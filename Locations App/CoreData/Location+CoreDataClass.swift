@@ -45,4 +45,15 @@ public class Location: NSManagedObject {
         self.favorited.toggle()
         CoreData.stack.save()
     }
+    
+    func setTag(tag: Tag) {
+        self.tag = tag
+        CoreData.stack.save()
+    }
+    
+    func delete() -> Location {
+        let location = self
+        CoreData.stack.context.delete(self)
+        return location
+    }
 }

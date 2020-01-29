@@ -32,4 +32,10 @@ public class Tag: NSManagedObject {
         self.color = color.toHex()
         CoreData.stack.save()
     }
+    
+    func delete() -> Tag {
+        let tag = self
+        CoreData.stack.context.delete(self)
+        return tag
+    }
 }
