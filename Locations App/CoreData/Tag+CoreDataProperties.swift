@@ -17,8 +17,8 @@ extension Tag {
         return NSFetchRequest<Tag>(entityName: "Tag")
     }
 
-    @NSManaged public var name: String?
-    @NSManaged public var color: Data?
+    @NSManaged public var name: String
+    @NSManaged public var color: String
     @NSManaged public var locations: NSSet?
 
 }

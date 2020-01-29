@@ -16,6 +16,15 @@
 		1E9D786823E10B520020FAFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E9D786623E10B520020FAFE /* LaunchScreen.storyboard */; };
 		1E9D787323E10B520020FAFE /* Locations_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D787223E10B520020FAFE /* Locations_AppTests.swift */; };
 		1E9D787E23E10B520020FAFE /* Locations_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D787D23E10B520020FAFE /* Locations_AppUITests.swift */; };
+		1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D788B23E10C670020FAFE /* LocationManager.swift */; };
+		1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9D788F23E10DE60020FAFE /* CloudKit.framework */; };
+		1E9D789723E124030020FAFE /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789623E124030020FAFE /* CoreData.swift */; };
+		1E9D789C23E125610020FAFE /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789823E125610020FAFE /* Location+CoreDataClass.swift */; };
+		1E9D789D23E125610020FAFE /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789923E125610020FAFE /* Location+CoreDataProperties.swift */; };
+		1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */; };
+		1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */; };
+		1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */; };
+		1E9D78A423E13C670020FAFE /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A323E13C670020FAFE /* Color+Additions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +60,16 @@
 		1E9D787923E10B520020FAFE /* Locations AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Locations AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9D787D23E10B520020FAFE /* Locations_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations_AppUITests.swift; sourceTree = "<group>"; };
 		1E9D787F23E10B520020FAFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E9D788B23E10C670020FAFE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		1E9D788D23E10DE30020FAFE /* Locations App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Locations App.entitlements"; sourceTree = "<group>"; };
+		1E9D788F23E10DE60020FAFE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		1E9D789623E124030020FAFE /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		1E9D789823E125610020FAFE /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1E9D789923E125610020FAFE /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversedGeoLocation.swift; sourceTree = "<group>"; };
+		1E9D78A323E13C670020FAFE /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +105,7 @@
 				1E9D787123E10B520020FAFE /* Locations AppTests */,
 				1E9D787C23E10B520020FAFE /* Locations AppUITests */,
 				1E9D785623E10B4F0020FAFE /* Products */,
+				1E9D788E23E10DE60020FAFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,22 +124,14 @@
 			children = (
 				1E9D785823E10B4F0020FAFE /* AppDelegate.swift */,
 				1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */,
-				1E9D785F23E10B4F0020FAFE /* ContentView.swift */,
-				1E9D786123E10B520020FAFE /* Assets.xcassets */,
-				1E9D786623E10B520020FAFE /* LaunchScreen.storyboard */,
-				1E9D786923E10B520020FAFE /* Info.plist */,
-				1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */,
-				1E9D786323E10B520020FAFE /* Preview Content */,
+				1E9D789523E123FC0020FAFE /* CoreData */,
+				1EFD54FE23E14F5500C02BBD /* Services */,
+				1E9D78A723E1497F0020FAFE /* Models */,
+				1E9D78A523E149160020FAFE /* Views */,
+				1E9D78A223E13C5E0020FAFE /* Extensions */,
+				1E9D78A623E149290020FAFE /* Resources */,
 			);
 			path = "Locations App";
-			sourceTree = "<group>";
-		};
-		1E9D786323E10B520020FAFE /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				1E9D786423E10B520020FAFE /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		1E9D787123E10B520020FAFE /* Locations AppTests */ = {
@@ -137,6 +150,71 @@
 				1E9D787F23E10B520020FAFE /* Info.plist */,
 			);
 			path = "Locations AppUITests";
+			sourceTree = "<group>";
+		};
+		1E9D788E23E10DE60020FAFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E9D788F23E10DE60020FAFE /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1E9D789523E123FC0020FAFE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1E9D789623E124030020FAFE /* CoreData.swift */,
+				1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */,
+				1E9D789823E125610020FAFE /* Location+CoreDataClass.swift */,
+				1E9D789923E125610020FAFE /* Location+CoreDataProperties.swift */,
+				1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */,
+				1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		1E9D78A223E13C5E0020FAFE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1E9D78A323E13C670020FAFE /* Color+Additions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1E9D78A523E149160020FAFE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E9D785F23E10B4F0020FAFE /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1E9D78A623E149290020FAFE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1E9D786423E10B520020FAFE /* Preview Assets.xcassets */,
+				1E9D786123E10B520020FAFE /* Assets.xcassets */,
+				1E9D786623E10B520020FAFE /* LaunchScreen.storyboard */,
+				1E9D786923E10B520020FAFE /* Info.plist */,
+				1E9D788D23E10DE30020FAFE /* Locations App.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1E9D78A723E1497F0020FAFE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1EFD54FE23E14F5500C02BBD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1E9D788B23E10C670020FAFE /* LocationManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,9 +348,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E9D789D23E125610020FAFE /* Location+CoreDataProperties.swift in Sources */,
+				1E9D78A423E13C670020FAFE /* Color+Additions.swift in Sources */,
+				1E9D789C23E125610020FAFE /* Location+CoreDataClass.swift in Sources */,
+				1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */,
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
+				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
+				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
+				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* ContentView.swift in Sources */,
+				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,
 				1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,7 +456,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -424,7 +510,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -438,11 +524,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Locations App/Locations App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Locations App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Locations App/Resources\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Locations App/Info.plist";
+				INFOPLIST_FILE = "Locations App/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -458,11 +545,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Locations App/Locations App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Locations App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Locations App/Resources\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Locations App/Info.plist";
+				INFOPLIST_FILE = "Locations App/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

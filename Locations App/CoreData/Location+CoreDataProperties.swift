@@ -17,12 +17,14 @@ extension Location {
         return NSFetchRequest<Location>(entityName: "Location")
     }
 
+    @NSManaged public var name: String
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var date: Date?
-    @NSManaged public var address: String?
-    @NSManaged public var notes: String?
+    @NSManaged public var arrivalDate: Date
+    @NSManaged public var departureDate: Date
+    @NSManaged public var address: String
+    @NSManaged public var notes: String
     @NSManaged public var favorited: Bool
-    @NSManaged public var tag: Tag?
+    @NSManaged public var tag: Tag
 
 }
