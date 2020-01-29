@@ -524,7 +524,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Locations App/Locations App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Locations App/Resources/Locations App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Locations App/Resources\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
@@ -545,7 +545,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Locations App/Locations App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Locations App/Resources/Locations App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Locations App/Resources\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
