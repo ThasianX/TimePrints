@@ -9,6 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @FetchRequest(
+        entity: Location.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Location.arrivalDate, ascending: false)],
+        predicate: .withinCurrentDate
+    ) var locations: FetchedResults<Location>
+    
     var body: some View {
         Text("Hello, World!")
     }

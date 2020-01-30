@@ -10,6 +10,7 @@
 import Foundation
 import CoreData
 
+extension Tag: Identifiable { }
 
 extension Tag {
 

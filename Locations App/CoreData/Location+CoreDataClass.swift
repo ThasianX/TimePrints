@@ -32,6 +32,7 @@ public class Location: NSManagedObject {
         return location
     }
     
+    @discardableResult
     class func create(visit: CLVisit, place: CLPlacemark) -> Location {
         create(visit.coordinate, arrivalDate: visit.arrivalDate, departureDate: visit.departureDate, place: place)
     }
