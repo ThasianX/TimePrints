@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */; };
+		1E7B618F23E284C600F9F974 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618E23E284C600F9F974 /* MapView.swift */; };
 		1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785823E10B4F0020FAFE /* AppDelegate.swift */; };
 		1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */; };
 		1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */; };
@@ -46,7 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Additions.swift"; sourceTree = "<group>"; };
+		1E7B618E23E284C600F9F974 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		1E9D785523E10B4F0020FAFE /* Locations App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Locations App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9D785823E10B4F0020FAFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +104,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E7B618C23E284A700F9F974 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				1E9D785F23E10B4F0020FAFE /* ContentView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		1E7B618D23E284B700F9F974 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1E7B618E23E284C600F9F974 /* MapView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		1E9D784C23E10B4F0020FAFE = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +207,8 @@
 		1E9D78A523E149160020FAFE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1E9D785F23E10B4F0020FAFE /* ContentView.swift */,
+				1E7B618C23E284A700F9F974 /* Screens */,
+				1E7B618D23E284B700F9F974 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,6 +216,7 @@
 		1E9D78A623E149290020FAFE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1E22BF5C23E2970500926030 /* Route.gpx */,
 				1E9D786423E10B520020FAFE /* Preview Assets.xcassets */,
 				1E9D786123E10B520020FAFE /* Assets.xcassets */,
 				1E9D786623E10B520020FAFE /* LaunchScreen.storyboard */,
@@ -325,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E9D786823E10B520020FAFE /* LaunchScreen.storyboard in Resources */,
+				1E22BF5D23E2970500926030 /* Route.gpx in Resources */,
 				1E9D786523E10B520020FAFE /* Preview Assets.xcassets in Resources */,
 				1E9D786223E10B520020FAFE /* Assets.xcassets in Resources */,
 			);
@@ -358,6 +381,7 @@
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
+				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* ContentView.swift in Sources */,

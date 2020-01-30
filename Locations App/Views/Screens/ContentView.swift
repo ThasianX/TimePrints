@@ -17,7 +17,7 @@ struct ContentView: View {
     ) var locations: FetchedResults<Location>
     
     var body: some View {
-        Text("Hello, World!")
+        MapView().edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -26,3 +26,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+

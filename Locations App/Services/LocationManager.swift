@@ -18,9 +18,9 @@ class LocationManager: NSObject {
     
     override init() {
         super.init()
-        self.locationManager.requestAlwaysAuthorization()
-        locationManager.startMonitoringVisits()
         locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startMonitoringVisits()
     }
 }
 
