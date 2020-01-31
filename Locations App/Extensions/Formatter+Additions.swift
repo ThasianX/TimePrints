@@ -9,9 +9,27 @@
 import Foundation
 
 extension Formatter {
-    static let timeOnlyNoPadding: DateFormatter = {
+    static let timeOnlyWithPadding: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "h:m a"
+        formatter.dateFormat = "h:mm a"
+        return formatter
+    }()
+    
+    static let abbreviatedDay: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E"
+        return formatter
+    }()
+    
+    static let dayOfMonth: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter
+    }()
+    
+    static let fullMonthWithYear: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM y"
         return formatter
     }()
 }

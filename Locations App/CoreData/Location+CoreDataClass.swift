@@ -10,24 +10,21 @@
 import Foundation
 import CoreData
 import CoreLocation
-import Fakery
 import SwiftUI
 
 @objc(Location)
 public class Location: NSManagedObject {
     class var preview: Location {
-        let faker = Faker()
-        let address = faker.address
         let location = newLocation()
-        location.latitude = address.latitude()
-        location.longitude = address.longitude()
+        location.latitude = 37.3230
+        location.longitude = 122.0322
         location.arrivalDate = Date()
-        location.departureDate = Date().addingTimeInterval(1000)
-        location.address = address.buildingNumber() + address.streetName() + ", " + address.city() + ", " + address.state()
+        location.departureDate = Date().addingTimeInterval(700)
+        location.address = "1 Infinite Loop, Cupertino, California"
         location.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
         location.name = "Apple INC"
         location.isFavorite = true
-        location.tag = Tag.getDefault()
+        location.tag = Tag.create(name: "Locations", color: Color("charcoal"))
         CoreData.stack.save()
         return location
     }

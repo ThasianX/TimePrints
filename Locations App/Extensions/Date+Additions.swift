@@ -9,7 +9,25 @@
 import Foundation
 
 extension Date {
-    var timeOnlyNoPadding: String {
-        return Formatter.timeOnlyNoPadding.string(from: self)
+    var timeOnlyWithPadding: String {
+        return Formatter.timeOnlyWithPadding.string(from: self)
+    }
+    
+    var abbreviatedDay: String {
+        return Formatter.abbreviatedDay.string(from: self)
+    }
+    
+    var dayOfMonth: String {
+        return Formatter.dayOfMonth.string(from: self)
+    }
+    
+    var fullMonthWithYear: String {
+        return Formatter.fullMonthWithYear.string(from: self)
+    }
+}
+
+extension Date {
+    var dateComponents: DateComponents {
+        Calendar.current.dateComponents([.day, .month, .year], from: self)
     }
 }

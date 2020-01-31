@@ -8,22 +8,22 @@
 
 import SwiftUI
 
-struct LocationViewCell: View {
+struct LocationPreviewCell: View {
     let location: Location
     
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             Rectangle()
                 .fill(Color(location.tag.color))
                 .cornerRadius(20)
                 .frame(width: 5, height: 40)
-                .padding(.init(top: 10, leading: 0, bottom: 6, trailing: 0))
 
             VStack(alignment: .leading) {
                 Text(location.name)
-                    .font(.title)
+                    .font(.headline)
+                    .fontWeight(.bold)
                     .lineLimit(1)
-                Text("\(location.arrivalDate.timeOnlyNoPadding) ⟶ \(location.departureDate.timeOnlyNoPadding)    \(location.address)")
+                Text("\(location.arrivalDate.timeOnlyWithPadding) ⟶ \(location.departureDate.timeOnlyWithPadding)    \(location.address)")
                     .font(.caption)
                     .lineLimit(1)
             }
@@ -36,14 +36,15 @@ struct LocationViewCell: View {
                     .foregroundColor(.yellow)
             }
         }
+        .frame(height: 50)
         .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
     }
     
 }
 
-struct LocationViewCell_Previews: PreviewProvider {
+struct LocationPreviewCell_Previews: PreviewProvider {
     static var previews: some View {
-        LocationViewCell(location: .preview)
+        LocationPreviewCell(location: .preview)
     }
 }
 

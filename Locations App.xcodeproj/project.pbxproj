@@ -3,19 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E5AF45023E3C9A900A94F10 /* MKMapView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF44F23E3C9A900A94F10 /* MKMapView+Additions.swift */; };
-		1E5AF45223E3CC0500A94F10 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45123E3CC0500A94F10 /* LocationsView.swift */; };
-		1E5AF45423E3CCCA00A94F10 /* LocationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45323E3CCCA00A94F10 /* LocationViewCell.swift */; };
+		1E5AF45223E3CC0500A94F10 /* LocationsPreviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45123E3CC0500A94F10 /* LocationsPreviewList.swift */; };
+		1E5AF45423E3CCCA00A94F10 /* LocationPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45323E3CCCA00A94F10 /* LocationPreviewCell.swift */; };
 		1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45523E3E25E00A94F10 /* Formatter+Additions.swift */; };
 		1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45723E3E2E500A94F10 /* Date+Additions.swift */; };
 		1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */; };
 		1E7B618F23E284C600F9F974 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618E23E284C600F9F974 /* MapView.swift */; };
-		1E834B7C23E3E82B00A0854C /* Fakery in Frameworks */ = {isa = PBXBuildFile; productRef = 1E834B7B23E3E82B00A0854C /* Fakery */; };
 		1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785823E10B4F0020FAFE /* AppDelegate.swift */; };
 		1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */; };
 		1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */; };
@@ -34,6 +33,11 @@
 		1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */; };
 		1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */; };
 		1E9D78A423E13C670020FAFE /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A323E13C670020FAFE /* Color+Additions.swift */; };
+		1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839423E49E0900FF04A1 /* DaySideBar.swift */; };
+		1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */; };
+		1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */; };
+		1EFF839D23E4BF2F00FF04A1 /* DateComponents+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839C23E4BF2F00FF04A1 /* DateComponents+Additions.swift */; };
+		1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839E23E4CE7500FF04A1 /* DayPreviewBlock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +60,8 @@
 /* Begin PBXFileReference section */
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E5AF44F23E3C9A900A94F10 /* MKMapView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Additions.swift"; sourceTree = "<group>"; };
-		1E5AF45123E3CC0500A94F10 /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
-		1E5AF45323E3CCCA00A94F10 /* LocationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewCell.swift; sourceTree = "<group>"; };
+		1E5AF45123E3CC0500A94F10 /* LocationsPreviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsPreviewList.swift; sourceTree = "<group>"; };
+		1E5AF45323E3CCCA00A94F10 /* LocationPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreviewCell.swift; sourceTree = "<group>"; };
 		1E5AF45523E3E25E00A94F10 /* Formatter+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Additions.swift"; sourceTree = "<group>"; };
 		1E5AF45723E3E2E500A94F10 /* Date+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Additions.swift"; sourceTree = "<group>"; };
 		1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Additions.swift"; sourceTree = "<group>"; };
@@ -87,6 +91,11 @@
 		1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversedGeoLocation.swift; sourceTree = "<group>"; };
 		1E9D78A323E13C670020FAFE /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
+		1EFF839423E49E0900FF04A1 /* DaySideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySideBar.swift; sourceTree = "<group>"; };
+		1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearSideBar.swift; sourceTree = "<group>"; };
+		1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Additions.swift"; sourceTree = "<group>"; };
+		1EFF839C23E4BF2F00FF04A1 /* DateComponents+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+Additions.swift"; sourceTree = "<group>"; };
+		1EFF839E23E4CE7500FF04A1 /* DayPreviewBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPreviewBlock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +103,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E834B7C23E3E82B00A0854C /* Fakery in Frameworks */,
 				1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,8 +128,11 @@
 			isa = PBXGroup;
 			children = (
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
-				1E5AF45123E3CC0500A94F10 /* LocationsView.swift */,
-				1E5AF45323E3CCCA00A94F10 /* LocationViewCell.swift */,
+				1E5AF45123E3CC0500A94F10 /* LocationsPreviewList.swift */,
+				1E5AF45323E3CCCA00A94F10 /* LocationPreviewCell.swift */,
+				1EFF839423E49E0900FF04A1 /* DaySideBar.swift */,
+				1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */,
+				1EFF839E23E4CE7500FF04A1 /* DayPreviewBlock.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -217,6 +228,8 @@
 				1E5AF44F23E3C9A900A94F10 /* MKMapView+Additions.swift */,
 				1E5AF45523E3E25E00A94F10 /* Formatter+Additions.swift */,
 				1E5AF45723E3E2E500A94F10 /* Date+Additions.swift */,
+				1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */,
+				1EFF839C23E4BF2F00FF04A1 /* DateComponents+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -276,7 +289,6 @@
 			);
 			name = "Locations App";
 			packageProductDependencies = (
-				1E834B7B23E3E82B00A0854C /* Fakery */,
 			);
 			productName = "Locations App";
 			productReference = 1E9D785523E10B4F0020FAFE /* Locations App.app */;
@@ -351,7 +363,6 @@
 			);
 			mainGroup = 1E9D784C23E10B4F0020FAFE;
 			packageReferences = (
-				1E834B7A23E3E82B00A0854C /* XCRemoteSwiftPackageReference "Fakery" */,
 			);
 			productRefGroup = 1E9D785623E10B4F0020FAFE /* Products */;
 			projectDirPath = "";
@@ -404,18 +415,23 @@
 				1E9D789C23E125610020FAFE /* Location+CoreDataClass.swift in Sources */,
 				1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */,
 				1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */,
-				1E5AF45423E3CCCA00A94F10 /* LocationViewCell.swift in Sources */,
-				1E5AF45223E3CC0500A94F10 /* LocationsView.swift in Sources */,
+				1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */,
+				1EFF839D23E4BF2F00FF04A1 /* DateComponents+Additions.swift in Sources */,
+				1E5AF45423E3CCCA00A94F10 /* LocationPreviewCell.swift in Sources */,
+				1E5AF45223E3CC0500A94F10 /* LocationsPreviewList.swift in Sources */,
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
+				1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
+				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,
 				1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */,
 				1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */,
+				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,25 +758,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		1E834B7A23E3E82B00A0854C /* XCRemoteSwiftPackageReference "Fakery" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vadymmarkov/Fakery";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1E834B7B23E3E82B00A0854C /* Fakery */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E834B7A23E3E82B00A0854C /* XCRemoteSwiftPackageReference "Fakery" */;
-			productName = Fakery;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */ = {
