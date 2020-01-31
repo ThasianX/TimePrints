@@ -10,15 +10,34 @@
 import Foundation
 import CoreData
 import CoreLocation
+import Fakery
+import SwiftUI
 
 @objc(Location)
 public class Location: NSManagedObject {
+    class var preview: Location {
+        let faker = Faker()
+        let address = faker.address
+        let location = newLocation()
+        location.latitude = address.latitude()
+        location.longitude = address.longitude()
+        location.arrivalDate = Date()
+        location.departureDate = Date().addingTimeInterval(1000)
+        location.address = address.buildingNumber() + address.streetName() + ", " + address.city() + ", " + address.state()
+        location.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
+        location.name = "Apple INC"
+        location.isFavorite = true
+        location.tag = Tag.getDefault()
+        CoreData.stack.save()
+        return location
+    }
+    
     // MARK: CRUD
     private class func newLocation() -> Location {
         Location(context: CoreData.stack.context)
     }
     
-    class func create(_ coordinates: CLLocationCoordinate2D, arrivalDate: Date, departureDate: Date, place: CLPlacemark) -> Location {
+    private class func create(_ coordinates: CLLocationCoordinate2D, arrivalDate: Date, departureDate: Date, place: CLPlacemark) -> Location {
         let location = newLocation()
         location.latitude = coordinates.latitude
         location.longitude = coordinates.longitude
@@ -27,6 +46,7 @@ public class Location: NSManagedObject {
         let reversedGeoLocation = ReversedGeoLocation(with: place)
         location.address = reversedGeoLocation.address
         location.name = reversedGeoLocation.name
+        location.tag = Tag.getDefault()
         CoreData.stack.save()
         
         return location
@@ -43,7 +63,7 @@ public class Location: NSManagedObject {
     }
     
     func favorite() {
-        self.favorited.toggle()
+        self.isFavorite.toggle()
         CoreData.stack.save()
     }
     

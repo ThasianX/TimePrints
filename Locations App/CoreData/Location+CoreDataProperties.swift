@@ -25,7 +25,7 @@ extension Location {
     @NSManaged public var departureDate: Date
     @NSManaged public var address: String
     @NSManaged public var notes: String
-    @NSManaged public var favorited: Bool
+    @NSManaged public var isFavorite: Bool
     @NSManaged public var tag: Tag
 
 }

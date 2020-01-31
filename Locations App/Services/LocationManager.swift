@@ -12,7 +12,11 @@ import CoreLocation
 import Combine
 import CoreData
 
-class LocationManager: NSObject {
+class LocationManager: NSObject {//, ObservableObject {
+//    @Published var currentLocation: CLLocation? {
+//        willSet { objectWillChange.send() }
+//    }
+    
     private let locationManager = CLLocationManager()
     private let geoCoder: CLGeocoder = CLGeocoder()
     
@@ -21,7 +25,16 @@ class LocationManager: NSObject {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.startMonitoringVisits()
+        locationManager.startUpdatingLocation()
     }
+    
+//    func startFollowingUser() {
+//        locationManager.startUpdatingLocation()
+//    }
+//
+//    func stopFollowingUser() {
+//        locationManager.stopUpdatingLocation()
+//    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -38,4 +51,10 @@ extension LocationManager: CLLocationManagerDelegate {
     private func newVisitReceived(_ visit: CLVisit, place: CLPlacemark) {
         Location.create(visit: visit, place: place)
     }
+    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        if let location = locations.first {
+//            currentLocation = location
+//        }
+//    }
 }

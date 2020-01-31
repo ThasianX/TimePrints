@@ -3,17 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
+		1E5AF45023E3C9A900A94F10 /* MKMapView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF44F23E3C9A900A94F10 /* MKMapView+Additions.swift */; };
+		1E5AF45223E3CC0500A94F10 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45123E3CC0500A94F10 /* LocationsView.swift */; };
+		1E5AF45423E3CCCA00A94F10 /* LocationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45323E3CCCA00A94F10 /* LocationViewCell.swift */; };
+		1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45523E3E25E00A94F10 /* Formatter+Additions.swift */; };
+		1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45723E3E2E500A94F10 /* Date+Additions.swift */; };
 		1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */; };
 		1E7B618F23E284C600F9F974 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618E23E284C600F9F974 /* MapView.swift */; };
+		1E834B7C23E3E82B00A0854C /* Fakery in Frameworks */ = {isa = PBXBuildFile; productRef = 1E834B7B23E3E82B00A0854C /* Fakery */; };
 		1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785823E10B4F0020FAFE /* AppDelegate.swift */; };
 		1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */; };
 		1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */; };
-		1E9D786023E10B4F0020FAFE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785F23E10B4F0020FAFE /* ContentView.swift */; };
+		1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785F23E10B4F0020FAFE /* RootView.swift */; };
 		1E9D786223E10B520020FAFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E9D786123E10B520020FAFE /* Assets.xcassets */; };
 		1E9D786523E10B520020FAFE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E9D786423E10B520020FAFE /* Preview Assets.xcassets */; };
 		1E9D786823E10B520020FAFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E9D786623E10B520020FAFE /* LaunchScreen.storyboard */; };
@@ -49,13 +55,18 @@
 
 /* Begin PBXFileReference section */
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
+		1E5AF44F23E3C9A900A94F10 /* MKMapView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Additions.swift"; sourceTree = "<group>"; };
+		1E5AF45123E3CC0500A94F10 /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
+		1E5AF45323E3CCCA00A94F10 /* LocationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewCell.swift; sourceTree = "<group>"; };
+		1E5AF45523E3E25E00A94F10 /* Formatter+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Additions.swift"; sourceTree = "<group>"; };
+		1E5AF45723E3E2E500A94F10 /* Date+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Additions.swift"; sourceTree = "<group>"; };
 		1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Additions.swift"; sourceTree = "<group>"; };
 		1E7B618E23E284C600F9F974 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		1E9D785523E10B4F0020FAFE /* Locations App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Locations App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9D785823E10B4F0020FAFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1E9D785D23E10B4F0020FAFE /* Locations_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Locations_App.xcdatamodel; sourceTree = "<group>"; };
-		1E9D785F23E10B4F0020FAFE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1E9D785F23E10B4F0020FAFE /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1E9D786123E10B520020FAFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E9D786423E10B520020FAFE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1E9D786723E10B520020FAFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E834B7C23E3E82B00A0854C /* Fakery in Frameworks */,
 				1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,7 +119,9 @@
 		1E7B618C23E284A700F9F974 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				1E9D785F23E10B4F0020FAFE /* ContentView.swift */,
+				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
+				1E5AF45123E3CC0500A94F10 /* LocationsView.swift */,
+				1E5AF45323E3CCCA00A94F10 /* LocationViewCell.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -200,6 +214,9 @@
 			children = (
 				1E9D78A323E13C670020FAFE /* Color+Additions.swift */,
 				1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */,
+				1E5AF44F23E3C9A900A94F10 /* MKMapView+Additions.swift */,
+				1E5AF45523E3E25E00A94F10 /* Formatter+Additions.swift */,
+				1E5AF45723E3E2E500A94F10 /* Date+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -258,6 +275,9 @@
 			dependencies = (
 			);
 			name = "Locations App";
+			packageProductDependencies = (
+				1E834B7B23E3E82B00A0854C /* Fakery */,
+			);
 			productName = "Locations App";
 			productReference = 1E9D785523E10B4F0020FAFE /* Locations App.app */;
 			productType = "com.apple.product-type.application";
@@ -330,6 +350,9 @@
 				Base,
 			);
 			mainGroup = 1E9D784C23E10B4F0020FAFE;
+			packageReferences = (
+				1E834B7A23E3E82B00A0854C /* XCRemoteSwiftPackageReference "Fakery" */,
+			);
 			productRefGroup = 1E9D785623E10B4F0020FAFE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -376,15 +399,20 @@
 			files = (
 				1E9D789D23E125610020FAFE /* Location+CoreDataProperties.swift in Sources */,
 				1E9D78A423E13C670020FAFE /* Color+Additions.swift in Sources */,
+				1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */,
+				1E5AF45023E3C9A900A94F10 /* MKMapView+Additions.swift in Sources */,
 				1E9D789C23E125610020FAFE /* Location+CoreDataClass.swift in Sources */,
+				1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */,
 				1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */,
+				1E5AF45423E3CCCA00A94F10 /* LocationViewCell.swift in Sources */,
+				1E5AF45223E3CC0500A94F10 /* LocationsView.swift in Sources */,
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
-				1E9D786023E10B4F0020FAFE /* ContentView.swift in Sources */,
+				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,
 				1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */,
 				1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */,
@@ -714,6 +742,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1E834B7A23E3E82B00A0854C /* XCRemoteSwiftPackageReference "Fakery" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vadymmarkov/Fakery";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1E834B7B23E3E82B00A0854C /* Fakery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E834B7A23E3E82B00A0854C /* XCRemoteSwiftPackageReference "Fakery" */;
+			productName = Fakery;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */ = {

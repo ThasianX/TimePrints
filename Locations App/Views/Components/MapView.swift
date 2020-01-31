@@ -11,17 +11,21 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
+//    @ObservedObject var locationManager = LocationManager()
+    @Binding var isFollowingUser: Bool
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
         let map = MKMapView(frame: UIScreen.main.bounds)
         map.delegate = context.coordinator
         map.showsUserLocation = true
-        map.userTrackingMode = .follow
+        map.setUserTrackingMode(.followWithHeading, animated: true)
         return map
     }
     
-    func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-        updateAnnotations(from: uiView)
+    func updateUIView(_ map: MKMapView, context: UIViewRepresentableContext<MapView>) {
+        self.centerOnLocation(map.userLocation.coordinate, map: map)
+            
+        self.updateAnnotations(from: map)
     }
     
     func makeCoordinator() -> Coordinator {
@@ -38,13 +42,18 @@ struct MapView: UIViewRepresentable {
 
     }
     
+    private func centerOnLocation(_ coordinate: CLLocationCoordinate2D, map: MKMapView) {
+        map.setCenter(coordinate: coordinate, zoomLevel: 15, animated: true)
+    }
+    
     private func updateAnnotations(from mapView: MKMapView) {
-        
+        print("a")
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView()
+        MapView(isFollowingUser: .constant(true))
     }
 }
+

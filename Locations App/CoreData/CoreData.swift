@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import SwiftUI
 
 class CoreData: NSObject {
     static let stack = CoreData()
@@ -50,6 +51,9 @@ class CoreData: NSObject {
     
     // MARK: - Database Setup
     public class func initialDbSetup() {
+        if Tag.count() == 0 {
+            Tag.create(name: "Locations", color: Color("charcoal"))
+        }
         // TODO: Include Cloud KVS preference setup here?
     }
 }

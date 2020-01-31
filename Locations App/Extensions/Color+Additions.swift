@@ -42,14 +42,17 @@ extension Color {
         self.init(.sRGB, red: r, green: g, blue: b, opacity: a)
     }
     
-    func toHex() -> String {
-        Color.appColors[self]!
+    func hexForTag() -> String {
+        Color.tagColors[self]!
     }
 }
 
 extension Color {
-    static let appColors = [
-        Color(hex: "#FF5F58") : "#FF5F58"
+    static let tagColors = [
+        Color("berryRed") : "berryRed",
+        Color("charcoal") : "charcoal",
+        Color("limeGreen") : "limeGreen",
+        Color("salmon") : "salmon",
+        Color("skyBlue") : "skyBlue"
     ]
-    
 }
