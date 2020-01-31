@@ -18,8 +18,8 @@ public class Location: NSManagedObject {
         let location = newLocation()
         location.latitude = 37.3230
         location.longitude = 122.0322
-        location.arrivalDate = Date()
-        location.departureDate = Date().addingTimeInterval(700)
+        location.arrivalDate = Date.random(range: 1000)
+        location.departureDate = Date().addingTimeInterval(.random(in: 100...2000))
         location.address = "1 Infinite Loop, Cupertino, California"
         location.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
         location.name = "Apple INC"
@@ -27,6 +27,19 @@ public class Location: NSManagedObject {
         location.tag = Tag.create(name: "Locations", color: Color("charcoal"))
         CoreData.stack.save()
         return location
+    }
+    
+    class var previewLocations: [Location] {
+        var locations = [Location]()
+        for _ in 0..<10 {
+            let date = Date.random(range: 100)
+            for _ in 0..<10 {
+                let location = preview
+                location.arrivalDate = date
+                locations.append(location)
+            }
+        }
+        return locations
     }
     
     // MARK: CRUD

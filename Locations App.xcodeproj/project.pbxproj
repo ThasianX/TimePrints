@@ -38,6 +38,7 @@
 		1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */; };
 		1EFF839D23E4BF2F00FF04A1 /* DateComponents+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839C23E4BF2F00FF04A1 /* DateComponents+Additions.swift */; };
 		1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839E23E4CE7500FF04A1 /* DayPreviewBlock.swift */; };
+		1EFF83A323E4E27800FF04A1 /* RandomAccessCollection+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF83A223E4E27800FF04A1 /* RandomAccessCollection+Additions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Additions.swift"; sourceTree = "<group>"; };
 		1EFF839C23E4BF2F00FF04A1 /* DateComponents+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+Additions.swift"; sourceTree = "<group>"; };
 		1EFF839E23E4CE7500FF04A1 /* DayPreviewBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPreviewBlock.swift; sourceTree = "<group>"; };
+		1EFF83A223E4E27800FF04A1 /* RandomAccessCollection+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RandomAccessCollection+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +232,7 @@
 				1E5AF45723E3E2E500A94F10 /* Date+Additions.swift */,
 				1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */,
 				1EFF839C23E4BF2F00FF04A1 /* DateComponents+Additions.swift */,
+				1EFF83A223E4E27800FF04A1 /* RandomAccessCollection+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				1E9D78A423E13C670020FAFE /* Color+Additions.swift in Sources */,
 				1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */,
 				1E5AF45023E3C9A900A94F10 /* MKMapView+Additions.swift in Sources */,
+				1EFF83A323E4E27800FF04A1 /* RandomAccessCollection+Additions.swift in Sources */,
 				1E9D789C23E125610020FAFE /* Location+CoreDataClass.swift in Sources */,
 				1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */,
 				1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */,

@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct DayPreviewBlock: View {
-    let locations: [Location]
     @State private var locationsIndex = 0
+    let locations: [Location]
+    let isFilled: Bool
     
     private var timer: Timer {
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
@@ -30,7 +31,11 @@ struct DayPreviewBlock: View {
     
     var body: some View {
         ZStack {
-            Color.green.frame(height: 150)
+            if isFilled {
+                Color.green.frame(height: 150)
+            } else {
+                Color.blue.frame(height: 150)
+            }
             VStack(spacing: 0) {
                 ForEach(locations[range]) { location in
                     LocationPreviewCell(location: location)
@@ -47,13 +52,12 @@ struct DayPreviewBlock: View {
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(locations: [])
-            DayPreviewBlock(locations: [.preview])
-            DayPreviewBlock(locations: [.preview, .preview])
-            DayPreviewBlock(locations: [.preview, .preview, .preview])
-            DayPreviewBlock(locations: [.preview, .preview, .preview, .preview])
-            DayPreviewBlock(locations: [.preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview])
+            DayPreviewBlock(locations: [], isFilled: false)
+            DayPreviewBlock(locations: [.preview], isFilled: false)
+            DayPreviewBlock(locations: [.preview, .preview], isFilled: false)
+            DayPreviewBlock(locations: [.preview, .preview, .preview], isFilled: false)
+            DayPreviewBlock(locations: [.preview, .preview, .preview, .preview], isFilled: false)
+            DayPreviewBlock(locations: [.preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview], isFilled: false)
         }
-        .border(Color.black)
     }
 }

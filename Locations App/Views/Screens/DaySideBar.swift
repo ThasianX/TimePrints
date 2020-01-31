@@ -21,6 +21,7 @@ struct DaySideBar: View {
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
         }
+        .frame(width: 35)
     }
 }
 
