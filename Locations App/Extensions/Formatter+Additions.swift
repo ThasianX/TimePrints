@@ -15,9 +15,15 @@ extension Formatter {
         return formatter
     }()
     
-    static let abbreviatedDay: DateFormatter = {
+    static let abbreviatedDayOfWeek: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "E"
+        return formatter
+    }()
+    
+    static let fullDayOfWeek: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
         return formatter
     }()
     
@@ -30,6 +36,12 @@ extension Formatter {
     static let fullMonthWithYear: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM y"
+        return formatter
+    }()
+    
+    static let fullMonthWithDay: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM M"
         return formatter
     }()
 }

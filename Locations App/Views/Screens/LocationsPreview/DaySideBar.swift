@@ -13,7 +13,7 @@ struct DaySideBar: View {
     
     var body: some View {
         VStack {
-            Text(date.abbreviatedDay.uppercased())
+            Text(date.abbreviatedDayOfWeek.uppercased())
                 .font(.caption)
                 .foregroundColor(.gray)
             Text(date.dayOfMonth)

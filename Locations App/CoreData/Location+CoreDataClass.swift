@@ -14,35 +14,7 @@ import SwiftUI
 
 @objc(Location)
 public class Location: NSManagedObject {
-    class var preview: Location {
-        let location = newLocation()
-        location.latitude = 37.3230
-        location.longitude = 122.0322
-        location.arrivalDate = Date.random(range: 1000)
-        location.departureDate = Date().addingTimeInterval(.random(in: 100...2000))
-        location.address = "1 Infinite Loop, Cupertino, California"
-        location.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
-        location.name = "Apple INC"
-        location.isFavorite = true
-        location.tag = Tag.create(name: "Locations", color: Color("charcoal"))
-        CoreData.stack.save()
-        return location
-    }
-    
-    class var previewLocations: [Location] {
-        var locations = [Location]()
-        for _ in 0..<10 {
-            let date = Date.random(range: 100)
-            for _ in 0..<10 {
-                let location = preview
-                location.arrivalDate = date
-                locations.append(location)
-            }
-        }
-        return locations
-    }
-    
-    // MARK: CRUD
+    // MARK: - CRUD
     private class func newLocation() -> Location {
         Location(context: CoreData.stack.context)
     }
@@ -86,5 +58,56 @@ public class Location: NSManagedObject {
         let location = self
         CoreData.stack.context.delete(self)
         return location
+    }
+    
+    // MARK: - Convenience
+    var visitDuration: String {
+        self.arrivalDate.timeOnlyWithPadding + "⟶" + self.departureDate.timeOnlyWithPadding
+    }
+    
+    var accent: Color {
+        Color(self.tag.color)
+    }
+}
+
+extension Location {
+    // MARK: - Preview
+    class var preview: Location {
+        let location = newLocation()
+        location.latitude = 37.3230
+        location.longitude = 122.0322
+        location.arrivalDate = Date.random(range: 1000)
+        location.departureDate = Date().addingTimeInterval(.random(in: 100...2000))
+        location.address = "1 Infinite Loop, Cupertino, California"
+        location.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
+        location.name = "Apple INC"
+        location.isFavorite = true
+        location.tag = Tag.create(name: "Locations", color: Color("charcoal"))
+        CoreData.stack.save()
+        return location
+    }
+    
+    class var previewLocations: [Location] {
+        var locations = [Location]()
+        for _ in 0..<10 {
+            let date = Date.random(range: 100)
+            for _ in 0..<10 {
+                let location = preview
+                location.arrivalDate = date
+                locations.append(location)
+            }
+        }
+        return locations
+    }
+    
+    class var previewLocationDetails: [Location] {
+        var locations = [Location]()
+        let date = Date.random(range: 100)
+        for _ in 0..<5 {
+            let location = preview
+            location.arrivalDate = date
+            locations.append(location)
+        }
+        return locations
     }
 }

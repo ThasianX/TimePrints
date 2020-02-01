@@ -13,17 +13,14 @@ struct LocationPreviewCell: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Rectangle()
-                .fill(Color(location.tag.color))
-                .cornerRadius(20)
-                .frame(width: 5, height: 40)
+            Popsicle(color: location.accent)
 
             VStack(alignment: .leading) {
                 Text(location.name)
                     .font(.headline)
                     .fontWeight(.bold)
                     .lineLimit(1)
-                Text("\(location.arrivalDate.timeOnlyWithPadding) ⟶ \(location.departureDate.timeOnlyWithPadding)    \(location.address)")
+                Text("\(location.visitDuration)    \(location.address)")
                     .font(.caption)
                     .lineLimit(1)
             }

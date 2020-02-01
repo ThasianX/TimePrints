@@ -13,8 +13,12 @@ extension Date {
         return Formatter.timeOnlyWithPadding.string(from: self)
     }
     
-    var abbreviatedDay: String {
-        return Formatter.abbreviatedDay.string(from: self)
+    var abbreviatedDayOfWeek: String {
+        return Formatter.abbreviatedDayOfWeek.string(from: self)
+    }
+    
+    var fullDayOfWeek: String {
+        return Formatter.fullDayOfWeek.string(from: self)
     }
     
     var dayOfMonth: String {
@@ -23,6 +27,10 @@ extension Date {
     
     var fullMonthWithYear: String {
         return Formatter.fullMonthWithYear.string(from: self)
+    }
+    
+    var fullMonthWithDay: String {
+        return Formatter.fullMonthWithDay.string(from: self)
     }
 }
 
