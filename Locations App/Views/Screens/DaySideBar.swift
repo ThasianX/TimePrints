@@ -13,12 +13,11 @@ struct DaySideBar: View {
     
     var body: some View {
         VStack {
-            Text(date.abbreviatedDay.capitalized)
-                .font(.subheadline)
+            Text(date.abbreviatedDay.uppercased())
+                .font(.caption)
                 .foregroundColor(.gray)
             Text(date.dayOfMonth)
-                .font(.system(size: 22))
-                .fontWeight(.semibold)
+                .fontWeight(.bold)
                 .foregroundColor(.white)
         }
         .frame(width: 35)

@@ -15,31 +15,37 @@ struct LocationsPreviewList: View {
         Dictionary(grouping: locations, by: { $0.arrivalDate.dateComponents })
     }
     
+    private var monthAndDates: [DateComponents: [DateComponents]] {
+        Dictionary(grouping: Array(dateLocations.keys), by: { $0.monthAndYear })
+    }
+    
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
+            SuperColor(.black)
             
-            HStack {
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 0) {
-                        ForEach(dateLocations.descendingKeys.indexed(), id: \.1.self) { i, dateComponent in
-                            //                if location.arrivalDate.fullMonthWithYear != self.currentDate.fullMonthWithYear {
-                            //                    self.currentDate = location.arrivalDate
-                            //                }
-                            HStack(alignment: .center) {
-                                DaySideBar(date: dateComponent.date)
-                                DayPreviewBlock(locations: self.dateLocations[dateComponent]!, isFilled: self.isFilled(index: i))
+            ScrollView(.vertical, showsIndicators: false) {
+                V0Stack {
+                    ForEach(monthAndDates.descendingKeys.indexed(), id: \.1.self) { i, monthComponent in
+                        H0Stack {
+                            MonthYearSideBar(date: monthComponent.date)
+                            V0Stack {
+                                ForEach(self.monthAndDates[monthComponent]!.sortDescending.indexed(), id: \.1.self) { i, dateComponent in
+                                    HStack {
+                                        DaySideBar(date: dateComponent.date)
+                                        DayPreviewBlock(locations: self.dateLocations[dateComponent]!, isFilled: self.isFilled(index: i))
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
-            .edgesIgnoringSafeArea(.all)
+            .beyond()
         }
     }
     
     private func isFilled(index: Int) -> Bool {
-        index % 2 == 0
+        return index % 2 == 0
     }
 }
 

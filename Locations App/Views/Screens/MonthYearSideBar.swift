@@ -15,8 +15,10 @@ struct MonthYearSideBar: View {
         Text(date.fullMonthWithYear)
             .tracking(10)
             .foregroundColor(.white)
-            .fontWeight(.bold)
-            .rotationEffect(.init(degrees: -90))
+            .font(.caption)
+            .fontWeight(.semibold)
+            .rotated(.degrees(-90))
+            .padding()
     }
 }
 
