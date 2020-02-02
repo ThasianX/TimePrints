@@ -189,10 +189,10 @@
 			isa = PBXGroup;
 			children = (
 				1E5AF45123E3CC0500A94F10 /* LocationsPreviewList.swift */,
+				1EFF839E23E4CE7500FF04A1 /* DayPreviewBlock.swift */,
 				1E5AF45323E3CCCA00A94F10 /* LocationPreviewCell.swift */,
 				1EFF839423E49E0900FF04A1 /* DaySideBar.swift */,
 				1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */,
-				1EFF839E23E4CE7500FF04A1 /* DayPreviewBlock.swift */,
 			);
 			path = LocationsPreview;
 			sourceTree = "<group>";
