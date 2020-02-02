@@ -135,7 +135,6 @@ extension DayDetailsRow {
                 .offset(x: 40, y: screen.bounds.height / 15)
                 .animation(nil)
                 .transition(.identity)
-//                .animation(Animation.easeInOut(duration: 1).delay(2))
         }
     }
     
