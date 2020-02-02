@@ -64,3 +64,10 @@ public class Tag: NSManagedObject {
         return tag
     }
 }
+
+extension Tag {
+    // MARK: - Preview
+    class var preview: Tag {
+        Tag.create(name: "Visits", color: Color("salmon"))
+    }
+}

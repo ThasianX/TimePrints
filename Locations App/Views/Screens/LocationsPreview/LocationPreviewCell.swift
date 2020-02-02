@@ -13,7 +13,7 @@ struct LocationPreviewCell: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Popsicle(color: location.accent)
+            Popsicle(tag: location.tag)
 
             VStack(alignment: .leading) {
                 Text(location.name)

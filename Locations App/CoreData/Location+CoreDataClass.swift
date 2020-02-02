@@ -62,7 +62,7 @@ public class Location: NSManagedObject {
     
     // MARK: - Convenience
     var visitDuration: String {
-        self.arrivalDate.timeOnlyWithPadding + "⟶" + self.departureDate.timeOnlyWithPadding
+        self.arrivalDate.timeOnlyWithPadding + " ➝ " + self.departureDate.timeOnlyWithPadding
     }
     
     var accent: Color {

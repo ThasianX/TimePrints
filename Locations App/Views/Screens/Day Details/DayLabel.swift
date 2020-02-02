@@ -28,7 +28,7 @@ struct DayLabel: View {
     var body: some View {
         VStack {
             Text(dayOfMonth.uppercased())
-                .font(.title)
+                .font(.system(size: 22))
                 .fontWeight(.bold)
                 .tracking(5)
             Text(date.fullMonthWithDay.uppercased())

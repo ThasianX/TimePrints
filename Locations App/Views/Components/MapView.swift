@@ -15,7 +15,7 @@ struct MapView: UIViewRepresentable {
     @Binding var isFollowingUser: Bool
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
-        let map = MKMapView(frame: UIScreen.main.bounds)
+        let map = MKMapView(frame: screen.bounds)
         map.delegate = context.coordinator
         map.showsUserLocation = true
         map.setUserTrackingMode(.followWithHeading, animated: true)

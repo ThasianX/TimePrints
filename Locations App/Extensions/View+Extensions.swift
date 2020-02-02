@@ -23,4 +23,8 @@ extension View {
     func beyond() -> some View {
         modifier(EdgeModifier())
     }
+    
+    func roundedFill(with color: Color) -> some View {
+        modifier(BackgroundModifier(color: color))
+    }
 }

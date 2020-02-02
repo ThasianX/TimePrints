@@ -44,4 +44,10 @@ extension Formatter {
         formatter.dateFormat = "MMMM M"
         return formatter
     }()
+    
+    static let fullMonthWithDayOfWeek: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE MMMM d"
+        return formatter
+    }()
 }
