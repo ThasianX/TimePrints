@@ -41,6 +41,7 @@
 		1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */; };
 		1E9D78A423E13C670020FAFE /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A323E13C670020FAFE /* Color+Additions.swift */; };
 		1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC8DC223E7238A00628251 /* StaticMapView.swift */; };
+		1EFC8DC523E76B4200628251 /* AnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC8DC423E76B4200628251 /* AnyTransition.swift */; };
 		1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839423E49E0900FF04A1 /* DaySideBar.swift */; };
 		1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */; };
 		1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */; };
@@ -117,6 +118,7 @@
 		1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversedGeoLocation.swift; sourceTree = "<group>"; };
 		1E9D78A323E13C670020FAFE /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
 		1EFC8DC223E7238A00628251 /* StaticMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapView.swift; sourceTree = "<group>"; };
+		1EFC8DC423E76B4200628251 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
 		1EFF839423E49E0900FF04A1 /* DaySideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySideBar.swift; sourceTree = "<group>"; };
 		1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearSideBar.swift; sourceTree = "<group>"; };
 		1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Additions.swift"; sourceTree = "<group>"; };
@@ -163,9 +165,9 @@
 		1E7B618C23E284A700F9F974 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				1E80279023E5EA7C0043D119 /* LocationsPreview */,
 				1E80279223E5EAA40043D119 /* Day Details */,
 				1E80279123E5EA990043D119 /* Map */,
-				1E80279023E5EA7C0043D119 /* LocationsPreview */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -305,6 +307,7 @@
 				1EFF83A223E4E27800FF04A1 /* RandomAccessCollection+Additions.swift */,
 				1EFF83AC23E52D5800FF04A1 /* View+Extensions.swift */,
 				1EFF83B023E532FA00FF04A1 /* Array+Additions.swift */,
+				1EFC8DC423E76B4200628251 /* AnyTransition.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				1EFF83AF23E52E5900FF04A1 /* RotatedModifier.swift in Sources */,
 				1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */,
 				1E6D568B23E5F6F10044AB3A /* BImage.swift in Sources */,
+				1EFC8DC523E76B4200628251 /* AnyTransition.swift in Sources */,
 				1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */,
 				1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,

@@ -62,7 +62,7 @@ struct DayDetailsRow: View {
             .offset(y: mapFull ? -80 : 0)
             .roundedFill(with: isSelected ? .clear : color)
         }
-        .frame(width: isSelected ? screen.bounds.width : nil, height: isSelected ? screen.bounds.height : nil)
+//        .frame(width: isSelected ? screen.bounds.width : nil, height: isSelected ? screen.bounds.height : nil)
     }
 }
 
