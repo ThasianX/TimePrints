@@ -23,9 +23,11 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ map: MKMapView, context: UIViewRepresentableContext<MapView>) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         self.centerOnLocation(map.userLocation.coordinate, map: map)
             
         self.updateAnnotations(from: map)
+        }
     }
     
     func makeCoordinator() -> Coordinator {

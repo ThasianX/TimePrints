@@ -17,7 +17,6 @@
 		1E6D568923E5EEB20044AB3A /* Popsicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D568823E5EEB20044AB3A /* Popsicle.swift */; };
 		1E6D568B23E5F6F10044AB3A /* BImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D568A23E5F6F10044AB3A /* BImage.swift */; };
 		1E6D568D23E5FEAC0044AB3A /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D568C23E5FEAC0044AB3A /* DayLabel.swift */; };
-		1E6D569023E62D670044AB3A /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D568F23E62D670044AB3A /* LocationDetailsView.swift */; };
 		1E6D569223E63DC70044AB3A /* BackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D569123E63DC70044AB3A /* BackgroundModifier.swift */; };
 		1E6D569423E653990044AB3A /* VSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D569323E653990044AB3A /* VSpace.swift */; };
 		1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */; };
@@ -86,7 +85,6 @@
 		1E6D568823E5EEB20044AB3A /* Popsicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popsicle.swift; sourceTree = "<group>"; };
 		1E6D568A23E5F6F10044AB3A /* BImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BImage.swift; sourceTree = "<group>"; };
 		1E6D568C23E5FEAC0044AB3A /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
-		1E6D568F23E62D670044AB3A /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
 		1E6D569123E63DC70044AB3A /* BackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundModifier.swift; sourceTree = "<group>"; };
 		1E6D569323E653990044AB3A /* VSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSpace.swift; sourceTree = "<group>"; };
 		1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Additions.swift"; sourceTree = "<group>"; };
@@ -160,18 +158,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1E6D568E23E62D0D0044AB3A /* Location Details */ = {
-			isa = PBXGroup;
-			children = (
-				1E6D568F23E62D670044AB3A /* LocationDetailsView.swift */,
-			);
-			path = "Location Details";
-			sourceTree = "<group>";
-		};
 		1E7B618C23E284A700F9F974 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				1E6D568E23E62D0D0044AB3A /* Location Details */,
 				1E80279223E5EAA40043D119 /* Day Details */,
 				1E80279123E5EA990043D119 /* Map */,
 				1E80279023E5EA7C0043D119 /* LocationsPreview */,
@@ -542,7 +531,6 @@
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* DayDetailsRow.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
-				1E6D569023E62D670044AB3A /* LocationDetailsView.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,
