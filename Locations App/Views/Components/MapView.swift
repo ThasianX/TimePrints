@@ -15,7 +15,7 @@ struct MapView: UIViewRepresentable {
     @Binding var isFollowingUser: Bool
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
-        let map = MKMapView(frame: screen.bounds)
+        let map = MKMapView(frame: .zero)
         map.delegate = context.coordinator
         map.showsUserLocation = true
         map.setUserTrackingMode(.followWithHeading, animated: true)
@@ -23,9 +23,11 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ map: MKMapView, context: UIViewRepresentableContext<MapView>) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         self.centerOnLocation(map.userLocation.coordinate, map: map)
             
         self.updateAnnotations(from: map)
+        }
     }
     
     func makeCoordinator() -> Coordinator {

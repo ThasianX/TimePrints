@@ -27,8 +27,10 @@ struct BImage: View {
     
     var body: some View {
         Button(action: {
-            self.condition.toggle()
-            self.action()
+            withAnimation {
+                self.condition.toggle()
+                self.action()
+            }
         }) {
             image
                 .imageScale(.large)

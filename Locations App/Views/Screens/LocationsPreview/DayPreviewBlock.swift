@@ -32,9 +32,9 @@ struct DayPreviewBlock: View {
     var body: some View {
         ZStack {
             if isFilled {
-                Color.green.frame(height: 150)
+                Color("salmon").saturation(2).frame(height: 150)
             } else {
-                Color.blue.frame(height: 150)
+                Color("salmon").frame(height: 150)
             }
             VStack(spacing: 0) {
                 ForEach(locations[range]) { location in

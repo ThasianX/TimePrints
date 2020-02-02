@@ -14,6 +14,10 @@ struct DayDetailsView: View {
     let date: Date
     let locations: [Location]
     
+    private var showingDetail: Bool {
+        selectedIndex != -1
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
             SuperColor(Color("salmon")).saturation(2)
@@ -24,24 +28,28 @@ struct DayDetailsView: View {
             }
             .padding(.init(top: 5, leading: 30, bottom: 0, trailing: 0))
             .offset(y: 60)
+            .opacity(showingDetail ? 0 : 1)
             
             VStack(spacing: 2) {
-                DayLabel(date: date)
+                DayLabel(date: date).opacity(showingDetail ? 0 : 1)
                 
-                VSpace(20)
+                VSpace(20).opacity(showingDetail ? 0 : 1)
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     ForEach(locations.indexed(), id: \.1.self) { i, location in
                         DayDetailsRow(selectedIndex: self.$selectedIndex, id: i, location: location, color: Color("salmon"))
                             .contentShape(Rectangle())
                             .onTapGesture { self.setIndex(index: i) }
-                            .animation(.spring())
                     }
-                    Spacer()
                 }
+                .opacity(showingDetail ? 0 : 1)
             }
             .padding(.init(top: 0, leading: 40, bottom: 0, trailing: 40))
             .offset(y: 60)
+            
+            DayDetailsRow(selectedIndex: self.$selectedIndex, id: self.selectedIndex, location: showingDetail ? locations[self.selectedIndex] : .preview, color: Color("salmon"))
+                .opacity(showingDetail ? 1 : 0)
+                .frame(width: showingDetail ? screen.bounds.width : 0, height:showingDetail ? screen.bounds.height : 0)
         }
     }
     

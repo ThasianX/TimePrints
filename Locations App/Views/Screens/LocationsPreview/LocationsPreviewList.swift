@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct LocationsPreviewList: View {
+    @State private var showingDetail = false
+    @State private var currentDateComponent = Date().dateComponents
     let locations: [Location]
     
     private var dateLocations: [DateComponents: [Location]] {
@@ -20,19 +22,34 @@ struct LocationsPreviewList: View {
     }
     
     var body: some View {
-        ZStack {
+        var fill = false
+        
+        func isFilled() -> Bool {
+            fill.toggle()
+            return fill
+        }
+        
+        return ZStack {
             SuperColor(.black)
+            
+            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, locations: dateLocations[currentDateComponent] ?? []).frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0).animation(.easeIn)
             
             ScrollView(.vertical, showsIndicators: false) {
                 V0Stack {
-                    ForEach(monthAndDates.descendingKeys.indexed(), id: \.1.self) { i, monthComponent in
+                    ForEach(monthAndDates.descendingKeys) { monthComponent in
                         H0Stack {
-                            MonthYearSideBar(date: monthComponent.date)
+                            MonthYearSideBar(date: monthComponent.date).offset(x: self.showingDetail ? -200 : 0)
                             V0Stack {
-                                ForEach(self.monthAndDates[monthComponent]!.sortDescending.indexed(), id: \.1.self) { i, dateComponent in
+                                ForEach(self.monthAndDates[monthComponent]!.sortDescending) { dateComponent in
                                     HStack {
-                                        DaySideBar(date: dateComponent.date)
-                                        DayPreviewBlock(locations: self.dateLocations[dateComponent]!, isFilled: self.isFilled(index: i))
+                                        DaySideBar(date: dateComponent.date).offset(x: self.showingDetail ? -200 : 0)
+                                        DayPreviewBlock(locations: self.dateLocations[dateComponent]!, isFilled: isFilled())
+                                            .onTapGesture {
+                                                withAnimation {
+                                                    self.showingDetail = true
+                                                    self.currentDateComponent = dateComponent
+                                                }
+                                        }
                                     }
                                 }
                             }
@@ -40,12 +57,9 @@ struct LocationsPreviewList: View {
                     }
                 }
             }
+            .opacity(showingDetail ? 0 : 1)
             .beyond()
         }
-    }
-    
-    private func isFilled(index: Int) -> Bool {
-        return index % 2 == 0
     }
 }
 
