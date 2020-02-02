@@ -35,7 +35,6 @@ struct DayDetailsView: View {
                 
                 VSpace(20).opacity(showingDetail ? 0 : 1)
 
-                
                 ScrollView(.vertical, showsIndicators: false) {
                     if showingDetail {
                         DayDetailsRow(selectedIndex: self.$selectedIndex, id: self.selectedIndex, location: locations[self.selectedIndex], color: Color("salmon"))
@@ -49,7 +48,7 @@ struct DayDetailsView: View {
                         }
                     }
                 }
-                .frame(width: showingDetail ? screen.bounds.width : nil, height: showingDetail ? screen.bounds.height : nil)
+                .frame(width: showingDetail ? screen.bounds.width : screen.bounds.width - 50, height: showingDetail ? screen.bounds.height : nil)
             }
             .padding(.init(top: 0, leading: 40, bottom: 0, trailing: 40))
             .offset(y: showingDetail ? 0 : 60)

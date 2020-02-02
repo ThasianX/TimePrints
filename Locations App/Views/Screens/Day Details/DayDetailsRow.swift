@@ -108,7 +108,7 @@ extension DayDetailsRow {
     var map: some View {
         ZStack(alignment: .topLeading) {
             VStack(spacing: 20) {
-                MapView(isFollowingUser: .constant(true))
+                StaticMapView(coordinate: location.coordinate)
                     .frame(width: mapFull ? screen.bounds.width : screen.bounds.width / 2.5, height: mapFull ? screen.bounds.height * 3 / 4 : screen.bounds.width / 2.5)
                     .cornerRadius(mapFull ? 0 : screen.bounds.width / 5)
                     .onTapGesture {

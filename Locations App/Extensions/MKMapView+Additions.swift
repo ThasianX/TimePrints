@@ -43,7 +43,7 @@ extension MKMapView {
         let span = self.coordinateSpan(centerCoordinate: coordinate, zoomLevel: zoom)
         let region = MKCoordinateRegion(center: coordinate, span: span)
 
-        self.setRegion(region, animated: true)
+        self.setRegion(region, animated: animated)
     }
 
     // MARK: - Private func

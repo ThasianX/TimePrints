@@ -68,14 +68,18 @@ public class Location: NSManagedObject {
     var accent: Color {
         Color(self.tag.color)
     }
+    
+    var coordinate: CLLocationCoordinate2D {
+        .init(latitude: self.latitude, longitude: self.longitude)
+    }
 }
 
 extension Location {
     // MARK: - Preview
     class var preview: Location {
         let location = newLocation()
-        location.latitude = 37.3230
-        location.longitude = 122.0322
+        location.latitude = 12.9716
+        location.longitude = 77.5946
         location.arrivalDate = Date.random(range: 1000)
         location.departureDate = Date().addingTimeInterval(.random(in: 100...2000))
         location.address = "1 Infinite Loop, Cupertino, California"
