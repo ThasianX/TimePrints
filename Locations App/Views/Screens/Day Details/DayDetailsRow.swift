@@ -64,7 +64,7 @@ struct DayDetailsRow: View {
             .offset(y: isSelected ? 40 : 0)
             .roundedFill(with: isSelected ? .clear : color)
         }
-        .frame(width: isSelected ? .infinity : nil, height: isSelected ? .infinity : nil)
+        .frame(width: isSelected ? screen.bounds.width : nil, height: isSelected ? screen.bounds.height : nil)
     }
     
     private func unselectRow() {

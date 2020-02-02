@@ -17,7 +17,7 @@ struct DayDetailsView: View {
     var body: some View {
         ZStack(alignment: .top) {
             SuperColor(Color("salmon")).saturation(2)
-
+            
             HStack {
                 BImage(condition: $show, image: .init(systemName: "arrow.left"))
                 Spacer()
@@ -30,13 +30,15 @@ struct DayDetailsView: View {
                 
                 VSpace(20)
                 
-                ForEach(locations.indexed(), id: \.1.self) { i, location in
-                    DayDetailsRow(selectedIndex: self.$selectedIndex, id: i, location: location, color: Color("salmon"))
-                        .contentShape(Rectangle())
-                        .onTapGesture { self.setIndex(index: i) }
-                        .animation(.spring())
+                ScrollView(.vertical, showsIndicators: false) {
+                    ForEach(locations.indexed(), id: \.1.self) { i, location in
+                        DayDetailsRow(selectedIndex: self.$selectedIndex, id: i, location: location, color: Color("salmon"))
+                            .contentShape(Rectangle())
+                            .onTapGesture { self.setIndex(index: i) }
+                            .animation(.spring())
+                    }
+                    Spacer()
                 }
-                Spacer()
             }
             .padding(.init(top: 0, leading: 40, bottom: 0, trailing: 40))
             .offset(y: 60)
