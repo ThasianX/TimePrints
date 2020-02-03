@@ -30,7 +30,7 @@ struct LocationsPreviewList: View {
         }
         
         return ZStack {
-            SuperColor(.black)
+            SuperColor(UIColor.black)
             
             DayDetailsView(show: $showingDetail, date: currentDateComponent.date, locations: dateLocations[currentDateComponent] ?? []).frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0).animation(.easeIn)
             

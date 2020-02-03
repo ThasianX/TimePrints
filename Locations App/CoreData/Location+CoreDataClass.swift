@@ -11,6 +11,7 @@ import Foundation
 import CoreData
 import CoreLocation
 import SwiftUI
+import Mapbox
 
 @objc(Location)
 public class Location: NSManagedObject {
@@ -65,12 +66,20 @@ public class Location: NSManagedObject {
         self.arrivalDate.timeOnlyWithPadding + " ➝ " + self.departureDate.timeOnlyWithPadding
     }
     
-    var accent: Color {
-        Color(self.tag.color)
+    var accent: UIColor {
+        UIColor(self.tag.color)
     }
     
     var coordinate: CLLocationCoordinate2D {
         .init(latitude: self.latitude, longitude: self.longitude)
+    }
+    
+    var asAnnotation: MGLPointAnnotation {
+        let annotation = MGLPointAnnotation()
+        annotation.coordinate = self.coordinate
+        annotation.title = self.name
+        annotation.subtitle = self.arrivalDate.abbreviatedMonthWithDayYear + " " + self.visitDuration
+        return annotation
     }
 }
 
@@ -86,7 +95,7 @@ extension Location {
         location.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
         location.name = "Apple INC"
         location.isFavorite = true
-        location.tag = Tag.create(name: "Locations", color: Color("charcoal"))
+        location.tag = Tag.create(name: "Locations", color: .charcoal)
         CoreData.stack.save()
         return location
     }

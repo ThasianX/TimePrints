@@ -40,6 +40,14 @@
 		1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */; };
 		1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */; };
 		1E9D78A423E13C670020FAFE /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A323E13C670020FAFE /* Color+Additions.swift */; };
+		1EE2CF4B23E786AF009760D6 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE2CF4A23E786AF009760D6 /* Mapbox.framework */; };
+		1EE2CF4C23E786AF009760D6 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE2CF4A23E786AF009760D6 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1EE2CF4F23E78ADD009760D6 /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3BBC8123E7845E0088B5FD /* MapboxMobileEvents.framework */; };
+		1EE2CF5023E78ADD009760D6 /* MapboxMobileEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3BBC8123E7845E0088B5FD /* MapboxMobileEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
+		1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */; };
+		1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */; };
+		1EE2CF5923E7D2C2009760D6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */; };
 		1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC8DC223E7238A00628251 /* StaticMapView.swift */; };
 		1EFC8DC523E76B4200628251 /* AnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC8DC423E76B4200628251 /* AnyTransition.swift */; };
 		1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839423E49E0900FF04A1 /* DaySideBar.swift */; };
@@ -76,8 +84,599 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1EE2CF4D23E786AF009760D6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1EE2CF5023E78ADD009760D6 /* MapboxMobileEvents.framework in Embed Frameworks */,
+				1EE2CF4C23E786AF009760D6 /* Mapbox.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
+		1E3BBA2123E784440088B5FD /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		1E3BBA2323E784440088B5FD /* Annotations.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Annotations.html; sourceTree = "<group>"; };
+		1E3BBA2423E784440088B5FD /* Other Constants.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Constants.html"; sourceTree = "<group>"; };
+		1E3BBA2523E784440088B5FD /* Other Protocols.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Protocols.html"; sourceTree = "<group>"; };
+		1E3BBA2623E784440088B5FD /* Primitive Shapes.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Primitive Shapes.html"; sourceTree = "<group>"; };
+		1E3BBA2723E784440088B5FD /* predicates-and-expressions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "predicates-and-expressions.html"; sourceTree = "<group>"; };
+		1E3BBA2823E784440088B5FD /* Other Type Definitions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Type Definitions.html"; sourceTree = "<group>"; };
+		1E3BBA2923E784440088B5FD /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = index.html; sourceTree = "<group>"; };
+		1E3BBA2A23E784440088B5FD /* Style Content.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Content.html"; sourceTree = "<group>"; };
+		1E3BBA2B23E784440088B5FD /* Maps.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Maps.html; sourceTree = "<group>"; };
+		1E3BBA2C23E784440088B5FD /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
+		1E3BBA2E23E784440088B5FD /* highlight.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = highlight.css; sourceTree = "<group>"; };
+		1E3BBA2F23E784440088B5FD /* jazzy.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = jazzy.css; sourceTree = "<group>"; };
+		1E3BBA3023E784440088B5FD /* Styling the Map.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Styling the Map.html"; sourceTree = "<group>"; };
+		1E3BBA3123E784440088B5FD /* Style Layers.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Layers.html"; sourceTree = "<group>"; };
+		1E3BBA3323E784440088B5FD /* MGLCoordinateFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateFormatter.html; sourceTree = "<group>"; };
+		1E3BBA3423E784440088B5FD /* MGLMapSnapshotter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotter.html; sourceTree = "<group>"; };
+		1E3BBA3523E784440088B5FD /* MGLSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSource.html; sourceTree = "<group>"; };
+		1E3BBA3623E784440088B5FD /* MGLCompassButton.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCompassButton.html; sourceTree = "<group>"; };
+		1E3BBA3723E784440088B5FD /* MGLShapeSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeSource.html; sourceTree = "<group>"; };
+		1E3BBA3823E784440088B5FD /* MGLTilePyramidOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTilePyramidOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBA3923E784440088B5FD /* MGLOfflineStorage.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineStorage.html; sourceTree = "<group>"; };
+		1E3BBA3A23E784440088B5FD /* MGLRasterTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterTileSource.html; sourceTree = "<group>"; };
+		1E3BBA3B23E784440088B5FD /* MGLCircleStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA3C23E784440088B5FD /* MGLUserLocationAnnotationView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserLocationAnnotationView.html; sourceTree = "<group>"; };
+		1E3BBA3D23E784440088B5FD /* MGLFillExtrusionStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillExtrusionStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA3E23E784440088B5FD /* MGLClockDirectionFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLClockDirectionFormatter.html; sourceTree = "<group>"; };
+		1E3BBA3F23E784440088B5FD /* MGLDistanceFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLDistanceFormatter.html; sourceTree = "<group>"; };
+		1E3BBA4023E784440088B5FD /* MGLMapView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapView.html; sourceTree = "<group>"; };
+		1E3BBA4123E784440088B5FD /* MGLLight.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLight.html; sourceTree = "<group>"; };
+		1E3BBA4223E784440088B5FD /* MGLMultiPoint.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPoint.html; sourceTree = "<group>"; };
+		1E3BBA4323E784440088B5FD /* MGLLoggingConfiguration.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLoggingConfiguration.html; sourceTree = "<group>"; };
+		1E3BBA4423E784440088B5FD /* MGLCompassDirectionFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCompassDirectionFormatter.html; sourceTree = "<group>"; };
+		1E3BBA4523E784440088B5FD /* MGLSymbolStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA4623E784440088B5FD /* MGLMapSnapshot.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshot.html; sourceTree = "<group>"; };
+		1E3BBA4723E784440088B5FD /* MGLOfflinePack.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePack.html; sourceTree = "<group>"; };
+		1E3BBA4823E784440088B5FD /* MGLAnnotationView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationView.html; sourceTree = "<group>"; };
+		1E3BBA4923E784440088B5FD /* MGLAnnotationImage.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationImage.html; sourceTree = "<group>"; };
+		1E3BBA4A23E784440088B5FD /* MGLMultiPolyline.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPolyline.html; sourceTree = "<group>"; };
+		1E3BBA4B23E784440088B5FD /* MGLShapeOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBA4C23E784440088B5FD /* MGLAttributedExpression.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributedExpression.html; sourceTree = "<group>"; };
+		1E3BBA4D23E784440088B5FD /* MGLMultiPolygon.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPolygon.html; sourceTree = "<group>"; };
+		1E3BBA4E23E784440088B5FD /* MGLPointCollection.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPointCollection.html; sourceTree = "<group>"; };
+		1E3BBA4F23E784440088B5FD /* MGLNetworkConfiguration.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLNetworkConfiguration.html; sourceTree = "<group>"; };
+		1E3BBA5023E784440088B5FD /* MGLRasterStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA5123E784440088B5FD /* MGLAttributionInfo.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributionInfo.html; sourceTree = "<group>"; };
+		1E3BBA5223E784440088B5FD /* MGLStyle.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLStyle.html; sourceTree = "<group>"; };
+		1E3BBA5323E784440088B5FD /* MGLLineStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA5423E784440088B5FD /* MGLHeatmapStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHeatmapStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA5523E784440088B5FD /* MGLUserLocation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserLocation.html; sourceTree = "<group>"; };
+		1E3BBA5623E784440088B5FD /* MGLVectorStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLVectorStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA5723E784440088B5FD /* MGLStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA5823E784440088B5FD /* MGLPointAnnotation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPointAnnotation.html; sourceTree = "<group>"; };
+		1E3BBA5923E784440088B5FD /* MGLHillshadeStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHillshadeStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA5A23E784440088B5FD /* MGLImageSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLImageSource.html; sourceTree = "<group>"; };
+		1E3BBA5B23E784440088B5FD /* MGLForegroundStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLForegroundStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA5C23E784440088B5FD /* MGLShapeCollection.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeCollection.html; sourceTree = "<group>"; };
+		1E3BBA5D23E784440088B5FD /* MGLPolygon.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPolygon.html; sourceTree = "<group>"; };
+		1E3BBA5E23E784440088B5FD /* MGLAccountManager.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAccountManager.html; sourceTree = "<group>"; };
+		1E3BBA5F23E784440088B5FD /* MGLShape.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShape.html; sourceTree = "<group>"; };
+		1E3BBA6023E784440088B5FD /* MGLFillStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA6123E784440088B5FD /* MGLMapCamera.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapCamera.html; sourceTree = "<group>"; };
+		1E3BBA6223E784440088B5FD /* MGLComputedShapeSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLComputedShapeSource.html; sourceTree = "<group>"; };
+		1E3BBA6323E784440088B5FD /* MGLBackgroundStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLBackgroundStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBA6423E784440088B5FD /* MGLTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTileSource.html; sourceTree = "<group>"; };
+		1E3BBA6523E784440088B5FD /* MGLVectorTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLVectorTileSource.html; sourceTree = "<group>"; };
+		1E3BBA6623E784440088B5FD /* MGLPolyline.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPolyline.html; sourceTree = "<group>"; };
+		1E3BBA6723E784440088B5FD /* MGLMapSnapshotOverlay.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotOverlay.html; sourceTree = "<group>"; };
+		1E3BBA6823E784440088B5FD /* MGLMapSnapshotOptions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotOptions.html; sourceTree = "<group>"; };
+		1E3BBA6A23E784440088B5FD /* jquery.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		1E3BBA6B23E784440088B5FD /* typeahead.jquery.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = typeahead.jquery.js; sourceTree = "<group>"; };
+		1E3BBA6C23E784440088B5FD /* jazzy.search.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jazzy.search.js; sourceTree = "<group>"; };
+		1E3BBA6D23E784440088B5FD /* lunr.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = lunr.min.js; sourceTree = "<group>"; };
+		1E3BBA6E23E784440088B5FD /* jazzy.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jazzy.js; sourceTree = "<group>"; };
+		1E3BBA6F23E784440088B5FD /* Other Structs.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Structs.html"; sourceTree = "<group>"; };
+		1E3BBA7023E784440088B5FD /* infoplist-keys.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "infoplist-keys.html"; sourceTree = "<group>"; };
+		1E3BBA7123E784440088B5FD /* User Interaction.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "User Interaction.html"; sourceTree = "<group>"; };
+		1E3BBA7223E784440088B5FD /* Other Categories.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Categories.html"; sourceTree = "<group>"; };
+		1E3BBA7323E784440088B5FD /* Formatters.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Formatters.html; sourceTree = "<group>"; };
+		1E3BBA7523E784440088B5FD /* MGLIconPitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconPitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBA7623E784440088B5FD /* MGLIconTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBA7723E784440088B5FD /* MGLFillExtrusionTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillExtrusionTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBA7823E784440088B5FD /* MGLIconTextFit.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconTextFit.html; sourceTree = "<group>"; };
+		1E3BBA7923E784440088B5FD /* MGLLoggingLevel.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLoggingLevel.html; sourceTree = "<group>"; };
+		1E3BBA7A23E784440088B5FD /* MGLTextAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextAnchor.html; sourceTree = "<group>"; };
+		1E3BBA7B23E784440088B5FD /* MGLCircleTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBA7C23E784440088B5FD /* MGLCirclePitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCirclePitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBA7D23E784440088B5FD /* MGLLineTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBA7E23E784440088B5FD /* MGLOfflinePackState.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePackState.html; sourceTree = "<group>"; };
+		1E3BBA7F23E784440088B5FD /* MGLFillTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBA8023E784440088B5FD /* MGLHillshadeIlluminationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHillshadeIlluminationAnchor.html; sourceTree = "<group>"; };
+		1E3BBA8123E784440088B5FD /* MGLTextWritingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextWritingMode.html; sourceTree = "<group>"; };
+		1E3BBA8223E784440088B5FD /* MGLMapDebugMaskOptions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapDebugMaskOptions.html; sourceTree = "<group>"; };
+		1E3BBA8323E784440088B5FD /* MGLCircleScaleAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleScaleAlignment.html; sourceTree = "<group>"; };
+		1E3BBA8423E784440088B5FD /* MGLOrnamentPosition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOrnamentPosition.html; sourceTree = "<group>"; };
+		1E3BBA8523E784440088B5FD /* MGLTextRotationAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextRotationAlignment.html; sourceTree = "<group>"; };
+		1E3BBA8623E784440088B5FD /* MGLTextTransform.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextTransform.html; sourceTree = "<group>"; };
+		1E3BBA8723E784440088B5FD /* MGLTextJustification.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextJustification.html; sourceTree = "<group>"; };
+		1E3BBA8823E784440088B5FD /* MGLOrnamentVisibility.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOrnamentVisibility.html; sourceTree = "<group>"; };
+		1E3BBA8923E784440088B5FD /* MGLSymbolPlacement.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolPlacement.html; sourceTree = "<group>"; };
+		1E3BBA8A23E784440088B5FD /* MGLUserTrackingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserTrackingMode.html; sourceTree = "<group>"; };
+		1E3BBA8B23E784440088B5FD /* MGLTextPitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextPitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBA8C23E784440088B5FD /* MGLAnnotationVerticalAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationVerticalAlignment.html; sourceTree = "<group>"; };
+		1E3BBA8D23E784440088B5FD /* MGLTextTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBA8E23E784440088B5FD /* MGLAnnotationViewDragState.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationViewDragState.html; sourceTree = "<group>"; };
+		1E3BBA8F23E784440088B5FD /* MGLLineJoin.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineJoin.html; sourceTree = "<group>"; };
+		1E3BBA9023E784440088B5FD /* MGLIconAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconAnchor.html; sourceTree = "<group>"; };
+		1E3BBA9123E784440088B5FD /* MGLLightAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLightAnchor.html; sourceTree = "<group>"; };
+		1E3BBA9223E784440088B5FD /* MGLIconRotationAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconRotationAlignment.html; sourceTree = "<group>"; };
+		1E3BBA9323E784440088B5FD /* MGLAttributionInfoStyle.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributionInfoStyle.html; sourceTree = "<group>"; };
+		1E3BBA9423E784440088B5FD /* MGLDEMEncoding.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLDEMEncoding.html; sourceTree = "<group>"; };
+		1E3BBA9523E784440088B5FD /* MGLErrorCode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLErrorCode.html; sourceTree = "<group>"; };
+		1E3BBA9623E784440088B5FD /* MGLRasterResamplingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterResamplingMode.html; sourceTree = "<group>"; };
+		1E3BBA9723E784440088B5FD /* MGLSymbolZOrder.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolZOrder.html; sourceTree = "<group>"; };
+		1E3BBA9823E784440088B5FD /* MGLTileCoordinateSystem.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTileCoordinateSystem.html; sourceTree = "<group>"; };
+		1E3BBA9923E784440088B5FD /* MGLResourceKind.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLResourceKind.html; sourceTree = "<group>"; };
+		1E3BBA9A23E784440088B5FD /* MGLLineCap.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineCap.html; sourceTree = "<group>"; };
+		1E3BBA9B23E784440088B5FD /* Location Updates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Location Updates.html"; sourceTree = "<group>"; };
+		1E3BBA9C23E784440088B5FD /* for-style-authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "for-style-authors.html"; sourceTree = "<group>"; };
+		1E3BBA9D23E784440088B5FD /* Appendices.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Appendices.html; sourceTree = "<group>"; };
+		1E3BBA9F23E784440088B5FD /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
+		1E3BBAA023E784440088B5FD /* dash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dash.png; sourceTree = "<group>"; };
+		1E3BBAA123E784440088B5FD /* github.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = github.svg; sourceTree = "<group>"; };
+		1E3BBAA223E784440088B5FD /* link.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = link.svg; sourceTree = "<group>"; };
+		1E3BBAA323E784440088B5FD /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
+		1E3BBAA423E784440088B5FD /* plus.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = plus.svg; sourceTree = "<group>"; };
+		1E3BBAA623E784440088B5FD /* quickzoom.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quickzoom.gif; sourceTree = "<group>"; };
+		1E3BBAA723E784440088B5FD /* RotateSydney.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = RotateSydney.gif; sourceTree = "<group>"; };
+		1E3BBAA823E784440088B5FD /* mapbox.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mapbox.svg; sourceTree = "<group>"; };
+		1E3BBAAA23E784440088B5FD /* cast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cast.png; sourceTree = "<group>"; };
+		1E3BBAAB23E784440088B5FD /* exponential-function.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exponential-function.png"; sourceTree = "<group>"; };
+		1E3BBAAC23E784440088B5FD /* multiply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiply.png; sourceTree = "<group>"; };
+		1E3BBAAD23E784440088B5FD /* exponential-function-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exponential-function-1.png"; sourceTree = "<group>"; };
+		1E3BBAAE23E784440088B5FD /* identity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = identity.png; sourceTree = "<group>"; };
+		1E3BBAAF23E784440088B5FD /* minus.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = minus.svg; sourceTree = "<group>"; };
+		1E3BBAB023E784440088B5FD /* undocumented.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = undocumented.json; sourceTree = "<group>"; };
+		1E3BBAB223E784440088B5FD /* MGLTransition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTransition.html; sourceTree = "<group>"; };
+		1E3BBAB323E784440088B5FD /* MGLCoordinateSpan.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateSpan.html; sourceTree = "<group>"; };
+		1E3BBAB423E784440088B5FD /* MGLSphericalPosition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSphericalPosition.html; sourceTree = "<group>"; };
+		1E3BBAB523E784440088B5FD /* MGLCoordinateBounds.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateBounds.html; sourceTree = "<group>"; };
+		1E3BBAB623E784440088B5FD /* MGLCoordinateQuad.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateQuad.html; sourceTree = "<group>"; };
+		1E3BBAB723E784440088B5FD /* MGLOfflinePackProgress.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePackProgress.html; sourceTree = "<group>"; };
+		1E3BBAB923E784440088B5FD /* Mapbox.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Mapbox.docset; sourceTree = "<group>"; };
+		1E3BBABA23E784440088B5FD /* Mapbox.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Mapbox.xml; sourceTree = "<group>"; };
+		1E3BBABB23E784440088B5FD /* Mapbox.tgz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mapbox.tgz; sourceTree = "<group>"; };
+		1E3BBABC23E784440088B5FD /* gesture-recognizers.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "gesture-recognizers.html"; sourceTree = "<group>"; };
+		1E3BBABD23E784440088B5FD /* Offline Maps.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Offline Maps.html"; sourceTree = "<group>"; };
+		1E3BBABE23E784440088B5FD /* Other Enums.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Enums.html"; sourceTree = "<group>"; };
+		1E3BBABF23E784440088B5FD /* Other Functions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Functions.html"; sourceTree = "<group>"; };
+		1E3BBAC023E784440088B5FD /* tile-url-templates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "tile-url-templates.html"; sourceTree = "<group>"; };
+		1E3BBAC223E784440088B5FD /* opensans-regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-regular.eot"; sourceTree = "<group>"; };
+		1E3BBAC323E784440088B5FD /* opensans-regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-regular.woff"; sourceTree = "<group>"; };
+		1E3BBAC423E784440088B5FD /* opensans-bold.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-bold.woff"; sourceTree = "<group>"; };
+		1E3BBAC523E784440088B5FD /* opensans-bold.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-bold.eot"; sourceTree = "<group>"; };
+		1E3BBAC623E784440088B5FD /* working-with-geojson-data.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "working-with-geojson-data.html"; sourceTree = "<group>"; };
+		1E3BBAC823E784440088B5FD /* NSValue(MGLFillStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLFillStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBAC923E784440088B5FD /* NSValue(MGLLineStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLLineStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBACA23E784440088B5FD /* NSValue(MGLRasterStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLRasterStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBACB23E784440088B5FD /* NSValue(MGLAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLAdditions).html"; sourceTree = "<group>"; };
+		1E3BBACC23E784440088B5FD /* NSExpression(MGLAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSExpression(MGLAdditions).html"; sourceTree = "<group>"; };
+		1E3BBACD23E784440088B5FD /* NSValue(MGLSymbolStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLSymbolStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBACE23E784440088B5FD /* NSValue(MGLHillshadeStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLHillshadeStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBACF23E784440088B5FD /* NSValue(MGLCircleStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLCircleStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBAD023E784440088B5FD /* NSValue(MGLFillExtrusionStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLFillExtrusionStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBAD223E784440088B5FD /* MGLOverlay.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOverlay.html; sourceTree = "<group>"; };
+		1E3BBAD323E784440088B5FD /* MGLLocationManagerDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLocationManagerDelegate.html; sourceTree = "<group>"; };
+		1E3BBAD423E784440088B5FD /* MGLFeature.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFeature.html; sourceTree = "<group>"; };
+		1E3BBAD523E784440088B5FD /* MGLMapViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapViewDelegate.html; sourceTree = "<group>"; };
+		1E3BBAD623E784440088B5FD /* MGLOfflineStorageDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineStorageDelegate.html; sourceTree = "<group>"; };
+		1E3BBAD723E784440088B5FD /* MGLCluster.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCluster.html; sourceTree = "<group>"; };
+		1E3BBAD823E784440088B5FD /* MGLOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBAD923E784440088B5FD /* MGLComputedShapeSourceDataSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLComputedShapeSourceDataSource.html; sourceTree = "<group>"; };
+		1E3BBADA23E784440088B5FD /* MGLLocationManager.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLocationManager.html; sourceTree = "<group>"; };
+		1E3BBADB23E784440088B5FD /* MGLCalloutView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCalloutView.html; sourceTree = "<group>"; };
+		1E3BBADC23E784440088B5FD /* MGLCalloutViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCalloutViewDelegate.html; sourceTree = "<group>"; };
+		1E3BBADD23E784440088B5FD /* MGLAnnotation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotation.html; sourceTree = "<group>"; };
+		1E3BBADE23E784440088B5FD /* Style Primitives.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Primitives.html"; sourceTree = "<group>"; };
+		1E3BBADF23E784440088B5FD /* Geometry.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Geometry.html; sourceTree = "<group>"; };
+		1E3BBAE023E784440088B5FD /* migrating-to-expressions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "migrating-to-expressions.html"; sourceTree = "<group>"; };
+		1E3BBAE123E784440088B5FD /* Other Classes.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Classes.html"; sourceTree = "<group>"; };
+		1E3BBAE323E784440088B5FD /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapboxMobileEvents.framework; sourceTree = "<group>"; };
+		1E3BBAE423E784440088B5FD /* F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBAE523E784440088B5FD /* Mapbox.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Mapbox.framework.dSYM; sourceTree = "<group>"; };
+		1E3BBAE623E784440088B5FD /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
+		1E3BBAE723E784440088B5FD /* MapboxMobileEvents.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = MapboxMobileEvents.framework.dSYM; sourceTree = "<group>"; };
+		1E3BBAE823E784440088B5FD /* 8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBAE923E784440088B5FD /* 2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBAEA23E784440088B5FD /* B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBAEB23E784440088B5FD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		1E3BBAEC23E784440088B5FD /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		1E3BBAED23E784440088B5FD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1E3BBAEE23E784440088B5FD /* version.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = version.txt; sourceTree = "<group>"; };
+		1E3BBAF023E784490088B5FD /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		1E3BBAF223E784490088B5FD /* Annotations.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Annotations.html; sourceTree = "<group>"; };
+		1E3BBAF323E784490088B5FD /* Other Constants.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Constants.html"; sourceTree = "<group>"; };
+		1E3BBAF423E784490088B5FD /* Other Protocols.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Protocols.html"; sourceTree = "<group>"; };
+		1E3BBAF523E784490088B5FD /* Primitive Shapes.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Primitive Shapes.html"; sourceTree = "<group>"; };
+		1E3BBAF623E784490088B5FD /* predicates-and-expressions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "predicates-and-expressions.html"; sourceTree = "<group>"; };
+		1E3BBAF723E784490088B5FD /* Other Type Definitions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Type Definitions.html"; sourceTree = "<group>"; };
+		1E3BBAF823E784490088B5FD /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = index.html; sourceTree = "<group>"; };
+		1E3BBAF923E784490088B5FD /* Style Content.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Content.html"; sourceTree = "<group>"; };
+		1E3BBAFA23E784490088B5FD /* Maps.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Maps.html; sourceTree = "<group>"; };
+		1E3BBAFB23E784490088B5FD /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
+		1E3BBAFD23E784490088B5FD /* highlight.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = highlight.css; sourceTree = "<group>"; };
+		1E3BBAFE23E784490088B5FD /* jazzy.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = jazzy.css; sourceTree = "<group>"; };
+		1E3BBAFF23E784490088B5FD /* Styling the Map.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Styling the Map.html"; sourceTree = "<group>"; };
+		1E3BBB0023E784490088B5FD /* Style Layers.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Layers.html"; sourceTree = "<group>"; };
+		1E3BBB0223E784490088B5FD /* MGLCoordinateFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateFormatter.html; sourceTree = "<group>"; };
+		1E3BBB0323E784490088B5FD /* MGLMapSnapshotter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotter.html; sourceTree = "<group>"; };
+		1E3BBB0423E784490088B5FD /* MGLSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSource.html; sourceTree = "<group>"; };
+		1E3BBB0523E784490088B5FD /* MGLCompassButton.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCompassButton.html; sourceTree = "<group>"; };
+		1E3BBB0623E784490088B5FD /* MGLShapeSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeSource.html; sourceTree = "<group>"; };
+		1E3BBB0723E784490088B5FD /* MGLTilePyramidOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTilePyramidOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBB0823E784490088B5FD /* MGLOfflineStorage.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineStorage.html; sourceTree = "<group>"; };
+		1E3BBB0923E784490088B5FD /* MGLRasterTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterTileSource.html; sourceTree = "<group>"; };
+		1E3BBB0A23E784490088B5FD /* MGLCircleStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB0B23E784490088B5FD /* MGLUserLocationAnnotationView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserLocationAnnotationView.html; sourceTree = "<group>"; };
+		1E3BBB0C23E784490088B5FD /* MGLFillExtrusionStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillExtrusionStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB0D23E784490088B5FD /* MGLClockDirectionFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLClockDirectionFormatter.html; sourceTree = "<group>"; };
+		1E3BBB0E23E784490088B5FD /* MGLDistanceFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLDistanceFormatter.html; sourceTree = "<group>"; };
+		1E3BBB0F23E784490088B5FD /* MGLMapView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapView.html; sourceTree = "<group>"; };
+		1E3BBB1023E784490088B5FD /* MGLLight.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLight.html; sourceTree = "<group>"; };
+		1E3BBB1123E784490088B5FD /* MGLMultiPoint.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPoint.html; sourceTree = "<group>"; };
+		1E3BBB1223E784490088B5FD /* MGLLoggingConfiguration.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLoggingConfiguration.html; sourceTree = "<group>"; };
+		1E3BBB1323E784490088B5FD /* MGLCompassDirectionFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCompassDirectionFormatter.html; sourceTree = "<group>"; };
+		1E3BBB1423E784490088B5FD /* MGLSymbolStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB1523E784490088B5FD /* MGLMapSnapshot.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshot.html; sourceTree = "<group>"; };
+		1E3BBB1623E784490088B5FD /* MGLOfflinePack.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePack.html; sourceTree = "<group>"; };
+		1E3BBB1723E784490088B5FD /* MGLAnnotationView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationView.html; sourceTree = "<group>"; };
+		1E3BBB1823E784490088B5FD /* MGLAnnotationImage.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationImage.html; sourceTree = "<group>"; };
+		1E3BBB1923E784490088B5FD /* MGLMultiPolyline.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPolyline.html; sourceTree = "<group>"; };
+		1E3BBB1A23E784490088B5FD /* MGLShapeOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBB1B23E784490088B5FD /* MGLAttributedExpression.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributedExpression.html; sourceTree = "<group>"; };
+		1E3BBB1C23E784490088B5FD /* MGLMultiPolygon.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPolygon.html; sourceTree = "<group>"; };
+		1E3BBB1D23E784490088B5FD /* MGLPointCollection.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPointCollection.html; sourceTree = "<group>"; };
+		1E3BBB1E23E784490088B5FD /* MGLNetworkConfiguration.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLNetworkConfiguration.html; sourceTree = "<group>"; };
+		1E3BBB1F23E784490088B5FD /* MGLRasterStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB2023E784490088B5FD /* MGLAttributionInfo.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributionInfo.html; sourceTree = "<group>"; };
+		1E3BBB2123E784490088B5FD /* MGLStyle.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLStyle.html; sourceTree = "<group>"; };
+		1E3BBB2223E784490088B5FD /* MGLLineStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB2323E784490088B5FD /* MGLHeatmapStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHeatmapStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB2423E784490088B5FD /* MGLUserLocation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserLocation.html; sourceTree = "<group>"; };
+		1E3BBB2523E784490088B5FD /* MGLVectorStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLVectorStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB2623E784490088B5FD /* MGLStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB2723E784490088B5FD /* MGLPointAnnotation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPointAnnotation.html; sourceTree = "<group>"; };
+		1E3BBB2823E784490088B5FD /* MGLHillshadeStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHillshadeStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB2923E784490088B5FD /* MGLImageSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLImageSource.html; sourceTree = "<group>"; };
+		1E3BBB2A23E784490088B5FD /* MGLForegroundStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLForegroundStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB2B23E784490088B5FD /* MGLShapeCollection.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeCollection.html; sourceTree = "<group>"; };
+		1E3BBB2C23E784490088B5FD /* MGLPolygon.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPolygon.html; sourceTree = "<group>"; };
+		1E3BBB2D23E784490088B5FD /* MGLAccountManager.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAccountManager.html; sourceTree = "<group>"; };
+		1E3BBB2E23E784490088B5FD /* MGLShape.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShape.html; sourceTree = "<group>"; };
+		1E3BBB2F23E784490088B5FD /* MGLFillStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB3023E784490088B5FD /* MGLMapCamera.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapCamera.html; sourceTree = "<group>"; };
+		1E3BBB3123E784490088B5FD /* MGLComputedShapeSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLComputedShapeSource.html; sourceTree = "<group>"; };
+		1E3BBB3223E784490088B5FD /* MGLBackgroundStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLBackgroundStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBB3323E784490088B5FD /* MGLTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTileSource.html; sourceTree = "<group>"; };
+		1E3BBB3423E784490088B5FD /* MGLVectorTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLVectorTileSource.html; sourceTree = "<group>"; };
+		1E3BBB3523E784490088B5FD /* MGLPolyline.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPolyline.html; sourceTree = "<group>"; };
+		1E3BBB3623E784490088B5FD /* MGLMapSnapshotOverlay.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotOverlay.html; sourceTree = "<group>"; };
+		1E3BBB3723E784490088B5FD /* MGLMapSnapshotOptions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotOptions.html; sourceTree = "<group>"; };
+		1E3BBB3923E784490088B5FD /* jquery.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		1E3BBB3A23E784490088B5FD /* typeahead.jquery.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = typeahead.jquery.js; sourceTree = "<group>"; };
+		1E3BBB3B23E784490088B5FD /* jazzy.search.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jazzy.search.js; sourceTree = "<group>"; };
+		1E3BBB3C23E784490088B5FD /* lunr.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = lunr.min.js; sourceTree = "<group>"; };
+		1E3BBB3D23E784490088B5FD /* jazzy.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jazzy.js; sourceTree = "<group>"; };
+		1E3BBB3E23E784490088B5FD /* Other Structs.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Structs.html"; sourceTree = "<group>"; };
+		1E3BBB3F23E784490088B5FD /* infoplist-keys.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "infoplist-keys.html"; sourceTree = "<group>"; };
+		1E3BBB4023E784490088B5FD /* User Interaction.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "User Interaction.html"; sourceTree = "<group>"; };
+		1E3BBB4123E784490088B5FD /* Other Categories.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Categories.html"; sourceTree = "<group>"; };
+		1E3BBB4223E784490088B5FD /* Formatters.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Formatters.html; sourceTree = "<group>"; };
+		1E3BBB4423E784490088B5FD /* MGLIconPitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconPitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBB4523E784490088B5FD /* MGLIconTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBB4623E784490088B5FD /* MGLFillExtrusionTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillExtrusionTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBB4723E784490088B5FD /* MGLIconTextFit.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconTextFit.html; sourceTree = "<group>"; };
+		1E3BBB4823E784490088B5FD /* MGLLoggingLevel.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLoggingLevel.html; sourceTree = "<group>"; };
+		1E3BBB4923E784490088B5FD /* MGLTextAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextAnchor.html; sourceTree = "<group>"; };
+		1E3BBB4A23E784490088B5FD /* MGLCircleTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBB4B23E784490088B5FD /* MGLCirclePitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCirclePitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBB4C23E784490088B5FD /* MGLLineTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBB4D23E784490088B5FD /* MGLOfflinePackState.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePackState.html; sourceTree = "<group>"; };
+		1E3BBB4E23E784490088B5FD /* MGLFillTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBB4F23E784490088B5FD /* MGLHillshadeIlluminationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHillshadeIlluminationAnchor.html; sourceTree = "<group>"; };
+		1E3BBB5023E784490088B5FD /* MGLTextWritingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextWritingMode.html; sourceTree = "<group>"; };
+		1E3BBB5123E784490088B5FD /* MGLMapDebugMaskOptions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapDebugMaskOptions.html; sourceTree = "<group>"; };
+		1E3BBB5223E784490088B5FD /* MGLCircleScaleAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleScaleAlignment.html; sourceTree = "<group>"; };
+		1E3BBB5323E784490088B5FD /* MGLOrnamentPosition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOrnamentPosition.html; sourceTree = "<group>"; };
+		1E3BBB5423E784490088B5FD /* MGLTextRotationAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextRotationAlignment.html; sourceTree = "<group>"; };
+		1E3BBB5523E784490088B5FD /* MGLTextTransform.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextTransform.html; sourceTree = "<group>"; };
+		1E3BBB5623E784490088B5FD /* MGLTextJustification.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextJustification.html; sourceTree = "<group>"; };
+		1E3BBB5723E784490088B5FD /* MGLOrnamentVisibility.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOrnamentVisibility.html; sourceTree = "<group>"; };
+		1E3BBB5823E784490088B5FD /* MGLSymbolPlacement.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolPlacement.html; sourceTree = "<group>"; };
+		1E3BBB5923E784490088B5FD /* MGLUserTrackingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserTrackingMode.html; sourceTree = "<group>"; };
+		1E3BBB5A23E784490088B5FD /* MGLTextPitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextPitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBB5B23E784490088B5FD /* MGLAnnotationVerticalAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationVerticalAlignment.html; sourceTree = "<group>"; };
+		1E3BBB5C23E784490088B5FD /* MGLTextTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBB5D23E784490088B5FD /* MGLAnnotationViewDragState.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationViewDragState.html; sourceTree = "<group>"; };
+		1E3BBB5E23E784490088B5FD /* MGLLineJoin.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineJoin.html; sourceTree = "<group>"; };
+		1E3BBB5F23E784490088B5FD /* MGLIconAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconAnchor.html; sourceTree = "<group>"; };
+		1E3BBB6023E784490088B5FD /* MGLLightAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLightAnchor.html; sourceTree = "<group>"; };
+		1E3BBB6123E784490088B5FD /* MGLIconRotationAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconRotationAlignment.html; sourceTree = "<group>"; };
+		1E3BBB6223E784490088B5FD /* MGLAttributionInfoStyle.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributionInfoStyle.html; sourceTree = "<group>"; };
+		1E3BBB6323E784490088B5FD /* MGLDEMEncoding.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLDEMEncoding.html; sourceTree = "<group>"; };
+		1E3BBB6423E784490088B5FD /* MGLErrorCode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLErrorCode.html; sourceTree = "<group>"; };
+		1E3BBB6523E784490088B5FD /* MGLRasterResamplingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterResamplingMode.html; sourceTree = "<group>"; };
+		1E3BBB6623E784490088B5FD /* MGLSymbolZOrder.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolZOrder.html; sourceTree = "<group>"; };
+		1E3BBB6723E784490088B5FD /* MGLTileCoordinateSystem.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTileCoordinateSystem.html; sourceTree = "<group>"; };
+		1E3BBB6823E784490088B5FD /* MGLResourceKind.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLResourceKind.html; sourceTree = "<group>"; };
+		1E3BBB6923E784490088B5FD /* MGLLineCap.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineCap.html; sourceTree = "<group>"; };
+		1E3BBB6A23E784490088B5FD /* Location Updates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Location Updates.html"; sourceTree = "<group>"; };
+		1E3BBB6B23E784490088B5FD /* for-style-authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "for-style-authors.html"; sourceTree = "<group>"; };
+		1E3BBB6C23E784490088B5FD /* Appendices.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Appendices.html; sourceTree = "<group>"; };
+		1E3BBB6E23E784490088B5FD /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
+		1E3BBB6F23E784490088B5FD /* dash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dash.png; sourceTree = "<group>"; };
+		1E3BBB7023E784490088B5FD /* github.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = github.svg; sourceTree = "<group>"; };
+		1E3BBB7123E784490088B5FD /* link.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = link.svg; sourceTree = "<group>"; };
+		1E3BBB7223E784490088B5FD /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
+		1E3BBB7323E784490088B5FD /* plus.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = plus.svg; sourceTree = "<group>"; };
+		1E3BBB7523E784490088B5FD /* quickzoom.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quickzoom.gif; sourceTree = "<group>"; };
+		1E3BBB7623E784490088B5FD /* RotateSydney.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = RotateSydney.gif; sourceTree = "<group>"; };
+		1E3BBB7723E784490088B5FD /* mapbox.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mapbox.svg; sourceTree = "<group>"; };
+		1E3BBB7923E784490088B5FD /* cast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cast.png; sourceTree = "<group>"; };
+		1E3BBB7A23E784490088B5FD /* exponential-function.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exponential-function.png"; sourceTree = "<group>"; };
+		1E3BBB7B23E784490088B5FD /* multiply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiply.png; sourceTree = "<group>"; };
+		1E3BBB7C23E784490088B5FD /* exponential-function-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exponential-function-1.png"; sourceTree = "<group>"; };
+		1E3BBB7D23E784490088B5FD /* identity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = identity.png; sourceTree = "<group>"; };
+		1E3BBB7E23E784490088B5FD /* minus.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = minus.svg; sourceTree = "<group>"; };
+		1E3BBB7F23E784490088B5FD /* undocumented.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = undocumented.json; sourceTree = "<group>"; };
+		1E3BBB8123E784490088B5FD /* MGLTransition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTransition.html; sourceTree = "<group>"; };
+		1E3BBB8223E784490088B5FD /* MGLCoordinateSpan.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateSpan.html; sourceTree = "<group>"; };
+		1E3BBB8323E784490088B5FD /* MGLSphericalPosition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSphericalPosition.html; sourceTree = "<group>"; };
+		1E3BBB8423E784490088B5FD /* MGLCoordinateBounds.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateBounds.html; sourceTree = "<group>"; };
+		1E3BBB8523E784490088B5FD /* MGLCoordinateQuad.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateQuad.html; sourceTree = "<group>"; };
+		1E3BBB8623E784490088B5FD /* MGLOfflinePackProgress.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePackProgress.html; sourceTree = "<group>"; };
+		1E3BBB8823E784490088B5FD /* Mapbox.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Mapbox.docset; sourceTree = "<group>"; };
+		1E3BBB8923E784490088B5FD /* Mapbox.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Mapbox.xml; sourceTree = "<group>"; };
+		1E3BBB8A23E784490088B5FD /* Mapbox.tgz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mapbox.tgz; sourceTree = "<group>"; };
+		1E3BBB8B23E784490088B5FD /* gesture-recognizers.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "gesture-recognizers.html"; sourceTree = "<group>"; };
+		1E3BBB8C23E784490088B5FD /* Offline Maps.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Offline Maps.html"; sourceTree = "<group>"; };
+		1E3BBB8D23E784490088B5FD /* Other Enums.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Enums.html"; sourceTree = "<group>"; };
+		1E3BBB8E23E784490088B5FD /* Other Functions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Functions.html"; sourceTree = "<group>"; };
+		1E3BBB8F23E784490088B5FD /* tile-url-templates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "tile-url-templates.html"; sourceTree = "<group>"; };
+		1E3BBB9123E784490088B5FD /* opensans-regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-regular.eot"; sourceTree = "<group>"; };
+		1E3BBB9223E784490088B5FD /* opensans-regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-regular.woff"; sourceTree = "<group>"; };
+		1E3BBB9323E784490088B5FD /* opensans-bold.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-bold.woff"; sourceTree = "<group>"; };
+		1E3BBB9423E784490088B5FD /* opensans-bold.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-bold.eot"; sourceTree = "<group>"; };
+		1E3BBB9523E784490088B5FD /* working-with-geojson-data.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "working-with-geojson-data.html"; sourceTree = "<group>"; };
+		1E3BBB9723E784490088B5FD /* NSValue(MGLFillStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLFillStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBB9823E784490088B5FD /* NSValue(MGLLineStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLLineStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBB9923E784490088B5FD /* NSValue(MGLRasterStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLRasterStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBB9A23E784490088B5FD /* NSValue(MGLAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLAdditions).html"; sourceTree = "<group>"; };
+		1E3BBB9B23E784490088B5FD /* NSExpression(MGLAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSExpression(MGLAdditions).html"; sourceTree = "<group>"; };
+		1E3BBB9C23E784490088B5FD /* NSValue(MGLSymbolStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLSymbolStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBB9D23E784490088B5FD /* NSValue(MGLHillshadeStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLHillshadeStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBB9E23E784490088B5FD /* NSValue(MGLCircleStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLCircleStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBB9F23E784490088B5FD /* NSValue(MGLFillExtrusionStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLFillExtrusionStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBBA123E784490088B5FD /* MGLOverlay.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOverlay.html; sourceTree = "<group>"; };
+		1E3BBBA223E784490088B5FD /* MGLLocationManagerDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLocationManagerDelegate.html; sourceTree = "<group>"; };
+		1E3BBBA323E784490088B5FD /* MGLFeature.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFeature.html; sourceTree = "<group>"; };
+		1E3BBBA423E784490088B5FD /* MGLMapViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapViewDelegate.html; sourceTree = "<group>"; };
+		1E3BBBA523E784490088B5FD /* MGLOfflineStorageDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineStorageDelegate.html; sourceTree = "<group>"; };
+		1E3BBBA623E784490088B5FD /* MGLCluster.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCluster.html; sourceTree = "<group>"; };
+		1E3BBBA723E784490088B5FD /* MGLOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBBA823E784490088B5FD /* MGLComputedShapeSourceDataSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLComputedShapeSourceDataSource.html; sourceTree = "<group>"; };
+		1E3BBBA923E784490088B5FD /* MGLLocationManager.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLocationManager.html; sourceTree = "<group>"; };
+		1E3BBBAA23E784490088B5FD /* MGLCalloutView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCalloutView.html; sourceTree = "<group>"; };
+		1E3BBBAB23E784490088B5FD /* MGLCalloutViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCalloutViewDelegate.html; sourceTree = "<group>"; };
+		1E3BBBAC23E784490088B5FD /* MGLAnnotation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotation.html; sourceTree = "<group>"; };
+		1E3BBBAD23E784490088B5FD /* Style Primitives.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Primitives.html"; sourceTree = "<group>"; };
+		1E3BBBAE23E784490088B5FD /* Geometry.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Geometry.html; sourceTree = "<group>"; };
+		1E3BBBAF23E784490088B5FD /* migrating-to-expressions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "migrating-to-expressions.html"; sourceTree = "<group>"; };
+		1E3BBBB023E784490088B5FD /* Other Classes.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Classes.html"; sourceTree = "<group>"; };
+		1E3BBBB223E784490088B5FD /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapboxMobileEvents.framework; sourceTree = "<group>"; };
+		1E3BBBB323E784490088B5FD /* F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBBB423E784490088B5FD /* Mapbox.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Mapbox.framework.dSYM; sourceTree = "<group>"; };
+		1E3BBBB523E784490088B5FD /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
+		1E3BBBB623E784490088B5FD /* MapboxMobileEvents.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = MapboxMobileEvents.framework.dSYM; sourceTree = "<group>"; };
+		1E3BBBB723E784490088B5FD /* 8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBBB823E784490088B5FD /* 2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBBB923E784490088B5FD /* B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBBBA23E784490088B5FD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		1E3BBBBB23E784490088B5FD /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		1E3BBBBC23E784490088B5FD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1E3BBBBD23E784490088B5FD /* version.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = version.txt; sourceTree = "<group>"; };
+		1E3BBBBF23E7845E0088B5FD /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		1E3BBBC123E7845E0088B5FD /* Annotations.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Annotations.html; sourceTree = "<group>"; };
+		1E3BBBC223E7845E0088B5FD /* Other Constants.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Constants.html"; sourceTree = "<group>"; };
+		1E3BBBC323E7845E0088B5FD /* Other Protocols.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Protocols.html"; sourceTree = "<group>"; };
+		1E3BBBC423E7845E0088B5FD /* Primitive Shapes.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Primitive Shapes.html"; sourceTree = "<group>"; };
+		1E3BBBC523E7845E0088B5FD /* predicates-and-expressions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "predicates-and-expressions.html"; sourceTree = "<group>"; };
+		1E3BBBC623E7845E0088B5FD /* Other Type Definitions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Type Definitions.html"; sourceTree = "<group>"; };
+		1E3BBBC723E7845E0088B5FD /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = index.html; sourceTree = "<group>"; };
+		1E3BBBC823E7845E0088B5FD /* Style Content.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Content.html"; sourceTree = "<group>"; };
+		1E3BBBC923E7845E0088B5FD /* Maps.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Maps.html; sourceTree = "<group>"; };
+		1E3BBBCA23E7845E0088B5FD /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
+		1E3BBBCC23E7845E0088B5FD /* highlight.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = highlight.css; sourceTree = "<group>"; };
+		1E3BBBCD23E7845E0088B5FD /* jazzy.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = jazzy.css; sourceTree = "<group>"; };
+		1E3BBBCE23E7845E0088B5FD /* Styling the Map.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Styling the Map.html"; sourceTree = "<group>"; };
+		1E3BBBCF23E7845E0088B5FD /* Style Layers.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Layers.html"; sourceTree = "<group>"; };
+		1E3BBBD123E7845E0088B5FD /* MGLCoordinateFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateFormatter.html; sourceTree = "<group>"; };
+		1E3BBBD223E7845E0088B5FD /* MGLMapSnapshotter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotter.html; sourceTree = "<group>"; };
+		1E3BBBD323E7845E0088B5FD /* MGLSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSource.html; sourceTree = "<group>"; };
+		1E3BBBD423E7845E0088B5FD /* MGLCompassButton.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCompassButton.html; sourceTree = "<group>"; };
+		1E3BBBD523E7845E0088B5FD /* MGLShapeSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeSource.html; sourceTree = "<group>"; };
+		1E3BBBD623E7845E0088B5FD /* MGLTilePyramidOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTilePyramidOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBBD723E7845E0088B5FD /* MGLOfflineStorage.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineStorage.html; sourceTree = "<group>"; };
+		1E3BBBD823E7845E0088B5FD /* MGLRasterTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterTileSource.html; sourceTree = "<group>"; };
+		1E3BBBD923E7845E0088B5FD /* MGLCircleStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBDA23E7845E0088B5FD /* MGLUserLocationAnnotationView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserLocationAnnotationView.html; sourceTree = "<group>"; };
+		1E3BBBDB23E7845E0088B5FD /* MGLFillExtrusionStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillExtrusionStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBDC23E7845E0088B5FD /* MGLClockDirectionFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLClockDirectionFormatter.html; sourceTree = "<group>"; };
+		1E3BBBDD23E7845E0088B5FD /* MGLDistanceFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLDistanceFormatter.html; sourceTree = "<group>"; };
+		1E3BBBDE23E7845E0088B5FD /* MGLMapView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapView.html; sourceTree = "<group>"; };
+		1E3BBBDF23E7845E0088B5FD /* MGLLight.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLight.html; sourceTree = "<group>"; };
+		1E3BBBE023E7845E0088B5FD /* MGLMultiPoint.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPoint.html; sourceTree = "<group>"; };
+		1E3BBBE123E7845E0088B5FD /* MGLLoggingConfiguration.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLoggingConfiguration.html; sourceTree = "<group>"; };
+		1E3BBBE223E7845E0088B5FD /* MGLCompassDirectionFormatter.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCompassDirectionFormatter.html; sourceTree = "<group>"; };
+		1E3BBBE323E7845E0088B5FD /* MGLSymbolStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBE423E7845E0088B5FD /* MGLMapSnapshot.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshot.html; sourceTree = "<group>"; };
+		1E3BBBE523E7845E0088B5FD /* MGLOfflinePack.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePack.html; sourceTree = "<group>"; };
+		1E3BBBE623E7845E0088B5FD /* MGLAnnotationView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationView.html; sourceTree = "<group>"; };
+		1E3BBBE723E7845E0088B5FD /* MGLAnnotationImage.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationImage.html; sourceTree = "<group>"; };
+		1E3BBBE823E7845E0088B5FD /* MGLMultiPolyline.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPolyline.html; sourceTree = "<group>"; };
+		1E3BBBE923E7845E0088B5FD /* MGLShapeOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBBEA23E7845E0088B5FD /* MGLAttributedExpression.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributedExpression.html; sourceTree = "<group>"; };
+		1E3BBBEB23E7845E0088B5FD /* MGLMultiPolygon.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMultiPolygon.html; sourceTree = "<group>"; };
+		1E3BBBEC23E7845E0088B5FD /* MGLPointCollection.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPointCollection.html; sourceTree = "<group>"; };
+		1E3BBBED23E7845E0088B5FD /* MGLNetworkConfiguration.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLNetworkConfiguration.html; sourceTree = "<group>"; };
+		1E3BBBEE23E7845E0088B5FD /* MGLRasterStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBEF23E7845E0088B5FD /* MGLAttributionInfo.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributionInfo.html; sourceTree = "<group>"; };
+		1E3BBBF023E7845E0088B5FD /* MGLStyle.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLStyle.html; sourceTree = "<group>"; };
+		1E3BBBF123E7845E0088B5FD /* MGLLineStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBF223E7845E0088B5FD /* MGLHeatmapStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHeatmapStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBF323E7845E0088B5FD /* MGLUserLocation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserLocation.html; sourceTree = "<group>"; };
+		1E3BBBF423E7845E0088B5FD /* MGLVectorStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLVectorStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBF523E7845E0088B5FD /* MGLStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBF623E7845E0088B5FD /* MGLPointAnnotation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPointAnnotation.html; sourceTree = "<group>"; };
+		1E3BBBF723E7845E0088B5FD /* MGLHillshadeStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHillshadeStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBF823E7845E0088B5FD /* MGLImageSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLImageSource.html; sourceTree = "<group>"; };
+		1E3BBBF923E7845E0088B5FD /* MGLForegroundStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLForegroundStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBFA23E7845E0088B5FD /* MGLShapeCollection.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShapeCollection.html; sourceTree = "<group>"; };
+		1E3BBBFB23E7845E0088B5FD /* MGLPolygon.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPolygon.html; sourceTree = "<group>"; };
+		1E3BBBFC23E7845E0088B5FD /* MGLAccountManager.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAccountManager.html; sourceTree = "<group>"; };
+		1E3BBBFD23E7845E0088B5FD /* MGLShape.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLShape.html; sourceTree = "<group>"; };
+		1E3BBBFE23E7845E0088B5FD /* MGLFillStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBBFF23E7845E0088B5FD /* MGLMapCamera.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapCamera.html; sourceTree = "<group>"; };
+		1E3BBC0023E7845E0088B5FD /* MGLComputedShapeSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLComputedShapeSource.html; sourceTree = "<group>"; };
+		1E3BBC0123E7845E0088B5FD /* MGLBackgroundStyleLayer.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLBackgroundStyleLayer.html; sourceTree = "<group>"; };
+		1E3BBC0223E7845E0088B5FD /* MGLTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTileSource.html; sourceTree = "<group>"; };
+		1E3BBC0323E7845E0088B5FD /* MGLVectorTileSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLVectorTileSource.html; sourceTree = "<group>"; };
+		1E3BBC0423E7845E0088B5FD /* MGLPolyline.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLPolyline.html; sourceTree = "<group>"; };
+		1E3BBC0523E7845E0088B5FD /* MGLMapSnapshotOverlay.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotOverlay.html; sourceTree = "<group>"; };
+		1E3BBC0623E7845E0088B5FD /* MGLMapSnapshotOptions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapSnapshotOptions.html; sourceTree = "<group>"; };
+		1E3BBC0823E7845E0088B5FD /* jquery.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		1E3BBC0923E7845E0088B5FD /* typeahead.jquery.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = typeahead.jquery.js; sourceTree = "<group>"; };
+		1E3BBC0A23E7845E0088B5FD /* jazzy.search.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jazzy.search.js; sourceTree = "<group>"; };
+		1E3BBC0B23E7845E0088B5FD /* lunr.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = lunr.min.js; sourceTree = "<group>"; };
+		1E3BBC0C23E7845E0088B5FD /* jazzy.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jazzy.js; sourceTree = "<group>"; };
+		1E3BBC0D23E7845E0088B5FD /* Other Structs.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Structs.html"; sourceTree = "<group>"; };
+		1E3BBC0E23E7845E0088B5FD /* infoplist-keys.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "infoplist-keys.html"; sourceTree = "<group>"; };
+		1E3BBC0F23E7845E0088B5FD /* User Interaction.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "User Interaction.html"; sourceTree = "<group>"; };
+		1E3BBC1023E7845E0088B5FD /* Other Categories.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Categories.html"; sourceTree = "<group>"; };
+		1E3BBC1123E7845E0088B5FD /* Formatters.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Formatters.html; sourceTree = "<group>"; };
+		1E3BBC1323E7845E0088B5FD /* MGLIconPitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconPitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBC1423E7845E0088B5FD /* MGLIconTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBC1523E7845E0088B5FD /* MGLFillExtrusionTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillExtrusionTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBC1623E7845E0088B5FD /* MGLIconTextFit.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconTextFit.html; sourceTree = "<group>"; };
+		1E3BBC1723E7845E0088B5FD /* MGLLoggingLevel.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLoggingLevel.html; sourceTree = "<group>"; };
+		1E3BBC1823E7845E0088B5FD /* MGLTextAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextAnchor.html; sourceTree = "<group>"; };
+		1E3BBC1923E7845E0088B5FD /* MGLCircleTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBC1A23E7845E0088B5FD /* MGLCirclePitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCirclePitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBC1B23E7845E0088B5FD /* MGLLineTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBC1C23E7845E0088B5FD /* MGLOfflinePackState.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePackState.html; sourceTree = "<group>"; };
+		1E3BBC1D23E7845E0088B5FD /* MGLFillTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFillTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBC1E23E7845E0088B5FD /* MGLHillshadeIlluminationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLHillshadeIlluminationAnchor.html; sourceTree = "<group>"; };
+		1E3BBC1F23E7845E0088B5FD /* MGLTextWritingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextWritingMode.html; sourceTree = "<group>"; };
+		1E3BBC2023E7845E0088B5FD /* MGLMapDebugMaskOptions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapDebugMaskOptions.html; sourceTree = "<group>"; };
+		1E3BBC2123E7845E0088B5FD /* MGLCircleScaleAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCircleScaleAlignment.html; sourceTree = "<group>"; };
+		1E3BBC2223E7845E0088B5FD /* MGLOrnamentPosition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOrnamentPosition.html; sourceTree = "<group>"; };
+		1E3BBC2323E7845E0088B5FD /* MGLTextRotationAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextRotationAlignment.html; sourceTree = "<group>"; };
+		1E3BBC2423E7845E0088B5FD /* MGLTextTransform.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextTransform.html; sourceTree = "<group>"; };
+		1E3BBC2523E7845E0088B5FD /* MGLTextJustification.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextJustification.html; sourceTree = "<group>"; };
+		1E3BBC2623E7845E0088B5FD /* MGLOrnamentVisibility.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOrnamentVisibility.html; sourceTree = "<group>"; };
+		1E3BBC2723E7845E0088B5FD /* MGLSymbolPlacement.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolPlacement.html; sourceTree = "<group>"; };
+		1E3BBC2823E7845E0088B5FD /* MGLUserTrackingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLUserTrackingMode.html; sourceTree = "<group>"; };
+		1E3BBC2923E7845E0088B5FD /* MGLTextPitchAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextPitchAlignment.html; sourceTree = "<group>"; };
+		1E3BBC2A23E7845E0088B5FD /* MGLAnnotationVerticalAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationVerticalAlignment.html; sourceTree = "<group>"; };
+		1E3BBC2B23E7845E0088B5FD /* MGLTextTranslationAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTextTranslationAnchor.html; sourceTree = "<group>"; };
+		1E3BBC2C23E7845E0088B5FD /* MGLAnnotationViewDragState.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotationViewDragState.html; sourceTree = "<group>"; };
+		1E3BBC2D23E7845E0088B5FD /* MGLLineJoin.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineJoin.html; sourceTree = "<group>"; };
+		1E3BBC2E23E7845E0088B5FD /* MGLIconAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconAnchor.html; sourceTree = "<group>"; };
+		1E3BBC2F23E7845E0088B5FD /* MGLLightAnchor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLightAnchor.html; sourceTree = "<group>"; };
+		1E3BBC3023E7845E0088B5FD /* MGLIconRotationAlignment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLIconRotationAlignment.html; sourceTree = "<group>"; };
+		1E3BBC3123E7845E0088B5FD /* MGLAttributionInfoStyle.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAttributionInfoStyle.html; sourceTree = "<group>"; };
+		1E3BBC3223E7845E0088B5FD /* MGLDEMEncoding.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLDEMEncoding.html; sourceTree = "<group>"; };
+		1E3BBC3323E7845E0088B5FD /* MGLErrorCode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLErrorCode.html; sourceTree = "<group>"; };
+		1E3BBC3423E7845E0088B5FD /* MGLRasterResamplingMode.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLRasterResamplingMode.html; sourceTree = "<group>"; };
+		1E3BBC3523E7845E0088B5FD /* MGLSymbolZOrder.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSymbolZOrder.html; sourceTree = "<group>"; };
+		1E3BBC3623E7845E0088B5FD /* MGLTileCoordinateSystem.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTileCoordinateSystem.html; sourceTree = "<group>"; };
+		1E3BBC3723E7845E0088B5FD /* MGLResourceKind.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLResourceKind.html; sourceTree = "<group>"; };
+		1E3BBC3823E7845E0088B5FD /* MGLLineCap.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLineCap.html; sourceTree = "<group>"; };
+		1E3BBC3923E7845E0088B5FD /* Location Updates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Location Updates.html"; sourceTree = "<group>"; };
+		1E3BBC3A23E7845E0088B5FD /* for-style-authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "for-style-authors.html"; sourceTree = "<group>"; };
+		1E3BBC3B23E7845E0088B5FD /* Appendices.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Appendices.html; sourceTree = "<group>"; };
+		1E3BBC3D23E7845E0088B5FD /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
+		1E3BBC3E23E7845E0088B5FD /* dash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dash.png; sourceTree = "<group>"; };
+		1E3BBC3F23E7845E0088B5FD /* github.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = github.svg; sourceTree = "<group>"; };
+		1E3BBC4023E7845E0088B5FD /* link.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = link.svg; sourceTree = "<group>"; };
+		1E3BBC4123E7845E0088B5FD /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
+		1E3BBC4223E7845E0088B5FD /* plus.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = plus.svg; sourceTree = "<group>"; };
+		1E3BBC4423E7845E0088B5FD /* quickzoom.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quickzoom.gif; sourceTree = "<group>"; };
+		1E3BBC4523E7845E0088B5FD /* RotateSydney.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = RotateSydney.gif; sourceTree = "<group>"; };
+		1E3BBC4623E7845E0088B5FD /* mapbox.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mapbox.svg; sourceTree = "<group>"; };
+		1E3BBC4823E7845E0088B5FD /* cast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cast.png; sourceTree = "<group>"; };
+		1E3BBC4923E7845E0088B5FD /* exponential-function.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exponential-function.png"; sourceTree = "<group>"; };
+		1E3BBC4A23E7845E0088B5FD /* multiply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiply.png; sourceTree = "<group>"; };
+		1E3BBC4B23E7845E0088B5FD /* exponential-function-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exponential-function-1.png"; sourceTree = "<group>"; };
+		1E3BBC4C23E7845E0088B5FD /* identity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = identity.png; sourceTree = "<group>"; };
+		1E3BBC4D23E7845E0088B5FD /* minus.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = minus.svg; sourceTree = "<group>"; };
+		1E3BBC4E23E7845E0088B5FD /* undocumented.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = undocumented.json; sourceTree = "<group>"; };
+		1E3BBC5023E7845E0088B5FD /* MGLTransition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLTransition.html; sourceTree = "<group>"; };
+		1E3BBC5123E7845E0088B5FD /* MGLCoordinateSpan.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateSpan.html; sourceTree = "<group>"; };
+		1E3BBC5223E7845E0088B5FD /* MGLSphericalPosition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLSphericalPosition.html; sourceTree = "<group>"; };
+		1E3BBC5323E7845E0088B5FD /* MGLCoordinateBounds.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateBounds.html; sourceTree = "<group>"; };
+		1E3BBC5423E7845E0088B5FD /* MGLCoordinateQuad.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCoordinateQuad.html; sourceTree = "<group>"; };
+		1E3BBC5523E7845E0088B5FD /* MGLOfflinePackProgress.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflinePackProgress.html; sourceTree = "<group>"; };
+		1E3BBC5723E7845E0088B5FD /* Mapbox.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Mapbox.docset; sourceTree = "<group>"; };
+		1E3BBC5823E7845E0088B5FD /* Mapbox.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Mapbox.xml; sourceTree = "<group>"; };
+		1E3BBC5923E7845E0088B5FD /* Mapbox.tgz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mapbox.tgz; sourceTree = "<group>"; };
+		1E3BBC5A23E7845E0088B5FD /* gesture-recognizers.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "gesture-recognizers.html"; sourceTree = "<group>"; };
+		1E3BBC5B23E7845E0088B5FD /* Offline Maps.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Offline Maps.html"; sourceTree = "<group>"; };
+		1E3BBC5C23E7845E0088B5FD /* Other Enums.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Enums.html"; sourceTree = "<group>"; };
+		1E3BBC5D23E7845E0088B5FD /* Other Functions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Functions.html"; sourceTree = "<group>"; };
+		1E3BBC5E23E7845E0088B5FD /* tile-url-templates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "tile-url-templates.html"; sourceTree = "<group>"; };
+		1E3BBC6023E7845E0088B5FD /* opensans-regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-regular.eot"; sourceTree = "<group>"; };
+		1E3BBC6123E7845E0088B5FD /* opensans-regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-regular.woff"; sourceTree = "<group>"; };
+		1E3BBC6223E7845E0088B5FD /* opensans-bold.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-bold.woff"; sourceTree = "<group>"; };
+		1E3BBC6323E7845E0088B5FD /* opensans-bold.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opensans-bold.eot"; sourceTree = "<group>"; };
+		1E3BBC6423E7845E0088B5FD /* working-with-geojson-data.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "working-with-geojson-data.html"; sourceTree = "<group>"; };
+		1E3BBC6623E7845E0088B5FD /* NSValue(MGLFillStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLFillStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC6723E7845E0088B5FD /* NSValue(MGLLineStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLLineStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC6823E7845E0088B5FD /* NSValue(MGLRasterStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLRasterStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC6923E7845E0088B5FD /* NSValue(MGLAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC6A23E7845E0088B5FD /* NSExpression(MGLAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSExpression(MGLAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC6B23E7845E0088B5FD /* NSValue(MGLSymbolStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLSymbolStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC6C23E7845E0088B5FD /* NSValue(MGLHillshadeStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLHillshadeStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC6D23E7845E0088B5FD /* NSValue(MGLCircleStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLCircleStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC6E23E7845E0088B5FD /* NSValue(MGLFillExtrusionStyleLayerAdditions).html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "NSValue(MGLFillExtrusionStyleLayerAdditions).html"; sourceTree = "<group>"; };
+		1E3BBC7023E7845E0088B5FD /* MGLOverlay.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOverlay.html; sourceTree = "<group>"; };
+		1E3BBC7123E7845E0088B5FD /* MGLLocationManagerDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLocationManagerDelegate.html; sourceTree = "<group>"; };
+		1E3BBC7223E7845E0088B5FD /* MGLFeature.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLFeature.html; sourceTree = "<group>"; };
+		1E3BBC7323E7845E0088B5FD /* MGLMapViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLMapViewDelegate.html; sourceTree = "<group>"; };
+		1E3BBC7423E7845E0088B5FD /* MGLOfflineStorageDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineStorageDelegate.html; sourceTree = "<group>"; };
+		1E3BBC7523E7845E0088B5FD /* MGLCluster.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCluster.html; sourceTree = "<group>"; };
+		1E3BBC7623E7845E0088B5FD /* MGLOfflineRegion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLOfflineRegion.html; sourceTree = "<group>"; };
+		1E3BBC7723E7845E0088B5FD /* MGLComputedShapeSourceDataSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLComputedShapeSourceDataSource.html; sourceTree = "<group>"; };
+		1E3BBC7823E7845E0088B5FD /* MGLLocationManager.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLLocationManager.html; sourceTree = "<group>"; };
+		1E3BBC7923E7845E0088B5FD /* MGLCalloutView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCalloutView.html; sourceTree = "<group>"; };
+		1E3BBC7A23E7845E0088B5FD /* MGLCalloutViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLCalloutViewDelegate.html; sourceTree = "<group>"; };
+		1E3BBC7B23E7845E0088B5FD /* MGLAnnotation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = MGLAnnotation.html; sourceTree = "<group>"; };
+		1E3BBC7C23E7845E0088B5FD /* Style Primitives.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Style Primitives.html"; sourceTree = "<group>"; };
+		1E3BBC7D23E7845E0088B5FD /* Geometry.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Geometry.html; sourceTree = "<group>"; };
+		1E3BBC7E23E7845E0088B5FD /* migrating-to-expressions.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "migrating-to-expressions.html"; sourceTree = "<group>"; };
+		1E3BBC7F23E7845E0088B5FD /* Other Classes.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = "Other Classes.html"; sourceTree = "<group>"; };
+		1E3BBC8123E7845E0088B5FD /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapboxMobileEvents.framework; sourceTree = "<group>"; };
+		1E3BBC8223E7845E0088B5FD /* F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBC8323E7845E0088B5FD /* Mapbox.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Mapbox.framework.dSYM; sourceTree = "<group>"; };
+		1E3BBC8423E7845E0088B5FD /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
+		1E3BBC8523E7845E0088B5FD /* MapboxMobileEvents.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = MapboxMobileEvents.framework.dSYM; sourceTree = "<group>"; };
+		1E3BBC8623E7845E0088B5FD /* 8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBC8723E7845E0088B5FD /* 2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBC8823E7845E0088B5FD /* B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap"; sourceTree = "<group>"; };
+		1E3BBC8923E7845E0088B5FD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		1E3BBC8A23E7845E0088B5FD /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		1E3BBC8B23E7845E0088B5FD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1E3BBC8C23E7845E0088B5FD /* version.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = version.txt; sourceTree = "<group>"; };
 		1E5AF44F23E3C9A900A94F10 /* MKMapView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Additions.swift"; sourceTree = "<group>"; };
 		1E5AF45123E3CC0500A94F10 /* LocationsPreviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsPreviewList.swift; sourceTree = "<group>"; };
 		1E5AF45323E3CCCA00A94F10 /* LocationPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreviewCell.swift; sourceTree = "<group>"; };
@@ -117,6 +716,11 @@
 		1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversedGeoLocation.swift; sourceTree = "<group>"; };
 		1E9D78A323E13C670020FAFE /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
+		1EE2CF4A23E786AF009760D6 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = Carthage/Build/iOS/Mapbox.framework; sourceTree = "<group>"; };
+		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
+		1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
+		1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		1EFC8DC223E7238A00628251 /* StaticMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapView.swift; sourceTree = "<group>"; };
 		1EFC8DC423E76B4200628251 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
 		1EFF839423E49E0900FF04A1 /* DaySideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySideBar.swift; sourceTree = "<group>"; };
@@ -141,7 +745,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EE2CF4F23E78ADD009760D6 /* MapboxMobileEvents.framework in Frameworks */,
 				1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */,
+				1EE2CF4B23E786AF009760D6 /* Mapbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +768,942 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E3BBA2023E784440088B5FD /* mapbox-ios-sdk-5.6.0-dynamic-with-events */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBA2123E784440088B5FD /* LICENSE.md */,
+				1E3BBA2223E784440088B5FD /* documentation */,
+				1E3BBAE223E784440088B5FD /* dynamic */,
+				1E3BBAEB23E784440088B5FD /* Settings.bundle */,
+				1E3BBAEC23E784440088B5FD /* CHANGELOG.md */,
+				1E3BBAED23E784440088B5FD /* README.md */,
+				1E3BBAEE23E784440088B5FD /* version.txt */,
+			);
+			name = "mapbox-ios-sdk-5.6.0-dynamic-with-events";
+			path = "../../../../Downloads/mapbox-ios-sdk-5.6.0-dynamic-with-events";
+			sourceTree = "<group>";
+		};
+		1E3BBA2223E784440088B5FD /* documentation */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBA2323E784440088B5FD /* Annotations.html */,
+				1E3BBA2423E784440088B5FD /* Other Constants.html */,
+				1E3BBA2523E784440088B5FD /* Other Protocols.html */,
+				1E3BBA2623E784440088B5FD /* Primitive Shapes.html */,
+				1E3BBA2723E784440088B5FD /* predicates-and-expressions.html */,
+				1E3BBA2823E784440088B5FD /* Other Type Definitions.html */,
+				1E3BBA2923E784440088B5FD /* index.html */,
+				1E3BBA2A23E784440088B5FD /* Style Content.html */,
+				1E3BBA2B23E784440088B5FD /* Maps.html */,
+				1E3BBA2C23E784440088B5FD /* search.json */,
+				1E3BBA2D23E784440088B5FD /* css */,
+				1E3BBA3023E784440088B5FD /* Styling the Map.html */,
+				1E3BBA3123E784440088B5FD /* Style Layers.html */,
+				1E3BBA3223E784440088B5FD /* Classes */,
+				1E3BBA6923E784440088B5FD /* js */,
+				1E3BBA6F23E784440088B5FD /* Other Structs.html */,
+				1E3BBA7023E784440088B5FD /* infoplist-keys.html */,
+				1E3BBA7123E784440088B5FD /* User Interaction.html */,
+				1E3BBA7223E784440088B5FD /* Other Categories.html */,
+				1E3BBA7323E784440088B5FD /* Formatters.html */,
+				1E3BBA7423E784440088B5FD /* Enums */,
+				1E3BBA9B23E784440088B5FD /* Location Updates.html */,
+				1E3BBA9C23E784440088B5FD /* for-style-authors.html */,
+				1E3BBA9D23E784440088B5FD /* Appendices.html */,
+				1E3BBA9E23E784440088B5FD /* img */,
+				1E3BBAB023E784440088B5FD /* undocumented.json */,
+				1E3BBAB123E784440088B5FD /* Structs */,
+				1E3BBAB823E784440088B5FD /* docsets */,
+				1E3BBABC23E784440088B5FD /* gesture-recognizers.html */,
+				1E3BBABD23E784440088B5FD /* Offline Maps.html */,
+				1E3BBABE23E784440088B5FD /* Other Enums.html */,
+				1E3BBABF23E784440088B5FD /* Other Functions.html */,
+				1E3BBAC023E784440088B5FD /* tile-url-templates.html */,
+				1E3BBAC123E784440088B5FD /* fonts */,
+				1E3BBAC623E784440088B5FD /* working-with-geojson-data.html */,
+				1E3BBAC723E784440088B5FD /* Categories */,
+				1E3BBAD123E784440088B5FD /* Protocols */,
+				1E3BBADE23E784440088B5FD /* Style Primitives.html */,
+				1E3BBADF23E784440088B5FD /* Geometry.html */,
+				1E3BBAE023E784440088B5FD /* migrating-to-expressions.html */,
+				1E3BBAE123E784440088B5FD /* Other Classes.html */,
+			);
+			path = documentation;
+			sourceTree = "<group>";
+		};
+		1E3BBA2D23E784440088B5FD /* css */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBA2E23E784440088B5FD /* highlight.css */,
+				1E3BBA2F23E784440088B5FD /* jazzy.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		1E3BBA3223E784440088B5FD /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBA3323E784440088B5FD /* MGLCoordinateFormatter.html */,
+				1E3BBA3423E784440088B5FD /* MGLMapSnapshotter.html */,
+				1E3BBA3523E784440088B5FD /* MGLSource.html */,
+				1E3BBA3623E784440088B5FD /* MGLCompassButton.html */,
+				1E3BBA3723E784440088B5FD /* MGLShapeSource.html */,
+				1E3BBA3823E784440088B5FD /* MGLTilePyramidOfflineRegion.html */,
+				1E3BBA3923E784440088B5FD /* MGLOfflineStorage.html */,
+				1E3BBA3A23E784440088B5FD /* MGLRasterTileSource.html */,
+				1E3BBA3B23E784440088B5FD /* MGLCircleStyleLayer.html */,
+				1E3BBA3C23E784440088B5FD /* MGLUserLocationAnnotationView.html */,
+				1E3BBA3D23E784440088B5FD /* MGLFillExtrusionStyleLayer.html */,
+				1E3BBA3E23E784440088B5FD /* MGLClockDirectionFormatter.html */,
+				1E3BBA3F23E784440088B5FD /* MGLDistanceFormatter.html */,
+				1E3BBA4023E784440088B5FD /* MGLMapView.html */,
+				1E3BBA4123E784440088B5FD /* MGLLight.html */,
+				1E3BBA4223E784440088B5FD /* MGLMultiPoint.html */,
+				1E3BBA4323E784440088B5FD /* MGLLoggingConfiguration.html */,
+				1E3BBA4423E784440088B5FD /* MGLCompassDirectionFormatter.html */,
+				1E3BBA4523E784440088B5FD /* MGLSymbolStyleLayer.html */,
+				1E3BBA4623E784440088B5FD /* MGLMapSnapshot.html */,
+				1E3BBA4723E784440088B5FD /* MGLOfflinePack.html */,
+				1E3BBA4823E784440088B5FD /* MGLAnnotationView.html */,
+				1E3BBA4923E784440088B5FD /* MGLAnnotationImage.html */,
+				1E3BBA4A23E784440088B5FD /* MGLMultiPolyline.html */,
+				1E3BBA4B23E784440088B5FD /* MGLShapeOfflineRegion.html */,
+				1E3BBA4C23E784440088B5FD /* MGLAttributedExpression.html */,
+				1E3BBA4D23E784440088B5FD /* MGLMultiPolygon.html */,
+				1E3BBA4E23E784440088B5FD /* MGLPointCollection.html */,
+				1E3BBA4F23E784440088B5FD /* MGLNetworkConfiguration.html */,
+				1E3BBA5023E784440088B5FD /* MGLRasterStyleLayer.html */,
+				1E3BBA5123E784440088B5FD /* MGLAttributionInfo.html */,
+				1E3BBA5223E784440088B5FD /* MGLStyle.html */,
+				1E3BBA5323E784440088B5FD /* MGLLineStyleLayer.html */,
+				1E3BBA5423E784440088B5FD /* MGLHeatmapStyleLayer.html */,
+				1E3BBA5523E784440088B5FD /* MGLUserLocation.html */,
+				1E3BBA5623E784440088B5FD /* MGLVectorStyleLayer.html */,
+				1E3BBA5723E784440088B5FD /* MGLStyleLayer.html */,
+				1E3BBA5823E784440088B5FD /* MGLPointAnnotation.html */,
+				1E3BBA5923E784440088B5FD /* MGLHillshadeStyleLayer.html */,
+				1E3BBA5A23E784440088B5FD /* MGLImageSource.html */,
+				1E3BBA5B23E784440088B5FD /* MGLForegroundStyleLayer.html */,
+				1E3BBA5C23E784440088B5FD /* MGLShapeCollection.html */,
+				1E3BBA5D23E784440088B5FD /* MGLPolygon.html */,
+				1E3BBA5E23E784440088B5FD /* MGLAccountManager.html */,
+				1E3BBA5F23E784440088B5FD /* MGLShape.html */,
+				1E3BBA6023E784440088B5FD /* MGLFillStyleLayer.html */,
+				1E3BBA6123E784440088B5FD /* MGLMapCamera.html */,
+				1E3BBA6223E784440088B5FD /* MGLComputedShapeSource.html */,
+				1E3BBA6323E784440088B5FD /* MGLBackgroundStyleLayer.html */,
+				1E3BBA6423E784440088B5FD /* MGLTileSource.html */,
+				1E3BBA6523E784440088B5FD /* MGLVectorTileSource.html */,
+				1E3BBA6623E784440088B5FD /* MGLPolyline.html */,
+				1E3BBA6723E784440088B5FD /* MGLMapSnapshotOverlay.html */,
+				1E3BBA6823E784440088B5FD /* MGLMapSnapshotOptions.html */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		1E3BBA6923E784440088B5FD /* js */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBA6A23E784440088B5FD /* jquery.min.js */,
+				1E3BBA6B23E784440088B5FD /* typeahead.jquery.js */,
+				1E3BBA6C23E784440088B5FD /* jazzy.search.js */,
+				1E3BBA6D23E784440088B5FD /* lunr.min.js */,
+				1E3BBA6E23E784440088B5FD /* jazzy.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		1E3BBA7423E784440088B5FD /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBA7523E784440088B5FD /* MGLIconPitchAlignment.html */,
+				1E3BBA7623E784440088B5FD /* MGLIconTranslationAnchor.html */,
+				1E3BBA7723E784440088B5FD /* MGLFillExtrusionTranslationAnchor.html */,
+				1E3BBA7823E784440088B5FD /* MGLIconTextFit.html */,
+				1E3BBA7923E784440088B5FD /* MGLLoggingLevel.html */,
+				1E3BBA7A23E784440088B5FD /* MGLTextAnchor.html */,
+				1E3BBA7B23E784440088B5FD /* MGLCircleTranslationAnchor.html */,
+				1E3BBA7C23E784440088B5FD /* MGLCirclePitchAlignment.html */,
+				1E3BBA7D23E784440088B5FD /* MGLLineTranslationAnchor.html */,
+				1E3BBA7E23E784440088B5FD /* MGLOfflinePackState.html */,
+				1E3BBA7F23E784440088B5FD /* MGLFillTranslationAnchor.html */,
+				1E3BBA8023E784440088B5FD /* MGLHillshadeIlluminationAnchor.html */,
+				1E3BBA8123E784440088B5FD /* MGLTextWritingMode.html */,
+				1E3BBA8223E784440088B5FD /* MGLMapDebugMaskOptions.html */,
+				1E3BBA8323E784440088B5FD /* MGLCircleScaleAlignment.html */,
+				1E3BBA8423E784440088B5FD /* MGLOrnamentPosition.html */,
+				1E3BBA8523E784440088B5FD /* MGLTextRotationAlignment.html */,
+				1E3BBA8623E784440088B5FD /* MGLTextTransform.html */,
+				1E3BBA8723E784440088B5FD /* MGLTextJustification.html */,
+				1E3BBA8823E784440088B5FD /* MGLOrnamentVisibility.html */,
+				1E3BBA8923E784440088B5FD /* MGLSymbolPlacement.html */,
+				1E3BBA8A23E784440088B5FD /* MGLUserTrackingMode.html */,
+				1E3BBA8B23E784440088B5FD /* MGLTextPitchAlignment.html */,
+				1E3BBA8C23E784440088B5FD /* MGLAnnotationVerticalAlignment.html */,
+				1E3BBA8D23E784440088B5FD /* MGLTextTranslationAnchor.html */,
+				1E3BBA8E23E784440088B5FD /* MGLAnnotationViewDragState.html */,
+				1E3BBA8F23E784440088B5FD /* MGLLineJoin.html */,
+				1E3BBA9023E784440088B5FD /* MGLIconAnchor.html */,
+				1E3BBA9123E784440088B5FD /* MGLLightAnchor.html */,
+				1E3BBA9223E784440088B5FD /* MGLIconRotationAlignment.html */,
+				1E3BBA9323E784440088B5FD /* MGLAttributionInfoStyle.html */,
+				1E3BBA9423E784440088B5FD /* MGLDEMEncoding.html */,
+				1E3BBA9523E784440088B5FD /* MGLErrorCode.html */,
+				1E3BBA9623E784440088B5FD /* MGLRasterResamplingMode.html */,
+				1E3BBA9723E784440088B5FD /* MGLSymbolZOrder.html */,
+				1E3BBA9823E784440088B5FD /* MGLTileCoordinateSystem.html */,
+				1E3BBA9923E784440088B5FD /* MGLResourceKind.html */,
+				1E3BBA9A23E784440088B5FD /* MGLLineCap.html */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		1E3BBA9E23E784440088B5FD /* img */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBA9F23E784440088B5FD /* carat.png */,
+				1E3BBAA023E784440088B5FD /* dash.png */,
+				1E3BBAA123E784440088B5FD /* github.svg */,
+				1E3BBAA223E784440088B5FD /* link.svg */,
+				1E3BBAA323E784440088B5FD /* screenshot.png */,
+				1E3BBAA423E784440088B5FD /* plus.svg */,
+				1E3BBAA523E784440088B5FD /* user-interaction */,
+				1E3BBAA823E784440088B5FD /* mapbox.svg */,
+				1E3BBAA923E784440088B5FD /* data-driven-styling */,
+				1E3BBAAF23E784440088B5FD /* minus.svg */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		1E3BBAA523E784440088B5FD /* user-interaction */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAA623E784440088B5FD /* quickzoom.gif */,
+				1E3BBAA723E784440088B5FD /* RotateSydney.gif */,
+			);
+			path = "user-interaction";
+			sourceTree = "<group>";
+		};
+		1E3BBAA923E784440088B5FD /* data-driven-styling */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAAA23E784440088B5FD /* cast.png */,
+				1E3BBAAB23E784440088B5FD /* exponential-function.png */,
+				1E3BBAAC23E784440088B5FD /* multiply.png */,
+				1E3BBAAD23E784440088B5FD /* exponential-function-1.png */,
+				1E3BBAAE23E784440088B5FD /* identity.png */,
+			);
+			path = "data-driven-styling";
+			sourceTree = "<group>";
+		};
+		1E3BBAB123E784440088B5FD /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAB223E784440088B5FD /* MGLTransition.html */,
+				1E3BBAB323E784440088B5FD /* MGLCoordinateSpan.html */,
+				1E3BBAB423E784440088B5FD /* MGLSphericalPosition.html */,
+				1E3BBAB523E784440088B5FD /* MGLCoordinateBounds.html */,
+				1E3BBAB623E784440088B5FD /* MGLCoordinateQuad.html */,
+				1E3BBAB723E784440088B5FD /* MGLOfflinePackProgress.html */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		1E3BBAB823E784440088B5FD /* docsets */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAB923E784440088B5FD /* Mapbox.docset */,
+				1E3BBABA23E784440088B5FD /* Mapbox.xml */,
+				1E3BBABB23E784440088B5FD /* Mapbox.tgz */,
+			);
+			path = docsets;
+			sourceTree = "<group>";
+		};
+		1E3BBAC123E784440088B5FD /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAC223E784440088B5FD /* opensans-regular.eot */,
+				1E3BBAC323E784440088B5FD /* opensans-regular.woff */,
+				1E3BBAC423E784440088B5FD /* opensans-bold.woff */,
+				1E3BBAC523E784440088B5FD /* opensans-bold.eot */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		1E3BBAC723E784440088B5FD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAC823E784440088B5FD /* NSValue(MGLFillStyleLayerAdditions).html */,
+				1E3BBAC923E784440088B5FD /* NSValue(MGLLineStyleLayerAdditions).html */,
+				1E3BBACA23E784440088B5FD /* NSValue(MGLRasterStyleLayerAdditions).html */,
+				1E3BBACB23E784440088B5FD /* NSValue(MGLAdditions).html */,
+				1E3BBACC23E784440088B5FD /* NSExpression(MGLAdditions).html */,
+				1E3BBACD23E784440088B5FD /* NSValue(MGLSymbolStyleLayerAdditions).html */,
+				1E3BBACE23E784440088B5FD /* NSValue(MGLHillshadeStyleLayerAdditions).html */,
+				1E3BBACF23E784440088B5FD /* NSValue(MGLCircleStyleLayerAdditions).html */,
+				1E3BBAD023E784440088B5FD /* NSValue(MGLFillExtrusionStyleLayerAdditions).html */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		1E3BBAD123E784440088B5FD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAD223E784440088B5FD /* MGLOverlay.html */,
+				1E3BBAD323E784440088B5FD /* MGLLocationManagerDelegate.html */,
+				1E3BBAD423E784440088B5FD /* MGLFeature.html */,
+				1E3BBAD523E784440088B5FD /* MGLMapViewDelegate.html */,
+				1E3BBAD623E784440088B5FD /* MGLOfflineStorageDelegate.html */,
+				1E3BBAD723E784440088B5FD /* MGLCluster.html */,
+				1E3BBAD823E784440088B5FD /* MGLOfflineRegion.html */,
+				1E3BBAD923E784440088B5FD /* MGLComputedShapeSourceDataSource.html */,
+				1E3BBADA23E784440088B5FD /* MGLLocationManager.html */,
+				1E3BBADB23E784440088B5FD /* MGLCalloutView.html */,
+				1E3BBADC23E784440088B5FD /* MGLCalloutViewDelegate.html */,
+				1E3BBADD23E784440088B5FD /* MGLAnnotation.html */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		1E3BBAE223E784440088B5FD /* dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAE323E784440088B5FD /* MapboxMobileEvents.framework */,
+				1E3BBAE423E784440088B5FD /* F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap */,
+				1E3BBAE523E784440088B5FD /* Mapbox.framework.dSYM */,
+				1E3BBAE623E784440088B5FD /* Mapbox.framework */,
+				1E3BBAE723E784440088B5FD /* MapboxMobileEvents.framework.dSYM */,
+				1E3BBAE823E784440088B5FD /* 8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap */,
+				1E3BBAE923E784440088B5FD /* 2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap */,
+				1E3BBAEA23E784440088B5FD /* B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap */,
+			);
+			path = dynamic;
+			sourceTree = "<group>";
+		};
+		1E3BBAEF23E784490088B5FD /* mapbox-ios-sdk-5.6.0-dynamic-with-events */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAF023E784490088B5FD /* LICENSE.md */,
+				1E3BBAF123E784490088B5FD /* documentation */,
+				1E3BBBB123E784490088B5FD /* dynamic */,
+				1E3BBBBA23E784490088B5FD /* Settings.bundle */,
+				1E3BBBBB23E784490088B5FD /* CHANGELOG.md */,
+				1E3BBBBC23E784490088B5FD /* README.md */,
+				1E3BBBBD23E784490088B5FD /* version.txt */,
+			);
+			name = "mapbox-ios-sdk-5.6.0-dynamic-with-events";
+			path = "../../../../Downloads/mapbox-ios-sdk-5.6.0-dynamic-with-events";
+			sourceTree = "<group>";
+		};
+		1E3BBAF123E784490088B5FD /* documentation */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAF223E784490088B5FD /* Annotations.html */,
+				1E3BBAF323E784490088B5FD /* Other Constants.html */,
+				1E3BBAF423E784490088B5FD /* Other Protocols.html */,
+				1E3BBAF523E784490088B5FD /* Primitive Shapes.html */,
+				1E3BBAF623E784490088B5FD /* predicates-and-expressions.html */,
+				1E3BBAF723E784490088B5FD /* Other Type Definitions.html */,
+				1E3BBAF823E784490088B5FD /* index.html */,
+				1E3BBAF923E784490088B5FD /* Style Content.html */,
+				1E3BBAFA23E784490088B5FD /* Maps.html */,
+				1E3BBAFB23E784490088B5FD /* search.json */,
+				1E3BBAFC23E784490088B5FD /* css */,
+				1E3BBAFF23E784490088B5FD /* Styling the Map.html */,
+				1E3BBB0023E784490088B5FD /* Style Layers.html */,
+				1E3BBB0123E784490088B5FD /* Classes */,
+				1E3BBB3823E784490088B5FD /* js */,
+				1E3BBB3E23E784490088B5FD /* Other Structs.html */,
+				1E3BBB3F23E784490088B5FD /* infoplist-keys.html */,
+				1E3BBB4023E784490088B5FD /* User Interaction.html */,
+				1E3BBB4123E784490088B5FD /* Other Categories.html */,
+				1E3BBB4223E784490088B5FD /* Formatters.html */,
+				1E3BBB4323E784490088B5FD /* Enums */,
+				1E3BBB6A23E784490088B5FD /* Location Updates.html */,
+				1E3BBB6B23E784490088B5FD /* for-style-authors.html */,
+				1E3BBB6C23E784490088B5FD /* Appendices.html */,
+				1E3BBB6D23E784490088B5FD /* img */,
+				1E3BBB7F23E784490088B5FD /* undocumented.json */,
+				1E3BBB8023E784490088B5FD /* Structs */,
+				1E3BBB8723E784490088B5FD /* docsets */,
+				1E3BBB8B23E784490088B5FD /* gesture-recognizers.html */,
+				1E3BBB8C23E784490088B5FD /* Offline Maps.html */,
+				1E3BBB8D23E784490088B5FD /* Other Enums.html */,
+				1E3BBB8E23E784490088B5FD /* Other Functions.html */,
+				1E3BBB8F23E784490088B5FD /* tile-url-templates.html */,
+				1E3BBB9023E784490088B5FD /* fonts */,
+				1E3BBB9523E784490088B5FD /* working-with-geojson-data.html */,
+				1E3BBB9623E784490088B5FD /* Categories */,
+				1E3BBBA023E784490088B5FD /* Protocols */,
+				1E3BBBAD23E784490088B5FD /* Style Primitives.html */,
+				1E3BBBAE23E784490088B5FD /* Geometry.html */,
+				1E3BBBAF23E784490088B5FD /* migrating-to-expressions.html */,
+				1E3BBBB023E784490088B5FD /* Other Classes.html */,
+			);
+			path = documentation;
+			sourceTree = "<group>";
+		};
+		1E3BBAFC23E784490088B5FD /* css */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBAFD23E784490088B5FD /* highlight.css */,
+				1E3BBAFE23E784490088B5FD /* jazzy.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		1E3BBB0123E784490088B5FD /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB0223E784490088B5FD /* MGLCoordinateFormatter.html */,
+				1E3BBB0323E784490088B5FD /* MGLMapSnapshotter.html */,
+				1E3BBB0423E784490088B5FD /* MGLSource.html */,
+				1E3BBB0523E784490088B5FD /* MGLCompassButton.html */,
+				1E3BBB0623E784490088B5FD /* MGLShapeSource.html */,
+				1E3BBB0723E784490088B5FD /* MGLTilePyramidOfflineRegion.html */,
+				1E3BBB0823E784490088B5FD /* MGLOfflineStorage.html */,
+				1E3BBB0923E784490088B5FD /* MGLRasterTileSource.html */,
+				1E3BBB0A23E784490088B5FD /* MGLCircleStyleLayer.html */,
+				1E3BBB0B23E784490088B5FD /* MGLUserLocationAnnotationView.html */,
+				1E3BBB0C23E784490088B5FD /* MGLFillExtrusionStyleLayer.html */,
+				1E3BBB0D23E784490088B5FD /* MGLClockDirectionFormatter.html */,
+				1E3BBB0E23E784490088B5FD /* MGLDistanceFormatter.html */,
+				1E3BBB0F23E784490088B5FD /* MGLMapView.html */,
+				1E3BBB1023E784490088B5FD /* MGLLight.html */,
+				1E3BBB1123E784490088B5FD /* MGLMultiPoint.html */,
+				1E3BBB1223E784490088B5FD /* MGLLoggingConfiguration.html */,
+				1E3BBB1323E784490088B5FD /* MGLCompassDirectionFormatter.html */,
+				1E3BBB1423E784490088B5FD /* MGLSymbolStyleLayer.html */,
+				1E3BBB1523E784490088B5FD /* MGLMapSnapshot.html */,
+				1E3BBB1623E784490088B5FD /* MGLOfflinePack.html */,
+				1E3BBB1723E784490088B5FD /* MGLAnnotationView.html */,
+				1E3BBB1823E784490088B5FD /* MGLAnnotationImage.html */,
+				1E3BBB1923E784490088B5FD /* MGLMultiPolyline.html */,
+				1E3BBB1A23E784490088B5FD /* MGLShapeOfflineRegion.html */,
+				1E3BBB1B23E784490088B5FD /* MGLAttributedExpression.html */,
+				1E3BBB1C23E784490088B5FD /* MGLMultiPolygon.html */,
+				1E3BBB1D23E784490088B5FD /* MGLPointCollection.html */,
+				1E3BBB1E23E784490088B5FD /* MGLNetworkConfiguration.html */,
+				1E3BBB1F23E784490088B5FD /* MGLRasterStyleLayer.html */,
+				1E3BBB2023E784490088B5FD /* MGLAttributionInfo.html */,
+				1E3BBB2123E784490088B5FD /* MGLStyle.html */,
+				1E3BBB2223E784490088B5FD /* MGLLineStyleLayer.html */,
+				1E3BBB2323E784490088B5FD /* MGLHeatmapStyleLayer.html */,
+				1E3BBB2423E784490088B5FD /* MGLUserLocation.html */,
+				1E3BBB2523E784490088B5FD /* MGLVectorStyleLayer.html */,
+				1E3BBB2623E784490088B5FD /* MGLStyleLayer.html */,
+				1E3BBB2723E784490088B5FD /* MGLPointAnnotation.html */,
+				1E3BBB2823E784490088B5FD /* MGLHillshadeStyleLayer.html */,
+				1E3BBB2923E784490088B5FD /* MGLImageSource.html */,
+				1E3BBB2A23E784490088B5FD /* MGLForegroundStyleLayer.html */,
+				1E3BBB2B23E784490088B5FD /* MGLShapeCollection.html */,
+				1E3BBB2C23E784490088B5FD /* MGLPolygon.html */,
+				1E3BBB2D23E784490088B5FD /* MGLAccountManager.html */,
+				1E3BBB2E23E784490088B5FD /* MGLShape.html */,
+				1E3BBB2F23E784490088B5FD /* MGLFillStyleLayer.html */,
+				1E3BBB3023E784490088B5FD /* MGLMapCamera.html */,
+				1E3BBB3123E784490088B5FD /* MGLComputedShapeSource.html */,
+				1E3BBB3223E784490088B5FD /* MGLBackgroundStyleLayer.html */,
+				1E3BBB3323E784490088B5FD /* MGLTileSource.html */,
+				1E3BBB3423E784490088B5FD /* MGLVectorTileSource.html */,
+				1E3BBB3523E784490088B5FD /* MGLPolyline.html */,
+				1E3BBB3623E784490088B5FD /* MGLMapSnapshotOverlay.html */,
+				1E3BBB3723E784490088B5FD /* MGLMapSnapshotOptions.html */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		1E3BBB3823E784490088B5FD /* js */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB3923E784490088B5FD /* jquery.min.js */,
+				1E3BBB3A23E784490088B5FD /* typeahead.jquery.js */,
+				1E3BBB3B23E784490088B5FD /* jazzy.search.js */,
+				1E3BBB3C23E784490088B5FD /* lunr.min.js */,
+				1E3BBB3D23E784490088B5FD /* jazzy.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		1E3BBB4323E784490088B5FD /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB4423E784490088B5FD /* MGLIconPitchAlignment.html */,
+				1E3BBB4523E784490088B5FD /* MGLIconTranslationAnchor.html */,
+				1E3BBB4623E784490088B5FD /* MGLFillExtrusionTranslationAnchor.html */,
+				1E3BBB4723E784490088B5FD /* MGLIconTextFit.html */,
+				1E3BBB4823E784490088B5FD /* MGLLoggingLevel.html */,
+				1E3BBB4923E784490088B5FD /* MGLTextAnchor.html */,
+				1E3BBB4A23E784490088B5FD /* MGLCircleTranslationAnchor.html */,
+				1E3BBB4B23E784490088B5FD /* MGLCirclePitchAlignment.html */,
+				1E3BBB4C23E784490088B5FD /* MGLLineTranslationAnchor.html */,
+				1E3BBB4D23E784490088B5FD /* MGLOfflinePackState.html */,
+				1E3BBB4E23E784490088B5FD /* MGLFillTranslationAnchor.html */,
+				1E3BBB4F23E784490088B5FD /* MGLHillshadeIlluminationAnchor.html */,
+				1E3BBB5023E784490088B5FD /* MGLTextWritingMode.html */,
+				1E3BBB5123E784490088B5FD /* MGLMapDebugMaskOptions.html */,
+				1E3BBB5223E784490088B5FD /* MGLCircleScaleAlignment.html */,
+				1E3BBB5323E784490088B5FD /* MGLOrnamentPosition.html */,
+				1E3BBB5423E784490088B5FD /* MGLTextRotationAlignment.html */,
+				1E3BBB5523E784490088B5FD /* MGLTextTransform.html */,
+				1E3BBB5623E784490088B5FD /* MGLTextJustification.html */,
+				1E3BBB5723E784490088B5FD /* MGLOrnamentVisibility.html */,
+				1E3BBB5823E784490088B5FD /* MGLSymbolPlacement.html */,
+				1E3BBB5923E784490088B5FD /* MGLUserTrackingMode.html */,
+				1E3BBB5A23E784490088B5FD /* MGLTextPitchAlignment.html */,
+				1E3BBB5B23E784490088B5FD /* MGLAnnotationVerticalAlignment.html */,
+				1E3BBB5C23E784490088B5FD /* MGLTextTranslationAnchor.html */,
+				1E3BBB5D23E784490088B5FD /* MGLAnnotationViewDragState.html */,
+				1E3BBB5E23E784490088B5FD /* MGLLineJoin.html */,
+				1E3BBB5F23E784490088B5FD /* MGLIconAnchor.html */,
+				1E3BBB6023E784490088B5FD /* MGLLightAnchor.html */,
+				1E3BBB6123E784490088B5FD /* MGLIconRotationAlignment.html */,
+				1E3BBB6223E784490088B5FD /* MGLAttributionInfoStyle.html */,
+				1E3BBB6323E784490088B5FD /* MGLDEMEncoding.html */,
+				1E3BBB6423E784490088B5FD /* MGLErrorCode.html */,
+				1E3BBB6523E784490088B5FD /* MGLRasterResamplingMode.html */,
+				1E3BBB6623E784490088B5FD /* MGLSymbolZOrder.html */,
+				1E3BBB6723E784490088B5FD /* MGLTileCoordinateSystem.html */,
+				1E3BBB6823E784490088B5FD /* MGLResourceKind.html */,
+				1E3BBB6923E784490088B5FD /* MGLLineCap.html */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		1E3BBB6D23E784490088B5FD /* img */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB6E23E784490088B5FD /* carat.png */,
+				1E3BBB6F23E784490088B5FD /* dash.png */,
+				1E3BBB7023E784490088B5FD /* github.svg */,
+				1E3BBB7123E784490088B5FD /* link.svg */,
+				1E3BBB7223E784490088B5FD /* screenshot.png */,
+				1E3BBB7323E784490088B5FD /* plus.svg */,
+				1E3BBB7423E784490088B5FD /* user-interaction */,
+				1E3BBB7723E784490088B5FD /* mapbox.svg */,
+				1E3BBB7823E784490088B5FD /* data-driven-styling */,
+				1E3BBB7E23E784490088B5FD /* minus.svg */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		1E3BBB7423E784490088B5FD /* user-interaction */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB7523E784490088B5FD /* quickzoom.gif */,
+				1E3BBB7623E784490088B5FD /* RotateSydney.gif */,
+			);
+			path = "user-interaction";
+			sourceTree = "<group>";
+		};
+		1E3BBB7823E784490088B5FD /* data-driven-styling */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB7923E784490088B5FD /* cast.png */,
+				1E3BBB7A23E784490088B5FD /* exponential-function.png */,
+				1E3BBB7B23E784490088B5FD /* multiply.png */,
+				1E3BBB7C23E784490088B5FD /* exponential-function-1.png */,
+				1E3BBB7D23E784490088B5FD /* identity.png */,
+			);
+			path = "data-driven-styling";
+			sourceTree = "<group>";
+		};
+		1E3BBB8023E784490088B5FD /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB8123E784490088B5FD /* MGLTransition.html */,
+				1E3BBB8223E784490088B5FD /* MGLCoordinateSpan.html */,
+				1E3BBB8323E784490088B5FD /* MGLSphericalPosition.html */,
+				1E3BBB8423E784490088B5FD /* MGLCoordinateBounds.html */,
+				1E3BBB8523E784490088B5FD /* MGLCoordinateQuad.html */,
+				1E3BBB8623E784490088B5FD /* MGLOfflinePackProgress.html */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		1E3BBB8723E784490088B5FD /* docsets */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB8823E784490088B5FD /* Mapbox.docset */,
+				1E3BBB8923E784490088B5FD /* Mapbox.xml */,
+				1E3BBB8A23E784490088B5FD /* Mapbox.tgz */,
+			);
+			path = docsets;
+			sourceTree = "<group>";
+		};
+		1E3BBB9023E784490088B5FD /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB9123E784490088B5FD /* opensans-regular.eot */,
+				1E3BBB9223E784490088B5FD /* opensans-regular.woff */,
+				1E3BBB9323E784490088B5FD /* opensans-bold.woff */,
+				1E3BBB9423E784490088B5FD /* opensans-bold.eot */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		1E3BBB9623E784490088B5FD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBB9723E784490088B5FD /* NSValue(MGLFillStyleLayerAdditions).html */,
+				1E3BBB9823E784490088B5FD /* NSValue(MGLLineStyleLayerAdditions).html */,
+				1E3BBB9923E784490088B5FD /* NSValue(MGLRasterStyleLayerAdditions).html */,
+				1E3BBB9A23E784490088B5FD /* NSValue(MGLAdditions).html */,
+				1E3BBB9B23E784490088B5FD /* NSExpression(MGLAdditions).html */,
+				1E3BBB9C23E784490088B5FD /* NSValue(MGLSymbolStyleLayerAdditions).html */,
+				1E3BBB9D23E784490088B5FD /* NSValue(MGLHillshadeStyleLayerAdditions).html */,
+				1E3BBB9E23E784490088B5FD /* NSValue(MGLCircleStyleLayerAdditions).html */,
+				1E3BBB9F23E784490088B5FD /* NSValue(MGLFillExtrusionStyleLayerAdditions).html */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		1E3BBBA023E784490088B5FD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBBA123E784490088B5FD /* MGLOverlay.html */,
+				1E3BBBA223E784490088B5FD /* MGLLocationManagerDelegate.html */,
+				1E3BBBA323E784490088B5FD /* MGLFeature.html */,
+				1E3BBBA423E784490088B5FD /* MGLMapViewDelegate.html */,
+				1E3BBBA523E784490088B5FD /* MGLOfflineStorageDelegate.html */,
+				1E3BBBA623E784490088B5FD /* MGLCluster.html */,
+				1E3BBBA723E784490088B5FD /* MGLOfflineRegion.html */,
+				1E3BBBA823E784490088B5FD /* MGLComputedShapeSourceDataSource.html */,
+				1E3BBBA923E784490088B5FD /* MGLLocationManager.html */,
+				1E3BBBAA23E784490088B5FD /* MGLCalloutView.html */,
+				1E3BBBAB23E784490088B5FD /* MGLCalloutViewDelegate.html */,
+				1E3BBBAC23E784490088B5FD /* MGLAnnotation.html */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		1E3BBBB123E784490088B5FD /* dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBBB223E784490088B5FD /* MapboxMobileEvents.framework */,
+				1E3BBBB323E784490088B5FD /* F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap */,
+				1E3BBBB423E784490088B5FD /* Mapbox.framework.dSYM */,
+				1E3BBBB523E784490088B5FD /* Mapbox.framework */,
+				1E3BBBB623E784490088B5FD /* MapboxMobileEvents.framework.dSYM */,
+				1E3BBBB723E784490088B5FD /* 8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap */,
+				1E3BBBB823E784490088B5FD /* 2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap */,
+				1E3BBBB923E784490088B5FD /* B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap */,
+			);
+			path = dynamic;
+			sourceTree = "<group>";
+		};
+		1E3BBBBE23E7845E0088B5FD /* mapbox-ios-sdk-5.6.0-dynamic-with-events */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBBBF23E7845E0088B5FD /* LICENSE.md */,
+				1E3BBBC023E7845E0088B5FD /* documentation */,
+				1E3BBC8023E7845E0088B5FD /* dynamic */,
+				1E3BBC8923E7845E0088B5FD /* Settings.bundle */,
+				1E3BBC8A23E7845E0088B5FD /* CHANGELOG.md */,
+				1E3BBC8B23E7845E0088B5FD /* README.md */,
+				1E3BBC8C23E7845E0088B5FD /* version.txt */,
+			);
+			name = "mapbox-ios-sdk-5.6.0-dynamic-with-events";
+			path = "../../../../Downloads/mapbox-ios-sdk-5.6.0-dynamic-with-events";
+			sourceTree = "<group>";
+		};
+		1E3BBBC023E7845E0088B5FD /* documentation */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBBC123E7845E0088B5FD /* Annotations.html */,
+				1E3BBBC223E7845E0088B5FD /* Other Constants.html */,
+				1E3BBBC323E7845E0088B5FD /* Other Protocols.html */,
+				1E3BBBC423E7845E0088B5FD /* Primitive Shapes.html */,
+				1E3BBBC523E7845E0088B5FD /* predicates-and-expressions.html */,
+				1E3BBBC623E7845E0088B5FD /* Other Type Definitions.html */,
+				1E3BBBC723E7845E0088B5FD /* index.html */,
+				1E3BBBC823E7845E0088B5FD /* Style Content.html */,
+				1E3BBBC923E7845E0088B5FD /* Maps.html */,
+				1E3BBBCA23E7845E0088B5FD /* search.json */,
+				1E3BBBCB23E7845E0088B5FD /* css */,
+				1E3BBBCE23E7845E0088B5FD /* Styling the Map.html */,
+				1E3BBBCF23E7845E0088B5FD /* Style Layers.html */,
+				1E3BBBD023E7845E0088B5FD /* Classes */,
+				1E3BBC0723E7845E0088B5FD /* js */,
+				1E3BBC0D23E7845E0088B5FD /* Other Structs.html */,
+				1E3BBC0E23E7845E0088B5FD /* infoplist-keys.html */,
+				1E3BBC0F23E7845E0088B5FD /* User Interaction.html */,
+				1E3BBC1023E7845E0088B5FD /* Other Categories.html */,
+				1E3BBC1123E7845E0088B5FD /* Formatters.html */,
+				1E3BBC1223E7845E0088B5FD /* Enums */,
+				1E3BBC3923E7845E0088B5FD /* Location Updates.html */,
+				1E3BBC3A23E7845E0088B5FD /* for-style-authors.html */,
+				1E3BBC3B23E7845E0088B5FD /* Appendices.html */,
+				1E3BBC3C23E7845E0088B5FD /* img */,
+				1E3BBC4E23E7845E0088B5FD /* undocumented.json */,
+				1E3BBC4F23E7845E0088B5FD /* Structs */,
+				1E3BBC5623E7845E0088B5FD /* docsets */,
+				1E3BBC5A23E7845E0088B5FD /* gesture-recognizers.html */,
+				1E3BBC5B23E7845E0088B5FD /* Offline Maps.html */,
+				1E3BBC5C23E7845E0088B5FD /* Other Enums.html */,
+				1E3BBC5D23E7845E0088B5FD /* Other Functions.html */,
+				1E3BBC5E23E7845E0088B5FD /* tile-url-templates.html */,
+				1E3BBC5F23E7845E0088B5FD /* fonts */,
+				1E3BBC6423E7845E0088B5FD /* working-with-geojson-data.html */,
+				1E3BBC6523E7845E0088B5FD /* Categories */,
+				1E3BBC6F23E7845E0088B5FD /* Protocols */,
+				1E3BBC7C23E7845E0088B5FD /* Style Primitives.html */,
+				1E3BBC7D23E7845E0088B5FD /* Geometry.html */,
+				1E3BBC7E23E7845E0088B5FD /* migrating-to-expressions.html */,
+				1E3BBC7F23E7845E0088B5FD /* Other Classes.html */,
+			);
+			path = documentation;
+			sourceTree = "<group>";
+		};
+		1E3BBBCB23E7845E0088B5FD /* css */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBBCC23E7845E0088B5FD /* highlight.css */,
+				1E3BBBCD23E7845E0088B5FD /* jazzy.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		1E3BBBD023E7845E0088B5FD /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBBD123E7845E0088B5FD /* MGLCoordinateFormatter.html */,
+				1E3BBBD223E7845E0088B5FD /* MGLMapSnapshotter.html */,
+				1E3BBBD323E7845E0088B5FD /* MGLSource.html */,
+				1E3BBBD423E7845E0088B5FD /* MGLCompassButton.html */,
+				1E3BBBD523E7845E0088B5FD /* MGLShapeSource.html */,
+				1E3BBBD623E7845E0088B5FD /* MGLTilePyramidOfflineRegion.html */,
+				1E3BBBD723E7845E0088B5FD /* MGLOfflineStorage.html */,
+				1E3BBBD823E7845E0088B5FD /* MGLRasterTileSource.html */,
+				1E3BBBD923E7845E0088B5FD /* MGLCircleStyleLayer.html */,
+				1E3BBBDA23E7845E0088B5FD /* MGLUserLocationAnnotationView.html */,
+				1E3BBBDB23E7845E0088B5FD /* MGLFillExtrusionStyleLayer.html */,
+				1E3BBBDC23E7845E0088B5FD /* MGLClockDirectionFormatter.html */,
+				1E3BBBDD23E7845E0088B5FD /* MGLDistanceFormatter.html */,
+				1E3BBBDE23E7845E0088B5FD /* MGLMapView.html */,
+				1E3BBBDF23E7845E0088B5FD /* MGLLight.html */,
+				1E3BBBE023E7845E0088B5FD /* MGLMultiPoint.html */,
+				1E3BBBE123E7845E0088B5FD /* MGLLoggingConfiguration.html */,
+				1E3BBBE223E7845E0088B5FD /* MGLCompassDirectionFormatter.html */,
+				1E3BBBE323E7845E0088B5FD /* MGLSymbolStyleLayer.html */,
+				1E3BBBE423E7845E0088B5FD /* MGLMapSnapshot.html */,
+				1E3BBBE523E7845E0088B5FD /* MGLOfflinePack.html */,
+				1E3BBBE623E7845E0088B5FD /* MGLAnnotationView.html */,
+				1E3BBBE723E7845E0088B5FD /* MGLAnnotationImage.html */,
+				1E3BBBE823E7845E0088B5FD /* MGLMultiPolyline.html */,
+				1E3BBBE923E7845E0088B5FD /* MGLShapeOfflineRegion.html */,
+				1E3BBBEA23E7845E0088B5FD /* MGLAttributedExpression.html */,
+				1E3BBBEB23E7845E0088B5FD /* MGLMultiPolygon.html */,
+				1E3BBBEC23E7845E0088B5FD /* MGLPointCollection.html */,
+				1E3BBBED23E7845E0088B5FD /* MGLNetworkConfiguration.html */,
+				1E3BBBEE23E7845E0088B5FD /* MGLRasterStyleLayer.html */,
+				1E3BBBEF23E7845E0088B5FD /* MGLAttributionInfo.html */,
+				1E3BBBF023E7845E0088B5FD /* MGLStyle.html */,
+				1E3BBBF123E7845E0088B5FD /* MGLLineStyleLayer.html */,
+				1E3BBBF223E7845E0088B5FD /* MGLHeatmapStyleLayer.html */,
+				1E3BBBF323E7845E0088B5FD /* MGLUserLocation.html */,
+				1E3BBBF423E7845E0088B5FD /* MGLVectorStyleLayer.html */,
+				1E3BBBF523E7845E0088B5FD /* MGLStyleLayer.html */,
+				1E3BBBF623E7845E0088B5FD /* MGLPointAnnotation.html */,
+				1E3BBBF723E7845E0088B5FD /* MGLHillshadeStyleLayer.html */,
+				1E3BBBF823E7845E0088B5FD /* MGLImageSource.html */,
+				1E3BBBF923E7845E0088B5FD /* MGLForegroundStyleLayer.html */,
+				1E3BBBFA23E7845E0088B5FD /* MGLShapeCollection.html */,
+				1E3BBBFB23E7845E0088B5FD /* MGLPolygon.html */,
+				1E3BBBFC23E7845E0088B5FD /* MGLAccountManager.html */,
+				1E3BBBFD23E7845E0088B5FD /* MGLShape.html */,
+				1E3BBBFE23E7845E0088B5FD /* MGLFillStyleLayer.html */,
+				1E3BBBFF23E7845E0088B5FD /* MGLMapCamera.html */,
+				1E3BBC0023E7845E0088B5FD /* MGLComputedShapeSource.html */,
+				1E3BBC0123E7845E0088B5FD /* MGLBackgroundStyleLayer.html */,
+				1E3BBC0223E7845E0088B5FD /* MGLTileSource.html */,
+				1E3BBC0323E7845E0088B5FD /* MGLVectorTileSource.html */,
+				1E3BBC0423E7845E0088B5FD /* MGLPolyline.html */,
+				1E3BBC0523E7845E0088B5FD /* MGLMapSnapshotOverlay.html */,
+				1E3BBC0623E7845E0088B5FD /* MGLMapSnapshotOptions.html */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		1E3BBC0723E7845E0088B5FD /* js */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC0823E7845E0088B5FD /* jquery.min.js */,
+				1E3BBC0923E7845E0088B5FD /* typeahead.jquery.js */,
+				1E3BBC0A23E7845E0088B5FD /* jazzy.search.js */,
+				1E3BBC0B23E7845E0088B5FD /* lunr.min.js */,
+				1E3BBC0C23E7845E0088B5FD /* jazzy.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		1E3BBC1223E7845E0088B5FD /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC1323E7845E0088B5FD /* MGLIconPitchAlignment.html */,
+				1E3BBC1423E7845E0088B5FD /* MGLIconTranslationAnchor.html */,
+				1E3BBC1523E7845E0088B5FD /* MGLFillExtrusionTranslationAnchor.html */,
+				1E3BBC1623E7845E0088B5FD /* MGLIconTextFit.html */,
+				1E3BBC1723E7845E0088B5FD /* MGLLoggingLevel.html */,
+				1E3BBC1823E7845E0088B5FD /* MGLTextAnchor.html */,
+				1E3BBC1923E7845E0088B5FD /* MGLCircleTranslationAnchor.html */,
+				1E3BBC1A23E7845E0088B5FD /* MGLCirclePitchAlignment.html */,
+				1E3BBC1B23E7845E0088B5FD /* MGLLineTranslationAnchor.html */,
+				1E3BBC1C23E7845E0088B5FD /* MGLOfflinePackState.html */,
+				1E3BBC1D23E7845E0088B5FD /* MGLFillTranslationAnchor.html */,
+				1E3BBC1E23E7845E0088B5FD /* MGLHillshadeIlluminationAnchor.html */,
+				1E3BBC1F23E7845E0088B5FD /* MGLTextWritingMode.html */,
+				1E3BBC2023E7845E0088B5FD /* MGLMapDebugMaskOptions.html */,
+				1E3BBC2123E7845E0088B5FD /* MGLCircleScaleAlignment.html */,
+				1E3BBC2223E7845E0088B5FD /* MGLOrnamentPosition.html */,
+				1E3BBC2323E7845E0088B5FD /* MGLTextRotationAlignment.html */,
+				1E3BBC2423E7845E0088B5FD /* MGLTextTransform.html */,
+				1E3BBC2523E7845E0088B5FD /* MGLTextJustification.html */,
+				1E3BBC2623E7845E0088B5FD /* MGLOrnamentVisibility.html */,
+				1E3BBC2723E7845E0088B5FD /* MGLSymbolPlacement.html */,
+				1E3BBC2823E7845E0088B5FD /* MGLUserTrackingMode.html */,
+				1E3BBC2923E7845E0088B5FD /* MGLTextPitchAlignment.html */,
+				1E3BBC2A23E7845E0088B5FD /* MGLAnnotationVerticalAlignment.html */,
+				1E3BBC2B23E7845E0088B5FD /* MGLTextTranslationAnchor.html */,
+				1E3BBC2C23E7845E0088B5FD /* MGLAnnotationViewDragState.html */,
+				1E3BBC2D23E7845E0088B5FD /* MGLLineJoin.html */,
+				1E3BBC2E23E7845E0088B5FD /* MGLIconAnchor.html */,
+				1E3BBC2F23E7845E0088B5FD /* MGLLightAnchor.html */,
+				1E3BBC3023E7845E0088B5FD /* MGLIconRotationAlignment.html */,
+				1E3BBC3123E7845E0088B5FD /* MGLAttributionInfoStyle.html */,
+				1E3BBC3223E7845E0088B5FD /* MGLDEMEncoding.html */,
+				1E3BBC3323E7845E0088B5FD /* MGLErrorCode.html */,
+				1E3BBC3423E7845E0088B5FD /* MGLRasterResamplingMode.html */,
+				1E3BBC3523E7845E0088B5FD /* MGLSymbolZOrder.html */,
+				1E3BBC3623E7845E0088B5FD /* MGLTileCoordinateSystem.html */,
+				1E3BBC3723E7845E0088B5FD /* MGLResourceKind.html */,
+				1E3BBC3823E7845E0088B5FD /* MGLLineCap.html */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		1E3BBC3C23E7845E0088B5FD /* img */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC3D23E7845E0088B5FD /* carat.png */,
+				1E3BBC3E23E7845E0088B5FD /* dash.png */,
+				1E3BBC3F23E7845E0088B5FD /* github.svg */,
+				1E3BBC4023E7845E0088B5FD /* link.svg */,
+				1E3BBC4123E7845E0088B5FD /* screenshot.png */,
+				1E3BBC4223E7845E0088B5FD /* plus.svg */,
+				1E3BBC4323E7845E0088B5FD /* user-interaction */,
+				1E3BBC4623E7845E0088B5FD /* mapbox.svg */,
+				1E3BBC4723E7845E0088B5FD /* data-driven-styling */,
+				1E3BBC4D23E7845E0088B5FD /* minus.svg */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		1E3BBC4323E7845E0088B5FD /* user-interaction */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC4423E7845E0088B5FD /* quickzoom.gif */,
+				1E3BBC4523E7845E0088B5FD /* RotateSydney.gif */,
+			);
+			path = "user-interaction";
+			sourceTree = "<group>";
+		};
+		1E3BBC4723E7845E0088B5FD /* data-driven-styling */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC4823E7845E0088B5FD /* cast.png */,
+				1E3BBC4923E7845E0088B5FD /* exponential-function.png */,
+				1E3BBC4A23E7845E0088B5FD /* multiply.png */,
+				1E3BBC4B23E7845E0088B5FD /* exponential-function-1.png */,
+				1E3BBC4C23E7845E0088B5FD /* identity.png */,
+			);
+			path = "data-driven-styling";
+			sourceTree = "<group>";
+		};
+		1E3BBC4F23E7845E0088B5FD /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC5023E7845E0088B5FD /* MGLTransition.html */,
+				1E3BBC5123E7845E0088B5FD /* MGLCoordinateSpan.html */,
+				1E3BBC5223E7845E0088B5FD /* MGLSphericalPosition.html */,
+				1E3BBC5323E7845E0088B5FD /* MGLCoordinateBounds.html */,
+				1E3BBC5423E7845E0088B5FD /* MGLCoordinateQuad.html */,
+				1E3BBC5523E7845E0088B5FD /* MGLOfflinePackProgress.html */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		1E3BBC5623E7845E0088B5FD /* docsets */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC5723E7845E0088B5FD /* Mapbox.docset */,
+				1E3BBC5823E7845E0088B5FD /* Mapbox.xml */,
+				1E3BBC5923E7845E0088B5FD /* Mapbox.tgz */,
+			);
+			path = docsets;
+			sourceTree = "<group>";
+		};
+		1E3BBC5F23E7845E0088B5FD /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC6023E7845E0088B5FD /* opensans-regular.eot */,
+				1E3BBC6123E7845E0088B5FD /* opensans-regular.woff */,
+				1E3BBC6223E7845E0088B5FD /* opensans-bold.woff */,
+				1E3BBC6323E7845E0088B5FD /* opensans-bold.eot */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		1E3BBC6523E7845E0088B5FD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC6623E7845E0088B5FD /* NSValue(MGLFillStyleLayerAdditions).html */,
+				1E3BBC6723E7845E0088B5FD /* NSValue(MGLLineStyleLayerAdditions).html */,
+				1E3BBC6823E7845E0088B5FD /* NSValue(MGLRasterStyleLayerAdditions).html */,
+				1E3BBC6923E7845E0088B5FD /* NSValue(MGLAdditions).html */,
+				1E3BBC6A23E7845E0088B5FD /* NSExpression(MGLAdditions).html */,
+				1E3BBC6B23E7845E0088B5FD /* NSValue(MGLSymbolStyleLayerAdditions).html */,
+				1E3BBC6C23E7845E0088B5FD /* NSValue(MGLHillshadeStyleLayerAdditions).html */,
+				1E3BBC6D23E7845E0088B5FD /* NSValue(MGLCircleStyleLayerAdditions).html */,
+				1E3BBC6E23E7845E0088B5FD /* NSValue(MGLFillExtrusionStyleLayerAdditions).html */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		1E3BBC6F23E7845E0088B5FD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC7023E7845E0088B5FD /* MGLOverlay.html */,
+				1E3BBC7123E7845E0088B5FD /* MGLLocationManagerDelegate.html */,
+				1E3BBC7223E7845E0088B5FD /* MGLFeature.html */,
+				1E3BBC7323E7845E0088B5FD /* MGLMapViewDelegate.html */,
+				1E3BBC7423E7845E0088B5FD /* MGLOfflineStorageDelegate.html */,
+				1E3BBC7523E7845E0088B5FD /* MGLCluster.html */,
+				1E3BBC7623E7845E0088B5FD /* MGLOfflineRegion.html */,
+				1E3BBC7723E7845E0088B5FD /* MGLComputedShapeSourceDataSource.html */,
+				1E3BBC7823E7845E0088B5FD /* MGLLocationManager.html */,
+				1E3BBC7923E7845E0088B5FD /* MGLCalloutView.html */,
+				1E3BBC7A23E7845E0088B5FD /* MGLCalloutViewDelegate.html */,
+				1E3BBC7B23E7845E0088B5FD /* MGLAnnotation.html */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		1E3BBC8023E7845E0088B5FD /* dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BBC8123E7845E0088B5FD /* MapboxMobileEvents.framework */,
+				1E3BBC8223E7845E0088B5FD /* F207D6B5-A5AF-3799-A665-6016E3A8EA01.bcsymbolmap */,
+				1E3BBC8323E7845E0088B5FD /* Mapbox.framework.dSYM */,
+				1E3BBC8423E7845E0088B5FD /* Mapbox.framework */,
+				1E3BBC8523E7845E0088B5FD /* MapboxMobileEvents.framework.dSYM */,
+				1E3BBC8623E7845E0088B5FD /* 8F504B7B-C196-3FBC-B345-1F70257D3AEC.bcsymbolmap */,
+				1E3BBC8723E7845E0088B5FD /* 2020F3C8-7482-398F-94F5-08E6FADF2B47.bcsymbolmap */,
+				1E3BBC8823E7845E0088B5FD /* B2BBCEBE-D9C9-3E98-A63B-0BD273A7B14A.bcsymbolmap */,
+			);
+			path = dynamic;
+			sourceTree = "<group>";
+		};
 		1E7B618C23E284A700F9F974 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,13 +1718,14 @@
 			isa = PBXGroup;
 			children = (
 				1E7B618E23E284C600F9F974 /* MapView.swift */,
+				1EFC8DC223E7238A00628251 /* StaticMapView.swift */,
 				1EFF83B223E5365E00FF04A1 /* H0Stack.swift */,
 				1EFF83B423E5368900FF04A1 /* V0Stack.swift */,
 				1EFF83B823E53BC200FF04A1 /* SuperColor.swift */,
 				1E6D568823E5EEB20044AB3A /* Popsicle.swift */,
 				1E6D568A23E5F6F10044AB3A /* BImage.swift */,
 				1E6D569323E653990044AB3A /* VSpace.swift */,
-				1EFC8DC223E7238A00628251 /* StaticMapView.swift */,
+				1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -203,6 +1746,7 @@
 			isa = PBXGroup;
 			children = (
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
+				1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -276,6 +1820,10 @@
 		1E9D788E23E10DE60020FAFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1EE2CF4A23E786AF009760D6 /* Mapbox.framework */,
+				1E3BBA2023E784440088B5FD /* mapbox-ios-sdk-5.6.0-dynamic-with-events */,
+				1E3BBAEF23E784490088B5FD /* mapbox-ios-sdk-5.6.0-dynamic-with-events */,
+				1E3BBBBE23E7845E0088B5FD /* mapbox-ios-sdk-5.6.0-dynamic-with-events */,
 				1E9D788F23E10DE60020FAFE /* CloudKit.framework */,
 			);
 			name = Frameworks;
@@ -308,6 +1856,7 @@
 				1EFF83AC23E52D5800FF04A1 /* View+Extensions.swift */,
 				1EFF83B023E532FA00FF04A1 /* Array+Additions.swift */,
 				1EFC8DC423E76B4200628251 /* AnyTransition.swift */,
+				1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -338,6 +1887,7 @@
 			isa = PBXGroup;
 			children = (
 				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
+				1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -379,6 +1929,8 @@
 				1E9D785123E10B4F0020FAFE /* Sources */,
 				1E9D785223E10B4F0020FAFE /* Frameworks */,
 				1E9D785323E10B4F0020FAFE /* Resources */,
+				1EE2CF4D23E786AF009760D6 /* Embed Frameworks */,
+				1EE2CF5123E78AEE009760D6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -500,6 +2052,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1EE2CF5123E78AEE009760D6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Mapbox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MapboxMobileEvents.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1E9D785123E10B4F0020FAFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -512,10 +2086,12 @@
 				1EFF83A823E52B9000FF04A1 /* SizePreferenceKey.swift in Sources */,
 				1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */,
 				1EFF83B523E5368900FF04A1 /* V0Stack.swift in Sources */,
+				1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */,
 				1EFF83B923E53BC200FF04A1 /* SuperColor.swift in Sources */,
 				1E6D568923E5EEB20044AB3A /* Popsicle.swift in Sources */,
 				1E5AF45023E3C9A900A94F10 /* MKMapView+Additions.swift in Sources */,
 				1EFF83AB23E52BC700FF04A1 /* SizeModifier.swift in Sources */,
+				1EE2CF5923E7D2C2009760D6 /* CustomAnnotationView.swift in Sources */,
 				1EFF83A323E4E27800FF04A1 /* RandomAccessCollection+Additions.swift in Sources */,
 				1E9D789C23E125610020FAFE /* Location+CoreDataClass.swift in Sources */,
 				1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */,
@@ -528,8 +2104,10 @@
 				1E5AF45423E3CCCA00A94F10 /* LocationPreviewCell.swift in Sources */,
 				1E80278F23E5E9AC0043D119 /* DayDetailsView.swift in Sources */,
 				1E5AF45223E3CC0500A94F10 /* LocationsPreviewList.swift in Sources */,
+				1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */,
 				1EFF83B123E532FA00FF04A1 /* Array+Additions.swift in Sources */,
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,
+				1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */,
 				1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */,
@@ -717,6 +2295,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Locations App/Resources\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Locations App/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -738,6 +2320,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Locations App/Resources\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Locations App/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

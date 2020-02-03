@@ -29,3 +29,4 @@ extension Location {
     @NSManaged public var tag: Tag
 
 }
+

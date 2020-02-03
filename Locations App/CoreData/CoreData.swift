@@ -52,7 +52,7 @@ class CoreData: NSObject {
     // MARK: - Database Setup
     public class func initialDbSetup() {
         if Tag.count() == 0 {
-            Tag.create(name: "Locations", color: Color("charcoal"))
+            Tag.create(name: "Locations", color: UIColor.charcoal)
         }
         // TODO: Include Cloud KVS preference setup here?
     }

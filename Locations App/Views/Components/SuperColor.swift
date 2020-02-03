@@ -15,6 +15,10 @@ struct SuperColor: View {
         self.color = color
     }
     
+    @inlinable init(_ color: UIColor) {
+        self.color = Color(color)
+    }
+    
     var body: some View {
         color.beyond()
     }
@@ -22,6 +26,6 @@ struct SuperColor: View {
 
 struct SuperColor_Previews: PreviewProvider {
     static var previews: some View {
-        SuperColor(.black)
+        SuperColor(UIColor.black)
     }
 }

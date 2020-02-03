@@ -27,4 +27,12 @@ extension View {
     func roundedFill(with color: Color) -> some View {
         modifier(BackgroundModifier(color: color))
     }
+    
+    func roundedFill(with color: UIColor) -> some View {
+        modifier(BackgroundModifier(color: Color(color)))
+    }
+    
+    func erase() -> AnyView {
+        AnyView(self)
+    }
 }

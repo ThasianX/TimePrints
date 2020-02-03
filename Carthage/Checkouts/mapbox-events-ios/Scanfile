@@ -1,0 +1,12 @@
+# For more information about this configuration visit
+# https://github.com/fastlane/fastlane/tree/master/scan#scanfile
+
+# In general, you can use the options available
+# fastlane scan --help
+
+# Remove the # in front of the line to enable the option
+
+clean true
+scheme "MapboxMobileEvents"
+# open_report true
+
