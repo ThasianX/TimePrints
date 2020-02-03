@@ -15,18 +15,14 @@ extension Visit: Identifiable { }
 extension Visit {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Visit> {
-        return NSFetchRequest<Visit>(entityName: "Location")
+        return NSFetchRequest<Visit>(entityName: "Visit")
     }
 
-    @NSManaged public var name: String
-    @NSManaged public var latitude: Double
-    @NSManaged public var longitude: Double
     @NSManaged public var arrivalDate: Date
     @NSManaged public var departureDate: Date
-    @NSManaged public var address: String
     @NSManaged public var notes: String
     @NSManaged public var isFavorite: Bool
-    @NSManaged public var tag: Tag
+    @NSManaged public var location: Location
 
 }
 

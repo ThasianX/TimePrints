@@ -28,7 +28,7 @@ struct DayDetailsRow: View {
             
             VStack {
                 VStack {
-                    Text(visit.name)
+                    Text(visit.location.name)
                         .font(nameFont)
                         .fontWeight(nameWeight)
                     VSpace(isSelected ? 20 : 0)
@@ -40,7 +40,7 @@ struct DayDetailsRow: View {
                     }
                     
                     VSpace(isSelected ? 20 : 12)
-                    Popsicle(tag: visit.tag, displayName: isSelected)
+                    Popsicle(tag: visit.location.tag, displayName: isSelected)
                         .rotated(.init(degrees: isSelected ? 0 : 90))
                     VSpace(isSelected ? 20 : 12)
                 }
@@ -80,7 +80,7 @@ extension DayDetailsRow {
     var map: some View {
         ZStack(alignment: .topLeading) {
             VStack(spacing: 20) {
-                StaticMapView(coordinate: visit.coordinate, name: visit.name, color: color)
+                StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, color: color)
                     .frame(width: mapFull ? screen.bounds.width : screen.bounds.width / 2.5, height: mapFull ? screen.bounds.height * 3 / 4 : screen.bounds.width / 2.5)
                     .cornerRadius(mapFull ? 0 : screen.bounds.width / 5)
                     .onTapGesture {
@@ -89,7 +89,7 @@ extension DayDetailsRow {
                         }
                     }
                     .animation(.spring())
-                Text(visit.address.uppercased())
+                Text(visit.location.address.uppercased())
                     .font(.headline)
                     .multilineTextAlignment(.center)
                 Rectangle()

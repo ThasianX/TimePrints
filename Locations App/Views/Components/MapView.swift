@@ -11,10 +11,11 @@ import Mapbox
 
 struct MapView: UIViewRepresentable {
     @Binding var trackingMode: MGLUserTrackingMode
-    @Binding var selectedLocation: Visit?
+    @Binding var selectedLocation: Location?
     @Binding var showingEditTag: Bool
-    let annotations: [MGLPointAnnotation]
-    let annotationsToLocations: [String : Visit]
+    @Binding var showingLocationVisits: Bool
+    
+    let annotations: [LocationAnnotation]
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MGLMapView {
         let styleURL = URL(string: "mapbox://styles/mapbox/navigation-preview-night-v4")!
@@ -39,8 +40,6 @@ struct MapView: UIViewRepresentable {
 
     final class Coordinator: NSObject, MGLMapViewDelegate {
         var parent: MapView
-        let star = UIImage(named: "star")!.withRenderingMode(.alwaysTemplate).withTintColor(.yellow)
-        let starFill = UIImage(named: "star.fill")!.withRenderingMode(.alwaysTemplate).withTintColor(.yellow)
 
         init(_ parent: MapView) {
             self.parent = parent
@@ -51,47 +50,55 @@ struct MapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
-            guard annotation is MGLPointAnnotation else { return nil }
+            guard let annotation = annotation as? LocationAnnotation else { return nil }
             
             let identifier = "visit"
             
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
             
-            let location = parent.annotationsToLocations[annotation.title!!]!
-            
             if annotationView == nil {
                 annotationView = CustomAnnotationView(reuseIdentifier: identifier)
                 annotationView!.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
-                annotationView!.backgroundColor = location.accent
+                annotationView!.backgroundColor = annotation.color
             }
             
             return annotationView
         }
         
-        func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
-            let location = parent.annotationsToLocations[annotation.title!!]!
+        func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+            guard let annotation = annotation as? LocationAnnotation else { return nil }
             let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
-            if location.isFavorite {
-                button.setImage(starFill, for: .normal)
-            } else {
-                button.setImage(star, for: .normal)
-            }
+            let tag = UIImage(named: "tag.fill")!.withRenderingMode(.alwaysTemplate).withTintColor(annotation.location.accent)
+            button.setImage(tag, for: .normal)
+            button.tag = 0
             return button
         }
-    
-        func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
-            
+        
+        func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+            let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
+            let tag = UIImage(named: "info.circle.fill")!.withRenderingMode(.alwaysTemplate).withTintColor(.blue)
+            button.setImage(tag, for: .normal)
+            button.tag = 1
+            return button
+        }
+        
+        func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
+            mapView.deselectAnnotation(annotation, animated: true)
         }
         
         func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
-            if let button = control as? UIButton {
-                let location = parent.annotationsToLocations[annotation.title!!]!
-                location.favorite()
-                if location.isFavorite {
-                    button.setImage(starFill, for: .normal)
-                } else {
-                    button.setImage(star, for: .normal)
-                }
+            guard let annotation = annotation as? LocationAnnotation else { return }
+            mapView.deselectAnnotation(annotation, animated: true)
+            
+            switch control.tag {
+            case 0:
+                parent.selectedLocation = annotation.location
+                parent.showingEditTag = true
+            case 1:
+                parent.selectedLocation = annotation.location
+                parent.showingLocationVisits = true
+            default:
+                ()
             }
         }
     }
@@ -99,6 +106,6 @@ struct MapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(trackingMode: .constant(.follow), annotations: [Visit.preview.asAnnotation], annotationsToLocations: [Visit.preview.name : Visit.preview])
+        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), annotations: [])
     }
 }

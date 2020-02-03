@@ -20,32 +20,17 @@ struct RootView: View {
     //            NSSortDescriptor(keyPath: \Location.arrivalDate, ascending: false)],
     //        predicate: .withinCurrentDate
     //    ) var locations: FetchedResults<Location>
-    @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
+//    @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
+    @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
     
     @State private var trackingMode: MGLUserTrackingMode = .follow
-    @State private var selectedLocation: String?
+    @State private var selectedLocation: Location?
     @State private var showingEditTag = false
     @State private var showingLocationVisits = false
     
-    private var locationVisits: [Location : [Visit]] {
-        visits.reduce(into: [Location: [Visit]]()) {
-            let location = Location(name: $1.name, address: $1.address)
-            var visits = $0[location]
-            if visits != nil {
-                visits!.append($1)
-            } else {
-                $0[location] = [$1]
-            }
-        }
-    }
-    
-    private var annotations: [LocationAnnotation] {
-        locationVisits.forEac
-    }
-    
     var body: some View {
         ZStack(alignment: .top) {
-            MapView(trackingMode: $trackingMode, annotations: locations.map { $0.asAnnotation }, annotationsToLocations: annotationsToLocations).edgesIgnoringSafeArea(.all)
+            MapView(trackingMode: $trackingMode, selectedLocation: $selectedLocation, showingEditTag: $showingEditTag, showingLocationVisits: $showingLocationVisits, annotations: locations.map(LocationAnnotation.init)).beyond()
             
             HStack {
                 UserLocationButton(trackingMode: $trackingMode)

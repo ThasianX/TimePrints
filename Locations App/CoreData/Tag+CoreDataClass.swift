@@ -13,7 +13,7 @@ import SwiftUI
 
 @objc(Tag)
 public class Tag: NSManagedObject {
-    
+    // MARK: Class Functions
     class func count() -> Int {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
         
@@ -27,17 +27,16 @@ public class Tag: NSManagedObject {
     
     class func getDefault() -> Tag {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%@ == name", "Visits")
+        fetchRequest.predicate = NSPredicate(format: "%@ == name", "Places")
         
         do {
-            let a = try CoreData.stack.context.fetch(fetchRequest)
-            return a.first!
+            let tag = try CoreData.stack.context.fetch(fetchRequest)
+            return tag.first!
         } catch {
             fatalError("Default tag not in database")
         }
     }
     
-    // MARK: CRUD
     private class func newTag() -> Tag {
         Tag(context: CoreData.stack.context)
     }
@@ -52,6 +51,7 @@ public class Tag: NSManagedObject {
         return tag
     }
     
+    // MARK: Local Functions
     func edit(name: String, color: UIColor) {
         self.name = name
         self.color = color.hexString()

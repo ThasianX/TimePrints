@@ -10,15 +10,17 @@ import Foundation
 import Mapbox
 
 final class LocationAnnotation: NSObject, MGLAnnotation {
-    var coordinate: CLLocationCoordinate2D
-    var title: String?
-    var subtitle: String?
-    var color: UIColor
+    let coordinate: CLLocationCoordinate2D
+    let title: String?
+    let subtitle: String?
+    let color: UIColor
+    let location: Location
     
-    init(color: UIColor, location: Visit, count: Int) {
+    init(location: Location) {
         self.coordinate = location.coordinate
         self.title = location.name
-        self.subtitle = "Visited \(count) times"
-        self.color = color
+        self.subtitle = "Visited \(location.visits.count) times"
+        self.color = location.accent
+        self.location = location
     }
 }

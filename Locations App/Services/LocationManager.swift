@@ -6,11 +6,11 @@
 //  Copyright © 2020 Kevin Li. All rights reserved.
 //
 
-import SwiftUI
-import Foundation
+//import SwiftUI
+//import Foundation
 import CoreLocation
-import Combine
-import CoreData
+//import Combine
+//import CoreData
 
 class LocationManager: NSObject {//, ObservableObject {
 //    @Published var currentLocation: CLLocation? {
@@ -51,7 +51,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     private func newVisitReceived(_ visit: CLVisit, place: CLPlacemark) {
-        Visit.create(visit: visit, place: place)
+        Location.create(visit: visit, place: place)
     }
     
 //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

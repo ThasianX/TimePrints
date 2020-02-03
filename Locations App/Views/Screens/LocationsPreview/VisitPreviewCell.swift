@@ -13,14 +13,14 @@ struct VisitPreviewCell: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Popsicle(tag: visit.tag)
+            Popsicle(tag: visit.location.tag)
 
             VStack(alignment: .leading) {
-                Text(visit.name)
+                Text(visit.location.name)
                     .font(.headline)
                     .fontWeight(.bold)
                     .lineLimit(1)
-                Text("\(visit.visitDuration)    \(visit.address)")
+                Text("\(visit.visitDuration)    \(visit.location.address)")
                     .font(.caption)
                     .lineLimit(1)
             }

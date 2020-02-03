@@ -66,7 +66,8 @@
 		1EFFA58323E896F700914607 /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFFA58223E896F700914607 /* MapboxMobileEvents.framework */; };
 		1EFFA58423E896F700914607 /* MapboxMobileEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFFA58223E896F700914607 /* MapboxMobileEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EFFA58623E89A3400914607 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFA58523E89A3400914607 /* LocationAnnotation.swift */; };
-		1EFFA58823E8A50B00914607 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFA58723E8A50B00914607 /* Location.swift */; };
+		1EFFA58B23E8B1E700914607 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFA58923E8B1E700914607 /* Location+CoreDataClass.swift */; };
+		1EFFA58C23E8B1E700914607 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFA58A23E8B1E700914607 /* Location+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -742,7 +743,8 @@
 		1EFF83B823E53BC200FF04A1 /* SuperColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperColor.swift; sourceTree = "<group>"; };
 		1EFFA58223E896F700914607 /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		1EFFA58523E89A3400914607 /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
-		1EFFA58723E8A50B00914607 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		1EFFA58923E8B1E700914607 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1EFFA58A23E8B1E700914607 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1840,6 +1842,8 @@
 			children = (
 				1E9D789623E124030020FAFE /* CoreData.swift */,
 				1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */,
+				1EFFA58923E8B1E700914607 /* Location+CoreDataClass.swift */,
+				1EFFA58A23E8B1E700914607 /* Location+CoreDataProperties.swift */,
 				1E9D789823E125610020FAFE /* Visit+CoreDataClass.swift */,
 				1E9D789923E125610020FAFE /* Visit+CoreDataProperties.swift */,
 				1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */,
@@ -1895,7 +1899,6 @@
 				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
 				1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */,
 				1EFFA58523E89A3400914607 /* LocationAnnotation.swift */,
-				1EFFA58723E8A50B00914607 /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1938,7 +1941,7 @@
 				1E9D785223E10B4F0020FAFE /* Frameworks */,
 				1E9D785323E10B4F0020FAFE /* Resources */,
 				1EE2CF4D23E786AF009760D6 /* Embed Frameworks */,
-				1EE2CF5123E78AEE009760D6 /* ShellScript */,
+				1EE2CF5123E78AEE009760D6 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -2061,7 +2064,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1EE2CF5123E78AEE009760D6 /* ShellScript */ = {
+		1EE2CF5123E78AEE009760D6 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2072,6 +2075,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Mapbox.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MapboxMobileEvents.framework",
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -2101,6 +2105,8 @@
 				1EFF83AB23E52BC700FF04A1 /* SizeModifier.swift in Sources */,
 				1EE2CF5923E7D2C2009760D6 /* CustomAnnotationView.swift in Sources */,
 				1EFF83A323E4E27800FF04A1 /* RandomAccessCollection+Additions.swift in Sources */,
+				1EFFA58C23E8B1E700914607 /* Location+CoreDataProperties.swift in Sources */,
+				1EFFA58B23E8B1E700914607 /* Location+CoreDataClass.swift in Sources */,
 				1E9D789C23E125610020FAFE /* Visit+CoreDataClass.swift in Sources */,
 				1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */,
 				1EFF83B323E5365E00FF04A1 /* H0Stack.swift in Sources */,
@@ -2135,7 +2141,6 @@
 				1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */,
 				1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
-				1EFFA58823E8A50B00914607 /* Location.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2309,6 +2314,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Locations App/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2334,6 +2340,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Locations App/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
