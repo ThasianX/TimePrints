@@ -20,14 +20,27 @@ struct RootView: View {
     //            NSSortDescriptor(keyPath: \Location.arrivalDate, ascending: false)],
     //        predicate: .withinCurrentDate
     //    ) var locations: FetchedResults<Location>
-    @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
+    @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
     
     @State private var trackingMode: MGLUserTrackingMode = .follow
+    @State private var selectedLocation: String?
+    @State private var showingEditTag = false
+    @State private var showingLocationVisits = false
     
-    private var annotationsToLocations: [String : Location] {
-        locations.reduce(into: [String: Location]()) {
-            $0[$1.name] = $1
+    private var locationVisits: [Location : [Visit]] {
+        visits.reduce(into: [Location: [Visit]]()) {
+            let location = Location(name: $1.name, address: $1.address)
+            var visits = $0[location]
+            if visits != nil {
+                visits!.append($1)
+            } else {
+                $0[location] = [$1]
+            }
         }
+    }
+    
+    private var annotations: [LocationAnnotation] {
+        locationVisits.forEac
     }
     
     var body: some View {

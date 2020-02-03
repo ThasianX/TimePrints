@@ -12,7 +12,7 @@ struct DayDetailsView: View {
     @State private var selectedIndex: Int = -1
     @Binding var show: Bool
     let date: Date
-    let locations: [Location]
+    let visits: [Visit]
     
     private var showingDetail: Bool {
         selectedIndex != -1
@@ -36,8 +36,8 @@ struct DayDetailsView: View {
                 VSpace(20).opacity(showingDetail ? 0 : 1)
                 
                 ScrollView(.vertical, showsIndicators: false) {
-                    ForEach(locations.indexed(), id: \.1.self) { i, location in
-                        DayDetailsRow(selectedIndex: self.$selectedIndex, id: i, location: location, color: UIColor.salmon)
+                    ForEach(visits.indexed(), id: \.1.self) { i, visit in
+                        DayDetailsRow(selectedIndex: self.$selectedIndex, id: i, visit: visit, color: UIColor.salmon)
                             .contentShape(Rectangle())
                             .onTapGesture { self.setIndex(index: i) }
                     }
@@ -47,7 +47,7 @@ struct DayDetailsView: View {
             .padding(.init(top: 0, leading: 40, bottom: 0, trailing: 40))
             .offset(y: 60)
             
-            DayDetailsRow(selectedIndex: self.$selectedIndex, id: self.selectedIndex, location: showingDetail ? locations[self.selectedIndex] : .preview, color: UIColor.salmon)
+            DayDetailsRow(selectedIndex: self.$selectedIndex, id: self.selectedIndex, visit: showingDetail ? visits[self.selectedIndex] : .preview, color: UIColor.salmon)
                 .opacity(showingDetail ? 1 : 0)
                 .frame(width: showingDetail ? screen.bounds.width : 0, height:showingDetail ? screen.bounds.height : 0)
         }
@@ -62,6 +62,6 @@ struct DayDetailsView: View {
 
 struct DayDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DayDetailsView(show: .constant(true), date: Date(), locations: Location.previewLocationDetails)
+        DayDetailsView(show: .constant(true), date: Date(), visits: Visit.previewVisitDetails)
     }
 }

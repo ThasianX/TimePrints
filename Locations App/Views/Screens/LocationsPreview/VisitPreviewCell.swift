@@ -8,26 +8,26 @@
 
 import SwiftUI
 
-struct LocationPreviewCell: View {
-    let location: Location
+struct VisitPreviewCell: View {
+    let visit: Visit
     
     var body: some View {
         HStack(alignment: .center) {
-            Popsicle(tag: location.tag)
+            Popsicle(tag: visit.tag)
 
             VStack(alignment: .leading) {
-                Text(location.name)
+                Text(visit.name)
                     .font(.headline)
                     .fontWeight(.bold)
                     .lineLimit(1)
-                Text("\(location.visitDuration)    \(location.address)")
+                Text("\(visit.visitDuration)    \(visit.address)")
                     .font(.caption)
                     .lineLimit(1)
             }
 
             Spacer()
             
-            if location.isFavorite {
+            if visit.isFavorite {
                 Image(systemName: "star.fill")
                     .imageScale(.medium)
                     .foregroundColor(.yellow)
@@ -41,6 +41,6 @@ struct LocationPreviewCell: View {
 
 struct LocationPreviewCell_Previews: PreviewProvider {
     static var previews: some View {
-        LocationPreviewCell(location: .preview)
+        VisitPreviewCell(visit: .preview)
     }
 }

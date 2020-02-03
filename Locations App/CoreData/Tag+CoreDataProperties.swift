@@ -20,7 +20,7 @@ extension Tag {
 
     @NSManaged public var name: String
     @NSManaged public var color: String
-    @NSManaged public var locations: NSSet?
+    @NSManaged public var visits: NSSet?
 
 }
 
@@ -28,15 +28,15 @@ extension Tag {
 extension Tag {
 
     @objc(addLocationsObject:)
-    @NSManaged public func addToLocations(_ value: Location)
+    @NSManaged public func addVisit(_ value: Visit)
 
     @objc(removeLocationsObject:)
-    @NSManaged public func removeFromLocations(_ value: Location)
+    @NSManaged public func removeVisit(_ value: Visit)
 
     @objc(addLocations:)
-    @NSManaged public func addToLocations(_ values: NSSet)
+    @NSManaged public func addVisits(_ values: NSSet)
 
     @objc(removeLocations:)
-    @NSManaged public func removeFromLocations(_ values: NSSet)
+    @NSManaged public func removeVisits(_ values: NSSet)
 
 }

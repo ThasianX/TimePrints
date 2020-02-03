@@ -8,17 +8,17 @@
 
 import SwiftUI
 
-struct LocationsPreviewList: View {
+struct VisitsPreviewList: View {
     @State private var showingDetail = false
     @State private var currentDateComponent = Date().dateComponents
-    let locations: [Location]
+    let visits: [Visit]
     
-    private var dateLocations: [DateComponents: [Location]] {
-        Dictionary(grouping: locations, by: { $0.arrivalDate.dateComponents })
+    private var dateVisits: [DateComponents: [Visit]] {
+        Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
     }
     
-    private var monthAndDates: [DateComponents: [DateComponents]] {
-        Dictionary(grouping: Array(dateLocations.keys), by: { $0.monthAndYear })
+    private var monthDates: [DateComponents: [DateComponents]] {
+        Dictionary(grouping: Array(dateVisits.keys), by: { $0.monthAndYear })
     }
     
     var body: some View {
@@ -32,18 +32,21 @@ struct LocationsPreviewList: View {
         return ZStack {
             SuperColor(UIColor.black)
             
-            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, locations: dateLocations[currentDateComponent] ?? []).frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0).animation(.easeIn)
+            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, visits: dateVisits[currentDateComponent] ?? [])
+                .frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0)
+                .animation(.easeIn)
             
             ScrollView(.vertical, showsIndicators: false) {
                 V0Stack {
-                    ForEach(monthAndDates.descendingKeys) { monthComponent in
+                    ForEach(monthDates.descendingKeys) { monthComponent in
                         H0Stack {
                             MonthYearSideBar(date: monthComponent.date).offset(x: self.showingDetail ? -200 : 0)
                             V0Stack {
-                                ForEach(self.monthAndDates[monthComponent]!.sortDescending) { dateComponent in
+                                ForEach(self.monthDates[monthComponent]!.sortDescending) { dateComponent in
                                     HStack {
-                                        DaySideBar(date: dateComponent.date).offset(x: self.showingDetail ? -200 : 0)
-                                        DayPreviewBlock(locations: self.dateLocations[dateComponent]!, isFilled: isFilled())
+                                        DaySideBar(date: dateComponent.date)
+                                            .offset(x: self.showingDetail ? -200 : 0)
+                                        DayPreviewBlock(visits: self.dateVisits[dateComponent]!, isFilled: isFilled())
                                             .onTapGesture {
                                                 withAnimation {
                                                     self.showingDetail = true
@@ -63,8 +66,8 @@ struct LocationsPreviewList: View {
     }
 }
 
-struct LocationsView_Previews: PreviewProvider {
+struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        LocationsPreviewList(locations: Location.previewLocations).statusBar(hidden: true)
+        VisitsPreviewList(visits: Visit.previewVisits).statusBar(hidden: true)
     }
 }

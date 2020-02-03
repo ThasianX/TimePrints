@@ -12,7 +12,7 @@ struct DayDetailsRow: View {
     @State private var mapFull = false
     @Binding var selectedIndex: Int
     let id: Int
-    let location: Location
+    let visit: Visit
     let color: UIColor
     
     var body: some View {
@@ -28,19 +28,19 @@ struct DayDetailsRow: View {
             
             VStack {
                 VStack {
-                    Text(location.name)
+                    Text(visit.name)
                         .font(nameFont)
                         .fontWeight(nameWeight)
                     VSpace(isSelected ? 20 : 0)
-                    Text(location.visitDuration)
+                    Text(visit.visitDuration)
                         .font(visitDurationFont)
                     
                     if isSelected {
-                        Text(location.arrivalDate.fullMonthWithDayOfWeek.uppercased()).font(.caption)
+                        Text(visit.arrivalDate.fullMonthWithDayOfWeek.uppercased()).font(.caption)
                     }
                     
                     VSpace(isSelected ? 20 : 12)
-                    Popsicle(tag: location.tag, displayName: isSelected)
+                    Popsicle(tag: visit.tag, displayName: isSelected)
                         .rotated(.init(degrees: isSelected ? 0 : 90))
                     VSpace(isSelected ? 20 : 12)
                 }
@@ -50,7 +50,7 @@ struct DayDetailsRow: View {
                     map
                 }
                 
-                Text(location.notes)
+                Text(visit.notes)
                     .font(.caption)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -66,41 +66,13 @@ struct DayDetailsRow: View {
     }
 }
 
-// MARK: - Computed Properties and Helper Functions
-extension DayDetailsRow {
-    private var isSelected: Bool {
-        selectedIndex == id
-    }
-    
-    private var nameFont: Font {
-        isSelected ? .system(size: 22) : .headline
-    }
-    
-    private var nameWeight: Font.Weight {
-        isSelected ? .bold : .regular
-    }
-    
-    private var visitDurationFont: Font {
-        isSelected ? .system(size: 18) : .system(size: 10)
-    }
-
-    
-    private func unselectRow() {
-        self.selectedIndex = -1
-    }
-    
-    private func favorite() {
-        location.favorite()
-    }
-}
-
 // MARK: - Content
 extension DayDetailsRow {
     var header: some View {
         HStack {
             BImage(action: unselectRow, image: .init(systemName: "arrow.left"))
             Spacer()
-            BImage(action: favorite, image: location.isFavorite ? .init(systemName: "star.fill") : .init(systemName: "star"))
+            BImage(action: favorite, image: visit.isFavorite ? .init(systemName: "star.fill") : .init(systemName: "star"))
                 .foregroundColor(.yellow)
         }
     }
@@ -108,7 +80,7 @@ extension DayDetailsRow {
     var map: some View {
         ZStack(alignment: .topLeading) {
             VStack(spacing: 20) {
-                StaticMapView(coordinate: location.coordinate, name: location.name, color: color)
+                StaticMapView(coordinate: visit.coordinate, name: visit.name, color: color)
                     .frame(width: mapFull ? screen.bounds.width : screen.bounds.width / 2.5, height: mapFull ? screen.bounds.height * 3 / 4 : screen.bounds.width / 2.5)
                     .cornerRadius(mapFull ? 0 : screen.bounds.width / 5)
                     .onTapGesture {
@@ -117,7 +89,7 @@ extension DayDetailsRow {
                         }
                     }
                     .animation(.spring())
-                Text(location.address.uppercased())
+                Text(visit.address.uppercased())
                     .font(.headline)
                     .multilineTextAlignment(.center)
                 Rectangle()
@@ -144,7 +116,7 @@ extension DayDetailsRow {
                 .font(.system(size: 22))
                 .fontWeight(.bold)
                 .tracking(2)
-            if location.notes.isEmpty {
+            if visit.notes.isEmpty {
                 Text("TAP TO ADD")
                     .font(.caption)
             }
@@ -152,12 +124,39 @@ extension DayDetailsRow {
     }
 }
 
+// MARK: - Computed Properties and Helper Functions
+extension DayDetailsRow {
+    private var isSelected: Bool {
+        selectedIndex == id
+    }
+    
+    private var nameFont: Font {
+        isSelected ? .system(size: 22) : .headline
+    }
+    
+    private var nameWeight: Font.Weight {
+        isSelected ? .bold : .regular
+    }
+    
+    private var visitDurationFont: Font {
+        isSelected ? .system(size: 18) : .system(size: 10)
+    }
+
+    private func unselectRow() {
+        self.selectedIndex = -1
+    }
+    
+    private func favorite() {
+        visit.favorite()
+    }
+}
+
 struct DayDetailsRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayDetailsRow(selectedIndex: .constant(1), id: -1, location: .preview, color: UIColor.salmon).previewLayout(.sizeThatFits)
+            DayDetailsRow(selectedIndex: .constant(1), id: -1, visit: .preview, color: UIColor.salmon).previewLayout(.sizeThatFits)
             
-            DayDetailsRow(selectedIndex: .constant(1), id: 1, location: .preview, color: .salmon)
+            DayDetailsRow(selectedIndex: .constant(1), id: 1, visit: .preview, color: .salmon)
         }
         
     }

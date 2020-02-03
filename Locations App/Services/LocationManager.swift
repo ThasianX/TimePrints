@@ -39,17 +39,19 @@ class LocationManager: NSObject {//, ObservableObject {
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
-        
-        geoCoder.reverseGeocodeLocation(clLocation) { placeMarks, error in
-            if let place = placeMarks?.first {
-                self.newVisitReceived(visit, place: place)
+        if visit.departureDate != Date.distantFuture {
+            let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
+            
+            geoCoder.reverseGeocodeLocation(clLocation) { placeMarks, error in
+                if let place = placeMarks?.first {
+                    self.newVisitReceived(visit, place: place)
+                }
             }
         }
     }
     
     private func newVisitReceived(_ visit: CLVisit, place: CLPlacemark) {
-        Location.create(visit: visit, place: place)
+        Visit.create(visit: visit, place: place)
     }
     
 //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

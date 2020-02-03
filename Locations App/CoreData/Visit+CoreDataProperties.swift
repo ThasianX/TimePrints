@@ -10,12 +10,12 @@
 import Foundation
 import CoreData
 
-extension Location: Identifiable { }
+extension Visit: Identifiable { }
 
-extension Location {
+extension Visit {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Location> {
-        return NSFetchRequest<Location>(entityName: "Location")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Visit> {
+        return NSFetchRequest<Visit>(entityName: "Location")
     }
 
     @NSManaged public var name: String

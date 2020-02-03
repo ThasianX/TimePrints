@@ -11,8 +11,10 @@ import Mapbox
 
 struct MapView: UIViewRepresentable {
     @Binding var trackingMode: MGLUserTrackingMode
+    @Binding var selectedLocation: Visit?
+    @Binding var showingEditTag: Bool
     let annotations: [MGLPointAnnotation]
-    let annotationsToLocations: [String : Location]
+    let annotationsToLocations: [String : Visit]
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MGLMapView {
         let styleURL = URL(string: "mapbox://styles/mapbox/navigation-preview-night-v4")!
@@ -65,8 +67,8 @@ struct MapView: UIViewRepresentable {
             
             return annotationView
         }
-    
-        func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+        
+        func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
             let location = parent.annotationsToLocations[annotation.title!!]!
             let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
             if location.isFavorite {
@@ -75,6 +77,10 @@ struct MapView: UIViewRepresentable {
                 button.setImage(star, for: .normal)
             }
             return button
+        }
+    
+        func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+            
         }
         
         func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
@@ -93,6 +99,6 @@ struct MapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(trackingMode: .constant(.follow), annotations: [Location.preview.asAnnotation], annotationsToLocations: [Location.preview.name : Location.preview])
+        MapView(trackingMode: .constant(.follow), annotations: [Visit.preview.asAnnotation], annotationsToLocations: [Visit.preview.name : Visit.preview])
     }
 }

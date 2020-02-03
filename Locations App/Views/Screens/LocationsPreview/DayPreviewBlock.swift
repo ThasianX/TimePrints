@@ -9,24 +9,24 @@
 import SwiftUI
 
 struct DayPreviewBlock: View {
-    @State private var locationsIndex = 0
-    let locations: [Location]
+    @State private var visitIndex = 0
+    let visits: [Visit]
     let isFilled: Bool
     
     private var timer: Timer {
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
             withAnimation {
-                if self.locationsIndex < self.locations.count-3 {
-                    self.locationsIndex += 3
+                if self.visitIndex < self.visits.count-3 {
+                    self.visitIndex += 3
                 } else {
-                    self.locationsIndex = 0
+                    self.visitIndex = 0
                 }
             }
         }
     }
     
     private var range: Range<Int> {
-        return locationsIndex ..< ((locationsIndex + 3 > locations.count) ? locations.count : locationsIndex + 3)
+        return visitIndex ..< ((visitIndex + 3 > visits.count) ? visits.count : visitIndex + 3)
     }
     
     var body: some View {
@@ -37,8 +37,8 @@ struct DayPreviewBlock: View {
                 Color("salmon").frame(height: 150)
             }
             VStack(spacing: 0) {
-                ForEach(locations[range]) { location in
-                    LocationPreviewCell(location: location)
+                ForEach(visits[range]) { visit in
+                    VisitPreviewCell(visit: visit)
                 }
                 .animation(.easeInOut(duration: 0.5))
             }
@@ -52,12 +52,12 @@ struct DayPreviewBlock: View {
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(locations: [], isFilled: false)
-            DayPreviewBlock(locations: [.preview], isFilled: false)
-            DayPreviewBlock(locations: [.preview, .preview], isFilled: false)
-            DayPreviewBlock(locations: [.preview, .preview, .preview], isFilled: false)
-            DayPreviewBlock(locations: [.preview, .preview, .preview, .preview], isFilled: false)
-            DayPreviewBlock(locations: [.preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview], isFilled: false)
+            DayPreviewBlock(visits: [], isFilled: false)
+            DayPreviewBlock(visits: [.preview], isFilled: false)
+            DayPreviewBlock(visits: [.preview, .preview], isFilled: false)
+            DayPreviewBlock(visits: [.preview, .preview, .preview], isFilled: false)
+            DayPreviewBlock(visits: [.preview, .preview, .preview, .preview], isFilled: false)
+            DayPreviewBlock(visits: [.preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview], isFilled: false)
         }
     }
 }
