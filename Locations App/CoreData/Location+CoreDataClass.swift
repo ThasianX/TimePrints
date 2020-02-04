@@ -26,7 +26,7 @@ public class Location: NSManagedObject {
         if location != nil {
             location!.addVisit(newVisit)
         } else {
-            location = create(visit.coordinate, visit: newVisit, details: details)
+            location = create(visit.coordinate, visit: newVisit, name: details.name, address: details.address)
         }
         return location!
     }
@@ -39,12 +39,12 @@ public class Location: NSManagedObject {
         return location.first
     }
     
-    class func create(_ coordinates: CLLocationCoordinate2D, visit: Visit, details: ReversedGeoLocation) -> Location {
+    class func create(_ coordinates: CLLocationCoordinate2D, visit: Visit, name: String, address: String) -> Location {
         let location = newLocation()
         location.latitude = coordinates.latitude
         location.longitude = coordinates.longitude
-        location.name = details.name
-        location.address = details.address
+        location.name = name
+        location.address = address
         location.tag = Tag.getDefault()
         location.addVisit(visit)
         
@@ -72,5 +72,29 @@ public class Location: NSManagedObject {
     
     var coordinate: CLLocationCoordinate2D {
         .init(latitude: self.latitude, longitude: self.longitude)
+    }
+}
+
+extension Location {
+    // MARK: - Preview
+    class var preview: Location {
+        let location = newLocation()
+        location.latitude = 37.33182
+        location.longitude = -122.03118
+        location.name = "Apple INC"
+        location.address = "One Infinite Loop Cupertino, CA 95014"
+        let tag = Tag.newTag()
+        tag.name = "Visits"
+        tag.color = UIColor.berryRed.hexString()
+        let visit = Visit.newVisit()
+        visit.arrivalDate = Date()
+        visit.departureDate = Date().addingTimeInterval(400)
+        location.addVisit(visit)
+        return location
+    }
+    
+    class func deleteAll() {
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Location.fetchRequest())
+        try! CoreData.stack.context.execute(batchDeleteRequest)
     }
 }

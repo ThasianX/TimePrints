@@ -13,7 +13,7 @@ import CoreData
 @objc(Visit)
 public class Visit: NSManagedObject {
     // MARK: - Class Functions
-    private class func newVisit() -> Visit {
+    class func newVisit() -> Visit {
         Visit(context: CoreData.stack.context)
     }
     

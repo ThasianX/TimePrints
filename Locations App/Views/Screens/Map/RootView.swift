@@ -38,6 +38,9 @@ struct RootView: View {
             }
             .padding()
         }
+        .sheet(isPresented: $showingEditTag) {
+            EditTagView(show: self.$showingEditTag, location: self.$selectedLocation).environment(\.managedObjectContext, CoreData.stack.context)
+        }
     }
 }
 

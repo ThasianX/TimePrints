@@ -37,7 +37,17 @@ public class Tag: NSManagedObject {
         }
     }
     
-    private class func newTag() -> Tag {
+    class func fetchAll() -> [Tag] {
+        let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
+        
+        do {
+            return try CoreData.stack.context.fetch(fetchRequest)
+        } catch {
+            fatalError("Default tag not in database")
+        }
+    }
+    
+    class func newTag() -> Tag {
         Tag(context: CoreData.stack.context)
     }
     
@@ -63,11 +73,21 @@ public class Tag: NSManagedObject {
         CoreData.stack.context.delete(self)
         return tag
     }
+    
+    // MARK: - Computed Properties
+    var uiColor: UIColor {
+        UIColor(self.color)
+    }
 }
 
 extension Tag {
     // MARK: - Preview
     class var preview: Tag {
-        Tag.create(name: "Visits", color: .salmon)
+        return Tag.create(name: "Visits", color: .salmon)
+    }
+    
+    class func deleteAll() {
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Tag.fetchRequest())
+        try! CoreData.stack.context.execute(batchDeleteRequest)
     }
 }

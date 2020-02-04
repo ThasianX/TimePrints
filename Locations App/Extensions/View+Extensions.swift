@@ -32,6 +32,10 @@ extension View {
         modifier(BackgroundModifier(color: Color(color)))
     }
     
+    func onTap(perform action: @escaping () -> Void) -> some View {
+        modifier(TapModifier(perform: action))
+    }
+    
     func erase() -> AnyView {
         AnyView(self)
     }
