@@ -14,6 +14,17 @@ import MapKit
 @objc(Location)
 public class Location: NSManagedObject {
     // MARK: - Class Functions
+    class func count() -> Int {
+        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+        
+        do {
+            let count = try CoreData.stack.context.count(for: fetchRequest)
+            return count
+        } catch let error as NSError {
+            fatalError("Unresolved error \(error), \(error.userInfo)")
+        }
+    }
+    
     private class func newLocation() -> Location {
         Location(context: CoreData.stack.context)
     }

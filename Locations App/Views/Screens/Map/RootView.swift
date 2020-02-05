@@ -27,19 +27,27 @@ struct RootView: View {
     @State private var selectedLocation: Location?
     @State private var showingEditTag = false
     @State private var showingLocationVisits = false
+    @State private var stayAtLocation = false
     
     var body: some View {
         ZStack(alignment: .top) {
-            MapView(trackingMode: $trackingMode, selectedLocation: $selectedLocation, showingEditTag: $showingEditTag, showingLocationVisits: $showingLocationVisits, annotations: locations.map(LocationAnnotation.init)).beyond()
+            MapView(trackingMode: $trackingMode, selectedLocation: $selectedLocation, showingEditTag: $showingEditTag, showingLocationVisits: $showingLocationVisits, stayAtLocation: $stayAtLocation, annotations: locations.map(LocationAnnotation.init))
+                .beyond()
+                .disablur(showingEditTag)
             
             HStack {
-                UserLocationButton(trackingMode: $trackingMode)
+                UserLocationButton(trackingMode: $trackingMode, stayAtLocation: $stayAtLocation)
                 Spacer()
             }
             .padding()
-        }
-        .sheet(isPresented: $showingEditTag) {
-            EditTagView(show: self.$showingEditTag, location: self.$selectedLocation).environment(\.managedObjectContext, CoreData.stack.context)
+            .disablur(showingEditTag)
+            
+            EditTagView(show: self.$showingEditTag, location: self.$selectedLocation, stayAtLocation: $stayAtLocation).environment(\.managedObjectContext, CoreData.stack.context)
+                .frame(width: screen.bounds.width * 0.8, height: screen.bounds.height * 0.6)
+                .cornerRadius(30)
+                .shadow(radius: 20)
+                .animation(.spring())
+                .offset(y: showingEditTag ? screen.bounds.height * 0.15 : screen.bounds.height)
         }
     }
 }

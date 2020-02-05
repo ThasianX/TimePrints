@@ -27,7 +27,7 @@ public class Tag: NSManagedObject {
     
     class func getDefault() -> Tag {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%@ == name", "Places")
+        fetchRequest.predicate = NSPredicate(format: "%@ == name", "Locations")
         
         do {
             let tag = try CoreData.stack.context.fetch(fetchRequest)
@@ -57,7 +57,15 @@ public class Tag: NSManagedObject {
         tag.name = name
         tag.color = color.hexString()
         CoreData.stack.save()
-        
+        return tag
+    }
+    
+    @discardableResult
+    class func create(from existing: Tag) -> Tag {
+        let tag = newTag()
+        tag.name = existing.name
+        tag.color = existing.color
+        CoreData.stack.save()
         return tag
     }
     

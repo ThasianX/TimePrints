@@ -14,6 +14,7 @@ struct MapView: UIViewRepresentable {
     @Binding var selectedLocation: Location?
     @Binding var showingEditTag: Bool
     @Binding var showingLocationVisits: Bool
+    @Binding var stayAtLocation: Bool
     
     let annotations: [LocationAnnotation]
     
@@ -31,7 +32,9 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ map: MGLMapView, context: UIViewRepresentableContext<MapView>) {
         map.addAnnotations(annotations)
-        map.userTrackingMode = trackingMode
+        if !stayAtLocation {
+            map.userTrackingMode = trackingMode
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -82,10 +85,6 @@ struct MapView: UIViewRepresentable {
             return button
         }
         
-        func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-            mapView.deselectAnnotation(annotation, animated: true)
-        }
-        
         func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
             guard let annotation = annotation as? LocationAnnotation else { return }
             mapView.deselectAnnotation(annotation, animated: true)
@@ -106,6 +105,6 @@ struct MapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), annotations: [])
+        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), stayAtLocation: .constant(false), annotations: [])
     }
 }

@@ -21,3 +21,9 @@ extension Dictionary where Key: Comparable {
         }
     }
 }
+
+extension Dictionary where Value: Equatable {
+    func key(for value: Value) -> Key? {
+        first(where: { $1 == value })?.key
+    }
+}

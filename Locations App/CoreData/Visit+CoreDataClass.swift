@@ -13,6 +13,17 @@ import CoreData
 @objc(Visit)
 public class Visit: NSManagedObject {
     // MARK: - Class Functions
+    class func count() -> Int {
+        let fetchRequest: NSFetchRequest<Visit> = Visit.fetchRequest()
+        
+        do {
+            let count = try CoreData.stack.context.count(for: fetchRequest)
+            return count
+        } catch let error as NSError {
+            fatalError("Unresolved error \(error), \(error.userInfo)")
+        }
+    }
+    
     class func newVisit() -> Visit {
         Visit(context: CoreData.stack.context)
     }

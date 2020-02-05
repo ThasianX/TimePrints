@@ -36,6 +36,14 @@ extension View {
         modifier(TapModifier(perform: action))
     }
     
+    func disablur(_ disabled: Bool) -> some View {
+        modifier(DisableModifier(disabled: disabled))
+    }
+    
+    func fade(_ fade: Bool) -> some View {
+        modifier(OpacityModifier(fade: fade))
+    }
+    
     func erase() -> AnyView {
         AnyView(self)
     }
