@@ -1,8 +1,8 @@
 //
-//  LocationVisitsView.swift
+//  LocationVisitsview.swift
 //  Locations App
 //
-//  Created by Kevin Li on 2/3/20.
+//  Created by Kevin Li on 2/5/20.
 //  Copyright © 2020 Kevin Li. All rights reserved.
 //
 
