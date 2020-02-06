@@ -51,7 +51,7 @@ extension Formatter {
         return formatter
     }()
     
-    static let abbreviatedMonthWithDayYear: DateFormatter = {
+    static let abbreviatedMonthWithDayAndYear: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, yyyy"
         return formatter

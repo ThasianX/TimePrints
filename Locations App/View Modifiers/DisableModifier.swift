@@ -13,7 +13,7 @@ struct DisableModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .blur(radius: disabled ? 20 : 0)
             .allowsHitTesting(!disabled)
+            .blur(radius: disabled ? 20 : 0)
     }
 }

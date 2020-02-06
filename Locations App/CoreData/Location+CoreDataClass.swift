@@ -32,7 +32,12 @@ public class Location: NSManagedObject {
     @discardableResult
     class func create(visit: CLVisit, place: CLPlacemark) -> Location {
         let details = ReversedGeoLocation(with: place)
-        let newVisit = Visit.create(arrivalDate: visit.arrivalDate, departureDate: visit.departureDate)
+        let newVisit: Visit
+        if visit.departureDate == Date.distantFuture {
+            newVisit = Visit.create(arrivalDate: visit.arrivalDate, departureDate: visit.arrivalDate)
+        } else {
+            newVisit = Visit.create(arrivalDate: visit.arrivalDate, departureDate: visit.departureDate)
+        }
         var location = Location.location(for: details.address)
         if location != nil {
             location!.addVisit(newVisit)

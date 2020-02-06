@@ -39,7 +39,7 @@ class LocationManager: NSObject {//, ObservableObject {
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        if visit.departureDate != Date.distantFuture {
+//        if visit.departureDate != Date.distantFuture {
             let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
             
             geoCoder.reverseGeocodeLocation(clLocation) { placeMarks, error in
@@ -47,7 +47,7 @@ extension LocationManager: CLLocationManagerDelegate {
                     self.newVisitReceived(visit, place: place)
                 }
             }
-        }
+//        }
     }
     
     private func newVisitReceived(_ visit: CLVisit, place: CLPlacemark) {
