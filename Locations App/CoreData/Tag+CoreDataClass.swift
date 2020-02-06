@@ -13,7 +13,7 @@ import SwiftUI
 
 @objc(Tag)
 public class Tag: NSManagedObject {
-    
+    // MARK: Class Functions
     class func count() -> Int {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
         
@@ -27,34 +27,52 @@ public class Tag: NSManagedObject {
     
     class func getDefault() -> Tag {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%@ == name", "Visits")
+        fetchRequest.predicate = NSPredicate(format: "%@ == name", "Locations")
         
         do {
-            let a = try CoreData.stack.context.fetch(fetchRequest)
-            return a.first!
+            let tag = try CoreData.stack.context.fetch(fetchRequest)
+            return tag.first!
         } catch {
             fatalError("Default tag not in database")
         }
     }
     
-    // MARK: CRUD
-    private class func newTag() -> Tag {
+    class func fetchAll() -> [Tag] {
+        let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
+        
+        do {
+            return try CoreData.stack.context.fetch(fetchRequest)
+        } catch {
+            fatalError("Default tag not in database")
+        }
+    }
+    
+    class func newTag() -> Tag {
         Tag(context: CoreData.stack.context)
     }
     
     @discardableResult
-    class func create(name: String, color: Color) -> Tag {
+    class func create(name: String, color: UIColor) -> Tag {
         let tag = newTag()
         tag.name = name
-        tag.color = "charcoal"
+        tag.color = color.hexString()
         CoreData.stack.save()
-        
         return tag
     }
     
-    func edit(name: String, color: Color) {
+    @discardableResult
+    class func create(from existing: Tag) -> Tag {
+        let tag = newTag()
+        tag.name = existing.name
+        tag.color = existing.color
+        CoreData.stack.save()
+        return tag
+    }
+    
+    // MARK: Local Functions
+    func edit(name: String, color: UIColor) {
         self.name = name
-        self.color = color.hexForTag()
+        self.color = color.hexString()
         CoreData.stack.save()
     }
     
@@ -63,11 +81,21 @@ public class Tag: NSManagedObject {
         CoreData.stack.context.delete(self)
         return tag
     }
+    
+    // MARK: - Computed Properties
+    var uiColor: UIColor {
+        UIColor(self.color)
+    }
 }
 
 extension Tag {
     // MARK: - Preview
     class var preview: Tag {
-        Tag.create(name: "Visits", color: Color("salmon"))
+        return Tag.create(name: "Visits", color: .salmon)
+    }
+    
+    class func deleteAll() {
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Tag.fetchRequest())
+        try! CoreData.stack.context.execute(batchDeleteRequest)
     }
 }

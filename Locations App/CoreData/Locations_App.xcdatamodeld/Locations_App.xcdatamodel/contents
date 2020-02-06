@@ -2,22 +2,27 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="address" attributeType="String" defaultValueString=""/>
-        <attribute name="arrivalDate" attributeType="Date" defaultDateTimeInterval="601953480" usesScalarValueType="NO"/>
-        <attribute name="departureDate" attributeType="Date" defaultDateTimeInterval="601958280" usesScalarValueType="NO"/>
-        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
-        <attribute name="notes" optional="YES" attributeType="String"/>
         <relationship name="tag" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="locations" inverseEntity="Tag"/>
+        <relationship name="visits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Visit" inverseName="location" inverseEntity="Visit"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
         <attribute name="color" attributeType="String" defaultValueString=""/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="tag" inverseEntity="Location"/>
     </entity>
+    <entity name="Visit" representedClassName="Visit" syncable="YES">
+        <attribute name="arrivalDate" attributeType="Date" defaultDateTimeInterval="601953480" usesScalarValueType="NO"/>
+        <attribute name="departureDate" attributeType="Date" defaultDateTimeInterval="601958280" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="visits" inverseEntity="Location"/>
+    </entity>
     <elements>
-        <element name="Location" positionX="-63" positionY="-18" width="128" height="178"/>
+        <element name="Location" positionX="-54" positionY="54" width="128" height="133"/>
         <element name="Tag" positionX="-54" positionY="27" width="128" height="88"/>
+        <element name="Visit" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

@@ -2,53 +2,74 @@
 //  Location+CoreDataClass.swift
 //  Locations App
 //
-//  Created by Kevin Li on 1/28/20.
+//  Created by Kevin Li on 2/3/20.
 //  Copyright © 2020 Kevin Li. All rights reserved.
 //
 //
 
 import Foundation
 import CoreData
-import CoreLocation
-import SwiftUI
+import MapKit
 
 @objc(Location)
 public class Location: NSManagedObject {
-    // MARK: - CRUD
+    // MARK: - Class Functions
+    class func count() -> Int {
+        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+        
+        do {
+            let count = try CoreData.stack.context.count(for: fetchRequest)
+            return count
+        } catch let error as NSError {
+            fatalError("Unresolved error \(error), \(error.userInfo)")
+        }
+    }
+    
     private class func newLocation() -> Location {
         Location(context: CoreData.stack.context)
     }
     
-    private class func create(_ coordinates: CLLocationCoordinate2D, arrivalDate: Date, departureDate: Date, place: CLPlacemark) -> Location {
+    @discardableResult
+    class func create(visit: CLVisit, place: CLPlacemark) -> Location {
+        let details = ReversedGeoLocation(with: place)
+        let newVisit: Visit
+        if visit.departureDate == Date.distantFuture {
+            newVisit = Visit.create(arrivalDate: visit.arrivalDate, departureDate: visit.arrivalDate)
+        } else {
+            newVisit = Visit.create(arrivalDate: visit.arrivalDate, departureDate: visit.departureDate)
+        }
+        var location = Location.location(for: details.address)
+        if location != nil {
+            location!.addVisit(newVisit)
+        } else {
+            location = create(visit.coordinate, visit: newVisit, name: details.name, address: details.address)
+        }
+        return location!
+    }
+    
+    class func location(for address: String) -> Location? {
+        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "%@ == address", address)
+        
+        let location = try! CoreData.stack.context.fetch(fetchRequest)
+        return location.first
+    }
+    
+    class func create(_ coordinates: CLLocationCoordinate2D, visit: Visit, name: String, address: String) -> Location {
         let location = newLocation()
         location.latitude = coordinates.latitude
         location.longitude = coordinates.longitude
-        location.arrivalDate = arrivalDate
-        location.departureDate = departureDate
-        let reversedGeoLocation = ReversedGeoLocation(with: place)
-        location.address = reversedGeoLocation.address
-        location.name = reversedGeoLocation.name
+        location.name = name
+        location.address = address
         location.tag = Tag.getDefault()
+        location.addVisit(visit)
+        
         CoreData.stack.save()
         
         return location
     }
     
-    @discardableResult
-    class func create(visit: CLVisit, place: CLPlacemark) -> Location {
-        create(visit.coordinate, arrivalDate: visit.arrivalDate, departureDate: visit.departureDate, place: place)
-    }
-    
-    func addNotes(_ notes: String) {
-        self.notes = notes
-        CoreData.stack.save()
-    }
-    
-    func favorite() {
-        self.isFavorite.toggle()
-        CoreData.stack.save()
-    }
-    
+    // MARK: - Local Functions
     func setTag(tag: Tag) {
         self.tag = tag
         CoreData.stack.save()
@@ -60,13 +81,9 @@ public class Location: NSManagedObject {
         return location
     }
     
-    // MARK: - Convenience
-    var visitDuration: String {
-        self.arrivalDate.timeOnlyWithPadding + " ➝ " + self.departureDate.timeOnlyWithPadding
-    }
-    
-    var accent: Color {
-        Color(self.tag.color)
+    // MARK: - Computed Properties
+    var accent: UIColor {
+        UIColor(self.tag.color)
     }
     
     var coordinate: CLLocationCoordinate2D {
@@ -78,40 +95,22 @@ extension Location {
     // MARK: - Preview
     class var preview: Location {
         let location = newLocation()
-        location.latitude = 12.9716
-        location.longitude = 77.5946
-        location.arrivalDate = Date.random(range: 1000)
-        location.departureDate = Date().addingTimeInterval(.random(in: 100...2000))
-        location.address = "1 Infinite Loop, Cupertino, California"
-        location.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
+        location.latitude = 37.33182
+        location.longitude = -122.03118
         location.name = "Apple INC"
-        location.isFavorite = true
-        location.tag = Tag.create(name: "Locations", color: Color("charcoal"))
-        CoreData.stack.save()
+        location.address = "One Infinite Loop Cupertino, CA 95014"
+        let tag = Tag.newTag()
+        tag.name = "Visits"
+        tag.color = UIColor.berryRed.hexString()
+        let visit = Visit.newVisit()
+        visit.arrivalDate = Date()
+        visit.departureDate = Date().addingTimeInterval(400)
+        location.addVisit(visit)
         return location
     }
     
-    class var previewLocations: [Location] {
-        var locations = [Location]()
-        for _ in 0..<10 {
-            let date = Date.random(range: 100)
-            for _ in 0..<10 {
-                let location = preview
-                location.arrivalDate = date
-                locations.append(location)
-            }
-        }
-        return locations
-    }
-    
-    class var previewLocationDetails: [Location] {
-        var locations = [Location]()
-        let date = Date.random(range: 100)
-        for _ in 0..<5 {
-            let location = preview
-            location.arrivalDate = date
-            locations.append(location)
-        }
-        return locations
+    class func deleteAll() {
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Location.fetchRequest())
+        try! CoreData.stack.context.execute(batchDeleteRequest)
     }
 }

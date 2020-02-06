@@ -27,4 +27,24 @@ extension View {
     func roundedFill(with color: Color) -> some View {
         modifier(BackgroundModifier(color: color))
     }
+    
+    func roundedFill(with color: UIColor) -> some View {
+        modifier(BackgroundModifier(color: Color(color)))
+    }
+    
+    func onTap(perform action: @escaping () -> Void) -> some View {
+        modifier(TapModifier(perform: action))
+    }
+    
+    func disablur(_ disabled: Bool) -> some View {
+        modifier(DisableModifier(disabled: disabled))
+    }
+    
+    func fade(_ fade: Bool) -> some View {
+        modifier(OpacityModifier(fade: fade))
+    }
+    
+    func erase() -> AnyView {
+        AnyView(self)
+    }
 }

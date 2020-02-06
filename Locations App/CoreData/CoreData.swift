@@ -52,7 +52,10 @@ class CoreData: NSObject {
     // MARK: - Database Setup
     public class func initialDbSetup() {
         if Tag.count() == 0 {
-            Tag.create(name: "Locations", color: Color("charcoal"))
+            Tag.create(name: "Locations", color: UIColor.charcoal)
+        }
+        if Location.count() == 0 {
+            Location.create(.init(latitude: 37.33182, longitude: -122.03118), visit: .create(arrivalDate: Date(), departureDate: Date().addingTimeInterval(400)), name: "Apple INC", address: "One Infinite Loop Cupertino, CA 95014")
         }
         // TODO: Include Cloud KVS preference setup here?
     }

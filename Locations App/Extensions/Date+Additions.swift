@@ -36,6 +36,10 @@ extension Date {
     var fullMonthWithDayOfWeek: String {
         return Formatter.fullMonthWithDayOfWeek.string(from: self)
     }
+    
+    var abbreviatedMonthWithDayAndYear: String {
+        return Formatter.abbreviatedMonthWithDayAndYear.string(from: self)
+    }
 }
 
 extension Date {

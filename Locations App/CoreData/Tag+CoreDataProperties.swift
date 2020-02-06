@@ -28,15 +28,15 @@ extension Tag {
 extension Tag {
 
     @objc(addLocationsObject:)
-    @NSManaged public func addToLocations(_ value: Location)
+    @NSManaged public func addLocation(_ value: Location)
 
     @objc(removeLocationsObject:)
-    @NSManaged public func removeFromLocations(_ value: Location)
+    @NSManaged public func removeLocation(_ value: Location)
 
     @objc(addLocations:)
-    @NSManaged public func addToLocations(_ values: NSSet)
+    @NSManaged public func addLocations(_ values: NSSet)
 
     @objc(removeLocations:)
-    @NSManaged public func removeFromLocations(_ values: NSSet)
+    @NSManaged public func removeLocations(_ values: NSSet)
 
 }

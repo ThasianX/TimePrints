@@ -6,11 +6,11 @@
 //  Copyright © 2020 Kevin Li. All rights reserved.
 //
 
-import SwiftUI
-import Foundation
+//import SwiftUI
+//import Foundation
 import CoreLocation
-import Combine
-import CoreData
+//import Combine
+//import CoreData
 
 class LocationManager: NSObject {//, ObservableObject {
 //    @Published var currentLocation: CLLocation? {
@@ -39,13 +39,15 @@ class LocationManager: NSObject {//, ObservableObject {
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
-        
-        geoCoder.reverseGeocodeLocation(clLocation) { placeMarks, error in
-            if let place = placeMarks?.first {
-                self.newVisitReceived(visit, place: place)
+//        if visit.departureDate != Date.distantFuture {
+            let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
+            
+            geoCoder.reverseGeocodeLocation(clLocation) { placeMarks, error in
+                if let place = placeMarks?.first {
+                    self.newVisitReceived(visit, place: place)
+                }
             }
-        }
+//        }
     }
     
     private func newVisitReceived(_ visit: CLVisit, place: CLPlacemark) {

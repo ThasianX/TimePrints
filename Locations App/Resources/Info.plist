@@ -59,6 +59,8 @@
 	<string>Location when in usage</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Location always </string>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoidGhhc2lhbiIsImEiOiJjazY1bGxncWswNHB6M2xxbDA0NzhsMGJ4In0.ucJS1qbe4iA3lNwWFq0-Lw</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
