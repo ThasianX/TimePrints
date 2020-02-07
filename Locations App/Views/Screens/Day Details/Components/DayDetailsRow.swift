@@ -80,15 +80,15 @@ extension DayDetailsRow {
     var map: some View {
         ZStack(alignment: .topLeading) {
             VStack(spacing: 20) {
-                StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, color: color)
-                    .frame(width: mapFull ? screen.bounds.width : screen.bounds.width / 2.5, height: mapFull ? screen.bounds.height * 3 / 4 : screen.bounds.width / 2.5)
-                    .cornerRadius(mapFull ? 0 : screen.bounds.width / 5)
-                    .onTapGesture {
-                        withAnimation {
-                            self.mapFull.toggle()
-                        }
-                    }
-                    .animation(.spring())
+//                StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, color: color)
+//                    .frame(width: mapFull ? screen.bounds.width : screen.bounds.width / 2.5, height: mapFull ? screen.bounds.height * 3 / 4 : screen.bounds.width / 2.5)
+//                    .cornerRadius(mapFull ? 0 : screen.bounds.width / 5)
+//                    .onTapGesture {
+//                        withAnimation {
+//                            self.mapFull.toggle()
+//                        }
+//                    }
+//                    .animation(.spring())
                 Text(visit.location.address.uppercased())
                     .font(.headline)
                     .multilineTextAlignment(.center)

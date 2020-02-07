@@ -20,7 +20,9 @@ struct TapModifier: ViewModifier {
         content
             .contentShape(Rectangle())
             .onTapGesture {
-                self.action()
+                withAnimation {
+                    self.action()
+                }
         }
     }
 }

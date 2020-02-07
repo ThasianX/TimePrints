@@ -10,8 +10,10 @@ import SwiftUI
 
 struct DayPreviewBlock: View {
     @State private var visitIndex = 0
+    @Binding var currentDayComponent: DateComponents
     let visits: [Visit]
     let isFilled: Bool
+    let dayComponent: DateComponents
     
     private var timer: Timer {
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
@@ -45,6 +47,9 @@ struct DayPreviewBlock: View {
         }
         .onAppear {
             let _ = self.timer
+        }
+        .onTap {
+            self.currentDayComponent = self.dayComponent
         }
     }
 }
