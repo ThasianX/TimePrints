@@ -1,11 +1,3 @@
-//
-//  LocationViewCell.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/30/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct VisitPreviewCell: View {
@@ -16,27 +8,43 @@ struct VisitPreviewCell: View {
             Popsicle(tag: visit.location.tag)
 
             VStack(alignment: .leading) {
-                Text(visit.location.name)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .lineLimit(1)
-                Text("\(visit.visitDuration)    \(visit.location.address)")
-                    .font(.caption)
-                    .lineLimit(1)
+                locationName
+                visitDurationAndAddress
             }
-
+        
             Spacer()
             
+            favoriteIcon
+        }
+        .frame(height: 50)
+        .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
+    }
+}
+
+// MARK: - Content
+private extension VisitPreviewCell {
+    private var locationName: some View {
+        Text(visit.location.name)
+            .font(.headline)
+            .fontWeight(.bold)
+            .lineLimit(1)
+    }
+    
+    private var visitDurationAndAddress: some View {
+        Text("\(visit.visitDuration)    \(visit.location.address)")
+            .font(.caption)
+            .lineLimit(1)
+    }
+    
+    private var favoriteIcon: some View {
+        Group {
             if visit.isFavorite {
                 Image(systemName: "star.fill")
                     .imageScale(.medium)
                     .foregroundColor(.yellow)
             }
         }
-        .frame(height: 50)
-        .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
     }
-    
 }
 
 struct LocationPreviewCell_Previews: PreviewProvider {
