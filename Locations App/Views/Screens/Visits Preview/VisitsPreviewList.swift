@@ -9,16 +9,19 @@
 import SwiftUI
 
 struct VisitsPreviewList: View {
-//    @State private var showingDetail = false
     @State private var currentDayComponent = DateComponents()
     let visits: [Visit]
     
-    private var visitsForDate: [DateComponents: [Visit]] {
+    private var visitsForDayComponent: [DateComponents: [Visit]] {
         Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
     }
     
-    private var datesForMonth: [DateComponents: [DateComponents]] {
-        Dictionary(grouping: Array(visitsForDate.keys), by: { $0.monthAndYear })
+    private var daysComponentsForMonthComponent: [DateComponents: [DateComponents]] {
+        Dictionary(grouping: Array(visitsForDayComponent.keys), by: { $0.monthAndYear })
+    }
+    
+    private var isPreviewActive: Bool {
+        currentDayComponent == DateComponents()
     }
     
     var body: some View {
@@ -32,25 +35,25 @@ struct VisitsPreviewList: View {
         return ZStack {
             SuperColor(UIColor.black)
             
-//            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, visits: dateVisits[currentDateComponent] ?? [])
-//                .frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0)
-//                .animation(.easeIn)
+            //            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, visits: dateVisits[currentDateComponent] ?? [])
+            //                .frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0)
+            //                .animation(.easeIn)
             
             ScrollView(.vertical, showsIndicators: false) {
                 V0Stack {
-                    ForEach(datesForMonth.descendingKeys) { monthComponent in
+                    ForEach(daysComponentsForMonthComponent.descendingKeys) { monthComponent in
                         H0Stack {
                             MonthYearSideBar(date: monthComponent.date)
-//                                .offset(x: self.showingDetail ? -200 : 0)
                             V0Stack {
-                                ForEach(self.datesForMonth[monthComponent]!.sortDescending) { dateComponent in
+                                ForEach(self.daysComponentsForMonthComponent[monthComponent]!.sortDescending) { dayComponent in
                                     HStack {
-                                        DaySideBar(date: dateComponent.date)
-//                                            .offset(x: self.showingDetail ? -200 : 0)
-                                        DayPreviewBlock(visits: self.visitsForDate[dateComponent]!, isFilled: isFilled())
-                                            .onTap {
-//                                                self.showingDetail = true
-                                                self.currentDayComponent = dateComponent
+                                        DaySideBar(date: dayComponent.date)
+                                        GeometryReader { geometry in
+                                            ZStack {
+                                                DayPreviewBlock(currentDayComponent: self.$currentDayComponent, visits: self.visitsForDayComponent[dayComponent]!, isFilled: isFilled(), dayComponent: dayComponent, isPreviewActive: self.isPreviewActive)
+                                                .offset(y: self.isActiveDayComponent(dayComponent: dayComponent) ? -geometry.frame(in: .global).minY : 0)
+                                                .scaleEffect(self.isActiveDayComponent(dayComponent: dayComponent) ? 1 : 0.5)
+                                            }
                                         }
                                     }
                                 }
@@ -59,9 +62,15 @@ struct VisitsPreviewList: View {
                     }
                 }
             }
-//            .opacity(showingDetail ? 0 : 1)
             .beyond()
         }
+    }
+}
+
+// MARK: - Helpers
+private extension VisitsPreviewList {
+    private func isActiveDayComponent(dayComponent: DateComponents) -> Bool {
+        return currentDayComponent == dayComponent
     }
 }
 

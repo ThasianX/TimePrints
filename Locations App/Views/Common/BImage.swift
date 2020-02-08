@@ -10,18 +10,18 @@ import SwiftUI
 
 struct BImage: View {
     @Binding var condition: Bool
-    let action: () -> Void
+    let perform: () -> Void
     let image: Image
     
     init(condition: Binding<Bool>, image: Image) {
         self._condition = condition
-        self.action = {}
+        self.perform = {}
         self.image = image
     }
     
-    init(action: @escaping () -> Void, image: Image) {
+    init(perform: @escaping () -> Void, image: Image) {
         self._condition = .constant(false)
-        self.action = action
+        self.perform = perform
         self.image = image
     }
     
@@ -29,7 +29,7 @@ struct BImage: View {
         Button(action: {
             withAnimation {
                 self.condition.toggle()
-                self.action()
+                self.perform()
             }
         }) {
             image

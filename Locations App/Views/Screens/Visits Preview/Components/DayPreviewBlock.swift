@@ -10,46 +10,82 @@ import SwiftUI
 
 struct DayPreviewBlock: View {
     @State private var visitIndex = 0
+    @State private var timer: Timer?
     @Binding var currentDayComponent: DateComponents
     let visits: [Visit]
     let isFilled: Bool
     let dayComponent: DateComponents
-    
-    private var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
-            withAnimation {
-                if self.visitIndex < self.visits.count-3 {
-                    self.visitIndex += 3
-                } else {
-                    self.visitIndex = 0
-                }
-            }
-        }
-    }
+    let isPreviewActive: Bool
     
     private var range: Range<Int> {
         return visitIndex ..< ((visitIndex + 3 > visits.count) ? visits.count : visitIndex + 3)
     }
     
+    private func setCurrentDayComponent() {
+        currentDayComponent = dayComponent
+    }
+    
     var body: some View {
-        ZStack {
-            if isFilled {
-                Color("salmon").saturation(2).frame(height: 150)
-            } else {
-                Color("salmon").frame(height: 150)
-            }
-            VStack(spacing: 0) {
-                ForEach(visits[range]) { visit in
-                    VisitPreviewCell(visit: visit)
-                }
-                .animation(.easeInOut(duration: 0.5))
+        ZStack() {
+            backgroundColor
+        }
+        .onAppear(perform: determineAndSetAppropriateTimerState)
+        .onTapGesture(perform: setCurrentDayComponent)
+    }
+}
+
+// MARK: - Timer
+private extension DayPreviewBlock {
+    private func determineAndSetAppropriateTimerState() {
+        if isPreviewActive {
+            setTimerForVisitsSlideshow()
+        } else {
+            invalidateTimerForVisitsSlideshow()
+        }
+    }
+    
+    private func invalidateTimerForVisitsSlideshow() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func setTimerForVisitsSlideshow() {
+        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
+            withAnimation {
+                self.onTimerFire()
             }
         }
-        .onAppear {
-            let _ = self.timer
+    }
+    
+    private func onTimerFire() {
+        adjustDisplayedVisitsInPreview()
+    }
+    
+    private func adjustDisplayedVisitsInPreview() {
+        shiftPreviewVisitIndex()
+    }
+    
+    private func shiftPreviewVisitIndex() {
+        let visitIndexExists = self.visitIndex < self.visits.count-3
+        if visitIndexExists {
+            self.visitIndex += 3
+        } else {
+            self.visitIndex = 0
         }
-        .onTap {
-            self.currentDayComponent = self.dayComponent
+    }
+}
+
+// MARK: - Content
+private extension DayPreviewBlock {
+    private var backgroundColor: some View {
+        Color("salmon").saturation(isFilled ? 2 : 1)
+    }
+    
+    private var visitsPreviewBlock: some View {
+        VStack(spacing: 0) {
+            ForEach(visits[range]) { visit in
+                VisitPreviewCell(visit: visit)
+            }
         }
     }
 }
@@ -57,12 +93,7 @@ struct DayPreviewBlock: View {
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(visits: [], isFilled: false)
-            DayPreviewBlock(visits: [.preview], isFilled: false)
-            DayPreviewBlock(visits: [.preview, .preview], isFilled: false)
-            DayPreviewBlock(visits: [.preview, .preview, .preview], isFilled: false)
-            DayPreviewBlock(visits: [.preview, .preview, .preview, .preview], isFilled: false)
-            DayPreviewBlock(visits: [.preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview], isFilled: false)
+            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), visits: [], isFilled: false, dayComponent: DateComponents(), isPreviewActive: true)
         }
     }
 }

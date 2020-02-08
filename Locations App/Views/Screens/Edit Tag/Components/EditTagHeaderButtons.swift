@@ -22,10 +22,10 @@ struct EditTagHeaderButtons: View {
                 .foregroundColor(.white)
                 .fade(showAdd || showEdit)
             HStack {
-                BImage(action: showAdd ? resetAddTag : resetEditTag, image: .init(systemName: "xmark.circle.fill"))
+                BImage(perform: showAdd ? resetAddTag : resetEditTag, image: .init(systemName: "xmark.circle.fill"))
                     .foregroundColor(.red)
                     .animation(.easeInOut)
-                BImage(action: showAdd ? addNewTag : editTag, image: .init(systemName: "checkmark.circle.fill"))
+                BImage(perform: showAdd ? addNewTag : editTag, image: .init(systemName: "checkmark.circle.fill"))
                     .foregroundColor(.white)
                     .colorMultiply(selectedColor)
                     .animation(.easeInOut)

@@ -49,7 +49,7 @@ struct LocationVisitsView: View {
                 }
             }
             Spacer()
-            BImage(action: { self.show = false }, image: .init(systemName: "x.circle.fill"))
+            BImage(perform: { self.show = false }, image: .init(systemName: "x.circle.fill"))
         }
         .padding()
     }

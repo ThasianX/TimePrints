@@ -70,9 +70,9 @@ struct DayDetailsRow: View {
 extension DayDetailsRow {
     var header: some View {
         HStack {
-            BImage(action: unselectRow, image: .init(systemName: "arrow.left"))
+            BImage(perform: unselectRow, image: .init(systemName: "arrow.left"))
             Spacer()
-            BImage(action: favorite, image: visit.isFavorite ? .init(systemName: "star.fill") : .init(systemName: "star"))
+            BImage(perform: favorite, image: visit.isFavorite ? .init(systemName: "star.fill") : .init(systemName: "star"))
                 .foregroundColor(.yellow)
         }
     }
