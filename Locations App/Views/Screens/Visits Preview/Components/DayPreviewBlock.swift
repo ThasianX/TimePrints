@@ -26,8 +26,8 @@ struct DayPreviewBlock: View {
 // MARK: - Helper Functions
 private extension DayPreviewBlock {
     private func setCurrentDayComponentAndPreviewInactive() {
-        setCurrentDayComponent()
         setPreviewInactive()
+        setCurrentDayComponent()
     }
     
     private func setCurrentDayComponent() {

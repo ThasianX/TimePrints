@@ -3,7 +3,7 @@ import SwiftUI
 struct VisitDetailsView: View {
     @State private var mapFull = false
     @Binding var selectedIndex: Int
-    let id: Int
+    let index: Int
     let visit: Visit
     
     var body: some View {
@@ -25,7 +25,7 @@ struct VisitDetailsView: View {
 private extension VisitDetailsView {
     private func setSelectedVisitIndex(index: Int) {
         withAnimation {
-            self.selectedIndex = id
+            self.selectedIndex = index
         }
     }
 }
@@ -115,7 +115,7 @@ private extension VisitDetailsView {
 // MARK: - Computed Properties and Helper Functions
 extension VisitDetailsView {
     private var isSelected: Bool {
-        selectedIndex == id
+        selectedIndex == index
     }
     
     private var nameFont: Font {
@@ -142,9 +142,9 @@ extension VisitDetailsView {
 struct DayDetailsRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            VisitDetailsView(selectedIndex: .constant(1), id: -1, visit: .preview).previewLayout(.sizeThatFits)
+            VisitDetailsView(selectedIndex: .constant(1), index: -1, visit: .preview).previewLayout(.sizeThatFits)
             
-            VisitDetailsView(selectedIndex: .constant(1), id: 1, visit: .preview)
+            VisitDetailsView(selectedIndex: .constant(1), index: 1, visit: .preview)
         }
         
     }

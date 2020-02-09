@@ -1,14 +1,10 @@
 import SwiftUI
 
 struct VisitsForDayView: View {
-    @State private var selectedIndex: Int = -1
+    @State private var activeVisitIndex: Int = -1
     @Binding var currentDayComponent: DateComponents
     @Binding var isPreviewActive: Bool
     let visits: [Visit]
-    
-    private var showingDetail: Bool {
-        selectedIndex != -1
-    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -31,6 +27,14 @@ private extension VisitsForDayView {
     private func setPreviewActive() {
         isPreviewActive = true
     }
+    
+    private var isVisitActive: Bool {
+        activeVisitIndex != -1
+    }
+    
+    private func isActiveVisitIndex(index: Int) -> Bool {
+        index == activeVisitIndex
+    }
 }
 
 // MARK: Content
@@ -51,18 +55,23 @@ private extension VisitsForDayView {
     
     private var dayLabel: some View {
         DayLabel(date: currentDayComponent.date)
-            .fade(showingDetail)
+            .fade(isVisitActive)
     }
     
     private var visitsForDayList: some View {
         VScroll {
             VStack(spacing: 2) {
                 ForEach(visits.indexed(), id: \.1.self) { i, visit in
-                    VisitDetailsView(selectedIndex: self.$selectedIndex, id: i, visit: visit)
+//                    GeometryReader { geometry in
+//                        ZStack {
+                            VisitDetailsView(selectedIndex: self.$activeVisitIndex, index: i, visit: visit)
+//                                .offset(y: self.isVisitActive.when(true: -geometry.frame(in: .global).minY, false: 0))
+//                                .scaleEffect((self.isVisitActive && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
+//                        }
+//                    }
                 }
             }
         }
-        .fade(showingDetail)
     }
 }
 

@@ -44,10 +44,6 @@ struct VisitsPreviewList: View {
 
 // MARK: - Helpers
 private extension VisitsPreviewList {
-    private func isActiveDayComponent(dayComponent: DateComponents) -> Bool {
-        return currentDayComponent == dayComponent
-    }
-    
     private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
         daysComponentsForMonthComponent[monthComponent]!.sortDescending
     }
@@ -88,9 +84,9 @@ private extension VisitsPreviewList {
     
     private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
         DayPreviewBlock(
-            currentDayComponent: self.$currentDayComponent,
-            isPreviewActive: self.$isPreviewActive,
-            visits: self.visitsForDayComponent[dayComponent]!,
+            currentDayComponent: $currentDayComponent,
+            isPreviewActive: $isPreviewActive,
+            visits: visitsForDayComponent[dayComponent]!,
             isFilled: isFilled,
             dayComponent: dayComponent
         )
