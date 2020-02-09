@@ -37,6 +37,9 @@ struct VisitsPreviewList: View {
             }
             .extendToScreenEdges()
             
+            overlayColor
+                .fade(isPreviewActive)
+            
             visitsForActiveDayView
         }
     }
@@ -51,6 +54,11 @@ private extension VisitsPreviewList {
 
 // MARK: - Content
 private extension VisitsPreviewList {
+    private var overlayColor: some View {
+        ScreenColor(Color("salmon"))
+            .saturation(2)
+    }
+    
     private var backgroundColor: some View {
         ScreenColor(UIColor.black)
     }
@@ -98,8 +106,8 @@ private extension VisitsPreviewList {
             isPreviewActive: $isPreviewActive,
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? []
         )
-            .scaleEffect(isPreviewActive ? 0 : 1)
             .fade(isPreviewActive)
+            .scaleEffect(isPreviewActive.when(true: 0, false: 1))
             .animation(.spring())
     }
 }

@@ -8,8 +8,6 @@ struct VisitsForDayView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            backgroundColor
-            
             header
                 .padding()
             
@@ -39,12 +37,6 @@ private extension VisitsForDayView {
 
 // MARK: Content
 private extension VisitsForDayView {
-    private var backgroundColor: some View {
-        ScreenColor(Color("salmon"))
-            .saturation(2)
-            .animation(.linear)
-    }
-    
     private var header: some View {
         HStack {
             BImage(perform: setPreviewActive, image: .init(systemName: "arrow.left"))
