@@ -8,6 +8,7 @@ struct DayLabel: View {
             dayOfMonthText
             fullMonthWithDayText
         }
+        .animation(nil)
     }
 }
 
@@ -17,11 +18,11 @@ private extension DayLabel {
         Text(date.dayOfWeekBasedOnCurrentDay.uppercased())
             .font(.system(size: 22))
             .fontWeight(.bold)
-            .tracking(5)
+            .tracking(2)
     }
     
     private var fullMonthWithDayText: some View {
-        Text(date.fullMonthWithDay.uppercased())
+        Text(date.fullMonthWithDayAndYear.uppercased())
             .font(.caption)
     }
 }

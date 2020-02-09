@@ -40,6 +40,10 @@ extension Date {
     var abbreviatedMonthWithDayAndYear: String {
         return Formatter.abbreviatedMonthWithDayAndYear.string(from: self)
     }
+    
+    var fullMonthWithDayAndYear: String {
+        return Formatter.fullMonthWithDayAndYear.string(from: self)
+    }
 }
 
 extension Date {
