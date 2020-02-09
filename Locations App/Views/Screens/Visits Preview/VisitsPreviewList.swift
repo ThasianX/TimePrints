@@ -96,7 +96,7 @@ private extension VisitsPreviewList {
         VisitsForDayView(
             currentDayComponent: $currentDayComponent,
             isPreviewActive: $isPreviewActive,
-            visits: visitsForDayComponent[currentDayComponent] ?? []
+            visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? []
         )
             .scaleEffect(isPreviewActive ? 0 : 1)
             .fade(isPreviewActive)

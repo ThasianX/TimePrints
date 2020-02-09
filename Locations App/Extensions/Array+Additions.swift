@@ -17,3 +17,9 @@ extension Array where Element: Comparable {
         sorted(by: { $0 > $1 })
     }
 }
+
+extension Array where Element: Visit {
+    var sortAscByArrivalDate: Array {
+        sorted(by: { $0.arrivalDate < $1.arrivalDate })
+    }
+}
