@@ -30,32 +30,33 @@ struct RootView: View {
     @State private var stayAtLocation = false
     
     var body: some View {
-        ZStack(alignment: .top) {
-            MapView(trackingMode: $trackingMode, selectedLocation: $selectedLocation, showingEditTag: $showingEditTag, showingLocationVisits: $showingLocationVisits, stayAtLocation: $stayAtLocation, annotations: locations.map(LocationAnnotation.init))
-                .extendToScreenEdges()
-                .disablur(showingEditTag || showingLocationVisits)
-            
-            HStack {
-                UserLocationButton(trackingMode: $trackingMode, stayAtLocation: $stayAtLocation)
-                Spacer()
-            }
-            .padding()
-            .disablur(showingEditTag || showingLocationVisits)
-            
-            EditTagView(show: self.$showingEditTag, location: self.$selectedLocation, stayAtLocation: $stayAtLocation)
-                .frame(width: screen.bounds.width * 0.8, height: screen.bounds.height * 0.6)
-                .cornerRadius(30)
-                .shadow(radius: 20)
-                .animation(.spring())
-                .offset(y: showingEditTag ? screen.bounds.height * 0.15 : screen.bounds.height)
-            
-            LocationVisitsView(show: $showingLocationVisits, selectedLocation: selectedLocation)
-                .frame(width: screen.bounds.width * 0.8, height: screen.bounds.height * 0.6)
-                .cornerRadius(30)
-                .shadow(radius: 20)
-                .animation(.spring())
-                .offset(y: showingLocationVisits ? screen.bounds.height * 0.15 : screen.bounds.height)
-        }
+        VisitsPreviewList()
+//        ZStack(alignment: .top) {
+//            MapView(trackingMode: $trackingMode, selectedLocation: $selectedLocation, showingEditTag: $showingEditTag, showingLocationVisits: $showingLocationVisits, stayAtLocation: $stayAtLocation, annotations: locations.map(LocationAnnotation.init))
+//                .extendToScreenEdges()
+//                .disablur(showingEditTag || showingLocationVisits)
+//
+//            HStack {
+//                UserLocationButton(trackingMode: $trackingMode, stayAtLocation: $stayAtLocation)
+//                Spacer()
+//            }
+//            .padding()
+//            .disablur(showingEditTag || showingLocationVisits)
+//
+//            EditTagView(show: self.$showingEditTag, location: self.$selectedLocation, stayAtLocation: $stayAtLocation)
+//                .frame(width: screen.bounds.width * 0.8, height: screen.bounds.height * 0.6)
+//                .cornerRadius(30)
+//                .shadow(radius: 20)
+//                .animation(.spring())
+//                .offset(y: showingEditTag ? screen.bounds.height * 0.15 : screen.bounds.height)
+//
+//            LocationVisitsView(show: $showingLocationVisits, selectedLocation: selectedLocation)
+//                .frame(width: screen.bounds.width * 0.8, height: screen.bounds.height * 0.6)
+//                .cornerRadius(30)
+//                .shadow(radius: 20)
+//                .animation(.spring())
+//                .offset(y: showingLocationVisits ? screen.bounds.height * 0.15 : screen.bounds.height)
+//        }
     }
 }
 

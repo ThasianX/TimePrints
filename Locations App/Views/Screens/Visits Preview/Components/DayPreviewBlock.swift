@@ -75,7 +75,7 @@ private extension DayPreviewBlock {
     }
     
     private var visitsPreviewList: some View {
-        VStack(spacing: 0) {
+        V0Stack {
             ForEach(visits[range]) { visit in
                 VisitPreviewCell(visit: visit)
             }

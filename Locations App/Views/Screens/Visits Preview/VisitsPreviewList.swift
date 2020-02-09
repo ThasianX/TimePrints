@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct VisitsPreviewList: View {
+    @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
     @State private var currentDayComponent = DateComponents()
-    let visits: [Visit]
     
     private var visitsForDayComponent: [DateComponents: [Visit]] {
         Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
@@ -30,10 +30,6 @@ struct VisitsPreviewList: View {
         
         return ZStack {
             backgroundColor
-//            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, visits: dateVisits[currentDateComponent] ?? [])
-//                .frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0)
-//                .scaleEffect(self.isActiveDayComponent(dayComponent: dayComponent) ? 1 : 0.5)
-//                .animation(.easeIn)
             
             VScroll {
                 V0Stack {
@@ -52,6 +48,7 @@ struct VisitsPreviewList: View {
                                             isPreviewActive: self.isPreviewActive
                                         )
                                     }
+                                    .frame(height: 150)
                                 }
                             }
                         }
@@ -59,6 +56,11 @@ struct VisitsPreviewList: View {
                 }
             }
             .extendToScreenEdges()
+            
+            VisitsForDayView(currentDayComponent: $currentDayComponent, visits: visitsForDayComponent[currentDayComponent] ?? [])
+                .scaleEffect(isPreviewActive ? 0 : 1)
+                .fade(isPreviewActive)
+                .animation(.easeIn)
         }
     }
 }
@@ -83,6 +85,6 @@ private extension VisitsPreviewList {
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(visits: Visit.previewVisits).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
+        VisitsPreviewList().environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
     }
 }

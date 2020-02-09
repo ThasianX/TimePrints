@@ -56,4 +56,18 @@ extension Date {
         let newInterval = interval + (random - (intervalRange / 2.0))
         return Date(timeIntervalSince1970: newInterval)
     }
+    
+    var dayOfWeekBasedOnCurrentDay: String {
+        let day: String
+        if Calendar.current.isDateInToday(self) {
+            day = "Today"
+        } else if Calendar.current.isDateInYesterday(self) {
+            day = "Yesterday"
+        } else if Calendar.current.isDateInTomorrow(self) {
+            day = "Tomorrow"
+        } else {
+            day = self.fullDayOfWeek
+        }
+        return day
+    }
 }

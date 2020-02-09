@@ -13,62 +13,49 @@ struct DayDetailsRow: View {
     @Binding var selectedIndex: Int
     let id: Int
     let visit: Visit
-    let color: UIColor
     
     var body: some View {
         ZStack(alignment: .top) {
-            if isSelected {
-                ScreenColor(color)
-                    .saturation(2)
-                
-                header
-                    .padding(.init(top: 5, leading: 30, bottom: 0, trailing: 30))
-                    .offset(y: 60)
-                    .opacity(mapFull ? 0 : 1)
-            }
-            
             VStack {
-                VStack {
-                    Text(visit.location.name)
-                        .font(nameFont)
-                        .fontWeight(nameWeight)
-                    VSpace(isSelected ? 20 : 0)
-                    Text(visit.visitDuration)
-                        .font(visitDurationFont)
-                    
-                    if isSelected {
-                        Text(visit.arrivalDate.fullMonthWithDayOfWeek.uppercased()).font(.caption)
-                    }
-                    
-                    VSpace(isSelected ? 20 : 12)
-                    Popsicle(tag: visit.location.tag, displayName: isSelected)
-                        .rotated(.init(degrees: isSelected ? 0 : 90))
-                    VSpace(isSelected ? 20 : 12)
-                }
-                .opacity(mapFull ? 0 : 1)
-                
-                if isSelected {
-                    map
-                }
-                
-                Text(visit.notes)
-                    .font(.caption)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .lineLimit(isSelected ? nil : 3)
-                    .opacity(mapFull ? 0 : 1)
+                locationNameText
+                visitDurationText
+                locationTagView
+                    .padding(.init(top: 6, leading: 0, bottom: 4, trailing: 0))
+                visitNotesText
             }
-            .padding(.init(top: 20, leading: 40, bottom: 20, trailing: 40))
-            .offset(y: isSelected ? 40 : 0)
-            .offset(y: mapFull ? -80 : 0)
-            .roundedFill(with: isSelected ? .clear : color)
+            .frame(width: screen.bounds.width - 150)
+            .padding(.init(top: 10, leading: 40, bottom: 4, trailing: 40))
+            .roundedFill(with: Color(UIColor.salmon))
         }
-//        .frame(width: isSelected ? screen.bounds.width : nil, height: isSelected ? screen.bounds.height : nil)
     }
 }
 
 // MARK: - Content
 extension DayDetailsRow {
+    private var locationNameText: some View {
+        Text(visit.location.name)
+            .font(nameFont)
+            .fontWeight(nameWeight)
+    }
+    
+    private var visitDurationText: some View {
+        Text(visit.visitDuration)
+            .font(visitDurationFont)
+    }
+    
+    private var locationTagView: some View {
+        Popsicle(tag: visit.location.tag, displayName: isSelected)
+            .rotated(.init(degrees: isSelected ? 0 : 90))
+    }
+    
+    private var visitNotesText: some View {
+        Text(visit.notes)
+            .font(.caption)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: true, vertical: false)
+            .lineLimit(3)
+    }
+    
     var header: some View {
         HStack {
             BImage(perform: unselectRow, image: .init(systemName: "arrow.left"))
@@ -81,15 +68,15 @@ extension DayDetailsRow {
     var map: some View {
         ZStack(alignment: .topLeading) {
             VStack(spacing: 20) {
-//                StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, color: color)
-//                    .frame(width: mapFull ? screen.bounds.width : screen.bounds.width / 2.5, height: mapFull ? screen.bounds.height * 3 / 4 : screen.bounds.width / 2.5)
-//                    .cornerRadius(mapFull ? 0 : screen.bounds.width / 5)
-//                    .onTapGesture {
-//                        withAnimation {
-//                            self.mapFull.toggle()
-//                        }
-//                    }
-//                    .animation(.spring())
+                //                StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, color: color)
+                //                    .frame(width: mapFull ? screen.bounds.width : screen.bounds.width / 2.5, height: mapFull ? screen.bounds.height * 3 / 4 : screen.bounds.width / 2.5)
+                //                    .cornerRadius(mapFull ? 0 : screen.bounds.width / 5)
+                //                    .onTapGesture {
+                //                        withAnimation {
+                //                            self.mapFull.toggle()
+                //                        }
+                //                    }
+                //                    .animation(.spring())
                 Text(visit.location.address.uppercased())
                     .font(.headline)
                     .multilineTextAlignment(.center)
@@ -100,7 +87,7 @@ extension DayDetailsRow {
                 notes
                     .opacity(mapFull ? 0 : 1)
             }
-
+            
             BImage(condition: $mapFull, image: .init(systemName: "arrow.left.circle.fill"))
                 .scaleEffect(2.5)
                 .opacity(mapFull ? 1 : 0)
@@ -142,7 +129,7 @@ extension DayDetailsRow {
     private var visitDurationFont: Font {
         isSelected ? .system(size: 18) : .system(size: 10)
     }
-
+    
     private func unselectRow() {
         self.selectedIndex = -1
     }
@@ -155,9 +142,9 @@ extension DayDetailsRow {
 struct DayDetailsRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayDetailsRow(selectedIndex: .constant(1), id: -1, visit: .preview, color: UIColor.salmon).previewLayout(.sizeThatFits)
+            DayDetailsRow(selectedIndex: .constant(1), id: -1, visit: .preview).previewLayout(.sizeThatFits)
             
-            DayDetailsRow(selectedIndex: .constant(1), id: 1, visit: .preview, color: .salmon)
+            DayDetailsRow(selectedIndex: .constant(1), id: 1, visit: .preview)
         }
         
     }
