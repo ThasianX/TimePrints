@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct V0Stack<Content: View>: View {
+struct VScroll<Content: View>: View {
     private let content: Content
     
     @inlinable init(@ViewBuilder content: () -> Content) {
@@ -8,13 +8,13 @@ struct V0Stack<Content: View>: View {
     }
     
     var body: some View {
-        VStack(spacing: 0, content: { content })
+        ScrollView(.vertical, showsIndicators: false, content: { content })
     }
 }
 
-struct V0Stack_Previews: PreviewProvider {
+struct VScroll_Previews: PreviewProvider {
     static var previews: some View {
-        V0Stack {
+        VScroll {
             Text("A")
             Text("B")
             Text("C")

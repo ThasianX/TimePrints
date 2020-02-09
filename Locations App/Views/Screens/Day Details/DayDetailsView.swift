@@ -20,7 +20,7 @@ struct DayDetailsView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            SuperColor(Color("salmon")).saturation(2)
+            ScreenColor(Color("salmon")).saturation(2)
             
             HStack {
                 BImage(condition: $show, image: .init(systemName: "arrow.left"))
@@ -35,7 +35,7 @@ struct DayDetailsView: View {
                 
                 VSpace(20).opacity(showingDetail ? 0 : 1)
                 
-                ScrollView(.vertical, showsIndicators: false) {
+                VScroll {
                     ForEach(visits.indexed(), id: \.1.self) { i, visit in
                         DayDetailsRow(selectedIndex: self.$selectedIndex, id: i, visit: visit, color: UIColor.salmon)
                             .contentShape(Rectangle())

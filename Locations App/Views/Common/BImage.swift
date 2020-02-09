@@ -1,11 +1,3 @@
-//
-//  BImage.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/1/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct BImage: View {

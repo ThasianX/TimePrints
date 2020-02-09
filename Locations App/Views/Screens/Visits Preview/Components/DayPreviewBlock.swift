@@ -18,8 +18,9 @@ struct DayPreviewBlock: View {
     }
     
     var body: some View {
-        ZStack() {
+        ZStack {
             backgroundColor
+            visitsPreviewList
         }
         .onAppear(perform: determineAndSetAppropriateTimerState)
         .onTapGesture(perform: setCurrentDayComponent)
@@ -73,12 +74,13 @@ private extension DayPreviewBlock {
         Color("salmon").saturation(isFilled ? 2 : 1)
     }
     
-    private var visitsPreviewBlock: some View {
+    private var visitsPreviewList: some View {
         VStack(spacing: 0) {
             ForEach(visits[range]) { visit in
                 VisitPreviewCell(visit: visit)
             }
         }
+        .animation(.easeInOut)
     }
 }
 

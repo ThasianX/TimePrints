@@ -18,7 +18,8 @@ struct DayDetailsRow: View {
     var body: some View {
         ZStack(alignment: .top) {
             if isSelected {
-                SuperColor(color).saturation(2)
+                ScreenColor(color)
+                    .saturation(2)
                 
                 header
                     .padding(.init(top: 5, leading: 30, bottom: 0, trailing: 30))

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D3DB523EF8B2500528241 /* VScroll.swift */; };
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E24926023EB305D00165280 /* EditTagHeaderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24925F23EB305D00165280 /* EditTagHeaderText.swift */; };
 		1E24926223EB31AD00165280 /* EditTagHeaderButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926123EB31AD00165280 /* EditTagHeaderButtons.swift */; };
@@ -75,7 +76,7 @@
 		1EFF83B323E5365E00FF04A1 /* H0Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF83B223E5365E00FF04A1 /* H0Stack.swift */; };
 		1EFF83B523E5368900FF04A1 /* V0Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF83B423E5368900FF04A1 /* V0Stack.swift */; };
 		1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF83B623E53ACB00FF04A1 /* EdgeModifier.swift */; };
-		1EFF83B923E53BC200FF04A1 /* SuperColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF83B823E53BC200FF04A1 /* SuperColor.swift */; };
+		1EFF83B923E53BC200FF04A1 /* ScreenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF83B823E53BC200FF04A1 /* ScreenColor.swift */; };
 		1EFFA58323E896F700914607 /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFFA58223E896F700914607 /* MapboxMobileEvents.framework */; };
 		1EFFA58423E896F700914607 /* MapboxMobileEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFFA58223E896F700914607 /* MapboxMobileEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EFFA58623E89A3400914607 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFA58523E89A3400914607 /* LocationAnnotation.swift */; };
@@ -116,6 +117,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E1D3DB523EF8B2500528241 /* VScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VScroll.swift; sourceTree = "<group>"; };
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E24925F23EB305D00165280 /* EditTagHeaderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagHeaderText.swift; sourceTree = "<group>"; };
 		1E24926123EB31AD00165280 /* EditTagHeaderButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagHeaderButtons.swift; sourceTree = "<group>"; };
@@ -766,7 +768,7 @@
 		1EFF83B223E5365E00FF04A1 /* H0Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H0Stack.swift; sourceTree = "<group>"; };
 		1EFF83B423E5368900FF04A1 /* V0Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V0Stack.swift; sourceTree = "<group>"; };
 		1EFF83B623E53ACB00FF04A1 /* EdgeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeModifier.swift; sourceTree = "<group>"; };
-		1EFF83B823E53BC200FF04A1 /* SuperColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperColor.swift; sourceTree = "<group>"; };
+		1EFF83B823E53BC200FF04A1 /* ScreenColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenColor.swift; sourceTree = "<group>"; };
 		1EFFA58223E896F700914607 /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		1EFFA58523E89A3400914607 /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
 		1EFFA58923E8B1E700914607 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -1804,10 +1806,11 @@
 			children = (
 				1EFF83B223E5365E00FF04A1 /* H0Stack.swift */,
 				1EFF83B423E5368900FF04A1 /* V0Stack.swift */,
-				1EFF83B823E53BC200FF04A1 /* SuperColor.swift */,
+				1EFF83B823E53BC200FF04A1 /* ScreenColor.swift */,
 				1E6D568823E5EEB20044AB3A /* Popsicle.swift */,
 				1E6D568A23E5F6F10044AB3A /* BImage.swift */,
 				1E6D569323E653990044AB3A /* VSpace.swift */,
+				1E1D3DB523EF8B2500528241 /* VScroll.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2182,7 +2185,7 @@
 				1EFF83B523E5368900FF04A1 /* V0Stack.swift in Sources */,
 				1E24926023EB305D00165280 /* EditTagHeaderText.swift in Sources */,
 				1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */,
-				1EFF83B923E53BC200FF04A1 /* SuperColor.swift in Sources */,
+				1EFF83B923E53BC200FF04A1 /* ScreenColor.swift in Sources */,
 				1E6D568923E5EEB20044AB3A /* Popsicle.swift in Sources */,
 				1E5AF45023E3C9A900A94F10 /* MKMapView+Additions.swift in Sources */,
 				1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */,
@@ -2215,6 +2218,7 @@
 				1E5DBEAB23EA278E00C86641 /* TagContextMenu.swift in Sources */,
 				1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */,
 				1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */,
+				1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,

@@ -1,14 +1,6 @@
-//
-//  SuperColor.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/31/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
-struct SuperColor: View {
+struct ScreenColor: View {
     let color: Color
     
     @inlinable init(_ color: Color) {
@@ -20,12 +12,13 @@ struct SuperColor: View {
     }
     
     var body: some View {
-        color.beyond()
+        color
+            .extendToScreenEdges()
     }
 }
 
-struct SuperColor_Previews: PreviewProvider {
+struct ScreenColor_Previews: PreviewProvider {
     static var previews: some View {
-        SuperColor(UIColor.black)
+        ScreenColor(UIColor.black)
     }
 }

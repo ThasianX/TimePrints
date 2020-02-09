@@ -20,7 +20,7 @@ extension View {
         modifier(RotatedModifier(angle: angle))
     }
     
-    func beyond() -> some View {
+    func extendToScreenEdges() -> some View {
         modifier(EdgeModifier())
     }
     

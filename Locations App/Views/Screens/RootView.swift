@@ -32,7 +32,7 @@ struct RootView: View {
     var body: some View {
         ZStack(alignment: .top) {
             MapView(trackingMode: $trackingMode, selectedLocation: $selectedLocation, showingEditTag: $showingEditTag, showingLocationVisits: $showingLocationVisits, stayAtLocation: $stayAtLocation, annotations: locations.map(LocationAnnotation.init))
-                .beyond()
+                .extendToScreenEdges()
                 .disablur(showingEditTag || showingLocationVisits)
             
             HStack {

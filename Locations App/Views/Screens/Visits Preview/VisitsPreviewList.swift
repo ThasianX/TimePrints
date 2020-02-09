@@ -16,6 +16,10 @@ struct VisitsPreviewList: View {
         currentDayComponent == DateComponents()
     }
     
+    private var descendingMonthComponents: [DateComponents] {
+        daysComponentsForMonthComponent.descendingKeys
+    }
+    
     var body: some View {
         var fill = false
         
@@ -25,28 +29,28 @@ struct VisitsPreviewList: View {
         }
         
         return ZStack {
-            SuperColor(UIColor.black)
+            backgroundColor
+//            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, visits: dateVisits[currentDateComponent] ?? [])
+//                .frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0)
+//                .scaleEffect(self.isActiveDayComponent(dayComponent: dayComponent) ? 1 : 0.5)
+//                .animation(.easeIn)
             
-            //            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, visits: dateVisits[currentDateComponent] ?? [])
-            //                .frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0)
-            //                .animation(.easeIn)
-            
-            ScrollView(.vertical, showsIndicators: false) {
+            VScroll {
                 V0Stack {
-                    ForEach(daysComponentsForMonthComponent.descendingKeys) { monthComponent in
+                    ForEach(descendingMonthComponents) { monthComponent in
                         H0Stack {
                             MonthYearSideBar(date: monthComponent.date)
                             V0Stack {
-                                ForEach(self.daysComponentsForMonthComponent[monthComponent]!.sortDescending) { dayComponent in
+                                ForEach(self.descendingDayComponents(for: monthComponent)) { dayComponent in
                                     HStack {
                                         DaySideBar(date: dayComponent.date)
-                                        GeometryReader { geometry in
-                                            ZStack {
-                                                DayPreviewBlock(currentDayComponent: self.$currentDayComponent, visits: self.visitsForDayComponent[dayComponent]!, isFilled: isFilled(), dayComponent: dayComponent, isPreviewActive: self.isPreviewActive)
-                                                .offset(y: self.isActiveDayComponent(dayComponent: dayComponent) ? -geometry.frame(in: .global).minY : 0)
-                                                .scaleEffect(self.isActiveDayComponent(dayComponent: dayComponent) ? 1 : 0.5)
-                                            }
-                                        }
+                                        DayPreviewBlock(
+                                            currentDayComponent: self.$currentDayComponent,
+                                            visits: self.visitsForDayComponent[dayComponent]!,
+                                            isFilled: isFilled(),
+                                            dayComponent: dayComponent,
+                                            isPreviewActive: self.isPreviewActive
+                                        )
                                     }
                                 }
                             }
@@ -54,7 +58,7 @@ struct VisitsPreviewList: View {
                     }
                 }
             }
-            .beyond()
+            .extendToScreenEdges()
         }
     }
 }
@@ -63,6 +67,17 @@ struct VisitsPreviewList: View {
 private extension VisitsPreviewList {
     private func isActiveDayComponent(dayComponent: DateComponents) -> Bool {
         return currentDayComponent == dayComponent
+    }
+    
+    private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
+        daysComponentsForMonthComponent[monthComponent]!.sortDescending
+    }
+}
+
+// MARK: - Content
+private extension VisitsPreviewList {
+    private var backgroundColor: some View {
+        ScreenColor(UIColor.black)
     }
 }
 

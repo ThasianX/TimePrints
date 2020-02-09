@@ -16,7 +16,7 @@ struct TagSelectionList: View {
     let onDelete: (Tag) -> Void
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
+        VScroll {
             VStack {
                 ForEach(tags) { tag in
                     ColoredTextRow(text: tag.name, color: tag.uiColor, selected: self.location?.tag == tag)
