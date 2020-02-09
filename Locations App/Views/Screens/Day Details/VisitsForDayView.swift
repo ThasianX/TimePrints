@@ -31,12 +31,6 @@ private extension VisitsForDayView {
     private func setPreviewActive() {
         isPreviewActive = true
     }
-    
-    private func setSelectedVisitIndex(index: Int) {
-        withAnimation {
-            self.selectedIndex = index
-        }
-    }
 }
 
 // MARK: Content
@@ -64,8 +58,7 @@ private extension VisitsForDayView {
         VScroll {
             VStack(spacing: 2) {
                 ForEach(visits.indexed(), id: \.1.self) { i, visit in
-                    DayDetailsRow(selectedIndex: self.$selectedIndex, id: i, visit: visit)
-                        .onTapGesture { self.setSelectedVisitIndex(index: i) }
+                    VisitDetailsView(selectedIndex: self.$selectedIndex, id: i, visit: visit)
                 }
             }
         }

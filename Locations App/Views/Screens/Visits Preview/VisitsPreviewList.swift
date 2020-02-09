@@ -74,16 +74,16 @@ private extension VisitsPreviewList {
         MonthYearSideBar(date: date)
     }
     
-    private func daySideBarText(date: Date) -> some View {
-        DaySideBar(date: date)
-    }
-    
     private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
         HStack {
             daySideBarText(date: dayComponent.date)
             dayPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled)
         }
         .frame(height: 150)
+    }
+    
+    private func daySideBarText(date: Date) -> some View {
+        DaySideBar(date: date)
     }
     
     private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
@@ -104,7 +104,7 @@ private extension VisitsPreviewList {
         )
             .scaleEffect(isPreviewActive ? 0 : 1)
             .fade(isPreviewActive)
-            .animation(.easeInOut)
+            .animation(.spring())
     }
 }
 

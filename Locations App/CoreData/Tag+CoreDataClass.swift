@@ -91,7 +91,7 @@ public class Tag: NSManagedObject {
 extension Tag {
     // MARK: - Preview
     class var preview: Tag {
-        return Tag.create(name: "Visits", color: .salmon)
+        Tag.create(name: "Visits", color: .salmon)
     }
     
     class func deleteAll() {

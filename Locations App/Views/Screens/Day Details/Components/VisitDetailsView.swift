@@ -1,14 +1,6 @@
-//
-//  LocationDetailsRow.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/1/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
-struct DayDetailsRow: View {
+struct VisitDetailsView: View {
     @State private var mapFull = false
     @Binding var selectedIndex: Int
     let id: Int
@@ -20,7 +12,6 @@ struct DayDetailsRow: View {
                 locationNameText
                 visitDurationText
                 locationTagView
-                    .padding(.init(top: 6, leading: 0, bottom: 4, trailing: 0))
                 visitNotesText
             }
             .frame(width: screen.bounds.width - 150)
@@ -30,8 +21,17 @@ struct DayDetailsRow: View {
     }
 }
 
+// MARK: - Helper Functions
+private extension VisitDetailsView {
+    private func setSelectedVisitIndex(index: Int) {
+        withAnimation {
+            self.selectedIndex = id
+        }
+    }
+}
+
 // MARK: - Content
-extension DayDetailsRow {
+private extension VisitDetailsView {
     private var locationNameText: some View {
         Text(visit.location.name)
             .font(nameFont)
@@ -44,8 +44,8 @@ extension DayDetailsRow {
     }
     
     private var locationTagView: some View {
-        Popsicle(tag: visit.location.tag, displayName: isSelected)
-            .rotated(.init(degrees: isSelected ? 0 : 90))
+        TagView(tag: visit.location.tag, displayName: isSelected)
+            .padding(.init(top: 6, leading: 0, bottom: 4, trailing: 0))
     }
     
     private var visitNotesText: some View {
@@ -113,7 +113,7 @@ extension DayDetailsRow {
 }
 
 // MARK: - Computed Properties and Helper Functions
-extension DayDetailsRow {
+extension VisitDetailsView {
     private var isSelected: Bool {
         selectedIndex == id
     }
@@ -142,9 +142,9 @@ extension DayDetailsRow {
 struct DayDetailsRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayDetailsRow(selectedIndex: .constant(1), id: -1, visit: .preview).previewLayout(.sizeThatFits)
+            VisitDetailsView(selectedIndex: .constant(1), id: -1, visit: .preview).previewLayout(.sizeThatFits)
             
-            DayDetailsRow(selectedIndex: .constant(1), id: 1, visit: .preview)
+            VisitDetailsView(selectedIndex: .constant(1), id: 1, visit: .preview)
         }
         
     }

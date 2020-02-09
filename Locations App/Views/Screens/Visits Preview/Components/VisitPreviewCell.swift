@@ -5,7 +5,8 @@ struct VisitPreviewCell: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Popsicle(tag: visit.location.tag)
+            TagView(tag: visit.location.tag)
+                .rotated(.degrees(90))
 
             VStack(alignment: .leading) {
                 locationName

@@ -55,7 +55,7 @@ private extension DayPreviewBlock {
     }
     
     private func setTimerForVisitsSlideshow() {
-        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
             withAnimation {
                 self.onTimerFire()
             }
