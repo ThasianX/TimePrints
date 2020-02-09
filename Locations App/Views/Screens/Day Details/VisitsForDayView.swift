@@ -3,6 +3,7 @@ import SwiftUI
 struct VisitsForDayView: View {
     @State private var selectedIndex: Int = -1
     @Binding var currentDayComponent: DateComponents
+    @Binding var isPreviewActive: Bool
     let visits: [Visit]
     
     private var showingDetail: Bool {
@@ -27,8 +28,8 @@ struct VisitsForDayView: View {
 
 // MARK: Helpers
 private extension VisitsForDayView {
-    private func resetCurrentDayComponent() {
-        currentDayComponent = DateComponents()
+    private func setPreviewActive() {
+        isPreviewActive = true
     }
     
     private func setSelectedVisitIndex(index: Int) {
@@ -48,7 +49,7 @@ private extension VisitsForDayView {
     
     private var header: some View {
         HStack {
-            BImage(perform: resetCurrentDayComponent, image: .init(systemName: "arrow.left"))
+            BImage(perform: setPreviewActive, image: .init(systemName: "arrow.left"))
                 .padding(.leading, 20)
             Spacer()
         }
@@ -74,6 +75,6 @@ private extension VisitsForDayView {
 
 struct VisitsForDayView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), visits: Visit.previewVisitDetails)
+        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), isPreviewActive: .constant(false), visits: Visit.previewVisitDetails)
     }
 }

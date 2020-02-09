@@ -4,17 +4,13 @@ struct DayPreviewBlock: View {
     @State private var visitIndex = 0
     @State private var timer: Timer?
     @Binding var currentDayComponent: DateComponents
+    @Binding var isPreviewActive: Bool
     let visits: [Visit]
     let isFilled: Bool
     let dayComponent: DateComponents
-    let isPreviewActive: Bool
     
     private var range: Range<Int> {
         return visitIndex ..< ((visitIndex + 3 > visits.count) ? visits.count : visitIndex + 3)
-    }
-    
-    private func setCurrentDayComponent() {
-        currentDayComponent = dayComponent
     }
     
     var body: some View {
@@ -23,7 +19,23 @@ struct DayPreviewBlock: View {
             visitsPreviewList
         }
         .onAppear(perform: determineAndSetAppropriateTimerState)
-        .onTapGesture(perform: setCurrentDayComponent)
+        .onTapGesture(perform: setCurrentDayComponentAndPreviewInactive)
+    }
+}
+
+// MARK: - Helper Functions
+private extension DayPreviewBlock {
+    private func setCurrentDayComponentAndPreviewInactive() {
+        setCurrentDayComponent()
+        setPreviewInactive()
+    }
+    
+    private func setCurrentDayComponent() {
+        currentDayComponent = dayComponent
+    }
+    
+    private func setPreviewInactive() {
+        isPreviewActive = false
     }
 }
 
@@ -87,7 +99,7 @@ private extension DayPreviewBlock {
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), visits: [], isFilled: false, dayComponent: DateComponents(), isPreviewActive: true)
+            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), isPreviewActive: .constant(true), visits: [], isFilled: false, dayComponent: DateComponents())
         }
     }
 }

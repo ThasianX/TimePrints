@@ -3,6 +3,7 @@ import SwiftUI
 struct VisitsPreviewList: View {
     @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
     @State private var currentDayComponent = DateComponents()
+    @State private var isPreviewActive = true
     
     private var visitsForDayComponent: [DateComponents: [Visit]] {
         Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
@@ -10,10 +11,6 @@ struct VisitsPreviewList: View {
     
     private var daysComponentsForMonthComponent: [DateComponents: [DateComponents]] {
         Dictionary(grouping: Array(visitsForDayComponent.keys), by: { $0.monthAndYear })
-    }
-    
-    private var isPreviewActive: Bool {
-        currentDayComponent == DateComponents()
     }
     
     private var descendingMonthComponents: [DateComponents] {
@@ -34,33 +31,13 @@ struct VisitsPreviewList: View {
             VScroll {
                 V0Stack {
                     ForEach(descendingMonthComponents) { monthComponent in
-                        H0Stack {
-                            MonthYearSideBar(date: monthComponent.date)
-                            V0Stack {
-                                ForEach(self.descendingDayComponents(for: monthComponent)) { dayComponent in
-                                    HStack {
-                                        DaySideBar(date: dayComponent.date)
-                                        DayPreviewBlock(
-                                            currentDayComponent: self.$currentDayComponent,
-                                            visits: self.visitsForDayComponent[dayComponent]!,
-                                            isFilled: isFilled(),
-                                            dayComponent: dayComponent,
-                                            isPreviewActive: self.isPreviewActive
-                                        )
-                                    }
-                                    .frame(height: 150)
-                                }
-                            }
-                        }
+                        self.monthYearSideBarWithDayPreviewBlocksView(monthComponent: monthComponent, isFilled: isFilled)
                     }
                 }
             }
             .extendToScreenEdges()
             
-            VisitsForDayView(currentDayComponent: $currentDayComponent, visits: visitsForDayComponent[currentDayComponent] ?? [])
-                .scaleEffect(isPreviewActive ? 0 : 1)
-                .fade(isPreviewActive)
-                .animation(.easeIn)
+            visitsForActiveDayView
         }
     }
 }
@@ -80,6 +57,54 @@ private extension VisitsPreviewList {
 private extension VisitsPreviewList {
     private var backgroundColor: some View {
         ScreenColor(UIColor.black)
+    }
+    
+    private func monthYearSideBarWithDayPreviewBlocksView(monthComponent: DateComponents, isFilled: @escaping () -> Bool) -> some View {
+        H0Stack {
+            self.monthYearSideBarText(date: monthComponent.date)
+            V0Stack {
+                ForEach(self.descendingDayComponents(for: monthComponent)) { dayComponent in
+                    self.daySideBarWithPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled())
+                }
+            }
+        }
+    }
+    
+    private func monthYearSideBarText(date: Date) -> some View {
+        MonthYearSideBar(date: date)
+    }
+    
+    private func daySideBarText(date: Date) -> some View {
+        DaySideBar(date: date)
+    }
+    
+    private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
+        HStack {
+            daySideBarText(date: dayComponent.date)
+            dayPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled)
+        }
+        .frame(height: 150)
+    }
+    
+    private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
+        DayPreviewBlock(
+            currentDayComponent: self.$currentDayComponent,
+            isPreviewActive: self.$isPreviewActive,
+            visits: self.visitsForDayComponent[dayComponent]!,
+            isFilled: isFilled,
+            dayComponent: dayComponent
+        )
+    }
+    
+    private var visitsForActiveDayView: some View {
+        VisitsForDayView(
+            currentDayComponent: $currentDayComponent,
+            isPreviewActive: $isPreviewActive,
+            visits: visitsForDayComponent[currentDayComponent] ?? []
+        )
+            .scaleEffect(isPreviewActive ? 0 : 1)
+            .fade(isPreviewActive)
+            .animation(.easeInOut)
     }
 }
 
