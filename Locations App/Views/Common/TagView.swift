@@ -21,7 +21,8 @@ private extension TagView {
             .font(.caption)
             .padding(6)
             .animation(nil)
-            .scaleEffect(displayName.when(true: 1, false: 0))
+            .fade(!displayName)
+            .scaleEffect(displayName.when(true: 1, false: 0.1))
     }
     
     private var roundedAndFilledRectangle: some View {
