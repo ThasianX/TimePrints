@@ -8,22 +8,26 @@ struct VisitDetailsView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
+            ScreenColor(.brown)
             VStack {
                 locationNameText
                 visitDurationText
                 locationTagView
                 visitNotesText
             }
-            .frame(width: screen.bounds.width - 150)
+            .background(Color(UIColor.salmon))
+            .frame(width: isSelected.when(true: screen.bounds.width, false: screen.bounds.width - 100))
             .padding(.init(top: 10, leading: 40, bottom: 4, trailing: 40))
-            .roundedFill(with: Color(UIColor.salmon))
+            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
         }
+        .onTapGesture(perform: setSelectedVisitIndex)
+        .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
     }
 }
 
 // MARK: - Helper Functions
 private extension VisitDetailsView {
-    private func setSelectedVisitIndex(index: Int) {
+    private func setSelectedVisitIndex() {
         withAnimation {
             self.selectedIndex = index
         }
@@ -52,7 +56,6 @@ private extension VisitDetailsView {
         Text(visit.notes)
             .font(.caption)
             .multilineTextAlignment(.center)
-            .fixedSize(horizontal: true, vertical: false)
             .lineLimit(3)
     }
     
@@ -139,7 +142,7 @@ extension VisitDetailsView {
     }
 }
 
-struct DayDetailsRow_Previews: PreviewProvider {
+struct VisitDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             VisitDetailsView(selectedIndex: .constant(1), index: -1, visit: .preview).previewLayout(.sizeThatFits)

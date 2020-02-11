@@ -34,6 +34,7 @@ struct VisitsPreviewList: View {
                         self.monthYearSideBarWithDayPreviewBlocksView(monthComponent: monthComponent, isFilled: isFilled)
                     }
                 }
+                .frame(width: screen.bounds.width)
             }
             .extendToScreenEdges()
             

@@ -9,14 +9,12 @@ struct VisitsForDayView: View {
     var body: some View {
         ZStack(alignment: .top) {
             header
-                .padding()
+                .frame(width: screen.bounds.width)
             
-            VStack(spacing: 20) {
-                dayLabel
-                visitsForDayList
-            }
-            .padding(.init(top: 0, leading: 40, bottom: 0, trailing: 40))
+            visitsForDayList
+                .offset(y: 100)
         }
+        
     }
 }
 
@@ -39,10 +37,16 @@ private extension VisitsForDayView {
 private extension VisitsForDayView {
     private var header: some View {
         HStack {
-            BImage(perform: setPreviewActive, image: .init(systemName: "arrow.left"))
-                .padding(.leading, 20)
+            backButton
+            Spacer()
+            dayLabel
             Spacer()
         }
+        .padding()
+    }
+    
+    private var backButton: some View {
+        BImage(perform: setPreviewActive, image: .init(systemName: "arrow.left"))
     }
     
     private var dayLabel: some View {
@@ -53,16 +57,18 @@ private extension VisitsForDayView {
     private var visitsForDayList: some View {
         VScroll {
             VStack(spacing: 2) {
-                ForEach(visits.indexed(), id: \.1.self) { i, visit in
-//                    GeometryReader { geometry in
-//                        ZStack {
+                ForEach(self.visits.indexed(), id: \.1.self) { i, visit in
+                    GeometryReader { geometry in
+                        ZStack {
                             VisitDetailsView(selectedIndex: self.$activeVisitIndex, index: i, visit: visit)
-//                                .offset(y: self.isVisitActive.when(true: -geometry.frame(in: .global).minY, false: 0))
-//                                .scaleEffect((self.isVisitActive && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
-//                        }
-//                    }
+                                .offset(y: self.isVisitActive.when(true: -geometry.frame(in: .global).minY, false: 0))
+                                .scaleEffect((self.isVisitActive && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
+                        }
+                    }
+                    .frame(height: 100)
                 }
             }
+            .frame(width: screen.bounds.width)
         }
     }
 }
