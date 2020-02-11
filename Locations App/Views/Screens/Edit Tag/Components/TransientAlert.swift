@@ -1,11 +1,3 @@
-//
-//  TransientAlert.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/5/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct TransientAlert: View {
@@ -15,23 +7,49 @@ struct TransientAlert: View {
     
     var body: some View {
         HStack {
-            if deletedTag != nil {
-                Text("Deleted: \(deletedTag!.name)")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding(.trailing, 8)
-                
-                Button(action: revert) {
-                    Text("Revert")
-                        .font(.headline)
-                        .foregroundColor(Color(deletedTag?.uiColor ?? .clear))
-                }
-            } else {
-                Text(alertMessage)
-                    .foregroundColor(.white)
-            }
+            deletedTagMessageDefaultsAlertMessage
         }
         .padding()
+    }
+}
+
+private extension TransientAlert {
+    private var deletedTagMessageDefaultsAlertMessage: some View {
+        Group {
+            if deletedTagExists {
+                deletedTagName
+                    .padding(.trailing, 8)
+                
+                revertButton
+            } else {
+                alertMessageText
+            }
+        }
+    }
+    
+    private var deletedTagName: some View {
+        Text("Deleted: \(deletedTag!.name)")
+            .font(.headline)
+            .foregroundColor(.white)
+    }
+    
+    private var revertButton: some View {
+        Button(action: revert) {
+            Text("Revert")
+                .font(.headline)
+                .foregroundColor(Color(deletedTag?.uiColor ?? .clear))
+        }
+    }
+    
+    private var alertMessageText: some View {
+        Text(alertMessage)
+            .foregroundColor(.white)
+    }
+}
+
+private extension TransientAlert {
+    private var deletedTagExists: Bool {
+        deletedTag != nil
     }
 }
 

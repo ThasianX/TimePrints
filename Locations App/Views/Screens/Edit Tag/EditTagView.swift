@@ -1,11 +1,3 @@
-//
-//  EditTagView.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/3/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct EditTagView: View {
@@ -24,6 +16,7 @@ struct EditTagView: View {
     @State private var presentAlert: Bool = false
     @State private var deletedTag: Tag? = nil
     @State private var alertMessage: String = ""
+    
     @Binding var show: Bool
     @Binding var location: Location?
     @Binding var stayAtLocation: Bool
@@ -31,52 +24,79 @@ struct EditTagView: View {
     let colors = AppColors.tags
     let identifiers = AppColors.tags.ascendingKeys
     
-    private var selectedColor: Color {
-        Color(colors[identifiers[selectedColorIndex]]!)
-    }
-    
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
-                HStack {
-                    EditTagHeaderText(showAdd: showAdd, showEdit: showEdit, selectedColor: selectedColor, location: location)
-                    
-                    Spacer()
-                    
-                    EditTagHeaderButtons(showAdd: $showAdd, showEdit: showEdit, resetAddTag: resetAddTag, resetEditTag: resetEditTag, addNewTag: addNewTag, editTag: editTag, selectedColor: selectedColor)
-                }
-                .padding()
-                .offset(y: showAdd || showEdit ? 250 : 0)
-                .animation(.spring())
+                header
+                    .padding()
+                    .offset(y: isShowingAddOrEdit.when(true: 250, false: 0))
+                    .animation(.spring())
                 
-                TagSelectionList(tags: Array(tags), location: location, onTap: setTag, onEdit: displayEditTag, onDelete: deleteTag)
-                    .fade(showAdd || showEdit)
-                    .scaleEffect(showAdd || showEdit ? 0 : 1)
+                tagSelectionList
+                    .fade(isShowingAddOrEdit)
+                    .scaleEffect(isShowingAddOrEdit.when(true: 0, false: 1))
                 
                 VSpace(50)
-                    .fade(showAdd || showEdit)
+                    .fade(isShowingAddOrEdit)
             }
             
-            VStack {
-                TagDetails(nameInput: $nameInput, selectedColorIndex: $selectedColorIndex, colors: colors, identifiers: identifiers)
-                Spacer()
-            }
-            .padding()
-            .fade(!showAdd && !showEdit)
-            .scaleEffect(showAdd || showEdit ? 1 : 0)
-            .animation(.spring())
+            tagDetails
+                .padding()
+                .fade(isntShowingAddNorEdit)
+                .scaleEffect(isShowingAddOrEdit.when(true: 1, false: 0))
+                .animation(.spring())
             
-            VStack {
-                Spacer()
-                TransientAlert(deletedTag: deletedTag, alertMessage: alertMessage, revert: revert)
-            }
-            .fade(!presentAlert)
+            transientAlert
+                .fade(!presentAlert)
         }
     }
 }
 
-// MARK: - Side Effects
-extension EditTagView {
+private extension EditTagView {
+    private var header: some View {
+        HStack {
+            EditTagHeaderText(showAdd: showAdd, showEdit: showEdit, selectedColor: selectedColor, location: location)
+            
+            Spacer()
+            
+            EditTagHeaderButtons(showAdd: $showAdd, showEdit: showEdit, resetAddTag: resetAddTag, resetEditTag: resetEditTag, addNewTag: addNewTag, editTag: editTag, selectedColor: selectedColor)
+        }
+    }
+    
+    private var tagSelectionList: some View {
+        TagSelectionList(tags: Array(tags), location: location, onTap: setTag, onEdit: displayEditTag, onDelete: deleteTag)
+    }
+    
+    private var tagDetails: some View {
+        VStack {
+            TagDetails(nameInput: $nameInput, selectedColorIndex: $selectedColorIndex, colors: colors, colorNames: identifiers)
+            Spacer()
+        }
+    }
+    
+    private var transientAlert: some View {
+        VStack {
+            Spacer()
+            TransientAlert(deletedTag: deletedTag, alertMessage: alertMessage, revert: revert)
+        }
+    }
+}
+
+private extension EditTagView {
+    private var selectedColor: Color {
+        Color(colors[identifiers[selectedColorIndex]]!)
+    }
+    
+    private var isShowingAddOrEdit: Bool {
+        showAdd || showEdit
+    }
+    
+    private var isntShowingAddNorEdit: Bool {
+        !showAdd && !showEdit
+    }
+}
+
+private extension EditTagView {
     private func reset() {
         resetAddTag()
         show = false

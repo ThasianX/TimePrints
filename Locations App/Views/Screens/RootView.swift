@@ -1,11 +1,3 @@
-//
-//  ContentView.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/28/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 import Mapbox
 
@@ -44,15 +36,17 @@ struct RootView: View {
                     .frame(width: screen.bounds.width * 0.8, height: screen.bounds.height * 0.6)
                     .cornerRadius(30)
                     .shadow(radius: 20)
-                    .animation(.spring())
+                    .fade(!showingEditTag)
                     .offset(y: showingEditTag ? screen.bounds.height * 0.15 : screen.bounds.height)
+                    .animation(.spring())
 
                 LocationVisitsView(show: $showingLocationVisits, selectedLocation: selectedLocation)
                     .frame(width: screen.bounds.width * 0.8, height: screen.bounds.height * 0.6)
                     .cornerRadius(30)
                     .shadow(radius: 20)
-                    .animation(.spring())
+                    .fade(!showingLocationVisits)
                     .offset(y: showingLocationVisits ? screen.bounds.height * 0.15 : screen.bounds.height)
+                    .animation(.spring())
             }
             .fade(showingVisitsPreviewList)
             
@@ -97,16 +91,13 @@ private extension RootView {
     private var listButtonBackgroundColor: Color {
         .white
     }
-    
 }
 
 private extension RootView {
-    
     private func toggleVisitsPreviewAndStayAtLocation() {
         showingVisitsPreviewList.toggle()
         stayAtLocation = true
     }
-    
 }
 
 struct RootView_Previews: PreviewProvider {

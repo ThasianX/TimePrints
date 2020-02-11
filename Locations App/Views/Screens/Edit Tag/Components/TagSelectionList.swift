@@ -1,11 +1,3 @@
-//
-//  TagSelectionList.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/5/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct TagSelectionList: View {
@@ -22,17 +14,20 @@ struct TagSelectionList: View {
                     ColoredTextRow(text: tag.name, color: tag.uiColor, selected: self.location?.tag == tag)
                         .background(Color.clear)
                         .padding(8)
-                        .onTap {
+                        .onTapGesture {
                             self.onTap(tag)
-                    }
-                    .contextMenu {
-                        self.contextMenu(for: tag)
+                        }
+                        .contextMenu {
+                            self.contextMenu(for: tag)
                     }
                 }
             }
         }
     }
     
+}
+
+private extension TagSelectionList {
     private func contextMenu(for tag: Tag) -> TagContextMenu {
         TagContextMenu(tag: tag, onEdit: onEdit, onDelete: onDelete)
     }

@@ -93,9 +93,11 @@ struct MapView: UIViewRepresentable {
             case 0:
                 parent.selectedLocation = annotation.location
                 parent.showingEditTag = true
+                parent.stayAtLocation = true
             case 1:
                 parent.selectedLocation = annotation.location
                 parent.showingLocationVisits = true
+                parent.stayAtLocation = true
             default:
                 ()
             }

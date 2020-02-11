@@ -1,11 +1,3 @@
-//
-//  TagContextMenu.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/4/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct TagContextMenu: View {
@@ -15,18 +7,27 @@ struct TagContextMenu: View {
     
     var body: some View {
         VStack {
-            Button(action: { self.onEdit(self.tag) }) {
-                HStack {
-                    Text("Edit")
-                    Image(systemName: "pencil")
-                }
+            editButton
+            deleteButton
+        }
+    }
+}
+
+private extension TagContextMenu {
+    private var editButton: some View {
+        Button(action: { self.onEdit(self.tag) }) {
+            HStack {
+                Text("Edit")
+                Image(systemName: "pencil")
             }
-            
-            Button(action: { self.onDelete(self.tag)}) {
-                HStack {
-                    Text("Delete")
-                    Image(systemName: "trash.fill")
-                }
+        }
+    }
+    
+    private var deleteButton: some View {
+        Button(action: { self.onDelete(self.tag)}) {
+            HStack {
+                Text("Delete")
+                Image(systemName: "trash.fill")
             }
         }
     }
