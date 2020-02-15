@@ -3,6 +3,7 @@ import SwiftUI
 struct VisitDetailsView: View {
     @State private var mapFull = false
     @Binding var selectedIndex: Int
+
     let index: Int
     let visit: Visit
     
@@ -16,17 +17,20 @@ struct VisitDetailsView: View {
                 visitNotesText
             }
             .background(Color(UIColor.salmon))
-            .frame(width: isSelected.when(true: screen.bounds.width, false: screen.bounds.width - 100))
+            .frame(width: isSelected.when(true: screen.width, false: screen.width - 100))
             .padding(.init(top: 10, leading: 40, bottom: 4, trailing: 40))
             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
         }
         .onTapGesture(perform: setSelectedVisitIndex)
-        .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
     }
 }
 
 // MARK: - Helper Functions
 private extension VisitDetailsView {
+    private var isShowing: Bool {
+        selectedIndex == index
+    }
+    
     private func setSelectedVisitIndex() {
         withAnimation {
             self.selectedIndex = index
@@ -95,7 +99,7 @@ private extension VisitDetailsView {
                 .scaleEffect(2.5)
                 .opacity(mapFull ? 1 : 0)
                 .allowsHitTesting(mapFull)
-                .offset(x: 40, y: screen.bounds.height / 15)
+                .offset(x: 40, y: screen.height / 15)
                 .animation(nil)
                 .transition(.identity)
         }

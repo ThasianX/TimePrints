@@ -9,12 +9,9 @@ struct VisitsForDayView: View {
     var body: some View {
         ZStack(alignment: .top) {
             header
-                .frame(width: screen.bounds.width)
-            
             visitsForDayList
                 .offset(y: 100)
         }
-        
     }
 }
 
@@ -24,7 +21,7 @@ private extension VisitsForDayView {
         isPreviewActive = true
     }
     
-    private var isVisitActive: Bool {
+    private var isShowing: Bool {
         activeVisitIndex != -1
     }
     
@@ -51,7 +48,6 @@ private extension VisitsForDayView {
     
     private var dayLabel: some View {
         DayLabel(date: currentDayComponent.date)
-            .fade(isVisitActive)
     }
     
     private var visitsForDayList: some View {
@@ -61,14 +57,16 @@ private extension VisitsForDayView {
                     GeometryReader { geometry in
                         ZStack {
                             VisitDetailsView(selectedIndex: self.$activeVisitIndex, index: i, visit: visit)
-                                .offset(y: self.isVisitActive.when(true: -geometry.frame(in: .global).minY, false: 0))
-                                .scaleEffect((self.isVisitActive && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
+                                .offset(y: self.isShowing.when(true: -geometry.frame(in: .global).minY, false: 0))
+                                .scaleEffect((self.isShowing && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
                         }
                     }
                     .frame(height: 100)
                 }
             }
-            .frame(width: screen.bounds.width)
+            .frame(width: screen.width)
+            .padding(.bottom, 300)
+            .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0))
         }
     }
 }

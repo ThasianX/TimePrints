@@ -1,16 +1,10 @@
-//
-//  LocationVisitsview.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/5/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct LocationVisitsView: View {
     @FetchRequest var visitsForSelectedLocation: FetchedResults<Visit>
+    
     @Binding var show: Bool
+    
     let selectedLocation: Location?
     
     init(show: Binding<Bool>, selectedLocation: Location?) {
@@ -29,29 +23,61 @@ struct LocationVisitsView: View {
     
     var body: some View {
         VStack {
-            Text("Visits for \(selectedLocation?.name ?? "")")
-                .font(.headline)
+            headerText
                 .padding(.bottom, 8)
             
-            ForEach(visitsForSelectedLocation) { visit in
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(visit.visitDuration)
-                        Spacer()
-                        if visit.isFavorite {
-                            Image(systemName: "star.fill")
-                                .imageScale(.medium)
-                                .foregroundColor(.yellow)
-                        }
-                    }
-                    Text(visit.arrivalDate.abbreviatedMonthWithDayAndYear)
-                        .font(.caption)
-                }
-            }
+            locationVisitsList
             Spacer()
-            BImage(perform: { self.show = false }, image: .init(systemName: "x.circle.fill"))
+            exitButton
         }
         .padding()
+    }
+}
+
+private extension LocationVisitsView {
+    private var headerText: some View {
+        Text("Visits for \(selectedLocation?.name ?? "")")
+            .font(.headline)
+    }
+    
+    private var locationVisitsList: some View {
+        VStack {
+            ForEach(visitsForSelectedLocation) { visit in
+                LocationVisitsRow(visit: visit)
+            }
+        }
+    }
+    
+    private var exitButton: some View {
+        BImage(perform: dontShow, image: .init(systemName: "x.circle.fill"))
+    }
+}
+
+private extension LocationVisitsView {
+    private struct LocationVisitsRow: View {
+        let visit: Visit
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(visit.visitDuration)
+                    Spacer()
+                    if visit.isFavorite {
+                        Image(systemName: "star.fill")
+                            .imageScale(.medium)
+                            .foregroundColor(.yellow)
+                    }
+                }
+                Text(visit.arrivalDate.abbreviatedMonthWithDayAndYear)
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+private extension LocationVisitsView {
+    private func dontShow() {
+        self.show = false
     }
 }
 
