@@ -10,18 +10,17 @@ struct VisitsForDayView: View {
         ZStack(alignment: .top) {
             header
             visitsForDayList
-                .offset(y: 100)
+                .offset(y: isShowingVisit.when(true: 0, false: 100))
         }
     }
 }
 
-// MARK: Helpers
 private extension VisitsForDayView {
     private func setPreviewActive() {
         isPreviewActive = true
     }
     
-    private var isShowing: Bool {
+    private var isShowingVisit: Bool {
         activeVisitIndex != -1
     }
     
@@ -30,16 +29,17 @@ private extension VisitsForDayView {
     }
 }
 
-// MARK: Content
 private extension VisitsForDayView {
     private var header: some View {
-        HStack {
-            backButton
-            Spacer()
+        ZStack {
+            HStack {
+                backButton
+                Spacer()
+            }
+
             dayLabel
-            Spacer()
         }
-        .padding()
+        .padding(30)
     }
     
     private var backButton: some View {
@@ -57,16 +57,18 @@ private extension VisitsForDayView {
                     GeometryReader { geometry in
                         ZStack {
                             VisitDetailsView(selectedIndex: self.$activeVisitIndex, index: i, visit: visit)
-                                .offset(y: self.isShowing.when(true: -geometry.frame(in: .global).minY, false: 0))
-                                .scaleEffect((self.isShowing && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
+                                .scaleEffect((self.isShowingVisit && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
+                                .offset(y: self.isShowingVisit.when(true: -geometry.frame(in: .global).minY, false: 0))
+                                .fade(self.isShowingVisit && !self.isActiveVisitIndex(index: i))
                         }
                     }
-                    .frame(height: 100)
+                    .frame(height: VisitCellConstants.height)
+                    .frame(maxWidth: VisitCellConstants.maxWidth(if: self.isShowingVisit))
                 }
             }
             .frame(width: screen.width)
             .padding(.bottom, 300)
-            .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0))
+            .animation(.spring())
         }
     }
 }

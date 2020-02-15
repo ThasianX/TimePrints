@@ -42,10 +42,12 @@ public class Visit: NSManagedObject {
         self.notes = notes
         CoreData.stack.save()
     }
-    
-    func favorite() {
+
+    @discardableResult
+    func favorite() -> Bool{
         self.isFavorite.toggle()
         CoreData.stack.save()
+        return self.isFavorite
     }
     
     func delete() -> Visit {

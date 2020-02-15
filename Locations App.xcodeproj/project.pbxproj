@@ -36,6 +36,7 @@
 		1E7B618B23E2721300F9F974 /* NSPredicate+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */; };
 		1E7B618F23E284C600F9F974 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618E23E284C600F9F974 /* MapView.swift */; };
 		1E80278F23E5E9AC0043D119 /* VisitsForDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E80278E23E5E9AC0043D119 /* VisitsForDayView.swift */; };
+		1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8909CD23F880070008500E /* VisitCellConstants.swift */; };
 		1E97274223EB57AE006528ED /* LocationVisitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E97274123EB57AE006528ED /* LocationVisitsView.swift */; };
 		1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785823E10B4F0020FAFE /* AppDelegate.swift */; };
 		1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */; };
@@ -723,6 +724,7 @@
 		1E7B618A23E2721300F9F974 /* NSPredicate+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Additions.swift"; sourceTree = "<group>"; };
 		1E7B618E23E284C600F9F974 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		1E80278E23E5E9AC0043D119 /* VisitsForDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsForDayView.swift; sourceTree = "<group>"; };
+		1E8909CD23F880070008500E /* VisitCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitCellConstants.swift; sourceTree = "<group>"; };
 		1E97274123EB57AE006528ED /* LocationVisitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVisitsView.swift; sourceTree = "<group>"; };
 		1E9D785523E10B4F0020FAFE /* Locations App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Locations App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9D785823E10B4F0020FAFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1981,6 +1983,7 @@
 				1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */,
 				1EFFA58523E89A3400914607 /* LocationAnnotation.swift */,
 				1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */,
+				1E8909CD23F880070008500E /* VisitCellConstants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2225,6 +2228,7 @@
 				1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */,
+				1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,

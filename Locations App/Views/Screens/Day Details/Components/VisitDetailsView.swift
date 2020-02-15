@@ -2,6 +2,7 @@ import SwiftUI
 
 struct VisitDetailsView: View {
     @State private var mapFull = false
+    @State private var isFavorite = false
     @Binding var selectedIndex: Int
 
     let index: Int
@@ -9,140 +10,120 @@ struct VisitDetailsView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            ScreenColor(.brown)
             VStack {
-                locationNameText
+                header
                 visitDurationText
                 locationTagView
-                visitNotesText
+                Spacer()
             }
+            .padding(.top, isSelected.when(true: 80, false: 12))
+            .padding(.leading, isSelected.when(true: 30, false: 40))
+            .padding(.trailing, isSelected.when(true: 30, false: 40))
+            .padding(.bottom, 0)
+            .frame(height: VisitCellConstants.height(if: isSelected))
+            .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
             .background(Color(UIColor.salmon))
-            .frame(width: isSelected.when(true: screen.width, false: screen.width - 100))
-            .padding(.init(top: 10, leading: 40, bottom: 4, trailing: 40))
-            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .onTapGesture(perform: setSelectedVisitIndex)
+
+
         }
-        .onTapGesture(perform: setSelectedVisitIndex)
+        .frame(height: VisitCellConstants.height(if: isSelected))
+        .animation(.spring())
+        .onAppear(perform: setFavoriteState)
     }
 }
 
-// MARK: - Helper Functions
 private extension VisitDetailsView {
-    private var isShowing: Bool {
-        selectedIndex == index
+    var header: some View {
+        HStack {
+            backButton
+                .fade(!isSelected)
+            Spacer()
+            HStack {
+                locationNameText
+                starImageIfNotSelectedAndIsFavorite
+            }
+            Spacer()
+            favoriteButton
+                .fade(!isSelected)
+        }
     }
-    
+
+    private var backButton: some View {
+        BImage(perform: unselectRow, image: .init(systemName: "arrow.left"))
+    }
+
+    private var locationNameText: some View {
+        Text(visit.location.name)
+            .font(isSelected.when(true: .system(size: 22), false: .headline))
+            .fontWeight(isSelected.when(true: .bold, false: .regular))
+            .lineLimit(isSelected.when(true: nil, false: 1))
+            .multilineTextAlignment(.center)
+            .animation(nil)
+    }
+
+    private var starImageIfNotSelectedAndIsFavorite: some View {
+        Group {
+            if !isSelected && isFavorite {
+                Image("star.fill")
+                    .foregroundColor(.yellow)
+            }
+        }
+    }
+
+    private var favoriteButton: some View {
+        BImage(perform: favorite, image: favoriteImage)
+            .foregroundColor(.yellow)
+    }
+
+    private var favoriteImage: Image {
+        if isFavorite {
+            return Image("star.fill")
+        } else {
+            return Image("star")
+        }
+    }
+}
+
+extension VisitDetailsView {
+    private var visitDurationText: some View {
+        Text(visit.visitDuration)
+            .font(isSelected.when(true: .system(size: 18), false: .system(size: 10)))
+            .animation(nil)
+    }
+
+    private var locationTagView: some View {
+        TagView(tag: visit.location.tag, displayName: isSelected)
+            .padding(.init(top: 6, leading: 0, bottom: 4, trailing: 0))
+    }
+}
+
+extension VisitDetailsView {
+    private func setFavoriteState() {
+        isFavorite = visit.isFavorite
+    }
+
     private func setSelectedVisitIndex() {
         withAnimation {
             self.selectedIndex = index
         }
     }
-}
 
-// MARK: - Content
-private extension VisitDetailsView {
-    private var locationNameText: some View {
-        Text(visit.location.name)
-            .font(nameFont)
-            .fontWeight(nameWeight)
-    }
-    
-    private var visitDurationText: some View {
-        Text(visit.visitDuration)
-            .font(visitDurationFont)
-    }
-    
-    private var locationTagView: some View {
-        TagView(tag: visit.location.tag, displayName: isSelected)
-            .padding(.init(top: 6, leading: 0, bottom: 4, trailing: 0))
-    }
-    
-    private var visitNotesText: some View {
-        Text(visit.notes)
-            .font(.caption)
-            .multilineTextAlignment(.center)
-            .lineLimit(3)
-    }
-    
-    var header: some View {
-        HStack {
-            BImage(perform: unselectRow, image: .init(systemName: "arrow.left"))
-            Spacer()
-            BImage(perform: favorite, image: visit.isFavorite ? .init(systemName: "star.fill") : .init(systemName: "star"))
-                .foregroundColor(.yellow)
-        }
-    }
-    
-    var map: some View {
-        ZStack(alignment: .topLeading) {
-            VStack(spacing: 20) {
-                //                StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, color: color)
-                //                    .frame(width: mapFull ? screen.bounds.width : screen.bounds.width / 2.5, height: mapFull ? screen.bounds.height * 3 / 4 : screen.bounds.width / 2.5)
-                //                    .cornerRadius(mapFull ? 0 : screen.bounds.width / 5)
-                //                    .onTapGesture {
-                //                        withAnimation {
-                //                            self.mapFull.toggle()
-                //                        }
-                //                    }
-                //                    .animation(.spring())
-                Text(visit.location.address.uppercased())
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
-                Rectangle()
-                    .fill(Color.black)
-                    .frame(width: 60, height: 3)
-                    .opacity(mapFull ? 0 : 1)
-                notes
-                    .opacity(mapFull ? 0 : 1)
-            }
-            
-            BImage(condition: $mapFull, image: .init(systemName: "arrow.left.circle.fill"))
-                .scaleEffect(2.5)
-                .opacity(mapFull ? 1 : 0)
-                .allowsHitTesting(mapFull)
-                .offset(x: 40, y: screen.height / 15)
-                .animation(nil)
-                .transition(.identity)
-        }
-    }
-    
-    var notes: some View {
-        VStack(spacing: 2) {
-            Text("NOTES")
-                .font(.system(size: 22))
-                .fontWeight(.bold)
-                .tracking(2)
-            if visit.notes.isEmpty {
-                Text("TAP TO ADD")
-                    .font(.caption)
-            }
-        }
-    }
-}
-
-// MARK: - Computed Properties and Helper Functions
-extension VisitDetailsView {
     private var isSelected: Bool {
         selectedIndex == index
     }
     
-    private var nameFont: Font {
-        isSelected ? .system(size: 22) : .headline
-    }
-    
-    private var nameWeight: Font.Weight {
-        isSelected ? .bold : .regular
-    }
-    
-    private var visitDurationFont: Font {
-        isSelected ? .system(size: 18) : .system(size: 10)
-    }
-    
     private func unselectRow() {
-        self.selectedIndex = -1
+        withAnimation {
+            self.selectedIndex = -1
+        }
     }
     
     private func favorite() {
-        visit.favorite()
+        withAnimation {
+            isFavorite = visit.favorite()
+        }
     }
 }
 
