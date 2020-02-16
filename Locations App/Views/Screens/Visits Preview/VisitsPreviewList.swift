@@ -1,9 +1,12 @@
 import SwiftUI
+import Mapbox
 
 struct VisitsPreviewList: View {
     @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
     @State private var currentDayComponent = DateComponents()
     @State private var isPreviewActive = true
+    @Binding var showingVisitsPreviewList: Bool
+    @Binding var activeVisitLocation: Location?
     
     private var visitsForDayComponent: [DateComponents: [Visit]] {
         Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
@@ -46,14 +49,17 @@ struct VisitsPreviewList: View {
     }
 }
 
-// MARK: - Helpers
 private extension VisitsPreviewList {
     private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
         daysComponentsForMonthComponent[monthComponent]!.sortDescending
     }
+
+    private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
+        self.activeVisitLocation = visit.location
+        self.showingVisitsPreviewList = false
+    }
 }
 
-// MARK: - Content
 private extension VisitsPreviewList {
     private var overlayColor: some View {
         ScreenColor(Color("salmon"))
@@ -105,7 +111,8 @@ private extension VisitsPreviewList {
         VisitsForDayView(
             currentDayComponent: $currentDayComponent,
             isPreviewActive: $isPreviewActive,
-            visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? []
+            visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
+            setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
             .fade(isPreviewActive)
             .scaleEffect(isPreviewActive.when(true: 0.1, false: 1))
@@ -115,6 +122,6 @@ private extension VisitsPreviewList {
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList().environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
+        VisitsPreviewList(showingVisitsPreviewList: .constant(false), activeVisitLocation: .constant(nil)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
     }
 }

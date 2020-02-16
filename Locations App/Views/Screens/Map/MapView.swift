@@ -15,6 +15,7 @@ struct MapView: UIViewRepresentable {
     @Binding var showingEditTag: Bool
     @Binding var showingLocationVisits: Bool
     @Binding var stayAtLocation: Bool
+    @Binding var activeVisitLocation: Location?
     
     let annotations: [LocationAnnotation]
     
@@ -34,6 +35,14 @@ struct MapView: UIViewRepresentable {
         map.addAnnotations(annotations)
         if !stayAtLocation {
             map.userTrackingMode = trackingMode
+        }
+        if activeVisitLocation != nil {
+            let annotation = LocationAnnotation.init(location: activeVisitLocation!)
+            map.setCenter(activeVisitLocation!.coordinate, zoomLevel: 13, animated: true)
+            map.selectAnnotation(annotation, animated: true, completionHandler: { })
+            DispatchQueue.main.async {
+                self.activeVisitLocation = nil
+            }
         }
     }
     
@@ -91,22 +100,25 @@ struct MapView: UIViewRepresentable {
             
             switch control.tag {
             case 0:
-                parent.selectedLocation = annotation.location
+                setLocationWithoutRecentering(location: annotation.location)
                 parent.showingEditTag = true
-                parent.stayAtLocation = true
             case 1:
-                parent.selectedLocation = annotation.location
+                setLocationWithoutRecentering(location: annotation.location)
                 parent.showingLocationVisits = true
-                parent.stayAtLocation = true
             default:
                 ()
             }
+        }
+
+        private func setLocationWithoutRecentering(location: Location) {
+            parent.selectedLocation = location
+            parent.stayAtLocation = true
         }
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), stayAtLocation: .constant(false), annotations: [])
+        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), annotations: [])
     }
 }

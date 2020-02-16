@@ -2,9 +2,12 @@ import SwiftUI
 
 struct VisitsForDayView: View {
     @State private var activeVisitIndex: Int = -1
+
     @Binding var currentDayComponent: DateComponents
     @Binding var isPreviewActive: Bool
+
     let visits: [Visit]
+    let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -56,7 +59,11 @@ private extension VisitsForDayView {
                 ForEach(self.visits.indexed(), id: \.1.self) { i, visit in
                     GeometryReader { geometry in
                         ZStack {
-                            VisitDetailsView(selectedIndex: self.$activeVisitIndex, index: i, visit: visit)
+                            VisitDetailsView(
+                                selectedIndex: self.$activeVisitIndex,
+                                index: i,
+                                visit: visit,
+                                setActiveVisitLocationAndDisplayMap: self.setActiveVisitLocationAndDisplayMap)
                                 .scaleEffect((self.isShowingVisit && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
                                 .offset(y: self.isShowingVisit.when(true: -geometry.frame(in: .global).minY, false: 0))
                                 .fade(self.isShowingVisit && !self.isActiveVisitIndex(index: i))
@@ -75,6 +82,6 @@ private extension VisitsForDayView {
 
 struct VisitsForDayView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), isPreviewActive: .constant(false), visits: Visit.previewVisitDetails)
+        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), isPreviewActive: .constant(false), visits: Visit.previewVisitDetails, setActiveVisitLocationAndDisplayMap: { _ in })
     }
 }

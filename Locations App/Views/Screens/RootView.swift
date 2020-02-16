@@ -14,10 +14,11 @@ struct RootView: View {
     @State private var showingLocationVisits = false
     @State private var stayAtLocation = false
     @State private var showingVisitsPreviewList = false
+    @State private var activeVisitLocation: Location? = nil
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            VisitsPreviewList()
+            VisitsPreviewList(showingVisitsPreviewList: $showingVisitsPreviewList, activeVisitLocation: $activeVisitLocation)
                 .fade(!showingVisitsPreviewList)
             
             ZStack(alignment: .top) {
@@ -31,7 +32,10 @@ struct RootView: View {
                 .padding()
                 .disablur(showingEditTag || showingLocationVisits)
                 
-                EditTagView(show: self.$showingEditTag, location: self.$selectedLocation, stayAtLocation: $stayAtLocation)
+                EditTagView(
+                    show: self.$showingEditTag,
+                    location: self.$selectedLocation,
+                    stayAtLocation: $stayAtLocation)
                     .frame(width: screen.width * 0.8, height: screen.height * 0.6)
                     .cornerRadius(30)
                     .shadow(radius: 20)
@@ -39,7 +43,9 @@ struct RootView: View {
                     .offset(y: showingEditTag ? screen.height * 0.15 : screen.height)
                     .animation(.spring())
                 
-                LocationVisitsView(show: $showingLocationVisits, selectedLocation: selectedLocation)
+                LocationVisitsView(
+                    show: $showingLocationVisits,
+                    selectedLocation: selectedLocation)
                     .frame(width: screen.width * 0.8, height: screen.height * 0.6)
                     .cornerRadius(30)
                     .shadow(radius: 20)
@@ -57,7 +63,15 @@ struct RootView: View {
 
 private extension RootView {
     private var mapView: some View {
-        MapView(trackingMode: $trackingMode, selectedLocation: $selectedLocation, showingEditTag: $showingEditTag, showingLocationVisits: $showingLocationVisits, stayAtLocation: $stayAtLocation, annotations: locations.map(LocationAnnotation.init))
+        MapView(
+            trackingMode: $trackingMode,
+            selectedLocation: $selectedLocation,
+            showingEditTag: $showingEditTag,
+            showingLocationVisits: $showingLocationVisits,
+            stayAtLocation: $stayAtLocation,
+            activeVisitLocation: $activeVisitLocation,
+            annotations: locations.map(LocationAnnotation.init)
+        )
             .extendToScreenEdges()
     }
 }

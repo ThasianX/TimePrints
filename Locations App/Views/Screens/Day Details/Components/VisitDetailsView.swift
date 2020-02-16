@@ -8,6 +8,7 @@ struct VisitDetailsView: View {
 
     let index: Int
     let visit: Visit
+    let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -299,7 +300,7 @@ private extension VisitDetailsView {
     }
 
     private func focusLocationOnAnnotatedMap() {
-
+        setActiveVisitLocationAndDisplayMap(visit)
     }
 
     private func displayAddNotesView() {
@@ -310,9 +311,9 @@ private extension VisitDetailsView {
 struct VisitDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            VisitDetailsView(selectedIndex: .constant(1), index: -1, visit: .preview).previewLayout(.sizeThatFits)
+            VisitDetailsView(selectedIndex: .constant(1), index: -1, visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in }).previewLayout(.sizeThatFits)
             
-            VisitDetailsView(selectedIndex: .constant(1), index: 1, visit: .preview)
+            VisitDetailsView(selectedIndex: .constant(1), index: 1,  visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in })
         }
         
     }

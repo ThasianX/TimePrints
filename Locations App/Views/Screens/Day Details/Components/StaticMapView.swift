@@ -49,7 +49,7 @@ struct StaticMapView: UIViewRepresentable {
             guard annotation is MGLPointAnnotation else { return nil }
             
             let annotationView = CustomAnnotationView()
-            annotationView.bounds = CGRect(x: 0, y: 0, width: 30, height: 30)
+            annotationView.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
             annotationView.backgroundColor = parent.color
             return annotationView
         }
