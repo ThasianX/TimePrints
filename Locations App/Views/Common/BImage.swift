@@ -27,7 +27,7 @@ struct BImage: View {
             image
                 .imageScale(.large)
         }
-        .buttonStyle(PlainButtonStyle())
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 
