@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 
 struct VisitDetailsView: View {
     @State private var mapFull = false
@@ -296,7 +297,9 @@ private extension VisitDetailsView {
     }
 
     private func openAppleMaps() {
-
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: visit.location.coordinate, addressDictionary:nil))
+        mapItem.name = "Visit Location"
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
 
     private func focusLocationOnAnnotatedMap() {
