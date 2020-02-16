@@ -44,7 +44,7 @@ struct CustomTextField: UIViewRepresentable {
         textField.returnKeyType = .done
         textField.backgroundColor = .clear
         textField.font = UIFont.preferredFont(forTextStyle: .body)
-        textField.textColor = .white
+        textField.textColor = .black
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return textField
     }

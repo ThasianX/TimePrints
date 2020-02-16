@@ -19,6 +19,7 @@ struct VisitDetailsView: View {
                 visitDetails
                 interactableMapViewIfSelected
                 notesIfSelected
+                    .padding(.bottom, 100)
                 Spacer()
             }
             .padding(.top, isSelected ? 80 : 12)
@@ -250,26 +251,41 @@ private extension VisitDetailsView {
     private var notesContainer: some View {
         Group {
             if !editNotesShowing {
-                visitNotesTextWithDefaultIfEmpty
+                visitNotesTextViewWithDefaultTextIfEmpty
+                    .padding(.leading, 40)
+                    .padding(.trailing, 40)
             } else {
                 notesTextView
             }
         }
     }
 
-    private var visitNotesTextWithDefaultIfEmpty: some View {
+    private var visitNotesTextViewWithDefaultTextIfEmpty: some View {
         Group {
             if !visit.notes.isEmpty {
-                visitNotesText
+                visitNotesTextView
             } else {
                 emptyNotesText
             }
         }
     }
 
-    private var visitNotesText: some View {
-        Text(visit.notes)
-            .font(.caption)
+    private var visitNotesTextView: some View {
+        GeometryReader { geometry in
+            ScrollView(.vertical, showsIndicators: true) {
+                Text(self.visit.notes)
+                    .font(.caption)
+                    .lineLimit(nil)
+                    .frame(
+                        minWidth: geometry.size.width,
+                        idealWidth: geometry.size.width,
+                        maxWidth: geometry.size.width,
+                        minHeight: geometry.size.height,
+                        idealHeight: geometry.size.height,
+                        maxHeight: .infinity,
+                        alignment: .topLeading)
+            }
+        }
     }
 
     private var emptyNotesText: some View {
