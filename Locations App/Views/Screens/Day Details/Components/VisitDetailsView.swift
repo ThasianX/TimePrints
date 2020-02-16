@@ -12,21 +12,27 @@ struct VisitDetailsView: View {
         ZStack(alignment: .top) {
             VStack {
                 header
+                    .padding(.bottom, isSelected ? 20 : 0)
                 visitDurationText
+                fullMonthWithDayOfWeekTextIfSelected
+                    .padding(.bottom, isSelected ? 10 : 0)
                 locationTagView
+                Group {
+                    if isSelected {
+                        staticMapView
+                        locationAddressText
+                    }
+                }
                 Spacer()
             }
-            .padding(.top, isSelected.when(true: 80, false: 12))
-            .padding(.leading, isSelected.when(true: 30, false: 40))
-            .padding(.trailing, isSelected.when(true: 30, false: 40))
-            .padding(.bottom, 0)
+            .padding(.top, isSelected ? 80 : 12)
+            .padding(.leading, isSelected ? 30 : 40)
+            .padding(.trailing, isSelected ? 30 : 40)
             .frame(height: VisitCellConstants.height(if: isSelected))
             .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
             .background(Color(UIColor.salmon))
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .onTapGesture(perform: setSelectedVisitIndex)
-
-
         }
         .frame(height: VisitCellConstants.height(if: isSelected))
         .animation(.spring())
@@ -89,13 +95,42 @@ private extension VisitDetailsView {
 extension VisitDetailsView {
     private var visitDurationText: some View {
         Text(visit.visitDuration)
-            .font(isSelected.when(true: .system(size: 18), false: .system(size: 10)))
+            .font(isSelected ? .system(size: 18) : .system(size: 10))
+            .tracking(isSelected ? 2 : 0)
             .animation(nil)
+    }
+
+    private var fullMonthWithDayOfWeekTextIfSelected: some View {
+        Group {
+            if isSelected {
+                fullMonthWithDayOfWeekText
+            }
+        }
     }
 
     private var locationTagView: some View {
         TagView(tag: visit.location.tag, displayName: isSelected)
             .padding(.init(top: 6, leading: 0, bottom: 4, trailing: 0))
+    }
+}
+
+private extension VisitDetailsView {
+    private var fullMonthWithDayOfWeekText: some View {
+        Text(visit.arrivalDate.fullMonthWithDayOfWeek.uppercased()).font(.caption)
+    }
+
+    private var staticMapView: some View {
+        StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, color: .blue)
+            .frame(width: mapFull ? screen.width : screen.width / 2.5, height: mapFull ? screen.height * 3 / 4 : screen.width / 2.5)
+            .cornerRadius(mapFull ? 0 : screen.width / 5)
+            .onTapGesture(perform: toggleMapState)
+            .animation(.spring())
+    }
+
+    private var locationAddressText: some View {
+        Text(visit.location.address.uppercased())
+            .font(.headline)
+            .multilineTextAlignment(.center)
     }
 }
 
@@ -123,6 +158,12 @@ extension VisitDetailsView {
     private func favorite() {
         withAnimation {
             isFavorite = visit.favorite()
+        }
+    }
+
+    private func toggleMapState() {
+        withAnimation {
+            mapFull.toggle()
         }
     }
 }

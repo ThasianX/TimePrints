@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 @objc(Visit)
 public class Visit: NSManagedObject {
@@ -59,6 +60,10 @@ public class Visit: NSManagedObject {
     // MARK: - Computed Properties
     var visitDuration: String {
         self.arrivalDate.timeOnlyWithPadding + " ➝ " + self.departureDate.timeOnlyWithPadding
+    }
+
+    var tagColor: UIColor {
+        self.location.tag.uiColor
     }
 }
 
