@@ -55,7 +55,7 @@ public class Visit: NSManagedObject {
 }
 
 extension Visit {
-    func addNotes(_ notes: String) {
+    func setNotes(_ notes: String) {
         self.notes = notes
         CoreData.stack.save()
     }

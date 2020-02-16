@@ -4,7 +4,8 @@ import MapKit
 struct VisitDetailsView: View {
     @State private var mapFull = false
     @State private var isFavorite = false
-    @State private var addNotesShowing = false
+    @State private var editNotesShowing = false
+    @State private var notesInput = ""
     @Binding var selectedIndex: Int
 
     let index: Int
@@ -31,7 +32,7 @@ struct VisitDetailsView: View {
         }
         .frame(height: VisitCellConstants.height(if: isSelected))
         .animation(.spring())
-        .onAppear(perform: setFavoriteState)
+        .onAppear(perform: setFavoritedStateAndNotesInput)
     }
 }
 
@@ -58,10 +59,18 @@ private extension VisitDetailsView {
         ZStack {
             Color(.white)
                 .fade(!mapFull)
-            BImage(perform: mapFull ? minimizeMap : unselectRow, image: .init(systemName: "arrow.left"))
+            BImage(perform: navigateBack, image: backButtonImage)
         }
         .frame(width: 30, height: 30)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+    }
+
+    private var dismissViewAndMinimizeMapButton: some View {
+        BImage(perform: navigateBack, image: backButtonImage)
+    }
+
+    private var backButtonImage: Image {
+        Image(systemName: !editNotesShowing ? "arrow.left" : "xmark.circle.fill")
     }
 
     private var locationNameText: some View {
@@ -99,7 +108,7 @@ private extension VisitDetailsView {
 private extension VisitDetailsView {
     private var visitDetails: some View {
         Group {
-            if !mapFull {
+            if !mapFull && !editNotesShowing {
                 visitDurationText
                 fullMonthWithDayOfWeekTextIfSelected
                     .padding(.bottom, isSelected ? 10 : 0)
@@ -107,8 +116,8 @@ private extension VisitDetailsView {
                     .padding(.bottom, isSelected ? 20 : 0)
             }
         }
-        .scaleEffect(mapFull ? 0 : 1)
-        .fade(mapFull)
+        .scaleEffect(mapFull || editNotesShowing ? 0 : 1)
+        .fade(mapFull || editNotesShowing)
     }
 
     private var visitDurationText: some View {
@@ -139,7 +148,7 @@ private extension VisitDetailsView {
 private extension VisitDetailsView {
     private var interactableMapViewIfSelected: some View {
         Group {
-            if isSelected {
+            if isSelected && !editNotesShowing {
                 staticMapView
                     .padding(.bottom, 10)
                 Group {
@@ -152,6 +161,8 @@ private extension VisitDetailsView {
                 .padding(.trailing, 80)
             }
         }
+        .scaleEffect(editNotesShowing ? 0 : 1)
+        .fade(editNotesShowing)
     }
 
     private var staticMapView: some View {
@@ -207,14 +218,14 @@ private extension VisitDetailsView {
     }
 
     private var notesButton: some View {
-        Button(action: displayAddNotesView) {
+        Button(action: displayEditNotesView) {
             VStack(spacing: 2) {
                 dividerView
                     .padding(.bottom, 20)
 
                 notesHeaderText
 
-                visitNotesTextWithDefaultIfEmpty
+                notesContainer
 
                 dividerView
                     .padding(.top, 20)
@@ -226,7 +237,7 @@ private extension VisitDetailsView {
     private var dividerView: some View {
         RoundedRectangle(cornerRadius: 20)
             .fill(Color.black)
-            .frame(width: 60, height: 3)
+            .frame(width: editNotesShowing ? screen.width-100 : screen.width/10, height: 3)
     }
 
     private var notesHeaderText: some View {
@@ -236,14 +247,29 @@ private extension VisitDetailsView {
             .tracking(2)
     }
 
-    private var visitNotesTextWithDefaultIfEmpty: some View {
+    private var notesContainer: some View {
         Group {
-            if visit.notes.isEmpty {
-                emptyNotesText
+            if !editNotesShowing {
+                visitNotesTextWithDefaultIfEmpty
             } else {
-                visitNotesText
+                notesTextView
             }
         }
+    }
+
+    private var visitNotesTextWithDefaultIfEmpty: some View {
+        Group {
+            if !visit.notes.isEmpty {
+                visitNotesText
+            } else {
+                emptyNotesText
+            }
+        }
+    }
+
+    private var visitNotesText: some View {
+        Text(visit.notes)
+            .font(.caption)
     }
 
     private var emptyNotesText: some View {
@@ -251,15 +277,24 @@ private extension VisitDetailsView {
             .font(.caption)
     }
 
-    private var visitNotesText: some View {
-        Text(visit.notes)
-            .font(.caption)
+    private var notesTextView: some View {
+        AutoResizingTextField(isActive: $editNotesShowing, text: $notesInput, onCommit: commitNoteEdits)
+            .frame(width: screen.width-100)
     }
 }
 
 private extension VisitDetailsView {
+    private func setFavoritedStateAndNotesInput() {
+        setFavoriteState()
+        setNotesInput()
+    }
+
     private func setFavoriteState() {
         isFavorite = visit.isFavorite
+    }
+
+    private func setNotesInput() {
+        notesInput = visit.notes
     }
 
     private func setSelectedVisitIndex() {
@@ -306,8 +341,35 @@ private extension VisitDetailsView {
         setActiveVisitLocationAndDisplayMap(visit)
     }
 
-    private func displayAddNotesView() {
-        addNotesShowing = true
+    private func displayEditNotesView() {
+        withAnimation {
+            editNotesShowing = true
+        }
+    }
+
+    private func navigateBack() {
+        if mapFull {
+            minimizeMap()
+        } else if editNotesShowing {
+            resetNoteState()
+        } else {
+            unselectRow()
+        }
+    }
+
+    private func resetNoteState() {
+        editNotesShowing = false
+        UIApplication.shared.endEditing(true)
+        updateNotesInput()
+    }
+
+    private func commitNoteEdits() {
+        visit.setNotes(notesInput)
+        updateNotesInput()
+    }
+
+    private func updateNotesInput() {
+        notesInput = visit.notes
     }
 }
 

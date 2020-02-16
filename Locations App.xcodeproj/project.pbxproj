@@ -56,6 +56,8 @@
 		1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */; };
 		1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */; };
 		1E9D78A423E13C670020FAFE /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A323E13C670020FAFE /* Color+Additions.swift */; };
+		1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */; };
+		1EB865E123F9E01400A4B8E1 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E023F9E01400A4B8E1 /* UIApplication.swift */; };
 		1EE2CF4B23E786AF009760D6 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE2CF4A23E786AF009760D6 /* Mapbox.framework */; };
 		1EE2CF4C23E786AF009760D6 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE2CF4A23E786AF009760D6 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
@@ -751,6 +753,8 @@
 		1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversedGeoLocation.swift; sourceTree = "<group>"; };
 		1E9D78A323E13C670020FAFE /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
+		1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		1EB865E023F9E01400A4B8E1 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1EE2CF4A23E786AF009760D6 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = Carthage/Build/iOS/Mapbox.framework; sourceTree = "<group>"; };
 		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
 		1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -1815,6 +1819,7 @@
 				1E6D568A23E5F6F10044AB3A /* BImage.swift */,
 				1E6D569323E653990044AB3A /* VSpace.swift */,
 				1E1D3DB523EF8B2500528241 /* VScroll.swift */,
+				1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1949,6 +1954,7 @@
 				1EFC8DC423E76B4200628251 /* AnyTransition.swift */,
 				1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */,
 				1E77273F23F051E00086C48E /* Bool+Additions.swift */,
+				1EB865E023F9E01400A4B8E1 /* UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2207,6 +2213,7 @@
 				1E24926223EB31AD00165280 /* EditTagHeaderButtons.swift in Sources */,
 				1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */,
 				1EFF83B323E5365E00FF04A1 /* H0Stack.swift in Sources */,
+				1EB865E123F9E01400A4B8E1 /* UIApplication.swift in Sources */,
 				1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */,
 				1EFF83AD23E52D5800FF04A1 /* View+Extensions.swift in Sources */,
 				1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */,
@@ -2234,6 +2241,7 @@
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
+				1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */,
 				1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
