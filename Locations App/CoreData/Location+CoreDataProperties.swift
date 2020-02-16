@@ -23,7 +23,7 @@ extension Location {
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
     @NSManaged public var tag: Tag
-    @NSManaged public var visits: NSSet
+    @NSManaged public var visits: Set<Visit>
     
 }
 
@@ -37,10 +37,10 @@ extension Location {
     @NSManaged public func removeVisit(_ value: Visit)
     
     @objc(addVisits:)
-    @NSManaged public func addVisits(_ values: NSSet)
+    @NSManaged public func addVisits(_ values: Set<Visit>)
     
     @objc(removeVisits:)
-    @NSManaged public func removeVisits(_ values: NSSet)
+    @NSManaged public func removeVisits(_ values: Set<Visit>)
     
 }
 

@@ -19,7 +19,7 @@ extension Visit {
     }
 
     @NSManaged public var arrivalDate: Date
-    @NSManaged public var departureDate: Date
+    @NSManaged public var departureDate: Date?
     @NSManaged public var notes: String
     @NSManaged public var isFavorite: Bool
     @NSManaged public var location: Location

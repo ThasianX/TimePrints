@@ -1,29 +1,13 @@
-//
-//  DayPreviewBlock.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/31/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct DayPreviewBlock: View {
     @State private var visitIndex = 0
+    @State private var timer: Timer?
+    @Binding var currentDayComponent: DateComponents
+    @Binding var isPreviewActive: Bool
     let visits: [Visit]
     let isFilled: Bool
-    
-    private var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
-            withAnimation {
-                if self.visitIndex < self.visits.count-3 {
-                    self.visitIndex += 3
-                } else {
-                    self.visitIndex = 0
-                }
-            }
-        }
-    }
+    let dayComponent: DateComponents
     
     private var range: Range<Int> {
         return visitIndex ..< ((visitIndex + 3 > visits.count) ? visits.count : visitIndex + 3)
@@ -31,33 +15,91 @@ struct DayPreviewBlock: View {
     
     var body: some View {
         ZStack {
-            if isFilled {
-                Color("salmon").saturation(2).frame(height: 150)
-            } else {
-                Color("salmon").frame(height: 150)
-            }
-            VStack(spacing: 0) {
-                ForEach(visits[range]) { visit in
-                    VisitPreviewCell(visit: visit)
-                }
-                .animation(.easeInOut(duration: 0.5))
+            backgroundColor
+            visitsPreviewList
+        }
+        .onAppear(perform: determineAndSetAppropriateTimerState)
+        .onTapGesture(perform: setCurrentDayComponentAndPreviewInactive)
+    }
+}
+
+// MARK: - Helper Functions
+private extension DayPreviewBlock {
+    private func setCurrentDayComponentAndPreviewInactive() {
+        setPreviewInactive()
+        setCurrentDayComponent()
+    }
+    
+    private func setCurrentDayComponent() {
+        currentDayComponent = dayComponent
+    }
+    
+    private func setPreviewInactive() {
+        isPreviewActive = false
+    }
+}
+
+// MARK: - Timer
+private extension DayPreviewBlock {
+    private func determineAndSetAppropriateTimerState() {
+        if isPreviewActive {
+            setTimerForVisitsSlideshow()
+        } else {
+            invalidateTimerForVisitsSlideshow()
+        }
+    }
+    
+    private func invalidateTimerForVisitsSlideshow() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func setTimerForVisitsSlideshow() {
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+            withAnimation {
+                self.onTimerFire()
             }
         }
-        .onAppear {
-            let _ = self.timer
+    }
+    
+    private func onTimerFire() {
+        adjustDisplayedVisitsInPreview()
+    }
+    
+    private func adjustDisplayedVisitsInPreview() {
+        shiftPreviewVisitIndex()
+    }
+    
+    private func shiftPreviewVisitIndex() {
+        let visitIndexExists = self.visitIndex < self.visits.count-3
+        if visitIndexExists {
+            self.visitIndex += 3
+        } else {
+            self.visitIndex = 0
         }
+    }
+}
+
+// MARK: - Content
+private extension DayPreviewBlock {
+    private var backgroundColor: some View {
+        Color("salmon").saturation(isFilled ? 2 : 1)
+    }
+    
+    private var visitsPreviewList: some View {
+        V0Stack {
+            ForEach(visits[range]) { visit in
+                VisitPreviewCell(visit: visit)
+            }
+        }
+        .animation(.easeInOut)
     }
 }
 
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(visits: [], isFilled: false)
-            DayPreviewBlock(visits: [.preview], isFilled: false)
-            DayPreviewBlock(visits: [.preview, .preview], isFilled: false)
-            DayPreviewBlock(visits: [.preview, .preview, .preview], isFilled: false)
-            DayPreviewBlock(visits: [.preview, .preview, .preview, .preview], isFilled: false)
-            DayPreviewBlock(visits: [.preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview, .preview], isFilled: false)
+            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), isPreviewActive: .constant(true), visits: [], isFilled: false, dayComponent: DateComponents())
         }
     }
 }

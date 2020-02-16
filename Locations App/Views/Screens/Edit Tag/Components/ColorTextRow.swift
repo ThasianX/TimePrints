@@ -1,34 +1,49 @@
-//
-//  ColorTextRow.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/5/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct ColoredTextRow: View {
     let text: String
     let color: UIColor
     let selected: Bool
+    var useStaticForegroundColor: Bool = false
     
     var body: some View {
         HStack {
-            Circle()
-                .fill(Color(color))
-                .frame(width: 20, height: 20)
-            Text(text)
-                .font(.headline)
-                .foregroundColor(.white)
-                .lineLimit(nil)
+            tagColorCircle
+            tagNameText
             Spacer()
-            if selected {
-                Image(systemName: "checkmark")
-                    .foregroundColor(.white)
-            }
+            checkmarkIfIsSelected
         }
         .padding(.init(top: 0, leading: 32, bottom: 0, trailing: 0))
+    }
+}
+
+private extension ColoredTextRow {
+    private var tagColorCircle: some View {
+        Circle()
+            .fill(Color(color))
+            .frame(width: 20, height: 20)
+    }
+    
+    private var tagNameText: some View {
+        Text(text)
+            .font(.headline)
+            .foregroundColor(foregroundColor)
+            .lineLimit(nil)
+    }
+    
+    private var checkmarkIfIsSelected: some View {
+        Group {
+            if selected {
+                Image(systemName: "checkmark")
+                    .foregroundColor(foregroundColor)
+            }
+        }
+    }
+}
+
+private extension ColoredTextRow {
+    private var foregroundColor: Color? {
+        useStaticForegroundColor ? .white : nil
     }
 }
 

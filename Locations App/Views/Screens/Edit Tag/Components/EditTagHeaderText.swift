@@ -1,11 +1,3 @@
-//
-//  EditTagHeader.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/5/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct EditTagHeaderText: View {
@@ -16,30 +8,44 @@ struct EditTagHeaderText: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "tag.fill")
-                .foregroundColor(.white)
-                .colorMultiply((showAdd || showEdit) ? selectedColor : (location != nil ? Color(location!.accent) : .clear))
-                .animation(.easeInOut)
+            tagImage
+            
             ZStack {
-                Text("CHOOSE TAG")
-                    .tracking(5)
-                    .font(.system(size: 20))
-                    .bold()
-                    .fade(showAdd || showEdit)
-                Text("MAKE TAG")
-                    .tracking(5)
-                    .font(.system(size: 20))
-                    .bold()
+                headerText("CHOOSE TAG")
+                    .fade(isShowingAddOrEdit)
+                headerText("MAKE TAG")
                     .fade(!showAdd)
-                Text("EDIT TAG")
-                    .tracking(5)
-                    .font(.system(size: 20))
-                    .bold()
+                headerText("EDIT TAG")
                     .fade(!showEdit)
             }
-            .foregroundColor(.white)
-            .animation(.easeInOut)
         }
+        .animation(.easeInOut)
+    }
+}
+
+private extension EditTagHeaderText {
+    private var tagImage: some View {
+        Image(systemName: "tag.fill")
+            .foregroundColor(.white)
+            .colorMultiply(isShowingAddOrEdit.when(true: selectedColor, false: defaultTagColor))
+    }
+    
+    private func headerText(_ text: String) -> some View {
+        Text(text)
+            .tracking(5)
+            .font(.system(size: 20))
+            .bold()
+            .foregroundColor(.white)
+    }
+}
+
+private extension EditTagHeaderText {
+    private var isShowingAddOrEdit: Bool {
+        showAdd || showEdit
+    }
+    
+    private var defaultTagColor: Color {
+        location != nil ? Color(location!.accent) : .clear
     }
 }
 

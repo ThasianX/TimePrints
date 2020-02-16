@@ -1,24 +1,23 @@
-//
-//  LocationsView.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/30/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
+import Mapbox
 
 struct VisitsPreviewList: View {
-    @State private var showingDetail = false
-    @State private var currentDateComponent = Date().dateComponents
-    let visits: [Visit]
+    @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
+    @State private var currentDayComponent = DateComponents()
+    @State private var isPreviewActive = true
+    @Binding var showingVisitsPreviewList: Bool
+    @Binding var activeVisitLocation: Location?
     
-    private var dateVisits: [DateComponents: [Visit]] {
+    private var visitsForDayComponent: [DateComponents: [Visit]] {
         Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
     }
     
-    private var monthDates: [DateComponents: [DateComponents]] {
-        Dictionary(grouping: Array(dateVisits.keys), by: { $0.monthAndYear })
+    private var daysComponentsForMonthComponent: [DateComponents: [DateComponents]] {
+        Dictionary(grouping: Array(visitsForDayComponent.keys), by: { $0.monthAndYear })
+    }
+    
+    private var descendingMonthComponents: [DateComponents] {
+        daysComponentsForMonthComponent.descendingKeys
     }
     
     var body: some View {
@@ -30,44 +29,99 @@ struct VisitsPreviewList: View {
         }
         
         return ZStack {
-            SuperColor(UIColor.black)
+            backgroundColor
             
-            DayDetailsView(show: $showingDetail, date: currentDateComponent.date, visits: dateVisits[currentDateComponent] ?? [])
-                .frame(width: showingDetail ? nil : 0, height: showingDetail ? nil : 0)
-                .animation(.easeIn)
-            
-            ScrollView(.vertical, showsIndicators: false) {
+            VScroll {
                 V0Stack {
-                    ForEach(monthDates.descendingKeys) { monthComponent in
-                        H0Stack {
-                            MonthYearSideBar(date: monthComponent.date).offset(x: self.showingDetail ? -200 : 0)
-                            V0Stack {
-                                ForEach(self.monthDates[monthComponent]!.sortDescending) { dateComponent in
-                                    HStack {
-                                        DaySideBar(date: dateComponent.date)
-                                            .offset(x: self.showingDetail ? -200 : 0)
-                                        DayPreviewBlock(visits: self.dateVisits[dateComponent]!, isFilled: isFilled())
-                                            .onTapGesture {
-                                                withAnimation {
-                                                    self.showingDetail = true
-                                                    self.currentDateComponent = dateComponent
-                                                }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    ForEach(descendingMonthComponents) { monthComponent in
+                        self.monthYearSideBarWithDayPreviewBlocksView(monthComponent: monthComponent, isFilled: isFilled)
                     }
                 }
+                .frame(width: screen.width)
             }
-            .opacity(showingDetail ? 0 : 1)
-            .beyond()
+            .extendToScreenEdges()
+            
+            overlayColor
+                .fade(isPreviewActive)
+            
+            visitsForActiveDayView
         }
+    }
+}
+
+private extension VisitsPreviewList {
+    private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
+        daysComponentsForMonthComponent[monthComponent]!.sortDescending
+    }
+
+    private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
+        self.activeVisitLocation = visit.location
+        self.showingVisitsPreviewList = false
+    }
+}
+
+private extension VisitsPreviewList {
+    private var overlayColor: some View {
+        ScreenColor(Color("salmon"))
+            .saturation(2)
+    }
+    
+    private var backgroundColor: some View {
+        ScreenColor(UIColor.black)
+    }
+    
+    private func monthYearSideBarWithDayPreviewBlocksView(monthComponent: DateComponents, isFilled: @escaping () -> Bool) -> some View {
+        H0Stack {
+            self.monthYearSideBarText(date: monthComponent.date)
+            V0Stack {
+                ForEach(self.descendingDayComponents(for: monthComponent)) { dayComponent in
+                    self.daySideBarWithPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled())
+                }
+            }
+        }
+    }
+    
+    private func monthYearSideBarText(date: Date) -> some View {
+        MonthYearSideBar(date: date)
+    }
+    
+    private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
+        HStack {
+            daySideBarText(date: dayComponent.date)
+            dayPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled)
+        }
+        .frame(height: 150)
+    }
+    
+    private func daySideBarText(date: Date) -> some View {
+        DaySideBar(date: date)
+    }
+    
+    private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
+        DayPreviewBlock(
+            currentDayComponent: $currentDayComponent,
+            isPreviewActive: $isPreviewActive,
+            visits: visitsForDayComponent[dayComponent]!,
+            isFilled: isFilled,
+            dayComponent: dayComponent
+        )
+    }
+    
+    private var visitsForActiveDayView: some View {
+        VisitsForDayView(
+            currentDayComponent: $currentDayComponent,
+            isPreviewActive: $isPreviewActive,
+            visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
+            setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
+        )
+            .fade(isPreviewActive)
+            .scaleEffect(isPreviewActive.when(true: 0.1, false: 1))
+            .animation(.spring())
     }
 }
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(visits: Visit.previewVisits).statusBar(hidden: true)
+        VisitsPreviewList(showingVisitsPreviewList: .constant(false), activeVisitLocation: .constant(nil)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
     }
 }

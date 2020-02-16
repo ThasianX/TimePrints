@@ -1,11 +1,3 @@
-//
-//  H0Stack.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/31/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct H0Stack<Content: View>: View {
@@ -16,9 +8,7 @@ struct H0Stack<Content: View>: View {
     }
     
     var body: some View {
-        HStack(spacing: 0) {
-            content
-        }
+        HStack(spacing: 0, content: { content })
     }
 }
 

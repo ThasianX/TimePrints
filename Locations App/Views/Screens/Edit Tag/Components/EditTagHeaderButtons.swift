@@ -1,37 +1,54 @@
-//
-//  EditTagHeaderButtons.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/5/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct EditTagHeaderButtons: View {
     @Binding var showAdd: Bool
+    
     let showEdit: Bool
     let resetAddTag: () -> Void
     let resetEditTag: () -> Void
     let addNewTag: () -> Void
     let editTag: () -> Void
     let selectedColor: Color
+    
     var body: some View {
         ZStack {
-            BImage(condition: $showAdd, image: .init(systemName: "plus"))
-                .foregroundColor(.white)
-                .fade(showAdd || showEdit)
+            addButton
+                .fade(isShowingAddOrEdit)
             HStack {
-                BImage(action: showAdd ? resetAddTag : resetEditTag, image: .init(systemName: "xmark.circle.fill"))
-                    .foregroundColor(.red)
-                    .animation(.easeInOut)
-                BImage(action: showAdd ? addNewTag : editTag, image: .init(systemName: "checkmark.circle.fill"))
-                    .foregroundColor(.white)
-                    .colorMultiply(selectedColor)
-                    .animation(.easeInOut)
+                xButton
+                checkmarkButton
             }
-            .fade(!showAdd && !showEdit)
+            .fade(isntShowingAddNorEdit)
         }
+        .animation(.easeInOut)
+    }
+}
+
+private extension EditTagHeaderButtons {
+    private var addButton: some View {
+        BImage(condition: $showAdd, image: .init(systemName: "plus"))
+            .foregroundColor(.white)
+    }
+    
+    private var xButton: some View {
+        BImage(perform: showAdd ? resetAddTag : resetEditTag, image: .init(systemName: "xmark.circle.fill"))
+            .foregroundColor(.red)
+    }
+    
+    private var checkmarkButton: some View {
+        BImage(perform: showAdd ? addNewTag : editTag, image: .init(systemName: "checkmark.circle.fill"))
+            .foregroundColor(.white)
+            .colorMultiply(selectedColor)
+    }
+}
+
+private extension EditTagHeaderButtons {
+    private var isShowingAddOrEdit: Bool {
+        showAdd || showEdit
+    }
+    
+    private var isntShowingAddNorEdit: Bool {
+        !showAdd && !showEdit
     }
 }
 

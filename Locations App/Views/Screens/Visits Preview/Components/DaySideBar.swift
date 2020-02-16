@@ -1,11 +1,3 @@
-//
-//  DaySideBar.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/31/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import SwiftUI
 
 struct DaySideBar: View {
@@ -13,14 +5,25 @@ struct DaySideBar: View {
     
     var body: some View {
         VStack {
-            Text(date.abbreviatedDayOfWeek.uppercased())
-                .font(.caption)
-                .foregroundColor(.gray)
-            Text(date.dayOfMonth)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
+            abbreviatedDayOfWeek
+            dayOfMonth
         }
         .frame(width: 35)
+    }
+}
+
+// MARK: - Content
+private extension DaySideBar {
+    private var abbreviatedDayOfWeek: some View {
+        Text(date.abbreviatedDayOfWeek.uppercased())
+            .font(.caption)
+            .foregroundColor(.gray)
+    }
+    
+    private var dayOfMonth: some View {
+        Text(date.dayOfMonth)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
     }
 }
 

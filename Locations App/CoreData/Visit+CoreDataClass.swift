@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 @objc(Visit)
 public class Visit: NSManagedObject {
@@ -27,7 +28,15 @@ public class Visit: NSManagedObject {
     class func newVisit() -> Visit {
         Visit(context: CoreData.stack.context)
     }
-    
+
+    class func create(arrivalDate: Date) -> Visit {
+        let visit = newVisit()
+        visit.arrivalDate = arrivalDate
+        CoreData.stack.save()
+
+        return visit
+    }
+
     class func create(arrivalDate: Date, departureDate: Date) -> Visit {
         let visit = newVisit()
         visit.arrivalDate = arrivalDate
@@ -36,32 +45,54 @@ public class Visit: NSManagedObject {
         
         return visit
     }
-    
-    // MARK: - Local Functions
+
+    class func visit(with arrivalDate: Date) -> Visit? {
+        let fetchRequest: NSFetchRequest<Visit> = Visit.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "%@ == arrivalDate", arrivalDate as NSDate)
+        let incompleteVisit = try! CoreData.stack.context.fetch(fetchRequest)
+        return incompleteVisit.first
+    }
+}
+
+extension Visit {
     func addNotes(_ notes: String) {
         self.notes = notes
         CoreData.stack.save()
     }
-    
-    func favorite() {
-        self.isFavorite.toggle()
-        CoreData.stack.save()
+
+    func complete(with departureDate: Date) {
+        self.departureDate = departureDate
     }
-    
+
+    @discardableResult
+    func favorite() -> Bool{
+        isFavorite.toggle()
+        CoreData.stack.save()
+        return isFavorite
+    }
+
     func delete() -> Visit {
         let visit = self
         CoreData.stack.context.delete(self)
         return visit
     }
-    
-    // MARK: - Computed Properties
+}
+
+extension Visit {
     var visitDuration: String {
-        self.arrivalDate.timeOnlyWithPadding + " ➝ " + self.departureDate.timeOnlyWithPadding
+        var arrivalTime = self.arrivalDate.timeOnlyWithPadding
+        if let departureTime = departureDate?.timeOnlyWithPadding {
+            arrivalTime += " ➝ " + departureTime
+        }
+        return arrivalTime
+    }
+
+    var tagColor: UIColor {
+        self.location.tag.uiColor
     }
 }
 
 extension Visit {
-    // MARK: - Preview
     class var preview: Visit {
         let visit = newVisit()
         visit.location.latitude = 12.9716
