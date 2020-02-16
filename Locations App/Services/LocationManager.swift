@@ -47,7 +47,7 @@ extension LocationManager {
 
     private func completeVisitReceived(_ visit: CLVisit, place: CLPlacemark) {
         let placeDetails = ReversedGeoLocation(with: place)
-        Location.completeVisit(for: visit, placeDetails: placeDetails)
+        Location.completeVisit(with: visit, placeDetails: placeDetails)
     }
 
     private func getPlacemark(for clLocation: CLLocation, completionHandler: @escaping (CLPlacemark?) -> Void) {

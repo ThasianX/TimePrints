@@ -66,20 +66,20 @@ public class Location: NSManagedObject {
 extension Location {
     class func beginVisit(with visit: CLVisit, placeDetails: ReversedGeoLocation) {
         let location = self.location(for: placeDetails.address)
-        let locationExists = location != nil
+        let locationExistsInDatabase = location != nil
 
-        if locationExists {
-            location!.beginVisit(for: visit)
+        if locationExistsInDatabase {
+            location!.addIncompleteVisit(with: visit)
         } else {
             Location.create(incompleteVisit: visit, placeDetails: placeDetails)
         }
     }
 
-    class func completeVisit(for visit: CLVisit, placeDetails: ReversedGeoLocation) {
+    class func completeVisit(with visit: CLVisit, placeDetails: ReversedGeoLocation) {
         let incompleteVisit = Visit.visit(with: visit.arrivalDate)
-        let incompleteVisitExists = incompleteVisit != nil
+        let incompleteVisitExistsInDatabase = incompleteVisit != nil
 
-        if incompleteVisitExists {
+        if incompleteVisitExistsInDatabase {
             incompleteVisit!.complete(with: visit.departureDate)
         } else {
             addCompletedVisit(with: visit, placeDetails: placeDetails)
@@ -88,9 +88,9 @@ extension Location {
 
     private class func addCompletedVisit(with visit: CLVisit, placeDetails: ReversedGeoLocation) {
         let location = Location.location(for: placeDetails.address)
-        let locationExists = location != nil
+        let locationExistsInDatabase = location != nil
 
-        if locationExists {
+        if locationExistsInDatabase {
             location!.addCompletedVisit(with: visit)
         } else {
             Location.create(completeVisit: visit, placeDetails: placeDetails)
@@ -99,7 +99,7 @@ extension Location {
 }
 
 extension Location {
-    func beginVisit(for visit: CLVisit) {
+    func addIncompleteVisit(with visit: CLVisit) {
         let visit = Visit.create(arrivalDate: visit.arrivalDate)
         addVisit(visit)
     }
