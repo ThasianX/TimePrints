@@ -101,7 +101,7 @@ private extension VisitsPreviewList {
         DayPreviewBlock(
             currentDayComponent: $currentDayComponent,
             isPreviewActive: $isPreviewActive,
-            visits: visitsForDayComponent[dayComponent]!,
+            visits: visitsForDayComponent[dayComponent]!.sortAscByArrivalDate,
             isFilled: isFilled,
             dayComponent: dayComponent
         )
