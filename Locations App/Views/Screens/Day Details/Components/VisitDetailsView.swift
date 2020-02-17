@@ -6,12 +6,17 @@ struct VisitDetailsView: View {
     @State private var isFavorite = false
     @State private var editNotesShowing = false
     @State private var notesInput = ""
+    @State private var activeTranslation: CGSize = .zero
     @Binding var selectedIndex: Int
 
     let index: Int
     let visit: Visit
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
-    
+
+    private var isSelected: Bool {
+        selectedIndex == index
+    }
+
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -28,12 +33,15 @@ struct VisitDetailsView: View {
             .frame(height: VisitCellConstants.height(if: isSelected))
             .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
             .background(Color(UIColor.salmon))
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 50 : 10, style: .continuous))
             .onTapGesture(perform: setSelectedVisitIndex)
+            .simultaneousGesture(exitGestureIfSelected)
         }
-        .frame(height: VisitCellConstants.height(if: isSelected))
-        .animation(.spring())
         .onAppear(perform: setFavoritedStateAndNotesInput)
+        .frame(height: VisitCellConstants.height(if: isSelected))
+        .edgesIgnoringSafeArea(.all)
+        .animation(.spring())
+        .scaleEffect(1 - (self.activeTranslation.height+self.activeTranslation.width)/1000)
     }
 }
 
@@ -51,7 +59,7 @@ private extension VisitDetailsView {
             favoriteButton
                 .fade(!isSelected)
         }
-        .padding(.bottom, isSelected ? 20 : 0)
+        .padding(.bottom, isSelected ? 10 : 0)
         .padding(.leading, isSelected ? 30 : 0)
         .padding(.trailing, isSelected ? 30 : 0)
     }
@@ -300,6 +308,29 @@ private extension VisitDetailsView {
 }
 
 private extension VisitDetailsView {
+    private var exitGestureIfSelected: some Gesture {
+        return isSelected ? exitGesture : nil
+    }
+
+    private var exitGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                guard value.translation.height > 0 else { return }
+                guard value.translation.height < 100 else { return }
+                guard value.translation.width < 100 else { return }
+
+                self.activeTranslation = value.translation
+        }
+        .onEnded { value in
+            if self.activeTranslation.height > 20 || self.activeTranslation.width > 10 {
+                self.resetViewState()
+            }
+            self.resetActiveTranslation()
+        }
+    }
+}
+
+private extension VisitDetailsView {
     private func setFavoritedStateAndNotesInput() {
         setFavoriteState()
         setNotesInput()
@@ -317,10 +348,6 @@ private extension VisitDetailsView {
         withAnimation {
             self.selectedIndex = index
         }
-    }
-
-    private var isSelected: Bool {
-        selectedIndex == index
     }
 
     private func minimizeMap() {
@@ -386,6 +413,16 @@ private extension VisitDetailsView {
 
     private func updateNotesInput() {
         notesInput = visit.notes
+    }
+
+    private func resetViewState() {
+        resetNoteState()
+        minimizeMap()
+        unselectRow()
+    }
+
+    private func resetActiveTranslation() {
+        activeTranslation = .zero
     }
 }
 

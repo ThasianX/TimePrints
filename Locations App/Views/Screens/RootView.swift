@@ -15,7 +15,7 @@ struct RootView: View {
     @State private var stayAtLocation = false
     @State private var showingVisitsPreviewList = false
     @State private var activeVisitLocation: Location? = nil
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
             VisitsPreviewList(showingVisitsPreviewList: $showingVisitsPreviewList, activeVisitLocation: $activeVisitLocation)

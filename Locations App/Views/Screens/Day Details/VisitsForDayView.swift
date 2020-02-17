@@ -2,6 +2,7 @@ import SwiftUI
 
 struct VisitsForDayView: View {
     @State private var activeVisitIndex: Int = -1
+    @State var activeTranslation = CGSize.zero
 
     @Binding var currentDayComponent: DateComponents
     @Binding var isPreviewActive: Bool
@@ -15,20 +16,8 @@ struct VisitsForDayView: View {
             visitsForDayList
                 .offset(y: isShowingVisit.when(true: 0, false: 100))
         }
-    }
-}
-
-private extension VisitsForDayView {
-    private func setPreviewActive() {
-        isPreviewActive = true
-    }
-    
-    private var isShowingVisit: Bool {
-        activeVisitIndex != -1
-    }
-    
-    private func isActiveVisitIndex(index: Int) -> Bool {
-        index == activeVisitIndex
+        .simultaneousGesture(exitGesture)
+        .scaleEffect(1 - self.activeTranslation.width/1000)
     }
 }
 
@@ -64,8 +53,8 @@ private extension VisitsForDayView {
                                 index: i,
                                 visit: visit,
                                 setActiveVisitLocationAndDisplayMap: self.setActiveVisitLocationAndDisplayMap)
-                                .scaleEffect((self.isShowingVisit && !self.isActiveVisitIndex(index: i)).when(true: 0.5, false: 1))
-                                .offset(y: self.isShowingVisit.when(true: -geometry.frame(in: .global).minY, false: 0))
+                                .scaleEffect((self.isShowingVisit && !self.isActiveVisitIndex(index: i)) ? 0.5 : 1)
+                                .offset(y: self.isShowingVisit ? -geometry.frame(in: .global).minY : 0)
                                 .fade(self.isShowingVisit && !self.isActiveVisitIndex(index: i))
                         }
                     }
@@ -79,6 +68,42 @@ private extension VisitsForDayView {
         }
     }
 }
+
+private extension VisitsForDayView {
+    private var exitGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                guard value.translation.width < 100 else { return }
+
+                self.activeTranslation = value.translation
+        }
+        .onEnded { value in
+            if self.activeTranslation.width > 30 {
+                self.setPreviewActive()
+            }
+            self.resetActiveTranslation()
+        }
+    }
+}
+
+private extension VisitsForDayView {
+    private func setPreviewActive() {
+        isPreviewActive = true
+    }
+
+    private var isShowingVisit: Bool {
+        activeVisitIndex != -1
+    }
+
+    private func isActiveVisitIndex(index: Int) -> Bool {
+        index == activeVisitIndex
+    }
+
+    private func resetActiveTranslation() {
+        activeTranslation = .zero
+    }
+}
+
 
 struct VisitsForDayView_Previews: PreviewProvider {
     static var previews: some View {
