@@ -6,8 +6,8 @@ struct VisitDetailsView: View {
     @State private var isFavorite = false
     @State private var editNotesShowing = false
     @State private var notesInput = ""
+    @State private var activeTranslation: CGSize = .zero
     @Binding var selectedIndex: Int
-    @Binding var activeTranslation: CGSize
 
     let index: Int
     let visit: Visit
@@ -41,7 +41,7 @@ struct VisitDetailsView: View {
         .frame(height: VisitCellConstants.height(if: isSelected))
         .edgesIgnoringSafeArea(.all)
         .animation(.spring())
-        .scaleEffect(1 - self.activeTranslation.height/1000)
+        .scaleEffect(1 - (self.activeTranslation.height+self.activeTranslation.width)/1000)
     }
 }
 
@@ -317,12 +317,12 @@ private extension VisitDetailsView {
             .onChanged { value in
                 guard value.translation.height > 0 else { return }
                 guard value.translation.height < 100 else { return }
-                guard value.translation.width < 300 else { return }
+                guard value.translation.width < 100 else { return }
 
                 self.activeTranslation = value.translation
         }
         .onEnded { value in
-            if self.activeTranslation.height > 20 {
+            if self.activeTranslation.height > 20 || self.activeTranslation.width > 10 {
                 self.resetViewState()
             }
             self.resetActiveTranslation()
@@ -429,9 +429,9 @@ private extension VisitDetailsView {
 struct VisitDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            VisitDetailsView(selectedIndex: .constant(1), activeTranslation: .constant(.zero), index: -1, visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in }).previewLayout(.sizeThatFits)
+            VisitDetailsView(selectedIndex: .constant(1), index: -1, visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in }).previewLayout(.sizeThatFits)
             
-            VisitDetailsView(selectedIndex: .constant(1), activeTranslation: .constant(.zero), index: 1,  visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in })
+            VisitDetailsView(selectedIndex: .constant(1), index: 1,  visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in })
         }
         
     }
