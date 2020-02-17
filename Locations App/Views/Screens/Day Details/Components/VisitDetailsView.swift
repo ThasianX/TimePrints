@@ -35,23 +35,7 @@ struct VisitDetailsView: View {
             .background(Color(UIColor.salmon))
             .clipShape(RoundedRectangle(cornerRadius: isSelected ? 50 : 10, style: .continuous))
             .onTapGesture(perform: setSelectedVisitIndex)
-            .simultaneousGesture(
-                isSelected ?
-                    DragGesture()
-                        .onChanged { value in
-                            guard value.translation.height > 0 else { return }
-                            guard value.translation.width < 300 else { return }
-
-                            self.activeTranslation = value.translation
-                    }
-                    .onEnded { value in
-                        if self.activeTranslation.height > 50 {
-                            self.resetViewState()
-                        }
-                        self.resetActiveTranslation()
-                    }
-                    : nil
-            )
+            .simultaneousGesture(exitGestureIfSelected)
         }
         .onAppear(perform: setFavoritedStateAndNotesInput)
         .frame(height: VisitCellConstants.height(if: isSelected))
@@ -320,6 +304,29 @@ private extension VisitDetailsView {
     private var notesTextView: some View {
         AutoResizingTextField(isActive: $editNotesShowing, text: $notesInput, onCommit: commitNoteEdits)
             .frame(width: screen.width-100)
+    }
+}
+
+private extension VisitDetailsView {
+    private var exitGestureIfSelected: some Gesture {
+        return isSelected ? exitGesture : nil
+    }
+
+    private var exitGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                guard value.translation.height > 0 else { return }
+                guard value.translation.height < 100 else { return }
+                guard value.translation.width < 300 else { return }
+
+                self.activeTranslation = value.translation
+        }
+        .onEnded { value in
+            if self.activeTranslation.height > 20 {
+                self.resetViewState()
+            }
+            self.resetActiveTranslation()
+        }
     }
 }
 
