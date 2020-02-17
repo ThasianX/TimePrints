@@ -7,11 +7,16 @@ struct VisitDetailsView: View {
     @State private var editNotesShowing = false
     @State private var notesInput = ""
     @Binding var selectedIndex: Int
+    @Binding var activeTranslation: CGSize
 
     let index: Int
     let visit: Visit
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
-    
+
+    private var isSelected: Bool {
+        selectedIndex == index
+    }
+
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -28,12 +33,31 @@ struct VisitDetailsView: View {
             .frame(height: VisitCellConstants.height(if: isSelected))
             .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
             .background(Color(UIColor.salmon))
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 50 : 10, style: .continuous))
             .onTapGesture(perform: setSelectedVisitIndex)
+            .simultaneousGesture(
+                isSelected ?
+                    DragGesture()
+                        .onChanged { value in
+                            guard value.translation.height > 0 else { return }
+                            guard value.translation.width < 300 else { return }
+
+                            self.activeTranslation = value.translation
+                    }
+                    .onEnded { value in
+                        if self.activeTranslation.height > 50 {
+                            self.resetViewState()
+                        }
+                        self.resetActiveTranslation()
+                    }
+                    : nil
+            )
         }
-        .frame(height: VisitCellConstants.height(if: isSelected))
-        .animation(.spring())
         .onAppear(perform: setFavoritedStateAndNotesInput)
+        .frame(height: VisitCellConstants.height(if: isSelected))
+        .edgesIgnoringSafeArea(.all)
+        .animation(.spring())
+        .scaleEffect(1 - self.activeTranslation.height/1000)
     }
 }
 
@@ -51,7 +75,7 @@ private extension VisitDetailsView {
             favoriteButton
                 .fade(!isSelected)
         }
-        .padding(.bottom, isSelected ? 20 : 0)
+        .padding(.bottom, isSelected ? 10 : 0)
         .padding(.leading, isSelected ? 30 : 0)
         .padding(.trailing, isSelected ? 30 : 0)
     }
@@ -319,10 +343,6 @@ private extension VisitDetailsView {
         }
     }
 
-    private var isSelected: Bool {
-        selectedIndex == index
-    }
-
     private func minimizeMap() {
         withAnimation {
             self.mapFull = false
@@ -387,14 +407,24 @@ private extension VisitDetailsView {
     private func updateNotesInput() {
         notesInput = visit.notes
     }
+
+    private func resetViewState() {
+        resetNoteState()
+        minimizeMap()
+        unselectRow()
+    }
+
+    private func resetActiveTranslation() {
+        activeTranslation = .zero
+    }
 }
 
 struct VisitDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            VisitDetailsView(selectedIndex: .constant(1), index: -1, visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in }).previewLayout(.sizeThatFits)
+            VisitDetailsView(selectedIndex: .constant(1), activeTranslation: .constant(.zero), index: -1, visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in }).previewLayout(.sizeThatFits)
             
-            VisitDetailsView(selectedIndex: .constant(1), index: 1,  visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in })
+            VisitDetailsView(selectedIndex: .constant(1), activeTranslation: .constant(.zero), index: 1,  visit: .preview, setActiveVisitLocationAndDisplayMap: { _ in })
         }
         
     }
