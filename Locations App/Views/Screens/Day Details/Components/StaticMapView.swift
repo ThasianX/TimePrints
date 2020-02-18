@@ -7,13 +7,7 @@ struct StaticMapView: UIViewRepresentable {
     let color: UIColor
     
     func makeUIView(context: UIViewRepresentableContext<StaticMapView>) -> MGLMapView {
-        let styleURL = URL(string: "mapbox://styles/mapbox/navigation-preview-night-v4")!
-        let mapView = MGLMapView(frame: .zero, styleURL: styleURL)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.delegate = context.coordinator
-        mapView.tintColor = .red
-        mapView.attributionButton.tintColor = .lightGray
-        mapView.showsUserLocation = true
+        let mapView = MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
         mapView.setCenter(coordinate, zoomLevel: 13, animated: false)
         return mapView
     }

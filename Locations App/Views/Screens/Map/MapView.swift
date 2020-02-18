@@ -12,15 +12,7 @@ struct MapView: UIViewRepresentable {
     let annotations: [LocationAnnotation]
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MGLMapView {
-        let styleURL = URL(string: "mapbox://styles/mapbox/navigation-preview-night-v4")!
-        let mapView = MGLMapView(frame: .zero, styleURL: styleURL)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.delegate = context.coordinator
-        mapView.tintColor = .red
-        mapView.attributionButton.tintColor = .lightGray
-        mapView.showsUserLocation = true
-        mapView.showsUserHeadingIndicator = true
-        return mapView
+        return MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
     }
     
     func updateUIView(_ map: MGLMapView, context: UIViewRepresentableContext<MapView>) {

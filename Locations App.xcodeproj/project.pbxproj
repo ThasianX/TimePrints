@@ -67,6 +67,7 @@
 		1EE2CF5923E7D2C2009760D6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */; };
 		1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC8DC223E7238A00628251 /* StaticMapView.swift */; };
 		1EFC8DC523E76B4200628251 /* AnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC8DC423E76B4200628251 /* AnyTransition.swift */; };
+		1EFE9F4723FC225D00E94D67 /* MGLMapView+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE9F4623FC225D00E94D67 /* MGLMapView+Default.swift */; };
 		1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839423E49E0900FF04A1 /* DaySideBar.swift */; };
 		1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */; };
 		1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */; };
@@ -764,6 +765,7 @@
 		1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		1EFC8DC223E7238A00628251 /* StaticMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapView.swift; sourceTree = "<group>"; };
 		1EFC8DC423E76B4200628251 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
+		1EFE9F4623FC225D00E94D67 /* MGLMapView+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MGLMapView+Default.swift"; sourceTree = "<group>"; };
 		1EFF839423E49E0900FF04A1 /* DaySideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySideBar.swift; sourceTree = "<group>"; };
 		1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearSideBar.swift; sourceTree = "<group>"; };
 		1EFF839A23E4BC9800FF04A1 /* Dictionary+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Additions.swift"; sourceTree = "<group>"; };
@@ -1958,6 +1960,7 @@
 				1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */,
 				1E77273F23F051E00086C48E /* Bool+Additions.swift */,
 				1EB865E023F9E01400A4B8E1 /* UIApplication.swift */,
+				1EFE9F4623FC225D00E94D67 /* MGLMapView+Default.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2238,6 +2241,7 @@
 				1E5AF45223E3CC0500A94F10 /* VisitsPreviewList.swift in Sources */,
 				1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */,
 				1EFF83B123E532FA00FF04A1 /* Array+Additions.swift in Sources */,
+				1EFE9F4723FC225D00E94D67 /* MGLMapView+Default.swift in Sources */,
 				1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */,
 				1E5DBEA723E9C6A000C86641 /* DisableModifier.swift in Sources */,
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,

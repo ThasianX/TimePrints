@@ -187,6 +187,7 @@ private extension VisitDetailsView {
             .font(.headline)
             .lineLimit(nil)
             .multilineTextAlignment(.center)
+            .animation(nil)
     }
 
     private var mapOptionButtons: some View {
@@ -218,12 +219,12 @@ private extension VisitDetailsView {
 private extension VisitDetailsView {
     private var notesIfSelected: some View {
         Group {
-            if isSelected {
+            if isSelected && !mapFull {
                 notesButton
-                    .fade(mapFull)
-                    .scaleEffect(mapFull ? 0 : 1)
             }
         }
+        .fade(mapFull)
+        .scaleEffect(mapFull ? 0 : 1)
     }
 
     private var notesButton: some View {
