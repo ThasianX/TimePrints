@@ -33,7 +33,7 @@ struct VisitDetailsView: View {
             .frame(height: VisitCellConstants.height(if: isSelected))
             .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
             .background(Color(UIColor.salmon))
-            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 50 : 10, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
             .onTapGesture(perform: setSelectedVisitIndex)
             .simultaneousGesture(exitGestureIfSelected)
         }

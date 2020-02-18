@@ -16,8 +16,6 @@ struct VisitsForDayView: View {
             visitsForDayList
                 .offset(y: isShowingVisit.when(true: 0, false: 100))
         }
-        .simultaneousGesture(exitGesture)
-        .scaleEffect(1 - self.activeTranslation.width/1000)
     }
 }
 
@@ -70,23 +68,6 @@ private extension VisitsForDayView {
 }
 
 private extension VisitsForDayView {
-    private var exitGesture: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                guard value.translation.width < 100 else { return }
-
-                self.activeTranslation = value.translation
-        }
-        .onEnded { value in
-            if self.activeTranslation.width > 30 {
-                self.setPreviewActive()
-            }
-            self.resetActiveTranslation()
-        }
-    }
-}
-
-private extension VisitsForDayView {
     private func setPreviewActive() {
         isPreviewActive = true
     }
@@ -97,10 +78,6 @@ private extension VisitsForDayView {
 
     private func isActiveVisitIndex(index: Int) -> Bool {
         index == activeVisitIndex
-    }
-
-    private func resetActiveTranslation() {
-        activeTranslation = .zero
     }
 }
 
