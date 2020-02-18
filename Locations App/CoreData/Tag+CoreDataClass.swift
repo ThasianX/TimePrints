@@ -1,19 +1,9 @@
-//
-//  Tag+CoreDataClass.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/28/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-//
-
 import Foundation
 import CoreData
 import SwiftUI
 
 @objc(Tag)
 public class Tag: NSManagedObject {
-    // MARK: Class Functions
     class func count() -> Int {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
         
@@ -39,12 +29,8 @@ public class Tag: NSManagedObject {
     
     class func fetchAll() -> [Tag] {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
-        
-        do {
-            return try CoreData.stack.context.fetch(fetchRequest)
-        } catch {
-            fatalError("Default tag not in database")
-        }
+
+        return try! CoreData.stack.context.fetch(fetchRequest)
     }
     
     class func newTag() -> Tag {
@@ -68,21 +54,23 @@ public class Tag: NSManagedObject {
         CoreData.stack.save()
         return tag
     }
-    
-    // MARK: Local Functions
+}
+
+extension Tag {
     func edit(name: String, color: UIColor) {
         self.name = name
         self.color = color.hexString()
         CoreData.stack.save()
     }
-    
+
     func delete() -> Tag {
         let tag = self
         CoreData.stack.context.delete(self)
         return tag
     }
-    
-    // MARK: - Computed Properties
+}
+
+extension Tag {
     var uiColor: UIColor {
         UIColor(self.color)
     }

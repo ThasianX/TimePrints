@@ -1,19 +1,7 @@
-//
-//  Location+CoreDataProperties.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/28/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-//
-
 import Foundation
 import CoreData
 
-extension Visit: Identifiable { }
-
-extension Visit {
-
+extension Visit: Identifiable {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Visit> {
         return NSFetchRequest<Visit>(entityName: "Visit")
     }
@@ -23,6 +11,5 @@ extension Visit {
     @NSManaged public var notes: String
     @NSManaged public var isFavorite: Bool
     @NSManaged public var location: Location
-
 }
 

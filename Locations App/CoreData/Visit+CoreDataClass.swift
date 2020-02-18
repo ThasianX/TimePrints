@@ -1,19 +1,9 @@
-//
-//  Location+CoreDataClass.swift
-//  Locations App
-//
-//  Created by Kevin Li on 1/28/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-//
-
 import Foundation
 import CoreData
 import UIKit
 
 @objc(Visit)
 public class Visit: NSManagedObject {
-    // MARK: - Class Functions
     class func count() -> Int {
         let fetchRequest: NSFetchRequest<Visit> = Visit.fetchRequest()
         
@@ -46,7 +36,7 @@ public class Visit: NSManagedObject {
         return visit
     }
 
-    class func visit(with arrivalDate: Date) -> Visit? {
+    class func fetch(with arrivalDate: Date) -> Visit? {
         let fetchRequest: NSFetchRequest<Visit> = Visit.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "%@ == arrivalDate", arrivalDate as NSDate)
         let incompleteVisit = try! CoreData.stack.context.fetch(fetchRequest)
@@ -62,10 +52,11 @@ extension Visit {
 
     func complete(with departureDate: Date) {
         self.departureDate = departureDate
+        CoreData.stack.save()
     }
 
     @discardableResult
-    func favorite() -> Bool{
+    func favorite() -> Bool {
         isFavorite.toggle()
         CoreData.stack.save()
         return isFavorite
