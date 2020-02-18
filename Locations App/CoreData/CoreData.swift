@@ -11,8 +11,7 @@ import SwiftUI
 
 class CoreData: NSObject {
     static let stack = CoreData()
-    
-    // MARK: - Core Data Stack
+
     private lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "Locations_App")
         
@@ -36,8 +35,7 @@ class CoreData: NSObject {
             return self.persistentContainer.viewContext
         }
     }
-    
-    // MARK: - Core Data Saving support
+
     func save() {
         if context.hasChanges {
             do {
@@ -49,7 +47,6 @@ class CoreData: NSObject {
         }
     }
     
-    // MARK: - Database Setup
     public class func initialDbSetup() {
         if Tag.count() == 0 {
             Tag.create(name: "Locations", color: UIColor.charcoal)

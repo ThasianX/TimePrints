@@ -1,21 +1,12 @@
-//
-//  Location+CoreDataClass.swift
-//  Locations App
-//
-//  Created by Kevin Li on 2/3/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-//
-
 import Foundation
 import CoreData
-import MapKit
+import Mapbox
 
 @objc(Location)
 public class Location: NSManagedObject {
     class func count() -> Int {
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-        
+
         do {
             let count = try CoreData.stack.context.count(for: fetchRequest)
             return count
@@ -36,18 +27,6 @@ public class Location: NSManagedObject {
         return location.first
     }
 
-    @discardableResult
-    class func create(incompleteVisit: CLVisit, placeDetails: ReversedGeoLocation) -> Location {
-        let visit = Visit.create(arrivalDate: incompleteVisit.arrivalDate)
-        return create(incompleteVisit.coordinate, visit: visit, name: placeDetails.name, address: placeDetails.address)
-    }
-
-    @discardableResult
-    class func create(completeVisit: CLVisit, placeDetails: ReversedGeoLocation) -> Location {
-        let visit = Visit.create(arrivalDate: completeVisit.arrivalDate, departureDate: completeVisit.departureDate)
-        return create(completeVisit.coordinate, visit: visit, name: placeDetails.name, address: placeDetails.address)
-    }
-    
     class func create(_ coordinates: CLLocationCoordinate2D, visit: Visit, name: String, address: String) -> Location {
         let location = newLocation()
         location.latitude = coordinates.latitude
@@ -56,9 +35,9 @@ public class Location: NSManagedObject {
         location.address = address
         location.tag = Tag.getDefault()
         location.addVisit(visit)
-        
+
         CoreData.stack.save()
-        
+
         return location
     }
 }
@@ -75,8 +54,20 @@ extension Location {
         }
     }
 
+    private func addIncompleteVisit(with visit: CLVisit) {
+        let visit = Visit.create(arrivalDate: visit.arrivalDate)
+        addVisit(visit)
+        CoreData.stack.save()
+    }
+
+    @discardableResult
+    class func create(incompleteVisit: CLVisit, placeDetails: ReversedGeoLocation) -> Location {
+        let visit = Visit.create(arrivalDate: incompleteVisit.arrivalDate)
+        return create(incompleteVisit.coordinate, visit: visit, name: placeDetails.name, address: placeDetails.address)
+    }
+
     class func completeVisit(with visit: CLVisit, placeDetails: ReversedGeoLocation) {
-        let incompleteVisit = Visit.visit(with: visit.arrivalDate)
+        let incompleteVisit = Visit.fetch(with: visit.arrivalDate)
         let incompleteVisitExistsInDatabase = incompleteVisit != nil
 
         if incompleteVisitExistsInDatabase {
@@ -96,19 +87,21 @@ extension Location {
             Location.create(completeVisit: visit, placeDetails: placeDetails)
         }
     }
+
+    private func addCompletedVisit(with visit: CLVisit) {
+        let completedVisit = Visit.create(arrivalDate: visit.arrivalDate, departureDate: visit.departureDate)
+        addVisit(completedVisit)
+        CoreData.stack.save()
+    }
+
+    @discardableResult
+    class func create(completeVisit: CLVisit, placeDetails: ReversedGeoLocation) -> Location {
+        let visit = Visit.create(arrivalDate: completeVisit.arrivalDate, departureDate: completeVisit.departureDate)
+        return create(completeVisit.coordinate, visit: visit, name: placeDetails.name, address: placeDetails.address)
+    }
 }
 
 extension Location {
-    func addIncompleteVisit(with visit: CLVisit) {
-        let visit = Visit.create(arrivalDate: visit.arrivalDate)
-        addVisit(visit)
-    }
-
-    func addCompletedVisit(with visit: CLVisit) {
-        let completedVisit = Visit.create(arrivalDate: visit.arrivalDate, departureDate: visit.departureDate)
-        addVisit(completedVisit)
-    }
-
     func setTag(tag: Tag) {
         self.tag = tag
         CoreData.stack.save()

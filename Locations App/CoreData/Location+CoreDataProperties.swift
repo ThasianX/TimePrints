@@ -10,10 +10,7 @@
 import Foundation
 import CoreData
 
-extension Location: Identifiable { }
-
-extension Location {
-    
+extension Location: Identifiable {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Location> {
         return NSFetchRequest<Location>(entityName: "Location")
     }
@@ -24,12 +21,9 @@ extension Location {
     @NSManaged public var longitude: Double
     @NSManaged public var tag: Tag
     @NSManaged public var visits: Set<Visit>
-    
 }
 
-// MARK: Generated accessors for visits
 extension Location {
-    
     @objc(addVisitsObject:)
     @NSManaged public func addVisit(_ value: Visit)
     
@@ -41,6 +35,5 @@ extension Location {
     
     @objc(removeVisits:)
     @NSManaged public func removeVisits(_ values: Set<Visit>)
-    
 }
 
