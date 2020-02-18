@@ -1,11 +1,3 @@
-//
-//  Locations_AppUITests.swift
-//  Locations AppUITests
-//
-//  Created by Kevin Li on 1/28/20.
-//  Copyright © 2020 Kevin Li. All rights reserved.
-//
-
 import XCTest
 
 class Locations_AppUITests: XCTestCase {
