@@ -1,2 +1,2 @@
-binary "https://www.mapbox.com/ios-sdk/Mapbox-iOS-SDK.json" "5.6.1"
+binary "https://www.mapbox.com/ios-sdk/Mapbox-iOS-SDK.json" "5.7.0"
 github "mapbox/mapbox-events-ios" "v0.10.2"
