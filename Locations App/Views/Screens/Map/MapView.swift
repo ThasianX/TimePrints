@@ -12,15 +12,7 @@ struct MapView: UIViewRepresentable {
     let annotations: [LocationAnnotation]
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MGLMapView {
-        let styleURL = URL(string: "mapbox://styles/mapbox/navigation-preview-night-v4")!
-        let mapView = MGLMapView(frame: .zero, styleURL: styleURL)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.delegate = context.coordinator
-        mapView.tintColor = .red
-        mapView.attributionButton.tintColor = .lightGray
-        mapView.showsUserLocation = true
-        mapView.showsUserHeadingIndicator = true
-        return mapView
+        return MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
     }
     
     func updateUIView(_ map: MGLMapView, context: UIViewRepresentableContext<MapView>) {
@@ -28,9 +20,9 @@ struct MapView: UIViewRepresentable {
         if !stayAtLocation {
             map.userTrackingMode = trackingMode
         }
-        if activeVisitLocation != nil {
-            let annotation = LocationAnnotation.init(location: activeVisitLocation!)
-            map.setCenter(activeVisitLocation!.coordinate, zoomLevel: 13, animated: true)
+        if let activeVisitLocation = activeVisitLocation {
+            let annotation = LocationAnnotation(location: activeVisitLocation)
+            map.setCenter(activeVisitLocation.coordinate, zoomLevel: 16, animated: true)
             map.selectAnnotation(annotation, animated: true, completionHandler: { })
             DispatchQueue.main.async {
                 self.activeVisitLocation = nil
@@ -56,34 +48,22 @@ struct MapView: UIViewRepresentable {
         func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
             guard let annotation = annotation as? LocationAnnotation else { return nil }
             
-            let identifier = "visit"
-            
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-            
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "visit")
             if annotationView == nil {
-                annotationView = CustomAnnotationView(reuseIdentifier: identifier)
-                annotationView!.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
-                annotationView!.backgroundColor = annotation.color
+                annotationView = CustomAnnotationView.makeDefault(identifier: "visit")
             }
+            annotationView!.backgroundColor = annotation.color
             
             return annotationView
         }
         
         func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
             guard let annotation = annotation as? LocationAnnotation else { return nil }
-            let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
-            let tag = UIImage(named: "tag.fill")!.withRenderingMode(.alwaysTemplate).withTintColor(annotation.location.accent)
-            button.setImage(tag, for: .normal)
-            button.tag = 0
-            return button
+            return UIButton.calloutButton(with: UIImage.tagFill, tintColor: annotation.color, tag: 0)
         }
         
         func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
-            let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
-            let tag = UIImage(named: "info.circle.fill")!.withRenderingMode(.alwaysTemplate).withTintColor(.blue)
-            button.setImage(tag, for: .normal)
-            button.tag = 1
-            return button
+            UIButton.calloutButton(with: UIImage.infoCircleFill, tintColor: .blue, tag: 1)
         }
         
         func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
@@ -106,6 +86,17 @@ struct MapView: UIViewRepresentable {
             parent.selectedLocation = location
             parent.stayAtLocation = true
         }
+    }
+}
+
+private extension UIButton {
+    static func calloutButton(with image: UIImage, tintColor: UIColor, tag: Int) -> UIButton {
+        let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
+        let calloutImage = image.withRenderingMode(.alwaysTemplate)
+        button.setImage(calloutImage, for: .normal)
+        button.tintColor = tintColor
+        button.tag = tag
+        return button
     }
 }
 

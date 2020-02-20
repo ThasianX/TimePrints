@@ -7,13 +7,7 @@ struct StaticMapView: UIViewRepresentable {
     let color: UIColor
     
     func makeUIView(context: UIViewRepresentableContext<StaticMapView>) -> MGLMapView {
-        let styleURL = URL(string: "mapbox://styles/mapbox/navigation-preview-night-v4")!
-        let mapView = MGLMapView(frame: .zero, styleURL: styleURL)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.delegate = context.coordinator
-        mapView.tintColor = .red
-        mapView.attributionButton.tintColor = .lightGray
-        mapView.showsUserLocation = true
+        let mapView = MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
         mapView.setCenter(coordinate, zoomLevel: 13, animated: false)
         return mapView
     }
@@ -39,9 +33,8 @@ struct StaticMapView: UIViewRepresentable {
         
         func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
             guard annotation is MGLPointAnnotation else { return nil }
-            
-            let annotationView = CustomAnnotationView()
-            annotationView.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
+
+            let annotationView = CustomAnnotationView.makeDefault()
             annotationView.backgroundColor = parent.color
             return annotationView
         }

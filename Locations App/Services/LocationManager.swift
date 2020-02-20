@@ -7,12 +7,13 @@ class LocationManager: NSObject {
     
     override init() {
         super.init()
+        locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.startMonitoringVisits()
     }
 }
 
-extension LocationManager {
+extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
         let location = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
         let visitIsComplete = visit.departureDate != Date.distantFuture

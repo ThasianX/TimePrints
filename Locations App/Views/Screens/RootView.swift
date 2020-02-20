@@ -18,42 +18,11 @@ struct RootView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            VisitsPreviewList(showingVisitsPreviewList: $showingVisitsPreviewList, activeVisitLocation: $activeVisitLocation)
+            visitsPreviewList
                 .fade(!showingVisitsPreviewList)
             
-            ZStack(alignment: .top) {
-                mapView
-                    .disablur(showingEditTag || showingLocationVisits)
-                
-                HStack {
-                    UserLocationButton(trackingMode: $trackingMode, stayAtLocation: $stayAtLocation)
-                    Spacer()
-                }
-                .padding()
-                .disablur(showingEditTag || showingLocationVisits)
-                
-                EditTagView(
-                    show: self.$showingEditTag,
-                    location: self.$selectedLocation,
-                    stayAtLocation: $stayAtLocation)
-                    .frame(width: screen.width * 0.8, height: screen.height * 0.6)
-                    .cornerRadius(30)
-                    .shadow(radius: 20)
-                    .fade(!showingEditTag)
-                    .offset(y: showingEditTag ? screen.height * 0.15 : screen.height)
-                    .animation(.spring())
-                
-                LocationVisitsView(
-                    show: $showingLocationVisits,
-                    selectedLocation: selectedLocation)
-                    .frame(width: screen.width * 0.8, height: screen.height * 0.6)
-                    .cornerRadius(30)
-                    .shadow(radius: 20)
-                    .fade(!showingLocationVisits)
-                    .offset(y: showingLocationVisits ? screen.height * 0.15 : screen.height)
-                    .animation(.spring())
-            }
-            .fade(showingVisitsPreviewList)
+            annotatedMapView
+                .fade(showingVisitsPreviewList)
             
             toggleViewButton
                 .fade(showingEditTag || showingLocationVisits)
@@ -62,6 +31,41 @@ struct RootView: View {
 }
 
 private extension RootView {
+    private var visitsPreviewList: some View {
+        VisitsPreviewList(showingVisitsPreviewList: $showingVisitsPreviewList, activeVisitLocation: $activeVisitLocation)
+    }
+}
+
+private extension View {
+    func modal(isPresented: Bool) -> some View {
+        self
+            .frame(width: screen.width * 0.8, height: screen.height * 0.6)
+            .cornerRadius(30)
+            .shadow(radius: 20)
+            .fade(!isPresented)
+            .offset(y: isPresented ? screen.height * 0.15 : screen.height)
+            .animation(.spring())
+    }
+}
+
+private extension RootView {
+    private var annotatedMapView: some View {
+        ZStack(alignment: .top) {
+            mapView
+                .extendToScreenEdges()
+                .disablur(showingEditTag || showingLocationVisits)
+
+            buttonHeader
+                .disablur(showingEditTag || showingLocationVisits)
+
+            editTagView
+                .modal(isPresented: showingEditTag)
+
+            locationVisitsView
+                .modal(isPresented: showingLocationVisits)
+        }
+    }
+
     private var mapView: some View {
         MapView(
             trackingMode: $trackingMode,
@@ -72,7 +76,33 @@ private extension RootView {
             activeVisitLocation: $activeVisitLocation,
             annotations: locations.map(LocationAnnotation.init)
         )
-            .extendToScreenEdges()
+    }
+
+    private var buttonHeader: some View {
+        HStack {
+            UserLocationButton(trackingMode: $trackingMode, stayAtLocation: $stayAtLocation)
+            Spacer()
+        }
+        .padding()
+    }
+
+    private var userLocationButton: some View {
+        UserLocationButton(trackingMode: $trackingMode, stayAtLocation: $stayAtLocation)
+    }
+
+    private var editTagView: some View {
+        EditTagView(
+            show: self.$showingEditTag,
+            location: self.$selectedLocation,
+            stayAtLocation: $stayAtLocation
+        )
+    }
+
+    private var locationVisitsView: some View {
+        LocationVisitsView(
+            show: $showingLocationVisits,
+            selectedLocation: selectedLocation
+        )
     }
 }
 

@@ -18,3 +18,17 @@ class CustomAnnotationView: MGLAnnotationView {
         layer.add(animation, forKey: "borderWidth")
     }
 }
+
+extension CustomAnnotationView {
+    static func makeDefault(identifier: String?) -> CustomAnnotationView {
+        let annotationView = CustomAnnotationView(reuseIdentifier: identifier)
+        annotationView.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
+        return annotationView
+    }
+
+    static func makeDefault() -> CustomAnnotationView {
+        let annotationView = CustomAnnotationView()
+        annotationView.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
+        return annotationView
+    }
+}

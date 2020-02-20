@@ -30,33 +30,18 @@ struct VisitsPreviewList: View {
         
         return ZStack {
             backgroundColor
-            
-            VScroll {
-                V0Stack {
-                    ForEach(descendingMonthComponents) { monthComponent in
-                        self.monthYearSideBarWithDayPreviewBlocksView(monthComponent: monthComponent, isFilled: isFilled)
-                    }
-                }
-                .frame(width: screen.width)
-            }
-            .extendToScreenEdges()
+
+            visitsPreviewList(isFilled: isFilled)
+                .extendToScreenEdges()
             
             overlayColor
                 .fade(isPreviewActive)
             
             visitsForActiveDayView
+                .fade(isPreviewActive)
+                .scaleEffect(isPreviewActive ? 0 : 1)
+                .animation(.spring())
         }
-    }
-}
-
-private extension VisitsPreviewList {
-    private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
-        daysComponentsForMonthComponent[monthComponent]!.sortDescending
-    }
-
-    private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
-        self.activeVisitLocation = visit.location
-        self.showingVisitsPreviewList = false
     }
 }
 
@@ -68,6 +53,17 @@ private extension VisitsPreviewList {
     
     private var backgroundColor: some View {
         ScreenColor(UIColor.black)
+    }
+
+    private func visitsPreviewList(isFilled: @escaping () -> Bool) -> some View {
+        VScroll {
+            V0Stack {
+                ForEach(descendingMonthComponents) { monthComponent in
+                    self.monthYearSideBarWithDayPreviewBlocksView(monthComponent: monthComponent, isFilled: isFilled)
+                }
+            }
+            .frame(width: screen.width)
+        }
     }
     
     private func monthYearSideBarWithDayPreviewBlocksView(monthComponent: DateComponents, isFilled: @escaping () -> Bool) -> some View {
@@ -114,9 +110,17 @@ private extension VisitsPreviewList {
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
-            .fade(isPreviewActive)
-            .scaleEffect(isPreviewActive.when(true: 0.1, false: 1))
-            .animation(.spring())
+    }
+}
+
+private extension VisitsPreviewList {
+    private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
+        daysComponentsForMonthComponent[monthComponent]!.sortDescending
+    }
+
+    private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
+        self.activeVisitLocation = visit.location
+        self.showingVisitsPreviewList = false
     }
 }
 

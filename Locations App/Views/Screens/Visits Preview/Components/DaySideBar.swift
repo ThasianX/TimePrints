@@ -12,7 +12,6 @@ struct DaySideBar: View {
     }
 }
 
-// MARK: - Content
 private extension DaySideBar {
     private var abbreviatedDayOfWeek: some View {
         Text(date.abbreviatedDayOfWeek.uppercased())

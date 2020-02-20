@@ -22,7 +22,6 @@ struct VisitPreviewCell: View {
     }
 }
 
-// MARK: - Content
 private extension VisitPreviewCell {
     private var locationName: some View {
         Text(visit.location.name)
