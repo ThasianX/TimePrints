@@ -10,7 +10,7 @@ struct UserLocationButton: View {
     }
     
     var body: some View {
-        locationFillImage
+        trackingModeButton
     }
 
     private var trackingModeButton: some View {
