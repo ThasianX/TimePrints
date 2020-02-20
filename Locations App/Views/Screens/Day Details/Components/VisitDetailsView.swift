@@ -7,6 +7,7 @@ struct VisitDetailsView: View {
     @State private var editNotesShowing = false
     @State private var notesInput = ""
     @State private var activeTranslation: CGSize = .zero
+
     @Binding var selectedIndex: Int
 
     let index: Int
@@ -19,23 +20,16 @@ struct VisitDetailsView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            VStack {
-                header
-                visitDetails
-                interactableMapViewIfSelected
-                notesIfSelected
-                    .padding(.bottom, 100)
-                Spacer()
-            }
-            .padding(.top, isSelected ? 80 : 12)
-            .padding(.leading, isSelected ? 0 : 40)
-            .padding(.trailing, isSelected ? 0 : 40)
-            .frame(height: VisitCellConstants.height(if: isSelected))
-            .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
-            .background(Color(UIColor.salmon))
-            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
-            .onTapGesture(perform: setSelectedVisitIndex)
-            .simultaneousGesture(exitGestureIfSelected)
+            visitDetailsView
+                .padding(.top, isSelected ? 80 : 12)
+                .padding(.leading, isSelected ? 0 : 40)
+                .padding(.trailing, isSelected ? 0 : 40)
+                .frame(height: VisitCellConstants.height(if: isSelected))
+                .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
+                .background(Color(UIColor.salmon))
+                .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
+                .onTapGesture(perform: setSelectedVisitIndex)
+                .simultaneousGesture(exitGestureIfSelected)
         }
         .onAppear(perform: setFavoritedStateAndNotesInput)
         .frame(height: VisitCellConstants.height(if: isSelected))
@@ -46,8 +40,30 @@ struct VisitDetailsView: View {
 }
 
 private extension VisitDetailsView {
-    var header: some View {
-        HStack {
+    private var visitDetailsView: some View {
+        VStack(spacing: 2) {
+            header
+                .padding(.bottom, isSelected ? 10 : 0)
+                .padding(.leading, isSelected ? 30 : 0)
+                .padding(.trailing, isSelected ? 30 : 0)
+            coreDetailsView
+                .scaleEffect(mapFull || editNotesShowing ? 0 : 1)
+                .fade(mapFull || editNotesShowing)
+            interactableMapViewIfSelected
+                .scaleEffect(editNotesShowing ? 0 : 1)
+                .fade(editNotesShowing)
+            notesIfSelected
+                .fade(mapFull)
+                .scaleEffect(mapFull ? 0 : 1)
+                .padding(.bottom, 100)
+            Spacer()
+        }
+    }
+}
+
+private extension VisitDetailsView {
+    private var header: some View {
+        HStack(alignment: .center) {
             backButton
                 .fade(!isSelected)
             Spacer()
@@ -59,9 +75,6 @@ private extension VisitDetailsView {
             favoriteButton
                 .fade(!isSelected)
         }
-        .padding(.bottom, isSelected ? 10 : 0)
-        .padding(.leading, isSelected ? 30 : 0)
-        .padding(.trailing, isSelected ? 30 : 0)
     }
 
     private var backButton: some View {
@@ -72,10 +85,6 @@ private extension VisitDetailsView {
         }
         .frame(width: 30, height: 30)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-    }
-
-    private var dismissViewAndMinimizeMapButton: some View {
-        BImage(perform: navigateBack, image: backButtonImage)
     }
 
     private var backButtonImage: Image {
@@ -106,27 +115,23 @@ private extension VisitDetailsView {
     }
 
     private var favoriteImage: Image {
-        if isFavorite {
-            return Image("star.fill")
-        } else {
-            return Image("star")
-        }
+        isFavorite ? Image("star.fill") : Image("star")
     }
 }
 
 private extension VisitDetailsView {
-    private var visitDetails: some View {
+    private var coreDetailsView: some View {
         Group {
             if !mapFull && !editNotesShowing {
                 visitDurationText
                 fullMonthWithDayOfWeekTextIfSelected
+                    .padding(.top, isSelected ? 8 : 0)
                     .padding(.bottom, isSelected ? 10 : 0)
                 locationTagView
-                    .padding(.bottom, isSelected ? 20 : 0)
+                    .padding(.top, 6)
+                    .padding(.bottom, isSelected ? 20 : 4)
             }
         }
-        .scaleEffect(mapFull || editNotesShowing ? 0 : 1)
-        .fade(mapFull || editNotesShowing)
     }
 
     private var visitDurationText: some View {
@@ -145,12 +150,12 @@ private extension VisitDetailsView {
     }
 
     private var fullMonthWithDayOfWeekText: some View {
-        Text(visit.arrivalDate.fullMonthWithDayOfWeek.uppercased()).font(.caption)
+        Text(visit.arrivalDate.fullMonthWithDayOfWeek.uppercased())
+            .font(.caption)
     }
 
     private var locationTagView: some View {
         TagView(tag: visit.location.tag, displayName: isSelected)
-            .padding(.init(top: 6, leading: 0, bottom: 4, trailing: 0))
     }
 }
 
@@ -170,8 +175,6 @@ private extension VisitDetailsView {
                 .padding(.trailing, 80)
             }
         }
-        .scaleEffect(editNotesShowing ? 0 : 1)
-        .fade(editNotesShowing)
     }
 
     private var staticMapView: some View {
@@ -223,8 +226,6 @@ private extension VisitDetailsView {
                 notesButton
             }
         }
-        .fade(mapFull)
-        .scaleEffect(mapFull ? 0 : 1)
     }
 
     private var notesButton: some View {
@@ -265,6 +266,7 @@ private extension VisitDetailsView {
                     .padding(.trailing, 40)
             } else {
                 notesTextView
+                    .frame(width: screen.width-100)
             }
         }
     }
@@ -292,7 +294,8 @@ private extension VisitDetailsView {
                         minHeight: geometry.size.height,
                         idealHeight: geometry.size.height,
                         maxHeight: .infinity,
-                        alignment: .topLeading)
+                        alignment: .topLeading
+                )
             }
         }
     }
@@ -304,7 +307,6 @@ private extension VisitDetailsView {
 
     private var notesTextView: some View {
         AutoResizingTextField(isActive: $editNotesShowing, text: $notesInput, onCommit: commitNoteEdits)
-            .frame(width: screen.width-100)
     }
 }
 
