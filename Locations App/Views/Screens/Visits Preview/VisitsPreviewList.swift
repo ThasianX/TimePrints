@@ -39,7 +39,7 @@ struct VisitsPreviewList: View {
             
             visitsForActiveDayView
                 .fade(isPreviewActive)
-                .scaleEffect(isPreviewActive.when(true: 0.1, false: 1))
+                .scaleEffect(isPreviewActive ? 0 : 1)
                 .animation(.spring())
         }
     }

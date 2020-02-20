@@ -25,4 +25,10 @@ extension CustomAnnotationView {
         annotationView.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
         return annotationView
     }
+
+    static func makeDefault() -> CustomAnnotationView {
+        let annotationView = CustomAnnotationView()
+        annotationView.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
+        return annotationView
+    }
 }

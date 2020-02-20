@@ -32,7 +32,9 @@ struct StaticMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
-            let annotationView = CustomAnnotationView.makeDefault(identifier: nil)
+            guard annotation is MGLPointAnnotation else { return nil }
+
+            let annotationView = CustomAnnotationView.makeDefault()
             annotationView.backgroundColor = parent.color
             return annotationView
         }

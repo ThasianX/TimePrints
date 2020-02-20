@@ -20,9 +20,9 @@ struct MapView: UIViewRepresentable {
         if !stayAtLocation {
             map.userTrackingMode = trackingMode
         }
-        if activeVisitLocation != nil {
-            let annotation = LocationAnnotation.init(location: activeVisitLocation!)
-            map.setCenter(activeVisitLocation!.coordinate, zoomLevel: 13, animated: true)
+        if let activeVisitLocation = activeVisitLocation {
+            let annotation = LocationAnnotation(location: activeVisitLocation)
+            map.setCenter(activeVisitLocation.coordinate, zoomLevel: 16, animated: true)
             map.selectAnnotation(annotation, animated: true, completionHandler: { })
             DispatchQueue.main.async {
                 self.activeVisitLocation = nil
