@@ -116,7 +116,12 @@ private extension RootView {
         .frame(width: 50, height: 50)
         .clipShape(Circle())
     }
-    
+
+    private func toggleVisitsPreviewAndStayAtLocation() {
+        showingVisitsPreviewList.toggle()
+        stayAtLocation = true
+    }
+
     private var mapImage: Image {
         .init(systemName: "map.fill")
     }
@@ -139,13 +144,6 @@ private extension RootView {
     
     private var listButtonBackgroundColor: Color {
         .white
-    }
-}
-
-private extension RootView {
-    private func toggleVisitsPreviewAndStayAtLocation() {
-        showingVisitsPreviewList.toggle()
-        stayAtLocation = true
     }
 }
 
