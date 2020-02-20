@@ -8,7 +8,6 @@ struct MonthYearSideBar: View {
     }
 }
 
-// MARK: - Content
 private extension MonthYearSideBar {
     private var fullMonthWithYear: some View {
         Text(date.fullMonthWithYear)

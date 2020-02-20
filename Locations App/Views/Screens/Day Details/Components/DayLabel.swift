@@ -12,7 +12,6 @@ struct DayLabel: View {
     }
 }
 
-// MARK: Content
 private extension DayLabel {
     private var dayOfMonthText: some View {
         Text(date.dayOfWeekBasedOnCurrentDay.uppercased())

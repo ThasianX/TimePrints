@@ -6,10 +6,10 @@ struct VisitCellConstants {
     static let width: CGFloat = screen.width - 60
 
     static func height(if isSelected: Bool) -> CGFloat {
-        isSelected.when(true: screen.height, false: VisitCellConstants.height)
+        isSelected ? screen.height : height
     }
 
     static func maxWidth(if isSelected: Bool) -> CGFloat {
-        isSelected.when(true: .infinity, false: VisitCellConstants.width)
+        isSelected ? .infinity : width
     }
 }

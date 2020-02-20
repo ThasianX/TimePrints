@@ -3,8 +3,10 @@ import SwiftUI
 struct DayPreviewBlock: View {
     @State private var visitIndex = 0
     @State private var timer: Timer?
+
     @Binding var currentDayComponent: DateComponents
     @Binding var isPreviewActive: Bool
+
     let visits: [Visit]
     let isFilled: Bool
     let dayComponent: DateComponents
@@ -17,13 +19,13 @@ struct DayPreviewBlock: View {
         ZStack {
             backgroundColor
             visitsPreviewList
+                .animation(.easeInOut)
         }
-        .onAppear(perform: determineAndSetAppropriateTimerState)
+        .onAppear(perform: setTimerForVisitsSlideshow)
         .onTapGesture(perform: setCurrentDayComponentAndPreviewInactive)
     }
 }
 
-// MARK: - Helper Functions
 private extension DayPreviewBlock {
     private func setCurrentDayComponentAndPreviewInactive() {
         setPreviewInactive()
@@ -39,21 +41,7 @@ private extension DayPreviewBlock {
     }
 }
 
-// MARK: - Timer
 private extension DayPreviewBlock {
-    private func determineAndSetAppropriateTimerState() {
-        if isPreviewActive {
-            setTimerForVisitsSlideshow()
-        } else {
-            invalidateTimerForVisitsSlideshow()
-        }
-    }
-    
-    private func invalidateTimerForVisitsSlideshow() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
     private func setTimerForVisitsSlideshow() {
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
             withAnimation {
@@ -61,16 +49,12 @@ private extension DayPreviewBlock {
             }
         }
     }
-    
+
     private func onTimerFire() {
-        adjustDisplayedVisitsInPreview()
+        shiftActivePreviewVisitIndex()
     }
-    
-    private func adjustDisplayedVisitsInPreview() {
-        shiftPreviewVisitIndex()
-    }
-    
-    private func shiftPreviewVisitIndex() {
+
+    private func shiftActivePreviewVisitIndex() {
         let visitIndexExists = self.visitIndex < self.visits.count-3
         if visitIndexExists {
             self.visitIndex += 3
@@ -80,10 +64,10 @@ private extension DayPreviewBlock {
     }
 }
 
-// MARK: - Content
 private extension DayPreviewBlock {
     private var backgroundColor: some View {
-        Color("salmon").saturation(isFilled ? 2 : 1)
+        Color("salmon")
+            .saturation(isFilled ? 2 : 1)
     }
     
     private var visitsPreviewList: some View {
@@ -92,7 +76,6 @@ private extension DayPreviewBlock {
                 VisitPreviewCell(visit: visit)
             }
         }
-        .animation(.easeInOut)
     }
 }
 
