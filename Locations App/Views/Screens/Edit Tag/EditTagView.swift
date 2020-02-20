@@ -101,6 +101,7 @@ private extension EditTagView {
         resetAddTag()
         show = false
         stayAtLocation = true
+        location = nil
     }
     
     private func resetAddTag() {

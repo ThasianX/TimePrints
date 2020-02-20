@@ -15,15 +15,22 @@ struct MapView: UIViewRepresentable {
         return MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
     }
     
-    func updateUIView(_ map: MGLMapView, context: UIViewRepresentableContext<MapView>) {
-        map.addAnnotations(annotations)
-        if !stayAtLocation {
-            map.userTrackingMode = trackingMode
+    func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
+        if selectedLocation == nil {
+            if let currentAnnotations = uiView.annotations {
+                uiView.removeAnnotations(currentAnnotations)
+            }
+            uiView.addAnnotations(annotations)
         }
+
+        if !stayAtLocation {
+            uiView.userTrackingMode = trackingMode
+        }
+
         if let activeVisitLocation = activeVisitLocation {
             let annotation = LocationAnnotation(location: activeVisitLocation)
-            map.setCenter(activeVisitLocation.coordinate, zoomLevel: 16, animated: true)
-            map.selectAnnotation(annotation, animated: true, completionHandler: { })
+            uiView.setCenter(activeVisitLocation.coordinate, zoomLevel: 16, animated: true)
+            uiView.selectAnnotation(annotation, animated: true, completionHandler: { })
             DispatchQueue.main.async {
                 self.activeVisitLocation = nil
             }
