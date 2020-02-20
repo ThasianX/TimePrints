@@ -10,13 +10,21 @@ struct UserLocationButton: View {
     }
     
     var body: some View {
+        locationFillImage
+    }
+
+    private var trackingModeButton: some View {
         Button(action: updateTrackingMode) {
-            Image(systemName: "location.fill")
-                .resizable()
-                .frame(width: 40, height: 40)
-                .rotationEffect(shouldRotate ? .init(degrees: -45) : .init(degrees: 0))
-                .animation(.spring(response: 0.75, dampingFraction: 0.825, blendDuration: 0))
+            locationFillImage
         }
+    }
+
+    private var locationFillImage: some View {
+        Image(systemName: "location.fill")
+            .resizable()
+            .frame(width: 40, height: 40)
+            .rotationEffect(shouldRotate ? .init(degrees: -45) : .init(degrees: 0))
+            .animation(.spring(response: 0.75, dampingFraction: 0.825, blendDuration: 0))
     }
     
     private func updateTrackingMode() {
