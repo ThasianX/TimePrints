@@ -48,7 +48,7 @@ struct MapView: UIViewRepresentable {
         func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
             guard let annotation = annotation as? LocationAnnotation else { return nil }
             
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "visit")
             if annotationView == nil {
                 annotationView = CustomAnnotationView.makeDefault(identifier: "visit")
             }

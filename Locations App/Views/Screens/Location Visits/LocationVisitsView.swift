@@ -60,17 +60,31 @@ private extension LocationVisitsView {
         var body: some View {
             VStack(alignment: .leading) {
                 HStack {
-                    Text(visit.visitDuration)
+                    visitDurationText
                     Spacer()
-                    if visit.isFavorite {
-                        Image(systemName: "star.fill")
-                            .imageScale(.medium)
-                            .foregroundColor(.yellow)
-                    }
+                    starImageIfFavorited
                 }
-                Text(visit.arrivalDate.abbreviatedMonthWithDayAndYear)
-                    .font(.caption)
+                arrivalDateAbbreviatedText
             }
+        }
+
+        private var visitDurationText: some View {
+            Text(visit.visitDuration)
+        }
+
+        private var starImageIfFavorited: some View {
+            Group {
+                if visit.isFavorite {
+                    Image(systemName: "star.fill")
+                        .imageScale(.medium)
+                        .foregroundColor(.yellow)
+                }
+            }
+        }
+
+        private var arrivalDateAbbreviatedText: some View {
+            Text(visit.arrivalDate.abbreviatedMonthWithDayAndYear)
+                .font(.caption)
         }
     }
 }
