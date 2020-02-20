@@ -48,34 +48,22 @@ struct MapView: UIViewRepresentable {
         func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
             guard let annotation = annotation as? LocationAnnotation else { return nil }
             
-            let identifier = "visit"
-            
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-            
             if annotationView == nil {
-                annotationView = CustomAnnotationView(reuseIdentifier: identifier)
-                annotationView!.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
-                annotationView!.backgroundColor = annotation.color
+                annotationView = CustomAnnotationView.makeDefault(identifier: "visit")
             }
+            annotationView!.backgroundColor = annotation.color
             
             return annotationView
         }
         
         func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
             guard let annotation = annotation as? LocationAnnotation else { return nil }
-            let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
-            let tag = UIImage(named: "tag.fill")!.withRenderingMode(.alwaysTemplate).withTintColor(annotation.location.accent)
-            button.setImage(tag, for: .normal)
-            button.tag = 0
-            return button
+            return UIButton.calloutButton(with: UIImage.tagFill, tintColor: annotation.color, tag: 0)
         }
         
         func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
-            let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
-            let tag = UIImage(named: "info.circle.fill")!.withRenderingMode(.alwaysTemplate).withTintColor(.blue)
-            button.setImage(tag, for: .normal)
-            button.tag = 1
-            return button
+            UIButton.calloutButton(with: UIImage.infoCircleFill, tintColor: .blue, tag: 1)
         }
         
         func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
@@ -98,6 +86,17 @@ struct MapView: UIViewRepresentable {
             parent.selectedLocation = location
             parent.stayAtLocation = true
         }
+    }
+}
+
+private extension UIButton {
+    static func calloutButton(with image: UIImage, tintColor: UIColor, tag: Int) -> UIButton {
+        let button = UIButton(frame: .init(x: 0, y: 0, width: 30, height: 30))
+        let calloutImage = image.withRenderingMode(.alwaysTemplate)
+        button.setImage(calloutImage, for: .normal)
+        button.tintColor = tintColor
+        button.tag = tag
+        return button
     }
 }
 
