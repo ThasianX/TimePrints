@@ -287,6 +287,7 @@ private extension VisitDetailsView {
                 Text(self.visit.notes)
                     .font(.caption)
                     .lineLimit(nil)
+                    .multilineTextAlignment(.center)
                     .frame(
                         minWidth: geometry.size.width,
                         idealWidth: geometry.size.width,
@@ -294,7 +295,7 @@ private extension VisitDetailsView {
                         minHeight: geometry.size.height,
                         idealHeight: geometry.size.height,
                         maxHeight: .infinity,
-                        alignment: .topLeading
+                        alignment: .top
                 )
             }
         }
