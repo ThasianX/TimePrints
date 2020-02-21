@@ -122,20 +122,18 @@ private extension EditTagView {
     }
 
     private var xButton: some View {
-        BImage(perform: showAdd ? resetAddTag : resetEditTag, image: Image(systemName: "xmark.circle.fill"))
+        BImage(perform: showAdd ? resetAddMode : resetEditMode, image: Image(systemName: "xmark.circle.fill"))
             .foregroundColor(.red)
     }
 
-    private func resetAddTag() {
-        nameInput = ""
-        selectedColorIndex = 1
+    private func resetAddMode() {
+        resetNameAndColorInput()
         showAdd = false
     }
 
-    private func resetEditTag() {
+    private func resetEditMode() {
         tagInEditing = nil
-        nameInput = ""
-        selectedColorIndex = 1
+        resetNameAndColorInput()
         showEdit = false
     }
 
@@ -153,6 +151,7 @@ private extension EditTagView {
         let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
         if !name.isEmpty {
             createTagAndExitView(name: name)
+            resetAddMode()
         }
     }
 
@@ -170,7 +169,7 @@ private extension EditTagView {
 
     private func editTagAndExitEditMode(name: String) {
         tagInEditing!.edit(name: name, color: colors[identifiers[selectedColorIndex]]!)
-        resetEditTag()
+        resetEditMode()
     }
 }
 
@@ -363,22 +362,26 @@ private extension EditTagView {
 }
 
 private extension EditTagView {
+    private func resetNameAndColorInput() {
+        nameInput = ""
+        selectedColorIndex = 1
+    }
+
     private func setTagAndExitView(tag: Tag) {
         location!.setTag(tag: tag)
-        reset()
+        resetView()
+    }
+
+    private func resetView() {
+        show = false
+        stayAtLocation = true
+        location = nil
     }
 
     private func resetAlert() {
         self.presentAlert = false
         self.alertMessage = ""
         self.deletedTag = nil
-    }
-
-    private func reset() {
-        resetAddTag()
-        show = false
-        stayAtLocation = true
-        location = nil
     }
 }
 
