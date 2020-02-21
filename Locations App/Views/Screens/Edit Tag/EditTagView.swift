@@ -12,10 +12,12 @@ struct EditTagView: View {
     @State private var showEdit: Bool = false
     @State private var nameInput: String = ""
     @State private var selectedColorIndex: Int = 1
+
     @State private var tagInEditing: Tag? = nil
     @State private var presentAlert: Bool = false
     @State private var deletedTag: Tag? = nil
     @State private var alertMessage: String = ""
+    @State private var alertItem: DispatchWorkItem = .init(block: {})
     
     @Binding var show: Bool
     @Binding var location: Location?
@@ -213,7 +215,7 @@ private extension EditTagView {
     }
 
     private func editButton(for tag: Tag) -> some View {
-        Button(action: { self.displayEditTag(tag: tag) }) {
+        Button(action: { self.displayEditTagAndSetState(tag: tag) }) {
             editTextPrecededByPencil
         }
     }
@@ -225,7 +227,7 @@ private extension EditTagView {
         }
     }
 
-    private func displayEditTag(tag: Tag) {
+    private func displayEditTagAndSetState(tag: Tag) {
         tagInEditing = tag
         setEditModeState()
         showEdit = true
@@ -238,7 +240,7 @@ private extension EditTagView {
     }
 
     private func deleteButton(for tag: Tag) -> some View {
-        Button(action: { self.deleteTag(tag: tag) }) {
+        Button(action: { self.deleteTagAndDisplayAlert(tag: tag) }) {
             deleteTextPrecededByTrash
         }
     }
@@ -250,27 +252,35 @@ private extension EditTagView {
         }
     }
 
-    private func deleteTag(tag: Tag) {
-        guard let location = location else { return }
-
+    private func deleteTagAndDisplayAlert(tag: Tag) {
         if tag == Tag.default {
             self.alertMessage = "Cannot delete default tag"
         } else {
-            let deleted = tag.delete()
-            if deleted == location.tag {
-                reconfigureLocationTag()
-            }
-            self.deletedTag = tag
+            deleteTag(tag: tag)
         }
         self.presentAlert = true
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
-            self.resetAlert()
-        }
+        displayAlert()
     }
 
-    func reconfigureLocationTag() {
+    private func deleteTag(tag: Tag) {
+        guard let location = location else { return }
+
+        let deleted = tag.delete()
+        if deleted == location.tag {
+            reconfigureLocationTag()
+        }
+        self.deletedTag = tag
+    }
+
+    private func reconfigureLocationTag() {
         location!.setTag(tag: Tag.default)
+    }
+
+    private func displayAlert() {
+        alertItem.cancel()
+        alertItem = DispatchWorkItem { self.resetAlert() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: alertItem)
     }
 }
 
