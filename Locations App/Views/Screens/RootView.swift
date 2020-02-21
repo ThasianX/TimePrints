@@ -19,13 +19,13 @@ struct RootView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             visitsPreviewList
-                .fade(!showingVisitsPreviewList)
+                .fade(if: !showingVisitsPreviewList)
             
             annotatedMapView
-                .fade(showingVisitsPreviewList)
+                .fade(if: showingVisitsPreviewList)
             
             toggleViewButton
-                .fade(showingEditTag || showingLocationVisits)
+                .fade(if: showingEditTag || showingLocationVisits)
         }
     }
 }
@@ -42,7 +42,7 @@ private extension View {
             .frame(width: screen.width * 0.8, height: screen.height * 0.6)
             .cornerRadius(30)
             .shadow(radius: 20)
-            .fade(!isPresented)
+            .fade(if: !isPresented)
             .offset(y: isPresented ? screen.height * 0.15 : screen.height)
             .animation(.spring())
     }

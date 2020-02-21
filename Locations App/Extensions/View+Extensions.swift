@@ -32,8 +32,8 @@ extension View {
         modifier(DisableModifier(disabled: disabled))
     }
     
-    func fade(_ fade: Bool) -> some View {
-        modifier(OpacityModifier(fade: fade))
+    func fade(if condition: Bool) -> some View {
+        modifier(OpacityModifier(fade: condition))
     }
     
     func erase() -> AnyView {

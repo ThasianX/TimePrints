@@ -61,7 +61,7 @@ private extension VisitsForDayView {
     private func dynamicVisitRow(index: Int, visit: Visit) -> some View {
         GeometryReader { geometry in
             self.makeVisitDetailsView(index: index, visit: visit)
-                .fade(self.isShowingVisit && !self.isActiveVisitIndex(index: index))
+                .fade(if: self.isShowingVisit && !self.isActiveVisitIndex(index: index))
                 .scaleEffect((self.isShowingVisit && !self.isActiveVisitIndex(index: index)) ? 0.5 : 1)
                 .offset(y: self.isShowingVisit ? -geometry.frame(in: .global).minY : 0)
         }

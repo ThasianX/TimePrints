@@ -48,12 +48,12 @@ private extension VisitDetailsView {
                 .padding(.trailing, isSelected ? 30 : 0)
             coreDetailsView
                 .scaleEffect(mapFull || editNotesShowing ? 0 : 1)
-                .fade(mapFull || editNotesShowing)
+                .fade(if: mapFull || editNotesShowing)
             interactableMapViewIfSelected
                 .scaleEffect(editNotesShowing ? 0 : 1)
-                .fade(editNotesShowing)
+                .fade(if: editNotesShowing)
             notesIfSelected
-                .fade(mapFull)
+                .fade(if: mapFull)
                 .scaleEffect(mapFull ? 0 : 1)
                 .padding(.bottom, 100)
             Spacer()
@@ -65,7 +65,7 @@ private extension VisitDetailsView {
     private var header: some View {
         HStack(alignment: .center) {
             backButton
-                .fade(!isSelected)
+                .fade(if: !isSelected)
             Spacer()
             HStack {
                 locationNameText
@@ -73,14 +73,14 @@ private extension VisitDetailsView {
             }
             Spacer()
             favoriteButton
-                .fade(!isSelected)
+                .fade(if: !isSelected)
         }
     }
 
     private var backButton: some View {
         ZStack {
             Color(.white)
-                .fade(!mapFull)
+                .fade(if: !mapFull)
             BImage(perform: navigateBack, image: backButtonImage)
         }
         .frame(width: 30, height: 30)
@@ -168,7 +168,7 @@ private extension VisitDetailsView {
                 Group {
                     locationAddressText
                     mapOptionButtons
-                        .fade(!mapFull)
+                        .fade(if: !mapFull)
                         .scaleEffect(mapFull ? 1 : 0)
                 }
                 .padding(.leading, 80)

@@ -35,10 +35,10 @@ struct VisitsPreviewList: View {
                 .extendToScreenEdges()
             
             overlayColor
-                .fade(isPreviewActive)
+                .fade(if: isPreviewActive)
             
             visitsForActiveDayView
-                .fade(isPreviewActive)
+                .fade(if: isPreviewActive)
                 .scaleEffect(isPreviewActive ? 0 : 1)
                 .animation(.spring())
         }
@@ -57,12 +57,16 @@ private extension VisitsPreviewList {
 
     private func visitsPreviewList(isFilled: @escaping () -> Bool) -> some View {
         VScroll {
-            V0Stack {
-                ForEach(descendingMonthComponents) { monthComponent in
-                    self.monthYearSideBarWithDayPreviewBlocksView(monthComponent: monthComponent, isFilled: isFilled)
-                }
+            visitsPreviewStack(isFilled: isFilled)
+                .frame(width: screen.width)
+        }
+    }
+
+    private func visitsPreviewStack(isFilled: @escaping () -> Bool) -> some View {
+        V0Stack {
+            ForEach(descendingMonthComponents) { monthComponent in
+                self.monthYearSideBarWithDayPreviewBlocksView(monthComponent: monthComponent, isFilled: isFilled)
             }
-            .frame(width: screen.width)
         }
     }
     
