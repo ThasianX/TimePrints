@@ -391,13 +391,13 @@ private extension EditTagView {
         show = false
         stayAtLocation = true
         location = nil
+        resetAlert()
     }
 
     private func resetAlert() {
         self.presentAlert = false
         self.alertMessage = ""
         self.deletedTag = nil
-
     }
 
     private func storeLocationsForDeletedTag(tag: Tag) {
