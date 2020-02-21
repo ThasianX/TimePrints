@@ -122,12 +122,25 @@ private extension EditTagView {
     }
 
     private var xButton: some View {
-        BImage(perform: showAdd ? resetAddTag : resetEditTag, image: .init(systemName: "xmark.circle.fill"))
+        BImage(perform: showAdd ? resetAddTag : resetEditTag, image: Image(systemName: "xmark.circle.fill"))
             .foregroundColor(.red)
     }
 
+    private func resetAddTag() {
+        nameInput = ""
+        selectedColorIndex = 1
+        showAdd = false
+    }
+
+    private func resetEditTag() {
+        tagInEditing = nil
+        nameInput = ""
+        selectedColorIndex = 1
+        showEdit = false
+    }
+
     private var checkmarkButton: some View {
-        BImage(perform: showAdd ? addNewTag : editTag, image: .init(systemName: "checkmark.circle.fill"))
+        BImage(perform: showAdd ? addNewTag : editTag, image: Image(systemName: "checkmark.circle.fill"))
             .foregroundColor(.white)
             .colorMultiply(selectedColor)
     }
@@ -139,13 +152,25 @@ private extension EditTagView {
     private func addNewTag() {
         let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
         if !name.isEmpty {
-            createTagAndExitView()
+            createTagAndExitView(name: name)
         }
     }
 
-    private func createTagAndExitView() {
-        let tag = Tag.create(name: nameInput, color: colors[identifiers[selectedColorIndex]]!)
+    private func createTagAndExitView(name: String) {
+        let tag = Tag.create(name: name, color: colors[identifiers[selectedColorIndex]]!)
         setTagAndExitView(tag: tag)
+    }
+
+    private func editTag() {
+        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !name.isEmpty {
+            editTagAndExitEditMode(name: name)
+        }
+    }
+
+    private func editTagAndExitEditMode(name: String) {
+        tagInEditing!.edit(name: name, color: colors[identifiers[selectedColorIndex]]!)
+        resetEditTag()
     }
 }
 
@@ -295,7 +320,7 @@ private extension EditTagView {
 
     private var deletedTagMessageDefaultsAlertMessage: some View {
         Group {
-            if deletedTagExists {
+            if deletedTag != nil {
                 deletedTagName
                     .padding(.trailing, 8)
 
@@ -304,10 +329,6 @@ private extension EditTagView {
                 alertMessageText
             }
         }
-    }
-
-    private var deletedTagExists: Bool {
-        deletedTag != nil
     }
 
     private var deletedTagName: some View {
@@ -328,6 +349,13 @@ private extension EditTagView {
             .foregroundColor(Color(deletedTag?.uiColor ?? .clear))
     }
 
+    private func revert() {
+        if let tag = deletedTag {
+            Tag.create(from: tag)
+            resetAlert()
+        }
+    }
+
     private var alertMessageText: some View {
         Text(alertMessage)
             .foregroundColor(.white)
@@ -335,50 +363,22 @@ private extension EditTagView {
 }
 
 private extension EditTagView {
-    private func reset() {
-        resetAddTag()
-        show = false
-        stayAtLocation = true
-        location = nil
+    private func setTagAndExitView(tag: Tag) {
+        location!.setTag(tag: tag)
+        reset()
     }
-    
-    private func resetAddTag() {
-        nameInput = ""
-        selectedColorIndex = 1
-        showAdd = false
-    }
-    
+
     private func resetAlert() {
         self.presentAlert = false
         self.alertMessage = ""
         self.deletedTag = nil
     }
-    
-    private func resetEditTag() {
-        tagInEditing = nil
-        nameInput = ""
-        selectedColorIndex = 1
-        showEdit = false
-    }
 
-    private func setTagAndExitView(tag: Tag) {
-        location!.setTag(tag: tag)
-        reset()
-    }
-    
-    private func editTag() {
-        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty {
-            tagInEditing!.edit(name: nameInput, color: colors[identifiers[selectedColorIndex]]!)
-            resetEditTag()
-        }
-    }
-    
-    private func revert() {
-        if let tag = deletedTag {
-            Tag.create(from: tag)
-            resetAlert()
-        }
+    private func reset() {
+        resetAddTag()
+        show = false
+        stayAtLocation = true
+        location = nil
     }
 }
 
