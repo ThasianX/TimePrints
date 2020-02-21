@@ -9,7 +9,7 @@ extension Tag: Identifiable {
     @NSManaged public var name: String
     @NSManaged public var color: String
     @NSManaged public var isDefault: Bool
-    @NSManaged public var locations: Set<Location>?
+    @NSManaged public var locations: Set<Location>
 }
 
 extension Tag {

@@ -18,6 +18,7 @@ struct EditTagView: View {
     @State private var deletedTag: Tag? = nil
     @State private var alertMessage: String = ""
     @State private var alertItem: DispatchWorkItem = .init(block: {})
+    @State private var locationsWithDeletedTag: Set<Location> = .init()
     
     @Binding var show: Bool
     @Binding var location: Location?
@@ -253,8 +254,8 @@ private extension EditTagView {
     }
 
     private func deleteTagAndDisplayAlert(tag: Tag) {
-        if tag == Tag.default {
-            self.alertMessage = "Cannot delete default tag"
+        if tag.isDefault {
+            self.alertMessage = "Default tag cannot be deleted"
         } else {
             deleteTag(tag: tag)
         }
@@ -264,17 +265,11 @@ private extension EditTagView {
     }
 
     private func deleteTag(tag: Tag) {
-        guard let location = location else { return }
+        storeLocationsForDeletedTag(tag: tag)
 
-        let deleted = tag.delete()
-        if deleted == location.tag {
-            reconfigureLocationTag()
-        }
-        self.deletedTag = tag
-    }
-
-    private func reconfigureLocationTag() {
-        location!.setTag(tag: Tag.default)
+        let deletedTag = tag.delete()
+        setTagForEffectedLocationsToDefault()
+        self.deletedTag = deletedTag
     }
 
     private func displayAlert() {
@@ -368,8 +363,9 @@ private extension EditTagView {
     }
 
     private func revert() {
-        if let tag = deletedTag {
-            Tag.create(from: tag)
+        if deletedTag != nil {
+            let tag = Tag.create(from: deletedTag!)
+            revertTagForEffectedLocations(to: tag)
             resetAlert()
         }
     }
@@ -401,6 +397,19 @@ private extension EditTagView {
         self.presentAlert = false
         self.alertMessage = ""
         self.deletedTag = nil
+
+    }
+
+    private func storeLocationsForDeletedTag(tag: Tag) {
+        locationsWithDeletedTag = tag.locations
+    }
+
+    private func setTagForEffectedLocationsToDefault() {
+        locationsWithDeletedTag.forEach { $0.setTag(tag: .default) }
+    }
+
+    private func revertTagForEffectedLocations(to tag: Tag) {
+        locationsWithDeletedTag.forEach { $0.setTag(tag: tag) }
     }
 }
 
