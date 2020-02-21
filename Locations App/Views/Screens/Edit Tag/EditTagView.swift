@@ -85,14 +85,14 @@ private extension EditTagView {
         .animation(.easeInOut)
     }
 
-    private var selectedColor: Color {
-        Color(colors[identifiers[selectedColorIndex]]!)
-    }
-
     private var tagImage: some View {
         Image(systemName: "tag.fill")
             .foregroundColor(.white)
             .colorMultiply(isShowingAddOrEdit ? selectedColor : defaultTagColor)
+    }
+
+    private var defaultTagColor: Color {
+        location != nil ? Color(location!.accent) : .clear
     }
 
     private func headerText(_ text: String) -> some View {
@@ -101,10 +101,6 @@ private extension EditTagView {
             .font(.system(size: 20))
             .bold()
             .foregroundColor(.white)
-    }
-
-    private var defaultTagColor: Color {
-        location != nil ? Color(location!.accent) : .clear
     }
 
     private var editTagHeaderButtons: some View {
@@ -135,6 +131,22 @@ private extension EditTagView {
             .foregroundColor(.white)
             .colorMultiply(selectedColor)
     }
+
+    private var selectedColor: Color {
+        Color(colors[identifiers[selectedColorIndex]]!)
+    }
+
+    private func addNewTag() {
+        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !name.isEmpty {
+            createTagAndExitView()
+        }
+    }
+
+    private func createTagAndExitView() {
+        let tag = Tag.create(name: nameInput, color: colors[identifiers[selectedColorIndex]]!)
+        setTagAndExitView(tag: tag)
+    }
 }
 
 private extension EditTagView {
@@ -158,7 +170,7 @@ private extension EditTagView {
             .padding(8)
             .contentShape(Rectangle())
             .onTapGesture {
-                self.setTag(tag: tag)
+                self.setTagAndExitView(tag: tag)
             }
             .contextMenu {
                 self.contextMenu(for: tag)
@@ -189,6 +201,14 @@ private extension EditTagView {
         }
     }
 
+    private func displayEditTag(tag: Tag) {
+        tagInEditing = tag
+        nameInput = tag.name
+        let identifier = colors.key(for: tag.uiColor)!
+        selectedColorIndex = identifiers.firstIndex(of: identifier)!
+        showEdit = true
+    }
+
     private func deleteButton(for tag: Tag) -> some View {
         Button(action: { self.deleteTag(tag: tag) }) {
             deleteTextPrecededByTrash
@@ -199,6 +219,24 @@ private extension EditTagView {
         HStack {
             Text("Delete")
             Image(systemName: "trash.fill")
+        }
+    }
+
+    private func deleteTag(tag: Tag) {
+        guard let location = location else { return }
+        let defaultTag = Tag.getDefault()
+        if tag == defaultTag {
+            self.alertMessage = "Cannot delete default tag"
+        } else {
+            let deleted = tag.delete()
+            if deleted == location.tag {
+                location.setTag(tag: defaultTag)
+            }
+            self.deletedTag = tag
+        }
+        self.presentAlert = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.resetAlert()
         }
     }
 }
@@ -322,45 +360,10 @@ private extension EditTagView {
         selectedColorIndex = 1
         showEdit = false
     }
-    
-    private func addNewTag() {
-        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty {
-            let tag = Tag.create(name: nameInput, color: colors[identifiers[selectedColorIndex]]!)
-            location!.setTag(tag: tag)
-            reset()
-        }
-    }
-    
-    private func setTag(tag: Tag) {
+
+    private func setTagAndExitView(tag: Tag) {
         location!.setTag(tag: tag)
         reset()
-    }
-    
-    private func displayEditTag(tag: Tag) {
-        tagInEditing = tag
-        nameInput = tag.name
-        let identifier = colors.key(for: tag.uiColor)!
-        selectedColorIndex = identifiers.firstIndex(of: identifier)!
-        showEdit = true
-    }
-    
-    private func deleteTag(tag: Tag) {
-        guard let location = location else { return }
-        let defaultTag = Tag.getDefault()
-        if tag == defaultTag {
-            self.alertMessage = "Cannot delete default tag"
-        } else {
-            let deleted = tag.delete()
-            if deleted == location.tag {
-                location.setTag(tag: defaultTag)
-            }
-            self.deletedTag = tag
-        }
-        self.presentAlert = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.resetAlert()
-        }
     }
     
     private func editTag() {
