@@ -33,7 +33,7 @@ public class Location: NSManagedObject {
         location.longitude = coordinates.longitude
         location.name = name
         location.address = address
-        location.tag = Tag.getDefault()
+        location.tag = Tag.default
         location.addVisit(visit)
 
         CoreData.stack.save()

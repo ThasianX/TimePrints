@@ -14,11 +14,11 @@ public class Tag: NSManagedObject {
             fatalError("Unresolved error \(error), \(error.userInfo)")
         }
     }
-    
-    class func getDefault() -> Tag {
+
+    class var `default`: Tag {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "%@ == name", "Locations")
-        
+
         do {
             let tag = try CoreData.stack.context.fetch(fetchRequest)
             return tag.first!

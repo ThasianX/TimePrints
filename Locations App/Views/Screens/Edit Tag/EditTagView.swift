@@ -227,10 +227,14 @@ private extension EditTagView {
 
     private func displayEditTag(tag: Tag) {
         tagInEditing = tag
-        nameInput = tag.name
-        let identifier = colors.key(for: tag.uiColor)!
-        selectedColorIndex = identifiers.firstIndex(of: identifier)!
+        setEditModeState()
         showEdit = true
+    }
+
+    func setEditModeState() {
+        nameInput = tagInEditing!.name
+        let identifier = colors.key(for: tagInEditing!.uiColor)!
+        selectedColorIndex = identifiers.firstIndex(of: identifier)!
     }
 
     private func deleteButton(for tag: Tag) -> some View {
@@ -248,20 +252,25 @@ private extension EditTagView {
 
     private func deleteTag(tag: Tag) {
         guard let location = location else { return }
-        let defaultTag = Tag.getDefault()
-        if tag == defaultTag {
+
+        if tag == Tag.default {
             self.alertMessage = "Cannot delete default tag"
         } else {
             let deleted = tag.delete()
             if deleted == location.tag {
-                location.setTag(tag: defaultTag)
+                reconfigureLocationTag()
             }
             self.deletedTag = tag
         }
         self.presentAlert = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
             self.resetAlert()
         }
+    }
+
+    func reconfigureLocationTag() {
+        location!.setTag(tag: Tag.default)
     }
 }
 
