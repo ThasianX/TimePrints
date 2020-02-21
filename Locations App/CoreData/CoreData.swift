@@ -41,7 +41,8 @@ class CoreData: NSObject {
     
     public class func initialDbSetup() {
         if Tag.count() == 0 {
-            Tag.create(name: "Locations", color: UIColor.charcoal)
+            let tag = Tag.create(name: "Locations", color: .limeGreen)
+            tag.setAsDefault()
         }
         // TODO: Include Cloud KVS preference setup here?
     }
