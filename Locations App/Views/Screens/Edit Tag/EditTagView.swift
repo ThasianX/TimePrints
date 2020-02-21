@@ -117,7 +117,7 @@ private extension EditTagView {
     }
 
     private var addButton: some View {
-        BImage(condition: $showAdd, image: .init(systemName: "plus"))
+        BImage(condition: $showAdd, image: Image(systemName: "plus"))
             .foregroundColor(.white)
     }
 
