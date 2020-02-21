@@ -14,6 +14,7 @@ struct TagSelectionList: View {
                     ColoredTextRow(text: tag.name, color: tag.uiColor, selected: self.location?.tag == tag)
                         .background(Color.clear)
                         .padding(8)
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             self.onTap(tag)
                         }
