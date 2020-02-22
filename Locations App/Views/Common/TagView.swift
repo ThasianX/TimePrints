@@ -21,7 +21,7 @@ private extension TagView {
             .font(.caption)
             .padding(6)
             .animation(nil)
-            .fade(!displayName)
+            .fade(if: !displayName)
             .scaleEffect(displayName.when(true: 1, false: 0.1))
     }
     

@@ -12,10 +12,13 @@ struct EditTagView: View {
     @State private var showEdit: Bool = false
     @State private var nameInput: String = ""
     @State private var selectedColorIndex: Int = 1
+
     @State private var tagInEditing: Tag? = nil
     @State private var presentAlert: Bool = false
     @State private var deletedTag: Tag? = nil
     @State private var alertMessage: String = ""
+    @State private var alertItem: DispatchWorkItem = .init(block: {})
+    @State private var locationsWithDeletedTag: Set<Location> = .init()
     
     @Binding var show: Bool
     @Binding var location: Location?
@@ -23,31 +26,39 @@ struct EditTagView: View {
     
     let colors = AppColors.tags
     let identifiers = AppColors.tags.ascendingKeys
-    
+
+    private var isShowingAddOrEdit: Bool {
+        showAdd || showEdit
+    }
+
+    private var isntShowingAddNorEdit: Bool {
+        !showAdd && !showEdit
+    }
+
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
                 header
                     .padding()
-                    .offset(y: isShowingAddOrEdit.when(true: 250, false: 0))
+                    .offset(y: isShowingAddOrEdit ? 250 : 0)
                     .animation(.spring())
                 
                 tagSelectionList
-                    .fade(isShowingAddOrEdit)
-                    .scaleEffect(isShowingAddOrEdit.when(true: 0, false: 1))
+                    .fade(if: isShowingAddOrEdit)
+                    .scaleEffect(isShowingAddOrEdit ? 0 : 1)
                 
                 VSpace(50)
-                    .fade(isShowingAddOrEdit)
+                    .fade(if: isShowingAddOrEdit)
             }
             
-            tagDetails
+            topAlignedTagDetails
                 .padding()
-                .fade(isntShowingAddNorEdit)
-                .scaleEffect(isShowingAddOrEdit.when(true: 1, false: 0))
+                .fade(if: isntShowingAddNorEdit)
+                .scaleEffect(!isShowingAddOrEdit ? 0 : 1)
                 .animation(.spring())
             
-            transientAlert
-                .fade(!presentAlert)
+            bottomAlignedTransientAlertView
+                .fade(if: !presentAlert)
         }
     }
 }
@@ -55,127 +66,350 @@ struct EditTagView: View {
 private extension EditTagView {
     private var header: some View {
         HStack {
-            EditTagHeaderText(showAdd: showAdd, showEdit: showEdit, selectedColor: selectedColor, location: location)
-            
+            editTagHeaderView
             Spacer()
-            
-            EditTagHeaderButtons(showAdd: $showAdd, showEdit: showEdit, resetAddTag: resetAddTag, resetEditTag: resetEditTag, addNewTag: addNewTag, editTag: editTag, selectedColor: selectedColor)
+            editTagHeaderButtons
         }
     }
-    
-    private var tagSelectionList: some View {
-        TagSelectionList(tags: Array(tags), location: location, onTap: setTag, onEdit: displayEditTag, onDelete: deleteTag)
-    }
-    
-    private var tagDetails: some View {
-        VStack {
-            TagDetails(nameInput: $nameInput, selectedColorIndex: $selectedColorIndex, colors: colors, colorNames: identifiers)
-            Spacer()
-        }
-    }
-    
-    private var transientAlert: some View {
-        VStack {
-            Spacer()
-            TransientAlert(deletedTag: deletedTag, alertMessage: alertMessage, revert: revert)
-        }
-    }
-}
 
-private extension EditTagView {
+    private var editTagHeaderView: some View {
+        HStack {
+            tagImage
+
+            ZStack {
+                headerText("CHOOSE TAG")
+                    .fade(if: isShowingAddOrEdit)
+                headerText("MAKE TAG")
+                    .fade(if: !showAdd)
+                headerText("EDIT TAG")
+                    .fade(if: !showEdit)
+            }
+        }
+        .animation(.easeInOut)
+    }
+
+    private var tagImage: some View {
+        Image(systemName: "tag.fill")
+            .foregroundColor(.white)
+            .colorMultiply(isShowingAddOrEdit ? selectedColor : defaultTagColor)
+    }
+
+    private var defaultTagColor: Color {
+        location != nil ? Color(location!.accent) : .clear
+    }
+
+    private func headerText(_ text: String) -> some View {
+        Text(text)
+            .tracking(5)
+            .font(.system(size: 20))
+            .bold()
+            .foregroundColor(.white)
+    }
+
+    private var editTagHeaderButtons: some View {
+        ZStack {
+            addButton
+                .fade(if: isShowingAddOrEdit)
+            HStack {
+                xButton
+                checkmarkButton
+            }
+            .fade(if: isntShowingAddNorEdit)
+        }
+        .animation(.easeInOut)
+    }
+
+    private var addButton: some View {
+        BImage(condition: $showAdd, image: Image(systemName: "plus"))
+            .foregroundColor(.white)
+    }
+
+    private var xButton: some View {
+        BImage(perform: showAdd ? resetAddMode : resetEditMode, image: Image(systemName: "xmark.circle.fill"))
+            .foregroundColor(.red)
+    }
+
+    private func resetAddMode() {
+        resetNameAndColorInput()
+        showAdd = false
+    }
+
+    private func resetEditMode() {
+        tagInEditing = nil
+        resetNameAndColorInput()
+        showEdit = false
+    }
+
+    private var checkmarkButton: some View {
+        BImage(perform: showAdd ? addNewTag : editTag, image: Image(systemName: "checkmark.circle.fill"))
+            .foregroundColor(.white)
+            .colorMultiply(selectedColor)
+    }
+
     private var selectedColor: Color {
         Color(colors[identifiers[selectedColorIndex]]!)
     }
-    
-    private var isShowingAddOrEdit: Bool {
-        showAdd || showEdit
+
+    private func addNewTag() {
+        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !name.isEmpty {
+            createTagAndExitView(name: name)
+            resetAddMode()
+        }
     }
-    
-    private var isntShowingAddNorEdit: Bool {
-        !showAdd && !showEdit
+
+    private func createTagAndExitView(name: String) {
+        let tag = Tag.create(name: name, color: colors[identifiers[selectedColorIndex]]!)
+        setTagAndExitView(tag: tag)
+    }
+
+    private func editTag() {
+        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !name.isEmpty {
+            editTagAndExitEditMode(name: name)
+        }
+    }
+
+    private func editTagAndExitEditMode(name: String) {
+        tagInEditing!.edit(name: name, color: colors[identifiers[selectedColorIndex]]!)
+        resetEditMode()
     }
 }
 
 private extension EditTagView {
-    private func reset() {
-        resetAddTag()
+    private var tagSelectionList: some View {
+        VScroll {
+            tagSelectionStack
+        }
+    }
+
+    private var tagSelectionStack: some View {
+        VStack {
+            ForEach(tags) { tag in
+                self.interactiveColoredTextRow(tag: tag)
+            }
+        }
+    }
+
+    private func interactiveColoredTextRow(tag: Tag) -> some View {
+        coloredTextRow(tag: tag)
+            .background(Color.clear)
+            .padding(8)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                self.setTagAndExitView(tag: tag)
+            }
+            .contextMenu {
+                self.contextMenu(for: tag)
+            }
+    }
+
+    private func coloredTextRow(tag: Tag) -> ColoredTextRow {
+        ColoredTextRow(text: tag.name, color: tag.uiColor, selected: self.location?.tag == tag)
+    }
+
+    private func contextMenu(for tag: Tag) -> some View {
+        VStack {
+            editButton(for: tag)
+            deleteButton(for: tag)
+        }
+    }
+
+    private func editButton(for tag: Tag) -> some View {
+        Button(action: { self.displayEditTagAndSetState(tag: tag) }) {
+            editTextPrecededByPencil
+        }
+    }
+
+    private var editTextPrecededByPencil: some View {
+        HStack {
+            Text("Edit")
+            Image(systemName: "pencil")
+        }
+    }
+
+    private func displayEditTagAndSetState(tag: Tag) {
+        tagInEditing = tag
+        setEditModeState()
+        showEdit = true
+    }
+
+    func setEditModeState() {
+        nameInput = tagInEditing!.name
+        let identifier = colors.key(for: tagInEditing!.uiColor)!
+        selectedColorIndex = identifiers.firstIndex(of: identifier)!
+    }
+
+    private func deleteButton(for tag: Tag) -> some View {
+        Button(action: { self.deleteTagAndDisplayAlert(tag: tag) }) {
+            deleteTextPrecededByTrash
+        }
+    }
+
+    private var deleteTextPrecededByTrash: some View {
+        HStack {
+            Text("Delete")
+            Image(systemName: "trash.fill")
+        }
+    }
+
+    private func deleteTagAndDisplayAlert(tag: Tag) {
+        if tag.isDefault {
+            self.alertMessage = "Default tag cannot be deleted"
+        } else {
+            deleteTag(tag: tag)
+        }
+        self.presentAlert = true
+
+        displayAlert()
+    }
+
+    private func deleteTag(tag: Tag) {
+        storeLocationsForDeletedTag(tag: tag)
+
+        let deletedTag = tag.delete()
+        setTagForEffectedLocationsToDefault()
+        self.deletedTag = deletedTag
+    }
+
+    private func displayAlert() {
+        alertItem.cancel()
+        alertItem = DispatchWorkItem { self.resetAlert() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: alertItem)
+    }
+}
+
+private extension EditTagView {
+    private var topAlignedTagDetails: some View {
+        VStack {
+            tagDetailsView
+            Spacer()
+        }
+    }
+
+    private var tagDetailsView: some View {
+        VStack {
+            tagNameTextField
+                .padding(.init(top: 0, leading: 30, bottom: 0, trailing: 30))
+
+            tagColorPicker
+        }
+    }
+
+    private var tagNameTextField: some View {
+        TextField("Tag Name...", text: $nameInput)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .multilineTextAlignment(.center)
+    }
+
+    private var tagColorPicker: some View {
+        Picker(selection: $selectedColorIndex, label: Text("")) {
+            ForEach(0..<identifiers.count) { index in
+                self.coloredTextRow(at: index)
+            }
+        }
+        .labelsHidden()
+    }
+
+    private func coloredTextRow(at index: Int) -> ColoredTextRow {
+        ColoredTextRow(text: identifiers[index], color: colors[self.identifiers[index]]!, selected: false, useStaticForegroundColor: true)
+    }
+}
+
+private extension EditTagView {
+    private var bottomAlignedTransientAlertView: some View {
+        VStack {
+            Spacer()
+            transientAlertView
+                .padding()
+        }
+    }
+
+    private var transientAlertView: some View {
+        HStack {
+            deletedTagMessageDefaultsAlertMessage
+        }
+    }
+
+    private var deletedTagMessageDefaultsAlertMessage: some View {
+        Group {
+            if deletedTag != nil {
+                deletedTagName
+                    .padding(.trailing, 8)
+
+                revertButton
+            } else {
+                alertMessageText
+            }
+        }
+    }
+
+    private var deletedTagName: some View {
+        Text("Deleted: \(deletedTag!.name)")
+            .font(.headline)
+            .foregroundColor(.white)
+    }
+
+    private var revertButton: some View {
+        Button(action: revert) {
+            revertText
+        }
+    }
+
+    private var revertText: some View {
+        Text("Revert")
+            .font(.headline)
+            .foregroundColor(Color(deletedTag?.uiColor ?? .clear))
+    }
+
+    private func revert() {
+        if deletedTag != nil {
+            let tag = Tag.create(from: deletedTag!)
+            revertTagForEffectedLocations(to: tag)
+            resetAlert()
+        }
+    }
+
+    private var alertMessageText: some View {
+        Text(alertMessage)
+            .foregroundColor(.white)
+    }
+}
+
+private extension EditTagView {
+    private func resetNameAndColorInput() {
+        nameInput = ""
+        selectedColorIndex = 1
+    }
+
+    private func setTagAndExitView(tag: Tag) {
+        location!.setTag(tag: tag)
+        resetView()
+    }
+
+    private func resetView() {
         show = false
         stayAtLocation = true
         location = nil
+        resetAlert()
     }
-    
-    private func resetAddTag() {
-        nameInput = ""
-        selectedColorIndex = 1
-        showAdd = false
-    }
-    
+
     private func resetAlert() {
         self.presentAlert = false
         self.alertMessage = ""
         self.deletedTag = nil
     }
-    
-    private func resetEditTag() {
-        tagInEditing = nil
-        nameInput = ""
-        selectedColorIndex = 1
-        showEdit = false
+
+    private func storeLocationsForDeletedTag(tag: Tag) {
+        locationsWithDeletedTag = tag.locations
     }
-    
-    private func addNewTag() {
-        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty {
-            let tag = Tag.create(name: nameInput, color: colors[identifiers[selectedColorIndex]]!)
-            location!.setTag(tag: tag)
-            reset()
-        }
+
+    private func setTagForEffectedLocationsToDefault() {
+        locationsWithDeletedTag.forEach { $0.setTag(tag: .default) }
     }
-    
-    private func setTag(tag: Tag) {
-        location!.setTag(tag: tag)
-        reset()
-    }
-    
-    private func displayEditTag(tag: Tag) {
-        tagInEditing = tag
-        nameInput = tag.name
-        let identifier = colors.key(for: tag.uiColor)!
-        selectedColorIndex = identifiers.firstIndex(of: identifier)!
-        showEdit = true
-    }
-    
-    private func deleteTag(tag: Tag) {
-        guard let location = location else { return }
-        let defaultTag = Tag.getDefault()
-        if tag == defaultTag {
-            self.alertMessage = "Cannot delete default tag"
-        } else {
-            let deleted = tag.delete()
-            if deleted == location.tag {
-                location.setTag(tag: defaultTag)
-            }
-            self.deletedTag = tag
-        }
-        self.presentAlert = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.resetAlert()
-        }
-    }
-    
-    private func editTag() {
-        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty {
-            tagInEditing!.edit(name: nameInput, color: colors[identifiers[selectedColorIndex]]!)
-            resetEditTag()
-        }
-    }
-    
-    private func revert() {
-        if let tag = deletedTag {
-            Tag.create(from: tag)
-            resetAlert()
-        }
+
+    private func revertTagForEffectedLocations(to tag: Tag) {
+        locationsWithDeletedTag.forEach { $0.setTag(tag: tag) }
     }
 }
 

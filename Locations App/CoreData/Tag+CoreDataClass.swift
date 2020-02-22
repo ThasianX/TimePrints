@@ -14,14 +14,14 @@ public class Tag: NSManagedObject {
             fatalError("Unresolved error \(error), \(error.userInfo)")
         }
     }
-    
-    class func getDefault() -> Tag {
+
+    class var `default`: Tag {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%@ == name", "Locations")
-        
+        fetchRequest.predicate = NSPredicate(format: "%d = isDefault", true)
+
         do {
-            let tag = try CoreData.stack.context.fetch(fetchRequest)
-            return tag.first!
+            let defaultTag = try CoreData.stack.context.fetch(fetchRequest)
+            return defaultTag.first!
         } catch {
             fatalError("Default tag not in database")
         }
@@ -57,6 +57,11 @@ public class Tag: NSManagedObject {
 }
 
 extension Tag {
+    func setAsDefault() {
+        self.isDefault = true
+        CoreData.stack.save()
+    }
+
     func edit(name: String, color: UIColor) {
         self.name = name
         self.color = color.hexString()

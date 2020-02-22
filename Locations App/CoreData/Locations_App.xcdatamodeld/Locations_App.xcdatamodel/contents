@@ -10,6 +10,7 @@
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
         <attribute name="color" attributeType="String" defaultValueString=""/>
+        <attribute name="isDefault" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="tag" inverseEntity="Location"/>
     </entity>
@@ -22,7 +23,7 @@
     </entity>
     <elements>
         <element name="Location" positionX="-54" positionY="54" width="128" height="133"/>
-        <element name="Tag" positionX="-54" positionY="27" width="128" height="88"/>
+        <element name="Tag" positionX="-54" positionY="27" width="128" height="103"/>
         <element name="Visit" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>
