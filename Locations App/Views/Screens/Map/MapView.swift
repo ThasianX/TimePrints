@@ -31,9 +31,6 @@ struct MapView: UIViewRepresentable {
             let annotation = LocationAnnotation(location: activeVisitLocation)
             uiView.setCenter(activeVisitLocation.coordinate, zoomLevel: 16, animated: true)
             uiView.selectAnnotation(annotation, animated: true, completionHandler: { })
-            DispatchQueue.main.async {
-                self.activeVisitLocation = nil
-            }
         }
     }
     
@@ -92,6 +89,7 @@ struct MapView: UIViewRepresentable {
         private func setLocationWithoutRecentering(location: Location) {
             parent.selectedLocation = location
             parent.stayAtLocation = true
+            parent.activeVisitLocation = nil
         }
     }
 }
