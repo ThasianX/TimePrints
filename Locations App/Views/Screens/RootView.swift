@@ -80,14 +80,18 @@ private extension RootView {
 
     private var buttonHeader: some View {
         HStack {
-            UserLocationButton(trackingMode: $trackingMode, stayAtLocation: $stayAtLocation)
+            userLocationButton
             Spacer()
         }
         .padding()
     }
 
     private var userLocationButton: some View {
-        UserLocationButton(trackingMode: $trackingMode, stayAtLocation: $stayAtLocation)
+        UserLocationButton(
+            trackingMode: $trackingMode,
+            stayAtLocation: $stayAtLocation,
+            activeVisitLocation: $activeVisitLocation
+        )
     }
 
     private var editTagView: some View {
@@ -122,6 +126,7 @@ private extension RootView {
     }
 
     private func toggleVisitsPreviewAndStayAtLocation() {
+        activeVisitLocation = nil
         showingVisitsPreviewList.toggle()
         stayAtLocation = true
     }

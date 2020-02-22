@@ -4,6 +4,7 @@ import Mapbox
 struct UserLocationButton: View {
     @Binding var trackingMode: MGLUserTrackingMode
     @Binding var stayAtLocation: Bool
+    @Binding var activeVisitLocation: Location?
     
     var shouldRotate: Bool {
         trackingMode == .followWithHeading
@@ -42,6 +43,7 @@ struct UserLocationButton: View {
         withAnimation {
             self.trackingMode = mode
             self.stayAtLocation = false
+            self.activeVisitLocation = nil
         }
     }
 }
@@ -49,8 +51,8 @@ struct UserLocationButton: View {
 struct UserLocationButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            UserLocationButton(trackingMode: .constant(.follow), stayAtLocation: .constant(false))
-            UserLocationButton(trackingMode: .constant(.followWithHeading), stayAtLocation: .constant(false))
+            UserLocationButton(trackingMode: .constant(.follow), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil))
+            UserLocationButton(trackingMode: .constant(.followWithHeading), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil))
         }
     }
 }
