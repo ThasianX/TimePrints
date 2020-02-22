@@ -349,6 +349,7 @@ private extension EditTagView {
         Picker(selection: $selectedColorIndex, label: Text("")) {
             ForEach(0..<identifiers.count) { index in
                 self.coloredTextRow(at: index)
+                    .tag(index)
             }
         }
         .labelsHidden()
