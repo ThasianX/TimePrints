@@ -10,6 +10,10 @@ struct VisitsForDayView: View {
     let visits: [Visit]
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
 
+    private var isShowingVisit: Bool {
+        activeVisitIndex != -1
+    }
+
     var body: some View {
         ZStack(alignment: .top) {
             header
@@ -33,6 +37,10 @@ private extension VisitsForDayView {
 
     private var backButton: some View {
         BImage(perform: setPreviewActive, image: Image(systemName: "arrow.left"))
+    }
+
+    private func setPreviewActive() {
+        isPreviewActive = true
     }
 
     private var dayLabel: some View {
@@ -76,16 +84,6 @@ private extension VisitsForDayView {
         )
         .id(visit.tagName)
         .id(visit.tagColor)
-    }
-}
-
-private extension VisitsForDayView {
-    private func setPreviewActive() {
-        isPreviewActive = true
-    }
-
-    private var isShowingVisit: Bool {
-        activeVisitIndex != -1
     }
 
     private func isActiveVisitIndex(index: Int) -> Bool {
