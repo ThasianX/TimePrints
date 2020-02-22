@@ -17,3 +17,12 @@ struct RotatedModifier: ViewModifier {
             .frame(width: newFrame.width, height: newFrame.height)
     }
 }
+
+private extension View {
+    func captureSize(in binding: Binding<CGSize>) -> some View {
+        modifier(SizeModifier())
+            .onPreferenceChange(SizePreferenceKey.self) {
+                binding.wrappedValue = $0
+        }
+    }
+}

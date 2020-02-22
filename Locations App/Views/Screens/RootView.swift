@@ -109,12 +109,16 @@ private extension RootView {
 private extension RootView {
     private var toggleViewButton: some View {
         ZStack {
-            showingVisitsPreviewList.when(true: mapButtonBackgroundColor, false: listButtonBackgroundColor)
-            BImage(perform: toggleVisitsPreviewAndStayAtLocation, image: showingVisitsPreviewList.when(true: mapImage, false: listImage))
-                .foregroundColor(showingVisitsPreviewList.when(true: mapButtonColor, false: listButtonColor))
+            toggleBackgroundColor
+            BImage(perform: toggleVisitsPreviewAndStayAtLocation, image: toggleImage)
+                .foregroundColor(toggleForegroundColor)
         }
         .frame(width: 50, height: 50)
         .clipShape(Circle())
+    }
+
+    private var toggleBackgroundColor: Color {
+        showingVisitsPreviewList ? .green : .white
     }
 
     private func toggleVisitsPreviewAndStayAtLocation() {
@@ -122,28 +126,12 @@ private extension RootView {
         stayAtLocation = true
     }
 
-    private var mapImage: Image {
-        .init(systemName: "map.fill")
+    private var toggleImage: Image {
+        showingVisitsPreviewList ? Image(systemName: "map.fill") : Image(systemName: "list.dash")
     }
-    
-    private var listImage: Image {
-        .init(systemName: "list.dash")
-    }
-    
-    private var mapButtonColor: Color {
-        .white
-    }
-    
-    private var listButtonColor: Color {
-        .black
-    }
-    
-    private var mapButtonBackgroundColor: Color {
-        .green
-    }
-    
-    private var listButtonBackgroundColor: Color {
-        .white
+
+    private var toggleForegroundColor: Color {
+        showingVisitsPreviewList ? .white : .black
     }
 }
 

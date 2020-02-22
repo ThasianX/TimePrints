@@ -33,7 +33,7 @@ struct VisitDetailsView: View {
         }
         .onAppear(perform: setFavoritedStateAndNotesInput)
         .frame(height: VisitCellConstants.height(if: isSelected))
-        .edgesIgnoringSafeArea(.all)
+        .extendToScreenEdges()
         .animation(.spring())
         .scaleEffect(1 - (self.activeTranslation.height+self.activeTranslation.width)/1000)
     }
@@ -93,9 +93,9 @@ private extension VisitDetailsView {
 
     private var locationNameText: some View {
         Text(visit.location.name)
-            .font(isSelected.when(true: .system(size: 22), false: .headline))
-            .fontWeight(isSelected.when(true: .bold, false: .regular))
-            .lineLimit(isSelected.when(true: nil, false: 1))
+            .font(isSelected ? .system(size: 22) : .headline)
+            .fontWeight(isSelected ? .bold : .regular)
+            .lineLimit(isSelected ? nil : 1)
             .multilineTextAlignment(.center)
             .animation(nil)
     }

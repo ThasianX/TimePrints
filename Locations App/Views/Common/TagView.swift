@@ -8,13 +8,12 @@ struct TagView: View {
         ZStack {
             content
         }
-        .frame(width: displayName.when(true: nil, false: 30), height: displayName.when(true: nil, false: 5))
+        .frame(width: displayName ? nil : 30, height: displayName ? nil : 5)
         .background(roundedAndFilledRectangle)
         .animation(.spring())
     }
 }
 
-// MARK: - Content
 private extension TagView {
     private var content: some View {
         Text(tag.name.uppercased())
@@ -22,7 +21,7 @@ private extension TagView {
             .padding(6)
             .animation(nil)
             .fade(if: !displayName)
-            .scaleEffect(displayName.when(true: 1, false: 0.1))
+            .scaleEffect(displayName ? 1 : 0)
     }
     
     private var roundedAndFilledRectangle: some View {
