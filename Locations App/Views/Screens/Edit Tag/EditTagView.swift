@@ -187,6 +187,8 @@ private extension EditTagView {
         VStack {
             ForEach(tags) { tag in
                 self.interactiveColoredTextRow(tag: tag)
+                    .id(tag.name)
+                    .id(tag.color)
             }
         }
     }
@@ -367,7 +369,7 @@ private extension EditTagView {
     private var revertText: some View {
         Text("Revert")
             .font(.headline)
-            .foregroundColor(Color(deletedTag?.uiColor ?? .clear))
+            .foregroundColor(Color(deletedTag!.uiColor))
     }
 
     private func revert() {
