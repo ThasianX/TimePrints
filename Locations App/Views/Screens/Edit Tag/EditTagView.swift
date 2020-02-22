@@ -102,7 +102,7 @@ private extension EditTagView {
     private var tagImage: some View {
         Image(systemName: "tag.fill")
             .foregroundColor(.white)
-            .colorMultiply(isShowingAddOrEdit ? selectedColor : defaultTagColor)
+            .colorMultiply(isShowingAddOrEdit ? Color(selectedColor) : defaultTagColor)
     }
 
     private var defaultTagColor: Color {
@@ -154,23 +154,38 @@ private extension EditTagView {
     private var checkmarkButton: some View {
         BImage(perform: showAdd ? addNewTag : editTag, image: Image(systemName: "checkmark.circle.fill"))
             .foregroundColor(.white)
-            .colorMultiply(selectedColor)
+            .colorMultiply(Color(selectedColor))
     }
 
-    private var selectedColor: Color {
-        Color(colors[identifiers[selectedColorIndex]]!)
+    private var selectedColor: UIColor {
+        colors[identifiers[selectedColorIndex]]!
     }
 
     private func addNewTag() {
         let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty {
-            createTagAndExitView(name: name)
-            resetAddMode()
+
+        guard !name.isEmpty else {
+            configureAlert(with: "Name cannot be empty")
+            return
         }
+
+        guard !Tag.containsTag(with: name, color: selectedColor) else {
+            configureAlert(with: "Tag already exists")
+            return
+        }
+
+        createTagAndExitView(name: name)
+        resetAddMode()
+    }
+
+    private func configureAlert(with message: String) {
+        alertMessage = message
+        presentAlert = true
+        startTransientAlert()
     }
 
     private func createTagAndExitView(name: String) {
-        let tag = Tag.create(name: name, color: colors[identifiers[selectedColorIndex]]!)
+        let tag = Tag.create(name: name, color: selectedColor)
         setTagAndExitView(tag: tag)
     }
 
@@ -296,12 +311,6 @@ private extension EditTagView {
     private func setTagForAffectedLocationsToDefault() {
         locationsForDeletedTag.forEach { $0.setTag(tag: .default) }
     }
-
-    private func startTransientAlert() {
-        alertItem.cancel()
-        alertItem = DispatchWorkItem { self.resetAlert() }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: alertItem)
-    }
 }
 
 private extension EditTagView {
@@ -424,6 +433,12 @@ private extension EditTagView {
         stayAtLocation = true
         location = nil
         resetAlert()
+    }
+
+    private func startTransientAlert() {
+        alertItem.cancel()
+        alertItem = DispatchWorkItem { self.resetAlert() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: alertItem)
     }
 
     private func resetAlert() {

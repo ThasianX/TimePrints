@@ -30,7 +30,29 @@ public class Tag: NSManagedObject {
     class func fetchAll() -> [Tag] {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
 
-        return try! CoreData.stack.context.fetch(fetchRequest)
+        do {
+            return try CoreData.stack.context.fetch(fetchRequest)
+        } catch {
+            fatalError("Tag entity does not exist in database")
+        }
+    }
+
+    class func containsTag(with name: String, color: UIColor) -> Bool {
+        let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
+        fetchRequest.predicate = createTagPredicate(name: name, color: color.hexString())
+
+        do {
+            let queriedTag = try CoreData.stack.context.fetch(fetchRequest)
+            return queriedTag.first != nil
+        } catch {
+            fatalError("Tag entity does not exist in database")
+        }
+    }
+
+    private class func createTagPredicate(name: String, color: String) -> NSCompoundPredicate {
+        let namePredicate = NSPredicate(format: "%@ == name", name)
+        let colorPredicate = NSPredicate(format: "%@ == color", color)
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, colorPredicate])
     }
     
     class func newTag() -> Tag {
