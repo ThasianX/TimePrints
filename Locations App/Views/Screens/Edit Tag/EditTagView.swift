@@ -1,5 +1,16 @@
 import SwiftUI
 
+private extension EditTagView {
+    struct DeletedTag {
+        let name: String
+        let color: String
+
+        var uiColor: UIColor {
+            UIColor(color)
+        }
+    }
+}
+
 struct EditTagView: View {
     @FetchRequest(
         entity: Tag.entity(),
@@ -12,13 +23,13 @@ struct EditTagView: View {
     @State private var showEdit: Bool = false
     @State private var nameInput: String = ""
     @State private var selectedColorIndex: Int = 1
-
     @State private var tagInEditing: Tag? = nil
+
+    @State private var deletedTag: DeletedTag? = nil
     @State private var presentAlert: Bool = false
-    @State private var deletedTag: Tag? = nil
     @State private var alertMessage: String = ""
     @State private var alertItem: DispatchWorkItem = .init(block: {})
-    @State private var locationsWithDeletedTag: Set<Location> = .init()
+    @State private var locationsForDeletedTag: Set<Location> = .init()
     
     @Binding var show: Bool
     @Binding var location: Location?
@@ -256,27 +267,34 @@ private extension EditTagView {
         if tag.isDefault {
             self.alertMessage = "Default tag cannot be deleted"
         } else {
-            deleteTag(tag: tag)
+            storeLocationsAndDeleteTag(tag: tag)
         }
         self.presentAlert = true
 
         startTransientAlert()
     }
 
-    private func deleteTag(tag: Tag) {
+    private func storeLocationsAndDeleteTag(tag: Tag) {
         storeLocationsForDeletedTag(tag: tag)
-
-        let deletedTag = tag.delete()
-        setTagForEffectedLocationsToDefault()
-        self.deletedTag = deletedTag
+        storeTagAndDeleteIt(tag: tag)
+        setTagForAffectedLocationsToDefault()
     }
 
     private func storeLocationsForDeletedTag(tag: Tag) {
-        locationsWithDeletedTag = tag.locations
+        locationsForDeletedTag = tag.locations
     }
 
-    private func setTagForEffectedLocationsToDefault() {
-        locationsWithDeletedTag.forEach { $0.setTag(tag: .default) }
+    private func storeTagAndDeleteIt(tag: Tag) {
+        setDeletedTag(tag: tag)
+        tag.delete()
+    }
+
+    private func setDeletedTag(tag: Tag) {
+        self.deletedTag = DeletedTag(name: tag.name, color: tag.color)
+    }
+
+    private func setTagForAffectedLocationsToDefault() {
+        locationsForDeletedTag.forEach { $0.setTag(tag: .default) }
     }
 
     private func startTransientAlert() {
@@ -372,15 +390,15 @@ private extension EditTagView {
     }
 
     private func revert() {
-        if deletedTag != nil {
-            let tag = Tag.create(from: deletedTag!)
-            revertTagForEffectedLocations(to: tag)
+        if let deletedTag = deletedTag {
+            let tag = Tag.create(name: deletedTag.name, hex: deletedTag.color)
+            revertTagForAffectedLocations(to: tag)
             resetAlert()
         }
     }
 
-    private func revertTagForEffectedLocations(to tag: Tag) {
-        locationsWithDeletedTag.forEach { $0.setTag(tag: tag) }
+    private func revertTagForAffectedLocations(to tag: Tag) {
+        locationsForDeletedTag.forEach { $0.setTag(tag: tag) }
     }
 
     private var alertMessageText: some View {

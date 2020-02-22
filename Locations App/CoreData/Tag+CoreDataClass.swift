@@ -45,12 +45,12 @@ public class Tag: NSManagedObject {
         CoreData.stack.save()
         return tag
     }
-    
+
     @discardableResult
-    class func create(from existing: Tag) -> Tag {
+    class func create(name: String, hex: String) -> Tag {
         let tag = newTag()
-        tag.name = existing.name
-        tag.color = existing.color
+        tag.name = name
+        tag.color = hex
         CoreData.stack.save()
         return tag
     }
@@ -68,6 +68,7 @@ extension Tag {
         CoreData.stack.save()
     }
 
+    @discardableResult
     func delete() -> Tag {
         let tag = self
         CoreData.stack.context.delete(self)
@@ -82,7 +83,6 @@ extension Tag {
 }
 
 extension Tag {
-    // MARK: - Preview
     class var preview: Tag {
         Tag.create(name: "Visits", color: .salmon)
     }
