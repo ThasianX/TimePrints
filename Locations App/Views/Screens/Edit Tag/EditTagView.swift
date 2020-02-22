@@ -175,7 +175,6 @@ private extension EditTagView {
         }
 
         createTagAndExitView(name: name)
-        resetAddMode()
     }
 
     private func configureAlert(with message: String) {
@@ -187,17 +186,27 @@ private extension EditTagView {
     private func createTagAndExitView(name: String) {
         let tag = Tag.create(name: name, color: selectedColor)
         setTagAndExitView(tag: tag)
+        resetAddMode()
     }
 
     private func editTag() {
         let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty {
-            editTagAndExitEditMode(name: name)
+
+        guard !name.isEmpty else {
+            configureAlert(with: "Name cannot be empty")
+            return
         }
+
+        guard !Tag.containsTag(with: name, color: selectedColor) else {
+            configureAlert(with: "Tag already exists")
+            return
+        }
+
+        editTagAndExitEditMode(name: name)
     }
 
     private func editTagAndExitEditMode(name: String) {
-        tagInEditing!.edit(name: name, color: colors[identifiers[selectedColorIndex]]!)
+        tagInEditing!.edit(name: name, color: selectedColor)
         resetEditMode()
     }
 }
