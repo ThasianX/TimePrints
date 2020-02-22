@@ -10,6 +10,10 @@ struct VisitsForDayView: View {
     let visits: [Visit]
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
 
+    private var isShowingVisit: Bool {
+        activeVisitIndex != -1
+    }
+
     var body: some View {
         ZStack(alignment: .top) {
             header
@@ -35,6 +39,10 @@ private extension VisitsForDayView {
         BImage(perform: setPreviewActive, image: Image(systemName: "arrow.left"))
     }
 
+    private func setPreviewActive() {
+        isPreviewActive = true
+    }
+
     private var dayLabel: some View {
         DayLabel(date: currentDayComponent.date)
     }
@@ -43,15 +51,15 @@ private extension VisitsForDayView {
         VScroll {
             makeVisitsStack
                 .frame(width: screen.width)
-                .padding(.bottom, 100)
+                .padding(.bottom, 600)
                 .animation(.spring())
         }
     }
 
     private var makeVisitsStack: some View {
         VStack(spacing: 2) {
-            ForEach(self.visits.indexed(), id: \.1.self) { i, visit in
-                self.dynamicVisitRow(index: i, visit: visit)
+            ForEach(0..<visits.count, id: \.self) { i in
+                self.dynamicVisitRow(index: i, visit: self.visits[i])
                     .frame(height: VisitCellConstants.height)
                     .frame(maxWidth: VisitCellConstants.maxWidth(if: self.isShowingVisit))
             }
@@ -67,23 +75,15 @@ private extension VisitsForDayView {
         }
     }
 
-    private func makeVisitDetailsView(index: Int, visit: Visit) -> VisitDetailsView {
+    private func makeVisitDetailsView(index: Int, visit: Visit) -> some View {
         VisitDetailsView(
             selectedIndex: $activeVisitIndex,
             index: index,
             visit: visit,
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
-    }
-}
-
-private extension VisitsForDayView {
-    private func setPreviewActive() {
-        isPreviewActive = true
-    }
-
-    private var isShowingVisit: Bool {
-        activeVisitIndex != -1
+        .id(visit.tagName)
+        .id(visit.tagColor)
     }
 
     private func isActiveVisitIndex(index: Int) -> Bool {

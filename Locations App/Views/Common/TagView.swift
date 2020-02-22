@@ -6,28 +6,27 @@ struct TagView: View {
     
     var body: some View {
         ZStack {
-            content
+            name
+                .fade(if: !displayName)
+                .scaleEffect(displayName ? 1 : 0)
         }
-        .frame(width: displayName.when(true: nil, false: 30), height: displayName.when(true: nil, false: 5))
+        .frame(width: displayName ? nil : 30, height: displayName ? nil : 5)
         .background(roundedAndFilledRectangle)
         .animation(.spring())
     }
 }
 
-// MARK: - Content
 private extension TagView {
-    private var content: some View {
+    private var name: some View {
         Text(tag.name.uppercased())
             .font(.caption)
             .padding(6)
             .animation(nil)
-            .fade(if: !displayName)
-            .scaleEffect(displayName.when(true: 1, false: 0.1))
     }
     
     private var roundedAndFilledRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
-            .fill(Color(.green))
+            .fill(Color(tag.uiColor))
     }
 }
 

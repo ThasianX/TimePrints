@@ -23,7 +23,7 @@ private extension MonthYearSideBar {
 struct MonthSideBar_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
+            Color.black.extendToScreenEdges()
             MonthYearSideBar(date: Date())
         }
     }
