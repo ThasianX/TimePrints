@@ -1,15 +1,15 @@
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct VisitDetailsView: View {
     @State private var mapFull = false
     @State private var isFavorite = false
     @State private var editNotesShowing = false
+
     @State private var notesInput = ""
     @State private var activeTranslation: CGSize = .zero
 
     @Binding var selectedIndex: Int
-
     let index: Int
     let visit: Visit
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
@@ -36,6 +36,56 @@ struct VisitDetailsView: View {
         .extendToScreenEdges()
         .animation(.spring())
         .scaleEffect(1 - (self.activeTranslation.height+self.activeTranslation.width)/1000)
+    }
+}
+
+private extension VisitDetailsView {
+    private func setSelectedVisitIndex() {
+        self.selectedIndex = index
+    }
+
+    private var exitGestureIfSelected: some Gesture {
+        return isSelected ? exitGesture : nil
+    }
+
+    private var exitGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                guard value.translation.height > 0 else { return }
+                guard value.translation.height < 100 else { return }
+                guard value.translation.width < 100 else { return }
+
+                self.activeTranslation = value.translation
+        }
+        .onEnded { value in
+            if self.activeTranslation.height > 20 || self.activeTranslation.width > 10 {
+                self.resetViewState()
+            }
+            self.resetActiveTranslation()
+        }
+    }
+
+    private func resetViewState() {
+        resetNoteState()
+        minimizeMap()
+        unselectRow()
+    }
+
+    private func resetActiveTranslation() {
+        activeTranslation = .zero
+    }
+
+    private func setFavoritedStateAndNotesInput() {
+        setFavoriteState()
+        updateNotesInput()
+    }
+
+    private func setFavoriteState() {
+        isFavorite = visit.isFavorite
+    }
+
+    private func updateNotesInput() {
+        notesInput = visit.notes
     }
 }
 
@@ -87,6 +137,30 @@ private extension VisitDetailsView {
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 
+    private func navigateBack() {
+        if mapFull {
+            minimizeMap()
+        } else if editNotesShowing {
+            resetNoteState()
+        } else {
+            unselectRow()
+        }
+    }
+
+    private func minimizeMap() {
+        self.mapFull = false
+    }
+
+    private func resetNoteState() {
+        editNotesShowing = false
+        UIApplication.shared.endEditing(true)
+        updateNotesInput()
+    }
+
+    private func unselectRow() {
+        self.selectedIndex = -1
+    }
+
     private var backButtonImage: Image {
         Image(systemName: !editNotesShowing ? "arrow.left" : "xmark.circle.fill")
     }
@@ -112,6 +186,10 @@ private extension VisitDetailsView {
     private var favoriteButton: some View {
         BImage(perform: favorite, image: favoriteImage)
             .foregroundColor(.yellow)
+    }
+
+    private func favorite() {
+        isFavorite = visit.favorite()
     }
 
     private var favoriteImage: Image {
@@ -185,6 +263,10 @@ private extension VisitDetailsView {
             .animation(.spring())
     }
 
+    private func toggleMapState() {
+        mapFull.toggle()
+    }
+
     private var locationAddressText: some View {
         Text(visit.location.address.uppercased())
             .font(.headline)
@@ -200,6 +282,19 @@ private extension VisitDetailsView {
         }
     }
 
+    private var focusLocationOnAnnotatedMapButton: some View {
+        Button(action: focusLocationOnAnnotatedMap) {
+            Image(systemName: "magnifyingglass")
+                .resizable()
+                .frame(width: 35, height: 35)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+
+    private func focusLocationOnAnnotatedMap() {
+        setActiveVisitLocationAndDisplayMap(visit)
+    }
+
     private var openAppleMapsButton: some View {
         Button(action: openAppleMaps) {
             Image(systemName: "arrow.up.right.diamond")
@@ -209,13 +304,10 @@ private extension VisitDetailsView {
         .buttonStyle(PlainButtonStyle())
     }
 
-    private var focusLocationOnAnnotatedMapButton: some View {
-        Button(action: focusLocationOnAnnotatedMap) {
-            Image(systemName: "magnifyingglass")
-                .resizable()
-                .frame(width: 35, height: 35)
-        }
-        .buttonStyle(PlainButtonStyle())
+    private func openAppleMaps() {
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: visit.location.coordinate, addressDictionary:nil))
+        mapItem.name = "Visit Location"
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
 }
 
@@ -243,6 +335,10 @@ private extension VisitDetailsView {
             }
         }
         .buttonStyle(PlainButtonStyle())
+    }
+
+    private func displayEditNotesView() {
+        editNotesShowing = true
     }
 
     private var dividerView: some View {
@@ -309,124 +405,10 @@ private extension VisitDetailsView {
     private var notesTextView: some View {
         AutoResizingTextField(isActive: $editNotesShowing, text: $notesInput, onCommit: commitNoteEdits)
     }
-}
-
-private extension VisitDetailsView {
-    private var exitGestureIfSelected: some Gesture {
-        return isSelected ? exitGesture : nil
-    }
-
-    private var exitGesture: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                guard value.translation.height > 0 else { return }
-                guard value.translation.height < 100 else { return }
-                guard value.translation.width < 100 else { return }
-
-                self.activeTranslation = value.translation
-        }
-        .onEnded { value in
-            if self.activeTranslation.height > 20 || self.activeTranslation.width > 10 {
-                self.resetViewState()
-            }
-            self.resetActiveTranslation()
-        }
-    }
-}
-
-private extension VisitDetailsView {
-    private func setFavoritedStateAndNotesInput() {
-        setFavoriteState()
-        setNotesInput()
-    }
-
-    private func setFavoriteState() {
-        isFavorite = visit.isFavorite
-    }
-
-    private func setNotesInput() {
-        notesInput = visit.notes
-    }
-
-    private func setSelectedVisitIndex() {
-        withAnimation {
-            self.selectedIndex = index
-        }
-    }
-
-    private func minimizeMap() {
-        withAnimation {
-            self.mapFull = false
-        }
-    }
-    
-    private func unselectRow() {
-        withAnimation {
-            self.selectedIndex = -1
-        }
-    }
-    
-    private func favorite() {
-        withAnimation {
-            isFavorite = visit.favorite()
-        }
-    }
-
-    private func toggleMapState() {
-        withAnimation {
-            mapFull.toggle()
-        }
-    }
-
-    private func openAppleMaps() {
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: visit.location.coordinate, addressDictionary:nil))
-        mapItem.name = "Visit Location"
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
-    }
-
-    private func focusLocationOnAnnotatedMap() {
-        setActiveVisitLocationAndDisplayMap(visit)
-    }
-
-    private func displayEditNotesView() {
-        withAnimation {
-            editNotesShowing = true
-        }
-    }
-
-    private func navigateBack() {
-        if mapFull {
-            minimizeMap()
-        } else if editNotesShowing {
-            resetNoteState()
-        } else {
-            unselectRow()
-        }
-    }
-
-    private func resetNoteState() {
-        editNotesShowing = false
-        UIApplication.shared.endEditing(true)
-        updateNotesInput()
-    }
 
     private func commitNoteEdits() {
         visit.setNotes(notesInput)
         updateNotesInput()
-    }
-
-    private func updateNotesInput() {
-        notesInput = visit.notes
-    }
-
-    private func resetViewState() {
-        resetNoteState()
-        minimizeMap()
-        unselectRow()
-    }
-
-    private func resetActiveTranslation() {
-        activeTranslation = .zero
     }
 }
 
