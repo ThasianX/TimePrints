@@ -195,9 +195,6 @@ private extension EditTagView {
 
     private func interactiveColoredTextRow(tag: Tag) -> some View {
         coloredTextRow(tag: tag)
-            .background(Color.clear)
-            .padding(8)
-            .contentShape(Rectangle())
             .onTapGesture {
                 self.setTagAndExitView(tag: tag)
             }
@@ -358,6 +355,7 @@ private extension EditTagView {
         Text("Deleted: \(deletedTag!.name)")
             .font(.headline)
             .foregroundColor(.white)
+            .animation(nil)
     }
 
     private var revertButton: some View {
@@ -370,6 +368,7 @@ private extension EditTagView {
         Text("Revert")
             .font(.headline)
             .foregroundColor(Color(deletedTag!.uiColor))
+            .animation(nil)
     }
 
     private func revert() {
@@ -387,6 +386,7 @@ private extension EditTagView {
     private var alertMessageText: some View {
         Text(alertMessage)
             .foregroundColor(.white)
+            .animation(nil)
     }
 }
 

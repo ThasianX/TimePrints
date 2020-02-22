@@ -13,7 +13,9 @@ struct ColoredTextRow: View {
             Spacer()
             checkmarkIfIsSelected
         }
-        .padding(.init(top: 0, leading: 32, bottom: 0, trailing: 0))
+        .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
+        .background(Color.clear)
+        .contentShape(Rectangle())
     }
 }
 
