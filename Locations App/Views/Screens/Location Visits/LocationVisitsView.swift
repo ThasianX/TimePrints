@@ -41,7 +41,7 @@ private extension LocationVisitsView {
     }
     
     private var locationVisitsList: some View {
-        VStack {
+        VStack(spacing: 8) {
             ForEach(visitsForSelectedLocation) { visit in
                 LocationVisitsRow(visit: visit)
             }
@@ -58,7 +58,7 @@ private extension LocationVisitsView {
         let visit: Visit
         
         var body: some View {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     visitDurationText
                     Spacer()

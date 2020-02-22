@@ -7,19 +7,15 @@ struct VisitsPreviewList: View {
     @State private var isPreviewActive = true
     @Binding var showingVisitsPreviewList: Bool
     @Binding var activeVisitLocation: Location?
-    
+
     private var visitsForDayComponent: [DateComponents: [Visit]] {
         Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
     }
-    
+
     private var daysComponentsForMonthComponent: [DateComponents: [DateComponents]] {
         Dictionary(grouping: Array(visitsForDayComponent.keys), by: { $0.monthAndYear })
     }
-    
-    private var descendingMonthComponents: [DateComponents] {
-        daysComponentsForMonthComponent.descendingKeys
-    }
-    
+
     var body: some View {
         var fill = false
         
@@ -46,20 +42,26 @@ struct VisitsPreviewList: View {
 }
 
 private extension VisitsPreviewList {
-    private var overlayColor: some View {
-        ScreenColor(Color("salmon"))
-            .saturation(2)
-    }
-    
     private var backgroundColor: some View {
         ScreenColor(UIColor.black)
     }
 
+    private var overlayColor: some View {
+        ScreenColor(Color("salmon"))
+            .saturation(2)
+    }
+}
+
+private extension VisitsPreviewList {
     private func visitsPreviewList(isFilled: @escaping () -> Bool) -> some View {
         VScroll {
             visitsPreviewStack(isFilled: isFilled)
                 .frame(width: screen.width)
         }
+    }
+
+    private var descendingMonthComponents: [DateComponents] {
+        daysComponentsForMonthComponent.descendingKeys
     }
 
     private func visitsPreviewStack(isFilled: @escaping () -> Bool) -> some View {
@@ -84,6 +86,10 @@ private extension VisitsPreviewList {
     private func monthYearSideBarText(date: Date) -> some View {
         MonthYearSideBar(date: date)
     }
+
+    private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
+        daysComponentsForMonthComponent[monthComponent]!.sortDescending
+    }
     
     private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
         HStack {
@@ -106,7 +112,9 @@ private extension VisitsPreviewList {
             dayComponent: dayComponent
         )
     }
-    
+}
+
+private extension VisitsPreviewList {
     private var visitsForActiveDayView: some View {
         VisitsForDayView(
             currentDayComponent: $currentDayComponent,
@@ -114,12 +122,6 @@ private extension VisitsPreviewList {
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
-    }
-}
-
-private extension VisitsPreviewList {
-    private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
-        daysComponentsForMonthComponent[monthComponent]!.sortDescending
     }
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {

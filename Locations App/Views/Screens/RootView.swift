@@ -7,13 +7,14 @@ let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.heig
 
 struct RootView: View {
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
-    
-    @State private var trackingMode: MGLUserTrackingMode = .follow
-    @State private var selectedLocation: Location?
+
     @State private var showingEditTag = false
     @State private var showingLocationVisits = false
     @State private var stayAtLocation = false
     @State private var showingVisitsPreviewList = false
+
+    @State private var trackingMode: MGLUserTrackingMode = .follow
+    @State private var selectedLocation: Location? = nil
     @State private var activeVisitLocation: Location? = nil
 
     var body: some View {
