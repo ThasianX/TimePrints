@@ -43,7 +43,7 @@ private extension VisitsForDayView {
         VScroll {
             makeVisitsStack
                 .frame(width: screen.width)
-                .padding(.bottom, 100)
+                .padding(.bottom, 600)
                 .animation(.spring())
         }
     }
