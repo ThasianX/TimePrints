@@ -260,7 +260,7 @@ private extension EditTagView {
         }
         self.presentAlert = true
 
-        displayAlert()
+        startTransientAlert()
     }
 
     private func deleteTag(tag: Tag) {
@@ -279,7 +279,7 @@ private extension EditTagView {
         locationsWithDeletedTag.forEach { $0.setTag(tag: .default) }
     }
 
-    private func displayAlert() {
+    private func startTransientAlert() {
         alertItem.cancel()
         alertItem = DispatchWorkItem { self.resetAlert() }
         DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: alertItem)
