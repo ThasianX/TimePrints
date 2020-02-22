@@ -50,8 +50,8 @@ private extension VisitsForDayView {
 
     private var makeVisitsStack: some View {
         VStack(spacing: 2) {
-            ForEach(self.visits.indexed(), id: \.1.self) { i, visit in
-                self.dynamicVisitRow(index: i, visit: visit)
+            ForEach(0..<visits.count, id: \.self) { i in
+                self.dynamicVisitRow(index: i, visit: self.visits[i])
                     .frame(height: VisitCellConstants.height)
                     .frame(maxWidth: VisitCellConstants.maxWidth(if: self.isShowingVisit))
             }
@@ -67,13 +67,15 @@ private extension VisitsForDayView {
         }
     }
 
-    private func makeVisitDetailsView(index: Int, visit: Visit) -> VisitDetailsView {
+    private func makeVisitDetailsView(index: Int, visit: Visit) -> some View {
         VisitDetailsView(
             selectedIndex: $activeVisitIndex,
             index: index,
             visit: visit,
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
+        .id(visit.tagName)
+        .id(visit.tagColor)
     }
 }
 

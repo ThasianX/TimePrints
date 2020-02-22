@@ -78,6 +78,10 @@ extension Visit {
         return arrivalTime
     }
 
+    var tagName: String {
+        self.location.tag.name
+    }
+
     var tagColor: UIColor {
         self.location.tag.uiColor
     }
