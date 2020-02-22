@@ -272,6 +272,14 @@ private extension EditTagView {
         self.deletedTag = deletedTag
     }
 
+    private func storeLocationsForDeletedTag(tag: Tag) {
+        locationsWithDeletedTag = tag.locations
+    }
+
+    private func setTagForEffectedLocationsToDefault() {
+        locationsWithDeletedTag.forEach { $0.setTag(tag: .default) }
+    }
+
     private func displayAlert() {
         alertItem.cancel()
         alertItem = DispatchWorkItem { self.resetAlert() }
@@ -370,6 +378,10 @@ private extension EditTagView {
         }
     }
 
+    private func revertTagForEffectedLocations(to tag: Tag) {
+        locationsWithDeletedTag.forEach { $0.setTag(tag: tag) }
+    }
+
     private var alertMessageText: some View {
         Text(alertMessage)
             .foregroundColor(.white)
@@ -398,18 +410,6 @@ private extension EditTagView {
         self.presentAlert = false
         self.alertMessage = ""
         self.deletedTag = nil
-    }
-
-    private func storeLocationsForDeletedTag(tag: Tag) {
-        locationsWithDeletedTag = tag.locations
-    }
-
-    private func setTagForEffectedLocationsToDefault() {
-        locationsWithDeletedTag.forEach { $0.setTag(tag: .default) }
-    }
-
-    private func revertTagForEffectedLocations(to tag: Tag) {
-        locationsWithDeletedTag.forEach { $0.setTag(tag: tag) }
     }
 }
 
