@@ -1,5 +1,16 @@
 import SwiftUI
 
+private extension EditTagView {
+    struct DeletedTag {
+        let name: String
+        let color: String
+
+        var uiColor: UIColor {
+            UIColor(color)
+        }
+    }
+}
+
 struct EditTagView: View {
     @FetchRequest(
         entity: Tag.entity(),
@@ -12,13 +23,13 @@ struct EditTagView: View {
     @State private var showEdit: Bool = false
     @State private var nameInput: String = ""
     @State private var selectedColorIndex: Int = 1
-
     @State private var tagInEditing: Tag? = nil
+
+    @State private var deletedTag: DeletedTag? = nil
     @State private var presentAlert: Bool = false
-    @State private var deletedTag: Tag? = nil
     @State private var alertMessage: String = ""
     @State private var alertItem: DispatchWorkItem = .init(block: {})
-    @State private var locationsWithDeletedTag: Set<Location> = .init()
+    @State private var locationsForDeletedTag: Set<Location> = .init()
     
     @Binding var show: Bool
     @Binding var location: Location?
@@ -91,7 +102,7 @@ private extension EditTagView {
     private var tagImage: some View {
         Image(systemName: "tag.fill")
             .foregroundColor(.white)
-            .colorMultiply(isShowingAddOrEdit ? selectedColor : defaultTagColor)
+            .colorMultiply(isShowingAddOrEdit ? Color(selectedColor) : defaultTagColor)
     }
 
     private var defaultTagColor: Color {
@@ -143,35 +154,59 @@ private extension EditTagView {
     private var checkmarkButton: some View {
         BImage(perform: showAdd ? addNewTag : editTag, image: Image(systemName: "checkmark.circle.fill"))
             .foregroundColor(.white)
-            .colorMultiply(selectedColor)
+            .colorMultiply(Color(selectedColor))
     }
 
-    private var selectedColor: Color {
-        Color(colors[identifiers[selectedColorIndex]]!)
+    private var selectedColor: UIColor {
+        colors[identifiers[selectedColorIndex]]!
     }
 
     private func addNewTag() {
         let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty {
-            createTagAndExitView(name: name)
-            resetAddMode()
+
+        guard !name.isEmpty else {
+            configureAlert(with: "Name cannot be empty")
+            return
         }
+
+        guard !Tag.containsTag(with: name, color: selectedColor) else {
+            configureAlert(with: "Tag already exists")
+            return
+        }
+
+        createTagAndExitView(name: name)
+    }
+
+    private func configureAlert(with message: String) {
+        alertMessage = message
+        presentAlert = true
+        startTransientAlert()
     }
 
     private func createTagAndExitView(name: String) {
-        let tag = Tag.create(name: name, color: colors[identifiers[selectedColorIndex]]!)
+        let tag = Tag.create(name: name, color: selectedColor)
         setTagAndExitView(tag: tag)
+        resetAddMode()
     }
 
     private func editTag() {
         let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty {
-            editTagAndExitEditMode(name: name)
+
+        guard !name.isEmpty else {
+            configureAlert(with: "Name cannot be empty")
+            return
         }
+
+        guard !Tag.containsTag(with: name, color: selectedColor) else {
+            configureAlert(with: "Tag already exists")
+            return
+        }
+
+        editTagAndExitEditMode(name: name)
     }
 
     private func editTagAndExitEditMode(name: String) {
-        tagInEditing!.edit(name: name, color: colors[identifiers[selectedColorIndex]]!)
+        tagInEditing!.edit(name: name, color: selectedColor)
         resetEditMode()
     }
 }
@@ -187,15 +222,14 @@ private extension EditTagView {
         VStack {
             ForEach(tags) { tag in
                 self.interactiveColoredTextRow(tag: tag)
+                    .id(tag.name)
+                    .id(tag.color)
             }
         }
     }
 
     private func interactiveColoredTextRow(tag: Tag) -> some View {
         coloredTextRow(tag: tag)
-            .background(Color.clear)
-            .padding(8)
-            .contentShape(Rectangle())
             .onTapGesture {
                 self.setTagAndExitView(tag: tag)
             }
@@ -257,25 +291,34 @@ private extension EditTagView {
         if tag.isDefault {
             self.alertMessage = "Default tag cannot be deleted"
         } else {
-            deleteTag(tag: tag)
+            storeLocationsAndDeleteTag(tag: tag)
         }
         self.presentAlert = true
 
-        displayAlert()
+        startTransientAlert()
     }
 
-    private func deleteTag(tag: Tag) {
+    private func storeLocationsAndDeleteTag(tag: Tag) {
         storeLocationsForDeletedTag(tag: tag)
-
-        let deletedTag = tag.delete()
-        setTagForEffectedLocationsToDefault()
-        self.deletedTag = deletedTag
+        storeTagAndDeleteIt(tag: tag)
+        setTagForAffectedLocationsToDefault()
     }
 
-    private func displayAlert() {
-        alertItem.cancel()
-        alertItem = DispatchWorkItem { self.resetAlert() }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: alertItem)
+    private func storeLocationsForDeletedTag(tag: Tag) {
+        locationsForDeletedTag = tag.locations
+    }
+
+    private func storeTagAndDeleteIt(tag: Tag) {
+        setDeletedTag(tag: tag)
+        tag.delete()
+    }
+
+    private func setDeletedTag(tag: Tag) {
+        self.deletedTag = DeletedTag(name: tag.name, color: tag.color)
+    }
+
+    private func setTagForAffectedLocationsToDefault() {
+        locationsForDeletedTag.forEach { $0.setTag(tag: .default) }
     }
 }
 
@@ -306,6 +349,7 @@ private extension EditTagView {
         Picker(selection: $selectedColorIndex, label: Text("")) {
             ForEach(0..<identifiers.count) { index in
                 self.coloredTextRow(at: index)
+                    .tag(index)
             }
         }
         .labelsHidden()
@@ -348,6 +392,7 @@ private extension EditTagView {
         Text("Deleted: \(deletedTag!.name)")
             .font(.headline)
             .foregroundColor(.white)
+            .animation(nil)
     }
 
     private var revertButton: some View {
@@ -359,20 +404,26 @@ private extension EditTagView {
     private var revertText: some View {
         Text("Revert")
             .font(.headline)
-            .foregroundColor(Color(deletedTag?.uiColor ?? .clear))
+            .foregroundColor(Color(deletedTag!.uiColor))
+            .animation(nil)
     }
 
     private func revert() {
-        if deletedTag != nil {
-            let tag = Tag.create(from: deletedTag!)
-            revertTagForEffectedLocations(to: tag)
+        if let deletedTag = deletedTag {
+            let tag = Tag.create(name: deletedTag.name, hex: deletedTag.color)
+            revertTagForAffectedLocations(to: tag)
             resetAlert()
         }
+    }
+
+    private func revertTagForAffectedLocations(to tag: Tag) {
+        locationsForDeletedTag.forEach { $0.setTag(tag: tag) }
     }
 
     private var alertMessageText: some View {
         Text(alertMessage)
             .foregroundColor(.white)
+            .animation(nil)
     }
 }
 
@@ -394,22 +445,16 @@ private extension EditTagView {
         resetAlert()
     }
 
+    private func startTransientAlert() {
+        alertItem.cancel()
+        alertItem = DispatchWorkItem { self.resetAlert() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: alertItem)
+    }
+
     private func resetAlert() {
         self.presentAlert = false
         self.alertMessage = ""
         self.deletedTag = nil
-    }
-
-    private func storeLocationsForDeletedTag(tag: Tag) {
-        locationsWithDeletedTag = tag.locations
-    }
-
-    private func setTagForEffectedLocationsToDefault() {
-        locationsWithDeletedTag.forEach { $0.setTag(tag: .default) }
-    }
-
-    private func revertTagForEffectedLocations(to tag: Tag) {
-        locationsWithDeletedTag.forEach { $0.setTag(tag: tag) }
     }
 }
 

@@ -30,7 +30,29 @@ public class Tag: NSManagedObject {
     class func fetchAll() -> [Tag] {
         let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
 
-        return try! CoreData.stack.context.fetch(fetchRequest)
+        do {
+            return try CoreData.stack.context.fetch(fetchRequest)
+        } catch {
+            fatalError("Tag entity does not exist in database")
+        }
+    }
+
+    class func containsTag(with name: String, color: UIColor) -> Bool {
+        let fetchRequest: NSFetchRequest<Tag> = Tag.fetchRequest()
+        fetchRequest.predicate = createTagPredicate(name: name, color: color.hexString())
+
+        do {
+            let queriedTag = try CoreData.stack.context.fetch(fetchRequest)
+            return queriedTag.first != nil
+        } catch {
+            fatalError("Tag entity does not exist in database")
+        }
+    }
+
+    private class func createTagPredicate(name: String, color: String) -> NSCompoundPredicate {
+        let namePredicate = NSPredicate(format: "%@ == name", name)
+        let colorPredicate = NSPredicate(format: "%@ == color", color)
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, colorPredicate])
     }
     
     class func newTag() -> Tag {
@@ -45,12 +67,12 @@ public class Tag: NSManagedObject {
         CoreData.stack.save()
         return tag
     }
-    
+
     @discardableResult
-    class func create(from existing: Tag) -> Tag {
+    class func create(name: String, hex: String) -> Tag {
         let tag = newTag()
-        tag.name = existing.name
-        tag.color = existing.color
+        tag.name = name
+        tag.color = hex
         CoreData.stack.save()
         return tag
     }
@@ -68,6 +90,7 @@ extension Tag {
         CoreData.stack.save()
     }
 
+    @discardableResult
     func delete() -> Tag {
         let tag = self
         CoreData.stack.context.delete(self)
@@ -82,7 +105,6 @@ extension Tag {
 }
 
 extension Tag {
-    // MARK: - Preview
     class var preview: Tag {
         Tag.create(name: "Visits", color: .salmon)
     }
