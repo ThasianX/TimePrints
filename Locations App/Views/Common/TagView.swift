@@ -26,7 +26,7 @@ private extension TagView {
     
     private var roundedAndFilledRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
-            .fill(Color(.green))
+            .fill(Color(tag.uiColor))
     }
 }
 
