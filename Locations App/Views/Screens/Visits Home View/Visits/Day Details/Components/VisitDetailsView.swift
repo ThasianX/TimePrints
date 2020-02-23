@@ -21,11 +21,13 @@ struct VisitDetailsView: View {
     var body: some View {
         ZStack(alignment: .top) {
             visitDetailsView
+                .animation(.spring())
                 .padding(.top, isSelected ? 80 : 12)
                 .padding(.leading, isSelected ? 0 : 40)
                 .padding(.trailing, isSelected ? 0 : 40)
                 .frame(height: VisitCellConstants.height(if: isSelected))
                 .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
+                .animation(nil)
                 .background(Color(UIColor.salmon))
                 .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
                 .onTapGesture(perform: setSelectedVisitIndex)
