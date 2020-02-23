@@ -225,7 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				1E0F7C802402BD42001B033C /* VisitsHomeView.swift */,
-				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
+				1E726FF62402FA07002FC8DB /* Components */,
 			);
 			path = "Visits Home View";
 			sourceTree = "<group>";
@@ -286,6 +286,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		1E726FF62402FA07002FC8DB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		1E7B618C23E284A700F9F974 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,8 +315,8 @@
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
 				1E24927123EB53DA00165280 /* Map */,
 				1E24927323EB54A600165280 /* Edit Tag */,
-				1E0F7C7F2402BD11001B033C /* Visits Home View */,
 				1E97274023EB5796006528ED /* Location Visits */,
+				1E0F7C7F2402BD11001B033C /* Visits Home View */,
 				1E24927223EB542200165280 /* Visits Preview */,
 				1E80279223E5EAA40043D119 /* Day Details */,
 			);
