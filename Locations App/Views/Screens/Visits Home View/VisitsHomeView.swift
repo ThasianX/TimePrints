@@ -16,12 +16,20 @@ struct VisitsHomeView: View {
 
     var body: some View {
         ZStack {
+            backgroundColor
+
             filterContent
 
             bottomRightAlignedExpandableFAB
                 .padding(.trailing, 16)
                 .padding(.bottom, 32)
         }
+    }
+}
+
+private extension VisitsHomeView {
+    private var backgroundColor: some View {
+        ScreenColor(UIColor.black)
     }
 }
 
