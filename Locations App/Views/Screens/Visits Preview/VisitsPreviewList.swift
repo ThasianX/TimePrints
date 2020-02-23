@@ -5,7 +5,7 @@ struct VisitsPreviewList: View {
     @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
     @State private var currentDayComponent = DateComponents()
     @State private var isPreviewActive = true
-    @Binding var showingVisitsPreviewList: Bool
+    @Binding var showingHomeView: Bool
     @Binding var activeVisitLocation: Location?
 
     private var visitsForDayComponent: [DateComponents: [Visit]] {
@@ -126,12 +126,12 @@ private extension VisitsPreviewList {
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
         self.activeVisitLocation = visit.location
-        self.showingVisitsPreviewList = false
+        self.showingHomeView = false
     }
 }
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(showingVisitsPreviewList: .constant(false), activeVisitLocation: .constant(nil)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
+        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
     }
 }
