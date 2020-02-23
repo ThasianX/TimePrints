@@ -7,6 +7,7 @@ struct VisitsPreviewList: View {
     @State private var isPreviewActive = true
     @Binding var showingHomeView: Bool
     @Binding var activeVisitLocation: Location?
+    @Binding var hideFAB: Bool
 
     var body: some View {
         var fill = false
@@ -122,6 +123,7 @@ private extension VisitsPreviewList {
         DayPreviewBlock(
             currentDayComponent: $currentDayComponent,
             isPreviewActive: $isPreviewActive,
+            hideFAB: $hideFAB,
             visits: visitsForDayComponent[dayComponent]!.sortAscByArrivalDate,
             isFilled: isFilled,
             dayComponent: dayComponent
@@ -134,6 +136,7 @@ private extension VisitsPreviewList {
         VisitsForDayView(
             currentDayComponent: $currentDayComponent,
             isPreviewActive: $isPreviewActive,
+            hideFAB: $hideFAB,
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
@@ -147,7 +150,7 @@ private extension VisitsPreviewList {
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
+        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
     }
 }
 

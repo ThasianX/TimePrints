@@ -10,6 +10,7 @@ enum HomeFilter {
 
 struct VisitsHomeView: View {
     @State private var homeFilter: HomeFilter = .visits
+    @State private var hideFAB: Bool = false
 
     @Binding var showingHomeView: Bool
     @Binding var activeVisitLocation: Location?
@@ -23,6 +24,7 @@ struct VisitsHomeView: View {
             bottomRightAlignedExpandableFAB
                 .padding(.trailing, 16)
                 .padding(.bottom, 32)
+                .fade(if: hideFAB)
         }
     }
 }
@@ -73,7 +75,7 @@ private extension VisitsHomeView {
     private var filterContent: AnyView {
         switch homeFilter {
         case .visits:
-            return VisitsPreviewList(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation).erased()
+            return VisitsPreviewList(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, hideFAB: $hideFAB).erased()
         case .tags:
             return EmptyView().erased()
         case .locations:

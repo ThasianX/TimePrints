@@ -6,6 +6,7 @@ struct DayPreviewBlock: View {
 
     @Binding var currentDayComponent: DateComponents
     @Binding var isPreviewActive: Bool
+    @Binding var hideFAB: Bool
 
     let visits: [Visit]
     let isFilled: Bool
@@ -38,6 +39,7 @@ private extension DayPreviewBlock {
     
     private func setPreviewInactive() {
         isPreviewActive = false
+        hideFAB = true
     }
 }
 
@@ -82,7 +84,7 @@ private extension DayPreviewBlock {
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), isPreviewActive: .constant(true), visits: [], isFilled: false, dayComponent: DateComponents())
+            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), isPreviewActive: .constant(true), hideFAB: .constant(true), visits: [], isFilled: false, dayComponent: DateComponents())
         }
     }
 }
