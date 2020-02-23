@@ -48,6 +48,7 @@
 		1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */; };
 		1EB865E123F9E01400A4B8E1 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E023F9E01400A4B8E1 /* UIApplication.swift */; };
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
+		1EC5698224020540002EF8A7 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC5698124020540002EF8A7 /* DataSource.swift */; };
 		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
 		1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */; };
 		1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */; };
@@ -160,6 +161,7 @@
 		1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1EB865E023F9E01400A4B8E1 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
+		1EC5698124020540002EF8A7 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
 		1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				1E9D789923E125610020FAFE /* Visit+CoreDataProperties.swift */,
 				1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */,
 				1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */,
+				1EC5698124020540002EF8A7 /* DataSource.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				1EFFA58C23E8B1E700914607 /* Location+CoreDataProperties.swift in Sources */,
 				1EFFA58B23E8B1E700914607 /* Location+CoreDataClass.swift in Sources */,
 				1E9D789C23E125610020FAFE /* Visit+CoreDataClass.swift in Sources */,
+				1EC5698224020540002EF8A7 /* DataSource.swift in Sources */,
 				1E5AF45823E3E2E500A94F10 /* Date+Additions.swift in Sources */,
 				1EFF83B323E5365E00FF04A1 /* H0Stack.swift in Sources */,
 				1EB865E123F9E01400A4B8E1 /* UIApplication.swift in Sources */,
