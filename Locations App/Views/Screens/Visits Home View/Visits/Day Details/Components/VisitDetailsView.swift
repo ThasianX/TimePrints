@@ -21,13 +21,11 @@ struct VisitDetailsView: View {
     var body: some View {
         ZStack(alignment: .top) {
             visitDetailsView
-                .animation(.spring())
                 .padding(.top, isSelected ? 80 : 12)
                 .padding(.leading, isSelected ? 0 : 40)
                 .padding(.trailing, isSelected ? 0 : 40)
                 .frame(height: VisitCellConstants.height(if: isSelected))
                 .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
-                .animation(nil)
                 .background(Color(UIColor.salmon))
                 .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
                 .onTapGesture(perform: setSelectedVisitIndex)
@@ -36,8 +34,8 @@ struct VisitDetailsView: View {
         .onAppear(perform: setFavoritedStateAndNotesInput)
         .frame(height: VisitCellConstants.height(if: isSelected))
         .extendToScreenEdges()
-        .animation(.spring())
         .scaleEffect(1 - (self.activeTranslation.height+self.activeTranslation.width)/1000)
+        .animation(.spring())
     }
 }
 
@@ -96,8 +94,7 @@ private extension VisitDetailsView {
         VStack(spacing: 2) {
             header
                 .padding(.bottom, isSelected ? 10 : 0)
-                .padding(.leading, isSelected ? 30 : 0)
-                .padding(.trailing, isSelected ? 30 : 0)
+                .padding(.horizontal, isSelected ? 30 : 0)
             coreDetailsView
                 .scaleEffect(mapFull || editNotesShowing ? 0 : 1)
                 .fade(if: mapFull || editNotesShowing)
