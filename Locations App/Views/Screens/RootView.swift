@@ -11,7 +11,7 @@ struct RootView: View {
     @State private var showingEditTag = false
     @State private var showingLocationVisits = false
     @State private var stayAtLocation = false
-    @State private var showingVisitsPreviewList = false
+    @State private var showingHomeView = false
 
     @State private var trackingMode: MGLUserTrackingMode = .follow
     @State private var selectedLocation: Location? = nil
@@ -19,11 +19,11 @@ struct RootView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            visitsPreviewList
-                .fade(if: !showingVisitsPreviewList)
+            visitsHomeView
+                .fade(if: !showingHomeView)
             
             annotatedMapView
-                .fade(if: showingVisitsPreviewList)
+                .fade(if: showingHomeView)
             
             toggleViewButton
                 .fade(if: showingEditTag || showingLocationVisits)
@@ -32,8 +32,8 @@ struct RootView: View {
 }
 
 private extension RootView {
-    private var visitsPreviewList: some View {
-        VisitsPreviewList(showingVisitsPreviewList: $showingVisitsPreviewList, activeVisitLocation: $activeVisitLocation)
+    private var visitsHomeView: some View {
+        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation)
     }
 }
 
@@ -123,21 +123,21 @@ private extension RootView {
     }
 
     private var toggleBackgroundColor: Color {
-        showingVisitsPreviewList ? .green : .white
+        showingHomeView ? .green : .white
     }
 
     private func toggleVisitsPreviewAndStayAtLocation() {
         activeVisitLocation = nil
-        showingVisitsPreviewList.toggle()
+        showingHomeView.toggle()
         stayAtLocation = true
     }
 
     private var toggleImage: Image {
-        showingVisitsPreviewList ? Image(systemName: "map.fill") : Image(systemName: "list.dash")
+        showingHomeView ? Image(systemName: "map.fill") : Image(systemName: "list.dash")
     }
 
     private var toggleForegroundColor: Color {
-        showingVisitsPreviewList ? .white : .black
+        showingHomeView ? .white : .black
     }
 }
 

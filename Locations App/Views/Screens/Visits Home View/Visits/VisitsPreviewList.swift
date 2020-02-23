@@ -5,34 +5,28 @@ struct VisitsPreviewList: View {
     @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
     @State private var currentDayComponent = DateComponents()
     @State private var isPreviewActive = true
-    @Binding var showingVisitsPreviewList: Bool
+    @Binding var showingHomeView: Bool
     @Binding var activeVisitLocation: Location?
-
-    private var visitsForDayComponent: [DateComponents: [Visit]] {
-        Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
-    }
-
-    private var daysComponentsForMonthComponent: [DateComponents: [DateComponents]] {
-        Dictionary(grouping: Array(visitsForDayComponent.keys), by: { $0.monthAndYear })
-    }
+    @Binding var hideFAB: Bool
 
     var body: some View {
         var fill = false
-        
+
         func isFilled() -> Bool {
             fill.toggle()
             return fill
         }
-        
-        return ZStack {
-            backgroundColor
 
-            visitsPreviewList(isFilled: isFilled)
-                .extendToScreenEdges()
-            
+        return ZStack {
+            V0Stack {
+                leftAlignedHeader
+                visitsPreviewList(isFilled: isFilled)
+                    .extendToScreenEdges()
+            }
+
             overlayColor
                 .fade(if: isPreviewActive)
-            
+
             visitsForActiveDayView
                 .fade(if: isPreviewActive)
                 .scaleEffect(isPreviewActive ? 0 : 1)
@@ -42,13 +36,35 @@ struct VisitsPreviewList: View {
 }
 
 private extension VisitsPreviewList {
-    private var backgroundColor: some View {
-        ScreenColor(UIColor.black)
+    private var leftAlignedHeader: some View {
+        HStack {
+            headerText
+            Spacer()
+        }
+        .padding()
     }
 
+    private var headerText: some View {
+        Text("Visits")
+            .font(.largeTitle)
+            .foregroundColor(.white)
+    }
+}
+
+private extension VisitsPreviewList {
     private var overlayColor: some View {
         ScreenColor(Color("salmon"))
             .saturation(2)
+    }
+}
+
+private extension VisitsPreviewList {
+    private var visitsForDayComponent: [DateComponents: [Visit]] {
+        Dictionary(grouping: visits, by: { $0.arrivalDate.dateComponents })
+    }
+
+    private var daysComponentsForMonthComponent: [DateComponents: [DateComponents]] {
+        Dictionary(grouping: Array(visitsForDayComponent.keys), by: { $0.monthAndYear })
     }
 }
 
@@ -71,7 +87,7 @@ private extension VisitsPreviewList {
             }
         }
     }
-    
+
     private func monthYearSideBarWithDayPreviewBlocksView(monthComponent: DateComponents, isFilled: @escaping () -> Bool) -> some View {
         H0Stack {
             self.monthYearSideBarText(date: monthComponent.date)
@@ -82,7 +98,7 @@ private extension VisitsPreviewList {
             }
         }
     }
-    
+
     private func monthYearSideBarText(date: Date) -> some View {
         MonthYearSideBar(date: date)
     }
@@ -90,7 +106,7 @@ private extension VisitsPreviewList {
     private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
         daysComponentsForMonthComponent[monthComponent]!.sortDescending
     }
-    
+
     private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
         HStack {
             daySideBarText(date: dayComponent.date)
@@ -98,15 +114,16 @@ private extension VisitsPreviewList {
         }
         .frame(height: 150)
     }
-    
+
     private func daySideBarText(date: Date) -> some View {
         DaySideBar(date: date)
     }
-    
+
     private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
         DayPreviewBlock(
             currentDayComponent: $currentDayComponent,
             isPreviewActive: $isPreviewActive,
+            hideFAB: $hideFAB,
             visits: visitsForDayComponent[dayComponent]!.sortAscByArrivalDate,
             isFilled: isFilled,
             dayComponent: dayComponent
@@ -119,6 +136,7 @@ private extension VisitsPreviewList {
         VisitsForDayView(
             currentDayComponent: $currentDayComponent,
             isPreviewActive: $isPreviewActive,
+            hideFAB: $hideFAB,
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
@@ -126,12 +144,13 @@ private extension VisitsPreviewList {
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
         self.activeVisitLocation = visit.location
-        self.showingVisitsPreviewList = false
+        self.showingHomeView = false
     }
 }
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(showingVisitsPreviewList: .constant(false), activeVisitLocation: .constant(nil)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
+        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
     }
 }
+

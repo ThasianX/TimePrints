@@ -6,6 +6,7 @@ struct VisitsForDayView: View {
 
     @Binding var currentDayComponent: DateComponents
     @Binding var isPreviewActive: Bool
+    @Binding var hideFAB: Bool
 
     let visits: [Visit]
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
@@ -41,6 +42,7 @@ private extension VisitsForDayView {
 
     private func setPreviewActive() {
         isPreviewActive = true
+        hideFAB = false
     }
 
     private var dayLabel: some View {
@@ -93,7 +95,7 @@ private extension VisitsForDayView {
 
 struct VisitsForDayView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), isPreviewActive: .constant(false), visits: Visit.previewVisitDetails, setActiveVisitLocationAndDisplayMap: { _ in })
+        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), isPreviewActive: .constant(false), hideFAB: .constant(true), visits: Visit.previewVisitDetails, setActiveVisitLocationAndDisplayMap: { _ in })
     }
 }
 

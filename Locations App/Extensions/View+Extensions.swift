@@ -17,7 +17,7 @@ extension View {
         modifier(OpacityModifier(fade: condition))
     }
     
-    func erase() -> AnyView {
+    func erased() -> AnyView {
         AnyView(self)
     }
 }
