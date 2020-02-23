@@ -11,6 +11,8 @@ struct ExpanadableFAB: View {
 
     var body: some View {
         ZStack {
+            menuInputsToView
+
             Button(action: toggleOpen) {
                 fabImage
                     .rotationEffect(.degrees(isOpen ? 45 : 0))
@@ -24,9 +26,6 @@ struct ExpanadableFAB: View {
             .shadow(color: fabColor, radius: 10)
             .scaleEffect(isOpen ? 1 : 0.7)
             .animation(.spring())
-            .zIndex(1)
-
-            menuInputsToView
         }
     }
 
@@ -66,7 +65,7 @@ extension ExpanadableFAB {
             .background(menuInput.color)
             .mask(Circle())
             .offset(x: isOpen ? menuInput.offsetX : 0, y: isOpen ? menuInput.offsetY : 0)
-            .scaleEffect(isOpen ? 1 : 0)
+            .scaleEffect(isOpen ? 1 : 0.1)
             .animation(Animation.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0).delay(menuInput.delay))
         }
 

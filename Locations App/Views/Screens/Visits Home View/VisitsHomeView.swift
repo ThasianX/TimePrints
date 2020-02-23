@@ -19,7 +19,8 @@ struct VisitsHomeView: View {
             filterContent
 
             bottomRightAlignedExpandableFAB
-                .padding()
+                .padding(.trailing, 16)
+                .padding(.bottom, 32)
         }
     }
 }
