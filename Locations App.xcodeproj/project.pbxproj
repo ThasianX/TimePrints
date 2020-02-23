@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1E06D51023FE21AE00467799 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */; };
+		1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C802402BD42001B033C /* VisitsHomeView.swift */; };
+		1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */; };
 		1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D3DB523EF8B2500528241 /* VScroll.swift */; };
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
@@ -113,6 +115,8 @@
 
 /* Begin PBXFileReference section */
 		1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
+		1E0F7C802402BD42001B033C /* VisitsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHomeView.swift; sourceTree = "<group>"; };
+		1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpanadableFAB.swift; sourceTree = "<group>"; };
 		1E1D3DB523EF8B2500528241 /* VScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VScroll.swift; sourceTree = "<group>"; };
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
@@ -217,6 +221,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E0F7C7F2402BD11001B033C /* Visits Home View */ = {
+			isa = PBXGroup;
+			children = (
+				1E0F7C802402BD42001B033C /* VisitsHomeView.swift */,
+				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
+			);
+			path = "Visits Home View";
+			sourceTree = "<group>";
+		};
 		1E24927123EB53DA00165280 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +307,7 @@
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
 				1E24927123EB53DA00165280 /* Map */,
 				1E24927323EB54A600165280 /* Edit Tag */,
+				1E0F7C7F2402BD11001B033C /* Visits Home View */,
 				1E97274023EB5796006528ED /* Location Visits */,
 				1E24927223EB542200165280 /* Visits Preview */,
 				1E80279223E5EAA40043D119 /* Day Details */,
@@ -656,6 +670,7 @@
 				1E6D569423E653990044AB3A /* VSpace.swift in Sources */,
 				1EFF83A823E52B9000FF04A1 /* SizePreferenceKey.swift in Sources */,
 				1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */,
+				1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */,
 				1EFF83B523E5368900FF04A1 /* V0Stack.swift in Sources */,
 				1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */,
 				1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */,
@@ -664,6 +679,7 @@
 				1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */,
 				1EFF83AB23E52BC700FF04A1 /* SizeModifier.swift in Sources */,
 				1EE2CF5923E7D2C2009760D6 /* CustomAnnotationView.swift in Sources */,
+				1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */,
 				1EFF83A323E4E27800FF04A1 /* RandomAccessCollection+Additions.swift in Sources */,
 				1E97274223EB57AE006528ED /* LocationVisitsView.swift in Sources */,
 				1EFFA58C23E8B1E700914607 /* Location+CoreDataProperties.swift in Sources */,
