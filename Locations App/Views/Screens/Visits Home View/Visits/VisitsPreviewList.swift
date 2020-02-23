@@ -27,8 +27,11 @@ struct VisitsPreviewList: View {
         return ZStack {
             backgroundColor
 
-            visitsPreviewList(isFilled: isFilled)
-                .extendToScreenEdges()
+            V0Stack {
+                leftAlignedHeader
+                visitsPreviewList(isFilled: isFilled)
+                    .extendToScreenEdges()
+            }
             
             overlayColor
                 .fade(if: isPreviewActive)
@@ -49,6 +52,22 @@ private extension VisitsPreviewList {
     private var overlayColor: some View {
         ScreenColor(Color("salmon"))
             .saturation(2)
+    }
+}
+
+private extension VisitsPreviewList {
+    private var leftAlignedHeader: some View {
+        HStack {
+            headerText
+            Spacer()
+        }
+        .padding()
+    }
+
+    private var headerText: some View {
+        Text("Visits")
+            .font(.largeTitle)
+            .foregroundColor(.white)
     }
 }
 
