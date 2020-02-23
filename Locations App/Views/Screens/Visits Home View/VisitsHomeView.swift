@@ -77,9 +77,9 @@ private extension VisitsHomeView {
         case .visits:
             return VisitsPreviewList(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, hideFAB: $hideFAB).erased()
         case .tags:
-            return EmptyView().erased()
+            return TagsListView().erased()
         case .locations:
-            return EmptyView().erased()
+            return LocationsListView().erased()
         }
     }
 }
