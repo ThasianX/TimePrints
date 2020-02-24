@@ -33,6 +33,7 @@ private extension TagRow {
             numberOfLocationsText
             numberOfVisitsText
         }
+        .animation(nil)
     }
 
     private var tagNameText: some View {
