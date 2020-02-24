@@ -441,6 +441,12 @@ private extension EditTagView {
     }
 
     private func setTagAndExitView(tag: Tag) {
+        if location!.tag == tag {
+            location!.setTag(tag: tag)
+            self.resetView()
+            return
+        }
+        
         location!.setTag(tag: tag)
         animatingSelection = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
