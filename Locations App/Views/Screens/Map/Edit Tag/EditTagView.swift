@@ -30,6 +30,7 @@ struct EditTagView: View {
     @State private var alertMessage: String = ""
     @State private var alertItem: DispatchWorkItem = .init(block: {})
     @State private var locationsForDeletedTag: Set<Location> = .init()
+    @State private var animatingSelection: Bool = false
     
     @Binding var show: Bool
     @Binding var location: Location?
@@ -71,6 +72,7 @@ struct EditTagView: View {
             bottomAlignedTransientAlertView
                 .fade(if: !presentAlert)
         }
+        .disabled(animatingSelection)
     }
 }
 
@@ -186,8 +188,8 @@ private extension EditTagView {
 
     private func createTagAndExitView(name: String) {
         let tag = Tag.create(name: name, color: selectedColor)
-        setTagAndExitView(tag: tag)
         resetAddMode()
+        setTagAndExitView(tag: tag)
     }
 
     private func editTag() {
@@ -440,13 +442,17 @@ private extension EditTagView {
 
     private func setTagAndExitView(tag: Tag) {
         location!.setTag(tag: tag)
-        resetView()
+        animatingSelection = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.resetView()
+        }
     }
 
     private func resetView() {
         show = false
         stayAtLocation = true
         location = nil
+        animatingSelection = false
         resetAlert()
     }
 

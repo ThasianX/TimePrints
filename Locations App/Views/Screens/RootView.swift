@@ -40,11 +40,11 @@ private extension RootView {
 private extension View {
     func modal(isPresented: Bool) -> some View {
         self
-            .frame(width: screen.width, height: screen.height * 0.6)
+            .frame(width: screen.width, height: screen.height * 0.8)
             .cornerRadius(30)
             .shadow(radius: 20)
             .fade(if: !isPresented)
-            .offset(y: isPresented ? screen.height * 0.15 : screen.height)
+            .offset(y: isPresented ? screen.height * 0.1 : screen.height)
             .animation(.spring())
     }
 }
