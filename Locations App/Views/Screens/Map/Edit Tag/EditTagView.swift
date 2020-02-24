@@ -58,7 +58,7 @@ struct EditTagView: View {
                     .fade(if: isShowingAddOrEdit)
                     .scaleEffect(isShowingAddOrEdit ? 0 : 1)
                 
-                VSpace(50)
+                VSpace(60)
                     .fade(if: isShowingAddOrEdit)
             }
             
@@ -81,6 +81,7 @@ private extension EditTagView {
             Spacer()
             editTagHeaderButtons
         }
+        .padding(.horizontal)
     }
 
     private var editTagHeaderView: some View {
@@ -121,7 +122,7 @@ private extension EditTagView {
         ZStack {
             addButton
                 .fade(if: isShowingAddOrEdit)
-            HStack {
+            HStack(spacing: 16) {
                 xButton
                 checkmarkButton
             }
@@ -222,6 +223,7 @@ private extension EditTagView {
         VStack {
             ForEach(tags) { tag in
                 self.interactiveColoredTextRow(tag: tag)
+                    .padding(.horizontal)
                     .id(tag.name)
                     .id(tag.color)
             }
@@ -238,8 +240,8 @@ private extension EditTagView {
             }
     }
 
-    private func coloredTextRow(tag: Tag) -> ColoredTextRow {
-        ColoredTextRow(text: tag.name, color: tag.uiColor, selected: self.location?.tag == tag)
+    private func coloredTextRow(tag: Tag) -> TagRow {
+        TagRow(tag: tag, isSelected: self.location?.tag == tag)
     }
 
     private func contextMenu(for tag: Tag) -> some View {
@@ -382,6 +384,9 @@ private extension EditTagView {
                     .padding(.trailing, 8)
 
                 revertButton
+                    .padding(8)
+                    .background(Color(deletedTag!.uiColor))
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             } else {
                 alertMessageText
             }
@@ -390,7 +395,7 @@ private extension EditTagView {
 
     private var deletedTagName: some View {
         Text("Deleted: \(deletedTag!.name)")
-            .font(.headline)
+            .font(.system(size: 20))
             .foregroundColor(.white)
             .animation(nil)
     }
@@ -403,8 +408,8 @@ private extension EditTagView {
 
     private var revertText: some View {
         Text("Revert")
-            .font(.headline)
-            .foregroundColor(Color(deletedTag!.uiColor))
+            .font(.system(size: 20))
+            .foregroundColor(.white)
             .animation(nil)
     }
 

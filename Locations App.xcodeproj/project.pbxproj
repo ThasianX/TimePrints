@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -62,6 +62,10 @@
 		1EF6227523FF21C800B28DCF /* MapboxMobileEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC8DC223E7238A00628251 /* StaticMapView.swift */; };
 		1EFC8DC523E76B4200628251 /* AnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC8DC423E76B4200628251 /* AnyTransition.swift */; };
+		1EFE85CB240360490001D0C3 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE85CA240360490001D0C3 /* TagRow.swift */; };
+		1EFE85CE240377060001D0C3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1EFE85CD240377060001D0C3 /* Lottie */; };
+		1EFE85D0240377170001D0C3 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE85CF240377170001D0C3 /* LottieView.swift */; };
+		1EFE85D3240390770001D0C3 /* check-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EFE85D2240390770001D0C3 /* check-animation.json */; };
 		1EFE9F4723FC225D00E94D67 /* MGLMapView+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE9F4623FC225D00E94D67 /* MGLMapView+Default.swift */; };
 		1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839423E49E0900FF04A1 /* DaySideBar.swift */; };
 		1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */; };
@@ -176,6 +180,9 @@
 		1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		1EFC8DC223E7238A00628251 /* StaticMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapView.swift; sourceTree = "<group>"; };
 		1EFC8DC423E76B4200628251 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
+		1EFE85CA240360490001D0C3 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
+		1EFE85CF240377170001D0C3 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		1EFE85D2240390770001D0C3 /* check-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "check-animation.json"; sourceTree = "<group>"; };
 		1EFE9F4623FC225D00E94D67 /* MGLMapView+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MGLMapView+Default.swift"; sourceTree = "<group>"; };
 		1EFF839423E49E0900FF04A1 /* DaySideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySideBar.swift; sourceTree = "<group>"; };
 		1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearSideBar.swift; sourceTree = "<group>"; };
@@ -205,6 +212,7 @@
 				1EF6227423FF21C800B28DCF /* MapboxMobileEvents.framework in Frameworks */,
 				1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */,
 				1EF6227123FF21C400B28DCF /* Mapbox.framework in Frameworks */,
+				1EFE85CE240377060001D0C3 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				1E24926F23EB52D200165280 /* ColorTextRow.swift */,
+				1EFE85CA240360490001D0C3 /* TagRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -323,6 +332,7 @@
 				1E1D3DB523EF8B2500528241 /* VScroll.swift */,
 				1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */,
 				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
+				1EFE85CF240377170001D0C3 /* LottieView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -383,6 +393,7 @@
 				1E9D789523E123FC0020FAFE /* CoreData */,
 				1EFD54FE23E14F5500C02BBD /* Services */,
 				1E9D78A723E1497F0020FAFE /* Models */,
+				1EFE85D1240390620001D0C3 /* Lottie */,
 				1E9D78A523E149160020FAFE /* Views */,
 				1EB865E223F9EC2D00A4B8E1 /* Button Styles */,
 				1EFF83A623E52B7A00FF04A1 /* PreferenceKeys */,
@@ -506,6 +517,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		1EFE85D1240390620001D0C3 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				1EFE85D2240390770001D0C3 /* check-animation.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		1EFF83A623E52B7A00FF04A1 /* PreferenceKeys */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +564,7 @@
 			);
 			name = "Locations App";
 			packageProductDependencies = (
+				1EFE85CD240377060001D0C3 /* Lottie */,
 			);
 			productName = "Locations App";
 			productReference = 1E9D785523E10B4F0020FAFE /* Locations App.app */;
@@ -619,6 +639,7 @@
 			);
 			mainGroup = 1E9D784C23E10B4F0020FAFE;
 			packageReferences = (
+				1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 1E9D785623E10B4F0020FAFE /* Products */;
 			projectDirPath = "";
@@ -637,6 +658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E9D786823E10B520020FAFE /* LaunchScreen.storyboard in Resources */,
+				1EFE85D3240390770001D0C3 /* check-animation.json in Resources */,
 				1E22BF5D23E2970500926030 /* Route.gpx in Resources */,
 				1E9D786523E10B520020FAFE /* Preview Assets.xcassets in Resources */,
 				1E9D786223E10B520020FAFE /* Assets.xcassets in Resources */,
@@ -734,6 +756,7 @@
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */,
 				1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
+				1EFE85D0240377170001D0C3 /* LottieView.swift in Sources */,
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
@@ -746,6 +769,7 @@
 				1EFF83AF23E52E5900FF04A1 /* RotatedModifier.swift in Sources */,
 				1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */,
 				1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */,
+				1EFE85CB240360490001D0C3 /* TagRow.swift in Sources */,
 				1E6D568B23E5F6F10044AB3A /* BImage.swift in Sources */,
 				1EFC8DC523E76B4200628251 /* AnyTransition.swift in Sources */,
 				1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */,
@@ -1086,6 +1110,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1EFE85CD240377060001D0C3 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */ = {

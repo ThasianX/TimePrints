@@ -40,7 +40,7 @@ private extension RootView {
 private extension View {
     func modal(isPresented: Bool) -> some View {
         self
-            .frame(width: screen.width * 0.8, height: screen.height * 0.6)
+            .frame(width: screen.width, height: screen.height * 0.6)
             .cornerRadius(30)
             .shadow(radius: 20)
             .fade(if: !isPresented)
