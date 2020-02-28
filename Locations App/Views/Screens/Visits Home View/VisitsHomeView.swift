@@ -72,15 +72,19 @@ private extension VisitsHomeView {
 }
 
 private extension VisitsHomeView {
-    private var filterContent: AnyView {
-        switch homeFilter {
-        case .visits:
-            return VisitsPreviewList(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, hideFAB: $hideFAB).erased()
-        case .tags:
-            return TagsListView().erased()
-        case .locations:
-            return LocationsListView().erased()
+    private var filterContent: some View {
+        ZStack {
+            VisitsPreviewList(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, hideFAB: $hideFAB)
+                .fade(if: !isCurrentFilter(filter: .visits))
+            TagsListView()
+                .fade(if: !isCurrentFilter(filter: .tags))
+            LocationsListView()
+                .fade(if: !isCurrentFilter(filter: .locations))
         }
+    }
+
+    private func isCurrentFilter(filter: HomeFilter) -> Bool {
+        filter == homeFilter
     }
 }
 
