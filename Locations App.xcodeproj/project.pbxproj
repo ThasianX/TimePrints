@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E00E5712408AF9500B14C9F /* TagDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00E5702408AF9500B14C9F /* TagDetailsView.swift */; };
 		1E06D51023FE21AE00467799 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */; };
 		1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C802402BD42001B033C /* VisitsHomeView.swift */; };
 		1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */; };
@@ -120,6 +121,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E00E5702408AF9500B14C9F /* TagDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailsView.swift; sourceTree = "<group>"; };
 		1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
 		1E0F7C802402BD42001B033C /* VisitsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHomeView.swift; sourceTree = "<group>"; };
 		1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpanadableFAB.swift; sourceTree = "<group>"; };
@@ -233,6 +235,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E00E5732408B02700B14C9F /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tags;
+			sourceTree = "<group>";
+		};
 		1E0F7C7F2402BD11001B033C /* Visits Home View */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				1E726FF82402FB82002FC8DB /* TagsListView.swift */,
+				1E00E5702408AF9500B14C9F /* TagDetailsView.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -333,6 +343,7 @@
 				1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */,
 				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
 				1EFE85CF240377170001D0C3 /* LottieView.swift */,
+				1E00E5732408B02700B14C9F /* Tags */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -745,6 +756,7 @@
 				1E5AF45223E3CC0500A94F10 /* VisitsPreviewList.swift in Sources */,
 				1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */,
 				1EFF83B123E532FA00FF04A1 /* Array+Additions.swift in Sources */,
+				1E00E5712408AF9500B14C9F /* TagDetailsView.swift in Sources */,
 				1EFE9F4723FC225D00E94D67 /* MGLMapView+Default.swift in Sources */,
 				1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */,
 				1E5DBEA723E9C6A000C86641 /* DisableModifier.swift in Sources */,
