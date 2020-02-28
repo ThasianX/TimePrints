@@ -44,7 +44,9 @@ struct CustomTextField: UIViewRepresentable {
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<CustomTextField>) {
         uiView.text = text
         if isActive && !uiView.isFirstResponder {
-            uiView.becomeFirstResponder()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                uiView.becomeFirstResponder()
+            }
         }
         recalculateHeight(view: uiView)
     }
