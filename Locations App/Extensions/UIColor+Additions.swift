@@ -1,17 +1,17 @@
 import UIKit
 
 extension UIColor {
-    static let berryRed = UIColor.init("#6F1F28")
+    static let berryRed = UIColor("#6F1F28")
     
-    static let charcoal = UIColor.init("#36454F")
+    static let charcoal = UIColor("#36454F")
     
-    static let limeGreen = UIColor.init("#31CD31")
+    static let limeGreen = UIColor("#31CD31")
     
-    static let salmon = UIColor.init("#FF8B69")
+    static let salmon = UIColor("#FF8B69")
     
-    static let skyBlue = UIColor.init("#86CEEB")
+    static let skyBlue = UIColor("#86CEEB")
 
-    static let kingFisherDaisy = UIColor.init("#4D089A")
+    static let kingFisherDaisy = UIColor("#4D089A")
 }
 
 extension UIColor {

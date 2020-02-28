@@ -6,7 +6,7 @@ struct SplashScreen: View {
     let kingFisherDaisy = Color(.kingFisherDaisy)
     let iLineWidth: CGFloat = 5
     let iZoomFactor: CGFloat = 1.4
-    let lineWidth:  CGFloat = 4
+    let lineWidth: CGFloat = 4
     let lineHeight: CGFloat = 28
     let iSquareLength: CGFloat = 12
 
