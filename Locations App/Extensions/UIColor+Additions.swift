@@ -10,6 +10,8 @@ extension UIColor {
     static let salmon = UIColor.init("#FF8B69")
     
     static let skyBlue = UIColor.init("#86CEEB")
+
+    static let kingFisherDaisy = UIColor.init("#4D089A")
 }
 
 extension UIColor {

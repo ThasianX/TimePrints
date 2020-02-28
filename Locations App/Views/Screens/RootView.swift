@@ -8,6 +8,7 @@ let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.heig
 struct RootView: View {
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
+    @State private var showSplash = true
     @State private var showingEditTag = false
     @State private var showingLocationVisits = false
     @State private var stayAtLocation = false
@@ -27,6 +28,9 @@ struct RootView: View {
             
             toggleViewButton
                 .fade(if: showingEditTag || showingLocationVisits)
+
+            splashScreen
+                .fade(if: !showSplash)
         }
     }
 }
@@ -138,6 +142,13 @@ private extension RootView {
 
     private var toggleForegroundColor: Color {
         showingHomeView ? .white : .black
+    }
+}
+
+private extension RootView {
+
+    private var splashScreen: SplashScreen {
+        SplashScreen(show: $showSplash)
     }
 }
 
