@@ -30,6 +30,7 @@ struct EditTagView: View {
     @State private var alertMessage: String = ""
     @State private var alertItem: DispatchWorkItem = .init(block: {})
     @State private var locationsForDeletedTag: Set<Location> = .init()
+    @State private var animatingSelection: Bool = false
     
     @Binding var show: Bool
     @Binding var location: Location?
@@ -58,7 +59,7 @@ struct EditTagView: View {
                     .fade(if: isShowingAddOrEdit)
                     .scaleEffect(isShowingAddOrEdit ? 0 : 1)
                 
-                VSpace(50)
+                VSpace(60)
                     .fade(if: isShowingAddOrEdit)
             }
             
@@ -71,6 +72,7 @@ struct EditTagView: View {
             bottomAlignedTransientAlertView
                 .fade(if: !presentAlert)
         }
+        .disabled(animatingSelection)
     }
 }
 
@@ -81,6 +83,7 @@ private extension EditTagView {
             Spacer()
             editTagHeaderButtons
         }
+        .padding(.horizontal)
     }
 
     private var editTagHeaderView: some View {
@@ -121,7 +124,7 @@ private extension EditTagView {
         ZStack {
             addButton
                 .fade(if: isShowingAddOrEdit)
-            HStack {
+            HStack(spacing: 16) {
                 xButton
                 checkmarkButton
             }
@@ -185,8 +188,8 @@ private extension EditTagView {
 
     private func createTagAndExitView(name: String) {
         let tag = Tag.create(name: name, color: selectedColor)
-        setTagAndExitView(tag: tag)
         resetAddMode()
+        setTagAndExitView(tag: tag)
     }
 
     private func editTag() {
@@ -222,6 +225,7 @@ private extension EditTagView {
         VStack {
             ForEach(tags) { tag in
                 self.interactiveColoredTextRow(tag: tag)
+                    .padding(.horizontal)
                     .id(tag.name)
                     .id(tag.color)
             }
@@ -238,8 +242,8 @@ private extension EditTagView {
             }
     }
 
-    private func coloredTextRow(tag: Tag) -> ColoredTextRow {
-        ColoredTextRow(text: tag.name, color: tag.uiColor, selected: self.location?.tag == tag)
+    private func coloredTextRow(tag: Tag) -> TagRow {
+        TagRow(tag: tag, isSelected: self.location?.tag == tag)
     }
 
     private func contextMenu(for tag: Tag) -> some View {
@@ -382,6 +386,9 @@ private extension EditTagView {
                     .padding(.trailing, 8)
 
                 revertButton
+                    .padding(8)
+                    .background(Color(deletedTag!.uiColor))
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             } else {
                 alertMessageText
             }
@@ -390,7 +397,7 @@ private extension EditTagView {
 
     private var deletedTagName: some View {
         Text("Deleted: \(deletedTag!.name)")
-            .font(.headline)
+            .font(.system(size: 20))
             .foregroundColor(.white)
             .animation(nil)
     }
@@ -403,8 +410,8 @@ private extension EditTagView {
 
     private var revertText: some View {
         Text("Revert")
-            .font(.headline)
-            .foregroundColor(Color(deletedTag!.uiColor))
+            .font(.system(size: 20))
+            .foregroundColor(.white)
             .animation(nil)
     }
 
@@ -434,14 +441,24 @@ private extension EditTagView {
     }
 
     private func setTagAndExitView(tag: Tag) {
+        if location!.tag == tag {
+            location!.setTag(tag: tag)
+            self.resetView()
+            return
+        }
+        
         location!.setTag(tag: tag)
-        resetView()
+        animatingSelection = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.resetView()
+        }
     }
 
     private func resetView() {
         show = false
         stayAtLocation = true
         location = nil
+        animatingSelection = false
         resetAlert()
     }
 
