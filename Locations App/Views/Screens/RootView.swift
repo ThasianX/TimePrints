@@ -22,20 +22,22 @@ struct RootView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            Group {
-                visitsHomeView
-                    .fade(if: !showingHomeView)
+            if userStore.isLoggedIn {
+                Group {
+                    visitsHomeView
+                        .fade(if: !showingHomeView)
 
-                annotatedMapView
-                    .fade(if: showingHomeView)
+                    annotatedMapView
+                        .fade(if: showingHomeView)
 
-                toggleViewButton
-                    .fade(if: showingEditTag || showingLocationVisits)
+                    toggleViewButton
+                        .fade(if: showingEditTag || showingLocationVisits)
+                }
             }
-            .fade(if: showingLogin)
 
-            loginView
-                .fade(if: !showingLogin)
+            if !userStore.isLoggedIn {
+                loginView
+            }
 
             splashScreen
                 .fade(if: !showSplash)
