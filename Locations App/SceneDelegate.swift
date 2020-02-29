@@ -5,9 +5,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let context = CoreData.stack.context
         let contentView = RootView()
-            .environment(\.managedObjectContext, context)
+            .environment(\.managedObjectContext, CoreData.stack.context)
             .environmentObject(UserStore(loginService: MockLoginService()))
             .statusBar(hidden: true)
 
