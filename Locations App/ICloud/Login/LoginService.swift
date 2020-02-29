@@ -8,11 +8,21 @@ protocol LoginService {
     func logOut()
 }
 
-struct MockLoginService: LoginService {
+struct MockSuccessLoginService: LoginService {
     var isUserLoggedIn: Bool = false
 
     func logIn(completion: @escaping (Bool) -> ()) {
         completion(true)
+    }
+
+    func logOut() { }
+}
+
+struct MockFailureLoginService: LoginService {
+    var isUserLoggedIn: Bool = false
+
+    func logIn(completion: @escaping (Bool) -> ()) {
+        completion(false)
     }
 
     func logOut() { }

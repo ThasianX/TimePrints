@@ -116,6 +116,6 @@ private extension LoginView {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            .environmentObject(UserStore(loginService: MockLoginService()))
+            .environmentObject(UserStore(loginService: MockSuccessLoginService()))
     }
 }

@@ -5,9 +5,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        let context = CoreData.stack.context
         let contentView = RootView()
-            .environment(\.managedObjectContext, CoreData.stack.context)
-            .environmentObject(UserStore(loginService: MockLoginService()))
+            .environment(\.managedObjectContext, context)
+            .environmentObject(UserStore(loginService: MockFailureLoginService()))
             .statusBar(hidden: true)
 
         if let windowScene = scene as? UIWindowScene {
