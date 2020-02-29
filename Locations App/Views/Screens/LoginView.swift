@@ -3,29 +3,65 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var loginService: ICloudLoginService
+    @EnvironmentObject var loginService: ICloudLoginService
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            VStack {
+                profileView
+                iCloudLoginView
+                wavelengthView
+                Spacer()
+            }
+        }
     }
 
 }
 
 private extension LoginView {
     private var profileView: some View {
-        LottieView(fileName: "profile")
-            .frame(width: 150, height: 150)
+        LottieView(fileName: "profile", repeatAnimation: !loginService.isUserLoggedIn)
+            .frame(width: 250, height: 250)
+    }
+
+    private var wavelengthView: some View {
+        LottieView(fileName: "wavelength", repeatAnimation: !loginService.isUserLoggedIn)
+            .frame(height: 150)
     }
 
     private var loadingView: some View {
-        LottieView(fileName: "loading")
+        LottieView(fileName: "walking", repeatAnimation: !loginService.isUserLoggedIn)
             .frame(width: 100, height: 100)
+    }
+
+    private var iCloudLoginView: some View {
+        HStack {
+            Spacer()
+            Image(systemName: "person.icloud.fill")
+                .imageScale(.large)
+                .foregroundColor(Color(.white))
+                .padding(.leading)
+            Text("Sign in With iCloud")
+                .font(.headline)
+                .padding(.leading)
+            Spacer()
+        }
+        .frame(width: 343, height: 68)
+        .background(BlurView(style: .systemMaterial))
+        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+        .shadow(color: Color(.kingFisherDaisy).opacity(0.2), radius: 20, x: 0, y: 20)
+        .onTapGesture(perform: logInToICloud)
+    }
+
+    private func logInToICloud() {
+        loginService.logIn()
     }
 
 }
 
-//struct LoginView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoginView()
-//    }
-//}
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView()
+            .environmentObject(ICloudLoginService())
+    }
+}

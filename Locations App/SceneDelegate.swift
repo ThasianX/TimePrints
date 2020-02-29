@@ -8,6 +8,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let context = CoreData.stack.context
         let contentView = RootView()
             .environment(\.managedObjectContext, context)
+            .environmentObject(ICloudLoginService())
             .statusBar(hidden: true)
 
         if let windowScene = scene as? UIWindowScene {

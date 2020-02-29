@@ -66,6 +66,7 @@
 		1ED53513240A3AED009B11D3 /* humpingmonkey.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53512240A3AEC009B11D3 /* humpingmonkey.json */; };
 		1ED53516240A3AF3009B11D3 /* check3.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53514240A3AF3009B11D3 /* check3.json */; };
 		1ED53517240A3AF3009B11D3 /* check2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53515240A3AF3009B11D3 /* check2.json */; };
+		1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53518240A3C9A009B11D3 /* BlurView.swift */; };
 		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
 		1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */; };
 		1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */; };
@@ -200,6 +201,7 @@
 		1ED53512240A3AEC009B11D3 /* humpingmonkey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = humpingmonkey.json; sourceTree = "<group>"; };
 		1ED53514240A3AF3009B11D3 /* check3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check3.json; sourceTree = "<group>"; };
 		1ED53515240A3AF3009B11D3 /* check2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check2.json; sourceTree = "<group>"; };
+		1ED53518240A3C9A009B11D3 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
 		1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */,
 				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
 				1EFE85CF240377170001D0C3 /* LottieView.swift */,
+				1ED53518240A3C9A009B11D3 /* BlurView.swift */,
 				1E00E5732408B02700B14C9F /* Tags */,
 			);
 			path = Common;
@@ -829,6 +832,7 @@
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
+				1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
 				1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */,
 				1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */,

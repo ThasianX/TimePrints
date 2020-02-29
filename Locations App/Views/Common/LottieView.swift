@@ -7,6 +7,7 @@ struct LottieView: UIViewRepresentable {
     typealias UIViewType = UIView
     let animationView = AnimationView()
     let fileName: String
+    var repeatAnimation = false
 
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView()
@@ -14,6 +15,7 @@ struct LottieView: UIViewRepresentable {
         let animation = Animation.named(fileName)
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = repeatAnimation ? .loop : .playOnce
         animationView.play()
 
         animationView.translatesAutoresizingMaskIntoConstraints = false
