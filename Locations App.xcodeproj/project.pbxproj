@@ -60,13 +60,16 @@
 		1ED53505240A2BF4009B11D3 /* BoolICloudKVS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */; };
 		1ED53507240A2C32009B11D3 /* KeyNamespaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */; };
 		1ED53509240A2C90009B11D3 /* ICloudKVS+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */; };
-		1ED5350B240A3639009B11D3 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5350A240A3639009B11D3 /* loading.json */; };
 		1ED5350F240A38B4009B11D3 /* walking.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5350E240A38B4009B11D3 /* walking.json */; };
-		1ED53511240A3AE8009B11D3 /* wavelength.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53510240A3AE8009B11D3 /* wavelength.json */; };
 		1ED53513240A3AED009B11D3 /* humpingmonkey.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53512240A3AEC009B11D3 /* humpingmonkey.json */; };
 		1ED53516240A3AF3009B11D3 /* check3.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53514240A3AF3009B11D3 /* check3.json */; };
 		1ED53517240A3AF3009B11D3 /* check2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53515240A3AF3009B11D3 /* check2.json */; };
 		1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53518240A3C9A009B11D3 /* BlurView.swift */; };
+		1ED5351B240AFD64009B11D3 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5351A240AFD64009B11D3 /* loading.json */; };
+		1ED5351D240B06E3009B11D3 /* error.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5351C240B06E3009B11D3 /* error.json */; };
+		1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED5351E240B0A27009B11D3 /* LoginService.swift */; };
+		1ED53521240B0A48009B11D3 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53520240B0A48009B11D3 /* Alert.swift */; };
+		1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53522240B0C01009B11D3 /* UserStore.swift */; };
 		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
 		1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */; };
 		1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */; };
@@ -195,13 +198,16 @@
 		1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolICloudKVS.swift; sourceTree = "<group>"; };
 		1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyNamespaceable.swift; sourceTree = "<group>"; };
 		1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ICloudKVS+Account.swift"; sourceTree = "<group>"; };
-		1ED5350A240A3639009B11D3 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		1ED5350E240A38B4009B11D3 /* walking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = walking.json; sourceTree = "<group>"; };
-		1ED53510240A3AE8009B11D3 /* wavelength.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wavelength.json; sourceTree = "<group>"; };
 		1ED53512240A3AEC009B11D3 /* humpingmonkey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = humpingmonkey.json; sourceTree = "<group>"; };
 		1ED53514240A3AF3009B11D3 /* check3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check3.json; sourceTree = "<group>"; };
 		1ED53515240A3AF3009B11D3 /* check2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check2.json; sourceTree = "<group>"; };
 		1ED53518240A3C9A009B11D3 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		1ED5351A240AFD64009B11D3 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		1ED5351C240B06E3009B11D3 /* error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.json; sourceTree = "<group>"; };
+		1ED5351E240B0A27009B11D3 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		1ED53520240B0A48009B11D3 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		1ED53522240B0C01009B11D3 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
 		1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
@@ -382,7 +388,7 @@
 			children = (
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
 				1E00E5742408CC6200B14C9F /* SplashScreen.swift */,
-				1ED534FF24096D62009B11D3 /* LoginView.swift */,
+				1ED53524240B0CC5009B11D3 /* Login */,
 				1E24927123EB53DA00165280 /* Map */,
 				1E0F7C7F2402BD11001B033C /* Visits Home View */,
 			);
@@ -558,8 +564,19 @@
 				1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */,
 				1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */,
 				1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */,
+				1ED5351E240B0A27009B11D3 /* LoginService.swift */,
+				1ED53520240B0A48009B11D3 /* Alert.swift */,
 			);
 			path = ICloud;
+			sourceTree = "<group>";
+		};
+		1ED53524240B0CC5009B11D3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1ED534FF24096D62009B11D3 /* LoginView.swift */,
+				1ED53522240B0C01009B11D3 /* UserStore.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		1EFD54FE23E14F5500C02BBD /* Services */ = {
@@ -576,12 +593,12 @@
 			children = (
 				1ED534FD24096B34009B11D3 /* profile.json */,
 				1EFE85D2240390770001D0C3 /* check1.json */,
-				1ED5350A240A3639009B11D3 /* loading.json */,
 				1ED5350E240A38B4009B11D3 /* walking.json */,
-				1ED53510240A3AE8009B11D3 /* wavelength.json */,
+				1ED5351A240AFD64009B11D3 /* loading.json */,
 				1ED53512240A3AEC009B11D3 /* humpingmonkey.json */,
 				1ED53515240A3AF3009B11D3 /* check2.json */,
 				1ED53514240A3AF3009B11D3 /* check3.json */,
+				1ED5351C240B06E3009B11D3 /* error.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -718,8 +735,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED5351D240B06E3009B11D3 /* error.json in Resources */,
 				1E9D786823E10B520020FAFE /* LaunchScreen.storyboard in Resources */,
 				1ED5350F240A38B4009B11D3 /* walking.json in Resources */,
+				1ED5351B240AFD64009B11D3 /* loading.json in Resources */,
 				1EFE85D3240390770001D0C3 /* check1.json in Resources */,
 				1ED53517240A3AF3009B11D3 /* check2.json in Resources */,
 				1E22BF5D23E2970500926030 /* Route.gpx in Resources */,
@@ -727,9 +746,7 @@
 				1ED53513240A3AED009B11D3 /* humpingmonkey.json in Resources */,
 				1E9D786523E10B520020FAFE /* Preview Assets.xcassets in Resources */,
 				1ED53516240A3AF3009B11D3 /* check3.json in Resources */,
-				1ED53511240A3AE8009B11D3 /* wavelength.json in Resources */,
 				1E9D786223E10B520020FAFE /* Assets.xcassets in Resources */,
-				1ED5350B240A3639009B11D3 /* loading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,6 +797,7 @@
 				1E9D789D23E125610020FAFE /* Visit+CoreDataProperties.swift in Sources */,
 				1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */,
 				1E6D569423E653990044AB3A /* VSpace.swift in Sources */,
+				1ED53521240B0A48009B11D3 /* Alert.swift in Sources */,
 				1EFF83A823E52B9000FF04A1 /* SizePreferenceKey.swift in Sources */,
 				1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */,
 				1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */,
@@ -834,8 +852,10 @@
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
 				1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
+				1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */,
 				1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */,
 				1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */,
+				1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,

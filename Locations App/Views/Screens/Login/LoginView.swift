@@ -2,8 +2,9 @@
 
 import SwiftUI
 
+// TODO: Monitor onForeground and call login on the userStore
 struct LoginView: View {
-    @EnvironmentObject var loginService: ICloudLoginService
+    @EnvironmentObject var userStore: UserStore
     @State private var isLoading = false
     @State private var isLoggingIn = false
 
@@ -12,7 +13,6 @@ struct LoginView: View {
             VStack {
                 profileView
                 iCloudLoginView
-                wavelengthView
                 Spacer()
             }
 
@@ -22,9 +22,12 @@ struct LoginView: View {
 
             if isLoggingIn {
                 LoggingInView()
-                    .onTapGesture {
-                        self.isLoggingIn = false
-                        self.loginService.logOut()
+            }
+
+            if userStore.alert != nil {
+                VStack {
+                    Text(userStore.alert!.message)
+                    LottieView(fileName: userStore.alert!.lottieFile)
                 }
             }
         }
@@ -34,17 +37,12 @@ struct LoginView: View {
 
 private extension LoginView {
     private var profileView: some View {
-        LottieView(fileName: "profile", repeatAnimation: !loginService.isUserLoggedIn)
+        LottieView(fileName: "profile", repeatAnimation: !userStore.isLoggedIn)
             .frame(width: 250, height: 250)
     }
 
-    private var wavelengthView: some View {
-        LottieView(fileName: "wavelength", repeatAnimation: !loginService.isUserLoggedIn)
-            .frame(height: 150)
-    }
-
     private var loggingInView: some View {
-        LottieView(fileName: "walking", repeatAnimation: !loginService.isUserLoggedIn)
+        LottieView(fileName: "walking", repeatAnimation: !userStore.isLoggedIn)
             .frame(width: 100, height: 100)
     }
 
@@ -74,13 +72,17 @@ private extension LoginView {
             self.isLoggingIn = true
             self.isLoading = false
         }
-        loginService.logIn()
+
+        DispatchQueue.main.asyncAfter(deadline: .now()+4) {
+            self.userStore.logIn()
+            self.isLoggingIn = false
+        }
     }
 
     private var loadingView: some View {
         VStack {
-            LottieView(fileName: "loading")
-                .frame(width: 100, height: 100)
+            LottieView(fileName: "loading", repeatAnimation: true)
+                .frame(width: 200, height: 200)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -114,6 +116,6 @@ private extension LoginView {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            .environmentObject(ICloudLoginService())
+            .environmentObject(UserStore(loginService: MockLoginService()))
     }
 }

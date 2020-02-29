@@ -6,7 +6,7 @@ let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
 
 struct RootView: View {
-    @EnvironmentObject var loginService: ICloudLoginService
+    @EnvironmentObject var userStore: UserStore
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
     @State private var showSplash = true
