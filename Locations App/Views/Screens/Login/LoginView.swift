@@ -10,19 +10,11 @@ struct LoginView: View {
 
     var body: some View {
         ZStack {
-            VStack {
-                profileView
-                iCloudLoginView
-                Spacer()
-            }
+            mainView
 
-            if isLoading {
-                loadingView
-            }
+            loadingViewIfLoading
 
-            if isLoggingIn {
-                LoggingInView()
-            }
+            loggingInViewIfLoggingIn
 
             if userStore.alert != nil {
                 VStack {
@@ -36,46 +28,78 @@ struct LoginView: View {
 }
 
 private extension LoginView {
-    private var profileView: some View {
+    private var mainView: some View {
+        VStack {
+            profileLottieView
+            iCloudLoginButton
+            Spacer()
+        }
+    }
+
+    private var profileLottieView: some View {
         LottieView(fileName: "profile", repeatAnimation: !userStore.isLoggedIn)
             .frame(width: 250, height: 250)
     }
 
-    private var loggingInView: some View {
-        LottieView(fileName: "walking", repeatAnimation: !userStore.isLoggedIn)
-            .frame(width: 100, height: 100)
-    }
-
-    private var iCloudLoginView: some View {
+    private var iCloudLoginButton: some View {
         HStack {
-            Spacer()
-            Image(systemName: "person.icloud.fill")
-                .imageScale(.large)
-                .foregroundColor(Color(.white))
-                .padding(.leading)
-            Text("Sign in With iCloud")
-                .font(.headline)
-                .padding(.leading)
-            Spacer()
+            iCloudImage
+            iCloudSignInText
         }
         .frame(width: 343, height: 68)
         .background(BlurView(style: .systemMaterial))
         .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-        .shadow(color: Color(.kingFisherDaisy).opacity(0.2), radius: 20, x: 0, y: 20)
+        .shadow(color: Color(.kingFisherDaisy).opacity(0.5), radius: 20)
         .onTapGesture(perform: logInToICloud)
     }
 
-    private func logInToICloud() {
-        isLoading = true
+    private var iCloudImage: some View {
+        Image(systemName: "icloud.fill")
+            .imageScale(.large)
+            .foregroundColor(Color(.white))
+    }
 
-        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-            self.isLoggingIn = true
-            self.isLoading = false
+    private var iCloudSignInText: some View {
+        Text("Sign in With iCloud")
+            .font(.headline)
+    }
+
+    private var loadingAnimationTime: Double { 2 }
+    private var loggingInAnimationTime: Double { 2 }
+
+    private func logInToICloud() {
+        showLoadingView()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + loadingAnimationTime) {
+            self.showLoggingInView()
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now()+4) {
-            self.userStore.logIn()
-            self.isLoggingIn = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + loadingAnimationTime + loggingInAnimationTime) {
+            self.logIn()
+        }
+    }
+
+    private func showLoadingView() {
+        isLoading = true
+    }
+
+    private func showLoggingInView() {
+        isLoggingIn = true
+        isLoading = false
+    }
+
+    private func logIn() {
+        self.userStore.logIn()
+        isLoggingIn = false
+    }
+}
+
+private extension LoginView {
+    private var loadingViewIfLoading: some View {
+        Group {
+            if isLoading {
+                loadingView
+            }
         }
     }
 
@@ -85,6 +109,18 @@ private extension LoginView {
                 .frame(width: 200, height: 200)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var loggingInViewIfLoggingIn: some View {
+        Group {
+            if isLoggingIn {
+                loggingInView
+            }
+        }
+    }
+
+    private var loggingInView: some View {
+        LoggingInView()
     }
 
     private struct LoggingInView: View {
@@ -104,7 +140,32 @@ private extension LoginView {
             .shadow(color: Color.black.opacity(0.2), radius: 30, x: 0, y: 30)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .scaleEffect(show ? 1 : 0.5)
-            .background(Color.black.opacity(show ? 0.5 : 0))
+            .background(Color.black.opacity(show ? 0.7 : 0))
+            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
+            .onAppear {
+                self.show = true
+            }
+        }
+    }
+
+    private struct AlertView: View {
+        @State var show = false
+
+        var body: some View {
+            VStack {
+                LottieView(fileName: "walking", repeatAnimation: true)
+                    .frame(width: 300, height: 200)
+                    .opacity(show ? 1 : 0)
+                    .animation(Animation.linear(duration: 1).delay(0.4))
+                    .scaleEffect(1.3)
+            }
+            .frame(width: 300, height: 275)
+            .background(BlurView(style: .systemMaterial))
+            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+            .shadow(color: Color.black.opacity(0.2), radius: 30, x: 0, y: 30)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .scaleEffect(show ? 1 : 0.5)
+            .background(Color.black.opacity(show ? 0.7 : 0))
             .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
             .onAppear {
                 self.show = true
