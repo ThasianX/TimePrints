@@ -56,6 +56,10 @@
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
 		1ED534FE24096B34009B11D3 /* profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED534FD24096B34009B11D3 /* profile.json */; };
 		1ED5350024096D62009B11D3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED534FF24096D62009B11D3 /* LoginView.swift */; };
+		1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */; };
+		1ED53505240A2BF4009B11D3 /* BoolICloudKVS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */; };
+		1ED53507240A2C32009B11D3 /* KeyNamespaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */; };
+		1ED53509240A2C90009B11D3 /* ICloudKVS+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */; };
 		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
 		1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */; };
 		1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */; };
@@ -180,6 +184,10 @@
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		1ED534FD24096B34009B11D3 /* profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profile.json; sourceTree = "<group>"; };
 		1ED534FF24096D62009B11D3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudLoginService.swift; sourceTree = "<group>"; };
+		1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolICloudKVS.swift; sourceTree = "<group>"; };
+		1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyNamespaceable.swift; sourceTree = "<group>"; };
+		1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ICloudKVS+Account.swift"; sourceTree = "<group>"; };
 		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
 		1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
@@ -359,9 +367,9 @@
 			children = (
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
 				1E00E5742408CC6200B14C9F /* SplashScreen.swift */,
+				1ED534FF24096D62009B11D3 /* LoginView.swift */,
 				1E24927123EB53DA00165280 /* Map */,
 				1E0F7C7F2402BD11001B033C /* Visits Home View */,
-				1ED534FF24096D62009B11D3 /* LoginView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -411,6 +419,7 @@
 				1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */,
 				1E9D789523E123FC0020FAFE /* CoreData */,
 				1EFD54FE23E14F5500C02BBD /* Services */,
+				1ED53503240A2BC4009B11D3 /* ICloud */,
 				1E9D78A723E1497F0020FAFE /* Models */,
 				1E9D78A523E149160020FAFE /* Views */,
 				1EB865E223F9EC2D00A4B8E1 /* Button Styles */,
@@ -528,10 +537,21 @@
 			path = "Button Styles";
 			sourceTree = "<group>";
 		};
+		1ED53503240A2BC4009B11D3 /* ICloud */ = {
+			isa = PBXGroup;
+			children = (
+				1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */,
+				1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */,
+				1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */,
+			);
+			path = ICloud;
+			sourceTree = "<group>";
+		};
 		1EFD54FE23E14F5500C02BBD /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				1E9D788B23E10C670020FAFE /* LocationManager.swift */,
+				1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -737,6 +757,7 @@
 				1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */,
 				1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */,
 				1EFF83B523E5368900FF04A1 /* V0Stack.swift in Sources */,
+				1ED53507240A2C32009B11D3 /* KeyNamespaceable.swift in Sources */,
 				1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */,
 				1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */,
 				1E726FF92402FB82002FC8DB /* TagsListView.swift in Sources */,
@@ -775,6 +796,7 @@
 				1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */,
 				1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */,
 				1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */,
+				1ED53509240A2C90009B11D3 /* ICloudKVS+Account.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */,
 				1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */,
@@ -797,6 +819,8 @@
 				1E6D568B23E5F6F10044AB3A /* BImage.swift in Sources */,
 				1EFC8DC523E76B4200628251 /* AnyTransition.swift in Sources */,
 				1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */,
+				1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */,
+				1ED53505240A2BF4009B11D3 /* BoolICloudKVS.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
