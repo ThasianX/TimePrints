@@ -128,7 +128,7 @@ private extension VisitDetailsView {
 
     private var backButton: some View {
         ZStack {
-            Color(.white)
+            Color(.black)
                 .fade(if: !mapFull)
             BImage(perform: navigateBack, image: backButtonImage)
         }
