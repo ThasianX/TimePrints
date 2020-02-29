@@ -242,7 +242,7 @@ private extension VisitDetailsView {
             if isSelected && !editNotesShowing {
                 staticMapView
                     .padding(.bottom, 10)
-                Group {
+                VStack(spacing: 16) {
                     locationAddressText
                     mapOptionButtons
                         .fade(if: !mapFull)
