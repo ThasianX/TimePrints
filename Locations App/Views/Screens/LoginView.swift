@@ -4,6 +4,8 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var loginService: ICloudLoginService
+    @State private var isLoading = false
+    @State private var isLoggingIn = false
 
     var body: some View {
         ZStack {
@@ -12,6 +14,18 @@ struct LoginView: View {
                 iCloudLoginView
                 wavelengthView
                 Spacer()
+            }
+
+            if isLoading {
+                loadingView
+            }
+
+            if isLoggingIn {
+                LoggingInView()
+                    .onTapGesture {
+                        self.isLoggingIn = false
+                        self.loginService.logOut()
+                }
             }
         }
     }
@@ -29,7 +43,7 @@ private extension LoginView {
             .frame(height: 150)
     }
 
-    private var loadingView: some View {
+    private var loggingInView: some View {
         LottieView(fileName: "walking", repeatAnimation: !loginService.isUserLoggedIn)
             .frame(width: 100, height: 100)
     }
@@ -54,9 +68,47 @@ private extension LoginView {
     }
 
     private func logInToICloud() {
+        isLoading = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+            self.isLoggingIn = true
+            self.isLoading = false
+        }
         loginService.logIn()
     }
 
+    private var loadingView: some View {
+        VStack {
+            LottieView(fileName: "loading")
+                .frame(width: 100, height: 100)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private struct LoggingInView: View {
+        @State var show = false
+
+        var body: some View {
+            VStack {
+                LottieView(fileName: "walking", repeatAnimation: true)
+                    .frame(width: 300, height: 200)
+                    .opacity(show ? 1 : 0)
+                    .animation(Animation.linear(duration: 1).delay(0.4))
+                    .scaleEffect(1.3)
+            }
+            .frame(width: 300, height: 275)
+            .background(BlurView(style: .systemMaterial))
+            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+            .shadow(color: Color.black.opacity(0.2), radius: 30, x: 0, y: 30)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .scaleEffect(show ? 1 : 0.5)
+            .background(Color.black.opacity(show ? 0.5 : 0))
+            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
+            .onAppear {
+                self.show = true
+            }
+        }
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {

@@ -34,7 +34,6 @@ final class ICloudLoginService: LoginService, ObservableObject {
                 self.openSettings()
             }
         }
-
     }
 
     private func logInUser() {
@@ -49,5 +48,10 @@ final class ICloudLoginService: LoginService, ObservableObject {
 
     private func openSettings() {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+
+    func logOut() {
+        ICloudKVS.Account.set(false, for: .isUserLoggedIn)
+        objectWillChange.send()
     }
 }
