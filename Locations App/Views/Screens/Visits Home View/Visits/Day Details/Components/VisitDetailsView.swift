@@ -128,7 +128,7 @@ private extension VisitDetailsView {
 
     private var backButton: some View {
         ZStack {
-            Color(.white)
+            Color(.black)
                 .fade(if: !mapFull)
             BImage(perform: navigateBack, image: backButtonImage)
         }
@@ -242,7 +242,7 @@ private extension VisitDetailsView {
             if isSelected && !editNotesShowing {
                 staticMapView
                     .padding(.bottom, 10)
-                Group {
+                VStack(spacing: 16) {
                     locationAddressText
                     mapOptionButtons
                         .fade(if: !mapFull)
