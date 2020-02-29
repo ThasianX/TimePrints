@@ -3,21 +3,29 @@
 import SwiftUI
 
 struct LoginView: View {
+    @ObservedObject var loginService: ICloudLoginService
 
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
+
 }
 
 private extension LoginView {
-    private var profileLottie: some View {
+    private var profileView: some View {
         LottieView(fileName: "profile")
-            .frame(width: screen.width/2, height: screen.width/2)
+            .frame(width: 150, height: 150)
     }
+
+    private var loadingView: some View {
+        LottieView(fileName: "loading")
+            .frame(width: 100, height: 100)
+    }
+
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginView()
+//    }
+//}
