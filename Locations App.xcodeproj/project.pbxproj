@@ -355,6 +355,26 @@
 			path = Locations;
 			sourceTree = "<group>";
 		};
+		1E52B0B2240B100900E4C693 /* KVS */ = {
+			isa = PBXGroup;
+			children = (
+				1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */,
+				1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */,
+				1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */,
+			);
+			path = KVS;
+			sourceTree = "<group>";
+		};
+		1E52B0B3240B101700E4C693 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */,
+				1ED5351E240B0A27009B11D3 /* LoginService.swift */,
+				1ED53520240B0A48009B11D3 /* Alert.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		1E726FF72402FA67002FC8DB /* Tags */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,11 +581,8 @@
 		1ED53503240A2BC4009B11D3 /* ICloud */ = {
 			isa = PBXGroup;
 			children = (
-				1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */,
-				1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */,
-				1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */,
-				1ED5351E240B0A27009B11D3 /* LoginService.swift */,
-				1ED53520240B0A48009B11D3 /* Alert.swift */,
+				1E52B0B3240B101700E4C693 /* Login */,
+				1E52B0B2240B100900E4C693 /* KVS */,
 			);
 			path = ICloud;
 			sourceTree = "<group>";
@@ -583,7 +600,6 @@
 			isa = PBXGroup;
 			children = (
 				1E9D788B23E10C670020FAFE /* LocationManager.swift */,
-				1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
