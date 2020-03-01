@@ -20,7 +20,6 @@ struct SplashScreen: View {
     @State private var coverCircleScale: CGFloat = 1
     @State private var coverCircleAlpha = 0.0
     @State private var logoImageAlpha = 0.0
-    @State private var logoImageScale: CGFloat = 1
 
     @Binding var show: Bool
 
@@ -52,7 +51,7 @@ struct SplashScreen: View {
                 .offset(x: 90)
                 .foregroundColor(.white)
                 .opacity(logoImageAlpha)
-                .scaleEffect(logoImageScale)
+                .scaleEffect(iZoomFactor)
 
             IAnimation(percent: percent)
                 .stroke(Color.white, lineWidth: iLineWidth)
@@ -140,7 +139,6 @@ extension SplashScreen {
             self.squareScale = 1
             withAnimation(.easeOut(duration: self.fadeAnimationDuration)) {
                 self.logoImageAlpha = 1
-                self.logoImageScale = self.iZoomFactor
                 self.coverCircleAlpha = 1
                 self.coverCircleScale = 1000
             }
@@ -164,7 +162,6 @@ extension SplashScreen {
             self.textScale = 1
             self.coverCircleAlpha = 0
             self.coverCircleScale = 1
-            self.logoImageScale = 1
             withAnimation {
                 self.show = false
             }
