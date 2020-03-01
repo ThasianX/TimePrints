@@ -368,9 +368,8 @@
 		1E52B0B3240B101700E4C693 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */,
 				1ED5351E240B0A27009B11D3 /* LoginService.swift */,
-				1ED53520240B0A48009B11D3 /* Alert.swift */,
+				1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -430,6 +429,14 @@
 				1E97274123EB57AE006528ED /* LocationVisitsView.swift */,
 			);
 			path = "Location Visits";
+			sourceTree = "<group>";
+		};
+		1E97D215240B481D004113F7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1ED53520240B0A48009B11D3 /* Alert.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		1E9D784C23E10B4F0020FAFE = {
@@ -560,6 +567,7 @@
 		1E9D78A723E1497F0020FAFE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1E97D215240B481D004113F7 /* Login */,
 				1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */,
 				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
 				1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */,
