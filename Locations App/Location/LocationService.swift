@@ -5,3 +5,7 @@ import Foundation
 protocol LocationService {
     func startTrackingVisits()
 }
+
+class MockLocationService: LocationService {
+    func startTrackingVisits() { }
+}

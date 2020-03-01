@@ -43,7 +43,7 @@
 		1E9D786823E10B520020FAFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E9D786623E10B520020FAFE /* LaunchScreen.storyboard */; };
 		1E9D787323E10B520020FAFE /* Locations_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D787223E10B520020FAFE /* Locations_AppTests.swift */; };
 		1E9D787E23E10B520020FAFE /* Locations_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D787D23E10B520020FAFE /* Locations_AppUITests.swift */; };
-		1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D788B23E10C670020FAFE /* LocationManager.swift */; };
+		1E9D788C23E10C670020FAFE /* CoreLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D788B23E10C670020FAFE /* CoreLocationService.swift */; };
 		1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9D788F23E10DE60020FAFE /* CloudKit.framework */; };
 		1E9D789723E124030020FAFE /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789623E124030020FAFE /* CoreData.swift */; };
 		1E9D789C23E125610020FAFE /* Visit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789823E125610020FAFE /* Visit+CoreDataClass.swift */; };
@@ -181,7 +181,7 @@
 		1E9D787923E10B520020FAFE /* Locations AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Locations AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9D787D23E10B520020FAFE /* Locations_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations_AppUITests.swift; sourceTree = "<group>"; };
 		1E9D787F23E10B520020FAFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1E9D788B23E10C670020FAFE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		1E9D788B23E10C670020FAFE /* CoreLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationService.swift; sourceTree = "<group>"; };
 		1E9D788D23E10DE30020FAFE /* Locations App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Locations App.entitlements"; sourceTree = "<group>"; };
 		1E9D788F23E10DE60020FAFE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1E9D789623E124030020FAFE /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
@@ -610,7 +610,7 @@
 			isa = PBXGroup;
 			children = (
 				1EDE74D4240B6721002A7C08 /* LocationService.swift */,
-				1E9D788B23E10C670020FAFE /* LocationManager.swift */,
+				1E9D788B23E10C670020FAFE /* CoreLocationService.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -879,7 +879,7 @@
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
 				1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */,
-				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
+				1E9D788C23E10C670020FAFE /* CoreLocationService.swift in Sources */,
 				1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */,
 				1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */,
 				1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */,

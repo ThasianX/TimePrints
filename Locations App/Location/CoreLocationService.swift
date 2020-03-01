@@ -1,7 +1,7 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject, LocationService {
+class CoreLocationService: NSObject, LocationService {
     private let locationManager = CLLocationManager()
     private let geoCoder = CLGeocoder()
     
@@ -16,7 +16,7 @@ class LocationManager: NSObject, LocationService {
     }
 }
 
-extension LocationManager: CLLocationManagerDelegate {
+extension CoreLocationService: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
         let location = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
         let visitIsComplete = visit.departureDate != Date.distantFuture

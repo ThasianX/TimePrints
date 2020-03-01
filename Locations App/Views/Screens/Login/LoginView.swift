@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var userStore: UserStore
+    @ObservedObject var userStore: UserStore
     @State private var isLoggingIn = false
 
     private var alert: Alert? {
@@ -157,7 +157,6 @@ private extension LoginView {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
-            .environmentObject(UserStore(loginService: MockSuccessLoginService()))
+        LoginView(userStore: UserStore(loginService: MockSuccessLoginService()))
     }
 }
