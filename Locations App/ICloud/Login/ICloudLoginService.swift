@@ -14,10 +14,6 @@ final class ICloudLoginService: LoginService {
         completion(isICloudAvailable)
     }
 
-    func logOut() {
-        ICloudKVS.Account.set(false, for: .isUserLoggedIn)
-    }
-    
     var isICloudAvailable: Bool {
         // Opaque token that represents the user's iCloud identity; nil if not logged into iCloud
         FileManager.default.ubiquityIdentityToken != nil
@@ -25,5 +21,9 @@ final class ICloudLoginService: LoginService {
 
     private func logInUser() {
         ICloudKVS.Account.set(true, for: .isUserLoggedIn)
+    }
+
+    func logOut() {
+        ICloudKVS.Account.set(false, for: .isUserLoggedIn)
     }
 }
