@@ -2,26 +2,21 @@
 
 import SwiftUI
 
-// TODO: Monitor onForeground and call login on the userStore
 struct LoginView: View {
     @EnvironmentObject var userStore: UserStore
-    @State private var isLoading = false
     @State private var isLoggingIn = false
+
+    private var alert: Alert? {
+        userStore.alert
+    }
 
     var body: some View {
         ZStack {
             mainView
 
-            loadingViewIfLoading
-
             loggingInViewIfLoggingIn
 
-            if userStore.alert != nil {
-                VStack {
-                    Text(userStore.alert!.message)
-                    LottieView(fileName: userStore.alert!.lottieFile)
-                }
-            }
+            alertViewIfExists
         }
     }
 
@@ -64,28 +59,18 @@ private extension LoginView {
             .font(.headline)
     }
 
-    private var loadingAnimationTime: Double { 2 }
-    private var loggingInAnimationTime: Double { 2 }
+    private var loggingInAnimationDuration: Double { 2 }
 
     private func logInToICloud() {
-        showLoadingView()
+        showLoggingInView()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + loadingAnimationTime) {
-            self.showLoggingInView()
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + loadingAnimationTime + loggingInAnimationTime) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + loggingInAnimationDuration) {
             self.logIn()
         }
     }
 
-    private func showLoadingView() {
-        isLoading = true
-    }
-
     private func showLoggingInView() {
         isLoggingIn = true
-        isLoading = false
     }
 
     private func logIn() {
@@ -95,22 +80,6 @@ private extension LoginView {
 }
 
 private extension LoginView {
-    private var loadingViewIfLoading: some View {
-        Group {
-            if isLoading {
-                loadingView
-            }
-        }
-    }
-
-    private var loadingView: some View {
-        VStack {
-            LottieView(fileName: "loading", repeatAnimation: true)
-                .frame(width: 200, height: 200)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
     private var loggingInViewIfLoggingIn: some View {
         Group {
             if isLoggingIn {
@@ -120,46 +89,44 @@ private extension LoginView {
     }
 
     private var loggingInView: some View {
-        LoggingInView()
+        VStack {
+            LottieView(fileName: "loading", repeatAnimation: true)
+                .frame(width: 200, height: 200)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private struct LoggingInView: View {
-        @State var show = false
-
-        var body: some View {
-            VStack {
-                LottieView(fileName: "walking", repeatAnimation: true)
-                    .frame(width: 300, height: 200)
-                    .opacity(show ? 1 : 0)
-                    .animation(Animation.linear(duration: 1).delay(0.4))
-                    .scaleEffect(1.3)
-            }
-            .frame(width: 300, height: 275)
-            .background(BlurView(style: .systemMaterial))
-            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            .shadow(color: Color.black.opacity(0.2), radius: 30, x: 0, y: 30)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .scaleEffect(show ? 1 : 0.5)
-            .background(Color.black.opacity(show ? 0.7 : 0))
-            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
-            .onAppear {
-                self.show = true
+    private var alertViewIfExists: some View {
+        Group {
+            if alert != nil {
+                alertView
             }
         }
     }
 
+    private var alertView: some View {
+        AlertView(alert: userStore.alert!)
+    }
+
     private struct AlertView: View {
         @State var show = false
+        let alert: Alert
 
         var body: some View {
             VStack {
-                LottieView(fileName: "walking", repeatAnimation: true)
-                    .frame(width: 300, height: 200)
+                Text(alert.message)
+                    .font(.system(.title))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .animation(nil)
+                LottieView(fileName: alert.lottieFile)
+                    .frame(width: 150, height: 150)
                     .opacity(show ? 1 : 0)
                     .animation(Animation.linear(duration: 1).delay(0.4))
                     .scaleEffect(1.3)
             }
-            .frame(width: 300, height: 275)
+            .frame(width: 300)
+            .padding()
             .background(BlurView(style: .systemMaterial))
             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             .shadow(color: Color.black.opacity(0.2), radius: 30, x: 0, y: 30)

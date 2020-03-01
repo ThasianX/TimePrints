@@ -3,14 +3,15 @@
 import SwiftUI
 
 final class UserStore: ObservableObject {
-    private let loginService: LoginService
-
     @Published var isLoggedIn: Bool
     @Published var alert: Alert? = nil
 
+    private let loginService: LoginService
+    private let alertAnimationDuration: Double = 2.5
+
     init(loginService: LoginService) {
-        self.loginService = loginService
         isLoggedIn = loginService.isUserLoggedIn
+        self.loginService = loginService
     }
 
     func logIn() {
@@ -22,15 +23,18 @@ final class UserStore: ObservableObject {
     private func userIsLoggedIn() {
         // TODO: After logging in, let user choose a theme color for the app, then initialize the CoreData stack and prompt for location permissions
         setLoggedInAlert()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + alertAnimationDuration) {
             self.isLoggedIn = true
         }
     }
 
     private func userIsNotLoggedIn() {
         setNotLoggedInAlert()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + alertAnimationDuration) {
             self.openSettings()
+            self.resetAlert()
         }
     }
 
@@ -44,6 +48,10 @@ final class UserStore: ObservableObject {
 
     private func setNotLoggedInAlert() {
         alert = NotLoggedInAlert()
+    }
+
+    private func resetAlert() {
+        alert = nil
     }
 
     func logOut() {

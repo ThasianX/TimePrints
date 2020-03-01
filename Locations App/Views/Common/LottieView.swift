@@ -16,6 +16,7 @@ struct LottieView: UIViewRepresentable {
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = repeatAnimation ? .loop : .playOnce
+        animationView.backgroundBehavior = .pauseAndRestore
         animationView.play()
 
         animationView.translatesAutoresizingMaskIntoConstraints = false
