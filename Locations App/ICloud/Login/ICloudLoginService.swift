@@ -14,7 +14,7 @@ final class ICloudLoginService: LoginService {
         completion(isICloudAvailable)
     }
 
-    var isICloudAvailable: Bool {
+    private var isICloudAvailable: Bool {
         // Opaque token that represents the user's iCloud identity; nil if not logged into iCloud
         FileManager.default.ubiquityIdentityToken != nil
     }
