@@ -68,11 +68,16 @@ private extension RootView {
 
             annotatedMapView
                 .fade(if: showingHomeView)
-                .onAppear(perform: locationService.startTrackingVisits)
+                .onAppear(perform: performInitialLocationAndDatabaseOperations)
 
             toggleViewButton
                 .fade(if: showingEditTag || showingLocationVisits)
         }
+    }
+
+    private func performInitialLocationAndDatabaseOperations() {
+        CoreData.initialDbSetup()
+        locationService.startTrackingVisits()
     }
 
     private var loginView: LoginView {
