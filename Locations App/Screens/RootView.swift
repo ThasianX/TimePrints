@@ -6,7 +6,7 @@ let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
 
 struct RootView: View {
-    @EnvironmentObject var userStore: UserStore
+    @ObservedObject var userStore: UserStore
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
     @State private var showSplash = true
@@ -20,24 +20,11 @@ struct RootView: View {
     @State private var selectedLocation: Location? = nil
     @State private var activeVisitLocation: Location? = nil
 
+    let locationService: LocationService
+
     var body: some View {
         ZStack(alignment: .bottom) {
-            if userStore.isLoggedIn {
-                Group {
-                    visitsHomeView
-                        .fade(if: !showingHomeView)
-
-                    annotatedMapView
-                        .fade(if: showingHomeView)
-
-                    toggleViewButton
-                        .fade(if: showingEditTag || showingLocationVisits)
-                }
-            }
-
-            if !userStore.isLoggedIn {
-                loginView
-            }
+            viewForLoginState
 
             splashScreen
                 .fade(if: !showSplash)
@@ -46,8 +33,8 @@ struct RootView: View {
 }
 
 private extension RootView {
-    private var visitsHomeView: some View {
-        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation)
+    private var splashScreen: SplashScreen {
+        SplashScreen(show: $showSplash)
     }
 }
 
@@ -60,6 +47,47 @@ private extension View {
             .fade(if: !isPresented)
             .offset(y: isPresented ? screen.height * 0.1 : screen.height)
             .animation(.spring())
+    }
+}
+
+private extension RootView {
+    private var viewForLoginState: some View {
+        Group {
+            if userStore.isLoggedIn {
+                appView
+            } else {
+                loginView
+            }
+        }
+    }
+
+    private var appView: some View {
+        Group {
+            visitsHomeView
+                .fade(if: !showingHomeView)
+
+            annotatedMapView
+                .fade(if: showingHomeView)
+                .onAppear(perform: performInitialLocationAndDatabaseOperations)
+
+            toggleViewButton
+                .fade(if: showingEditTag || showingLocationVisits)
+        }
+    }
+
+    private func performInitialLocationAndDatabaseOperations() {
+        CoreData.initialDbSetup()
+        locationService.startTrackingVisits()
+    }
+
+    private var loginView: LoginView {
+        LoginView(userStore: userStore)
+    }
+}
+
+private extension RootView {
+    private var visitsHomeView: some View {
+        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation)
     }
 }
 
@@ -155,23 +183,9 @@ private extension RootView {
     }
 }
 
-private extension RootView {
-    private var splashScreen: SplashScreen {
-        SplashScreen(show: $showSplash)
-    }
-}
-
-private extension RootView {
-    private var loginView: LoginView {
-        LoginView()
-    }
-}
-
 struct RootView_Previews: PreviewProvider {
-    
     static var previews: some View {
-        RootView()
+        RootView(userStore: UserStore(loginService: MockSuccessLoginService()), locationService: MockLocationService())
     }
-    
 }
 
