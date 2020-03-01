@@ -1,13 +1,16 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject {
+class LocationManager: NSObject, LocationService {
     private let locationManager = CLLocationManager()
-    private let geoCoder: CLGeocoder = CLGeocoder()
+    private let geoCoder = CLGeocoder()
     
     override init() {
         super.init()
         locationManager.delegate = self
+    }
+
+    func startTrackingVisits() {
         locationManager.requestAlwaysAuthorization()
         locationManager.startMonitoringVisits()
     }
