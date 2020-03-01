@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E00E5752408CC6200B14C9F /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00E5742408CC6200B14C9F /* SplashScreen.swift */; };
 		1E00E5712408AF9500B14C9F /* TagDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00E5702408AF9500B14C9F /* TagDetailsView.swift */; };
+		1E00E5752408CC6200B14C9F /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00E5742408CC6200B14C9F /* SplashScreen.swift */; };
 		1E06D51023FE21AE00467799 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */; };
 		1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C802402BD42001B033C /* VisitsHomeView.swift */; };
 		1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */; };
@@ -54,6 +54,22 @@
 		1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */; };
 		1EB865E123F9E01400A4B8E1 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E023F9E01400A4B8E1 /* UIApplication.swift */; };
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
+		1ED534FE24096B34009B11D3 /* profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED534FD24096B34009B11D3 /* profile.json */; };
+		1ED5350024096D62009B11D3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED534FF24096D62009B11D3 /* LoginView.swift */; };
+		1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */; };
+		1ED53505240A2BF4009B11D3 /* BoolICloudKVS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */; };
+		1ED53507240A2C32009B11D3 /* KeyNamespaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */; };
+		1ED53509240A2C90009B11D3 /* ICloudKVS+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */; };
+		1ED5350F240A38B4009B11D3 /* walking.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5350E240A38B4009B11D3 /* walking.json */; };
+		1ED53513240A3AED009B11D3 /* humpingmonkey.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53512240A3AEC009B11D3 /* humpingmonkey.json */; };
+		1ED53516240A3AF3009B11D3 /* check3.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53514240A3AF3009B11D3 /* check3.json */; };
+		1ED53517240A3AF3009B11D3 /* check2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED53515240A3AF3009B11D3 /* check2.json */; };
+		1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53518240A3C9A009B11D3 /* BlurView.swift */; };
+		1ED5351B240AFD64009B11D3 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5351A240AFD64009B11D3 /* loading.json */; };
+		1ED5351D240B06E3009B11D3 /* error.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5351C240B06E3009B11D3 /* error.json */; };
+		1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED5351E240B0A27009B11D3 /* LoginService.swift */; };
+		1ED53521240B0A48009B11D3 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53520240B0A48009B11D3 /* Alert.swift */; };
+		1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53522240B0C01009B11D3 /* UserStore.swift */; };
 		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
 		1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */; };
 		1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */; };
@@ -67,7 +83,7 @@
 		1EFE85CB240360490001D0C3 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE85CA240360490001D0C3 /* TagRow.swift */; };
 		1EFE85CE240377060001D0C3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1EFE85CD240377060001D0C3 /* Lottie */; };
 		1EFE85D0240377170001D0C3 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE85CF240377170001D0C3 /* LottieView.swift */; };
-		1EFE85D3240390770001D0C3 /* check-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EFE85D2240390770001D0C3 /* check-animation.json */; };
+		1EFE85D3240390770001D0C3 /* check1.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EFE85D2240390770001D0C3 /* check1.json */; };
 		1EFE9F4723FC225D00E94D67 /* MGLMapView+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE9F4623FC225D00E94D67 /* MGLMapView+Default.swift */; };
 		1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839423E49E0900FF04A1 /* DaySideBar.swift */; };
 		1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */; };
@@ -122,8 +138,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E00E5742408CC6200B14C9F /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		1E00E5702408AF9500B14C9F /* TagDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailsView.swift; sourceTree = "<group>"; };
+		1E00E5742408CC6200B14C9F /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
 		1E0F7C802402BD42001B033C /* VisitsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHomeView.swift; sourceTree = "<group>"; };
 		1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpanadableFAB.swift; sourceTree = "<group>"; };
@@ -176,6 +192,22 @@
 		1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1EB865E023F9E01400A4B8E1 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
+		1ED534FD24096B34009B11D3 /* profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profile.json; sourceTree = "<group>"; };
+		1ED534FF24096D62009B11D3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudLoginService.swift; sourceTree = "<group>"; };
+		1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolICloudKVS.swift; sourceTree = "<group>"; };
+		1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyNamespaceable.swift; sourceTree = "<group>"; };
+		1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ICloudKVS+Account.swift"; sourceTree = "<group>"; };
+		1ED5350E240A38B4009B11D3 /* walking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = walking.json; sourceTree = "<group>"; };
+		1ED53512240A3AEC009B11D3 /* humpingmonkey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = humpingmonkey.json; sourceTree = "<group>"; };
+		1ED53514240A3AF3009B11D3 /* check3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check3.json; sourceTree = "<group>"; };
+		1ED53515240A3AF3009B11D3 /* check2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check2.json; sourceTree = "<group>"; };
+		1ED53518240A3C9A009B11D3 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		1ED5351A240AFD64009B11D3 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		1ED5351C240B06E3009B11D3 /* error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.json; sourceTree = "<group>"; };
+		1ED5351E240B0A27009B11D3 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		1ED53520240B0A48009B11D3 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		1ED53522240B0C01009B11D3 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
 		1EE2CF5423E7CE4B009760D6 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
@@ -186,7 +218,7 @@
 		1EFC8DC423E76B4200628251 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
 		1EFE85CA240360490001D0C3 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
 		1EFE85CF240377170001D0C3 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		1EFE85D2240390770001D0C3 /* check-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "check-animation.json"; sourceTree = "<group>"; };
+		1EFE85D2240390770001D0C3 /* check1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check1.json; sourceTree = "<group>"; };
 		1EFE9F4623FC225D00E94D67 /* MGLMapView+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MGLMapView+Default.swift"; sourceTree = "<group>"; };
 		1EFF839423E49E0900FF04A1 /* DaySideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySideBar.swift; sourceTree = "<group>"; };
 		1EFF839623E4A4F900FF04A1 /* MonthYearSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearSideBar.swift; sourceTree = "<group>"; };
@@ -323,6 +355,25 @@
 			path = Locations;
 			sourceTree = "<group>";
 		};
+		1E52B0B2240B100900E4C693 /* KVS */ = {
+			isa = PBXGroup;
+			children = (
+				1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */,
+				1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */,
+				1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */,
+			);
+			path = KVS;
+			sourceTree = "<group>";
+		};
+		1E52B0B3240B101700E4C693 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1ED5351E240B0A27009B11D3 /* LoginService.swift */,
+				1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		1E726FF72402FA67002FC8DB /* Tags */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +396,7 @@
 				1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */,
 				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
 				1EFE85CF240377170001D0C3 /* LottieView.swift */,
+				1ED53518240A3C9A009B11D3 /* BlurView.swift */,
 				1E00E5732408B02700B14C9F /* Tags */,
 			);
 			path = Common;
@@ -355,6 +407,7 @@
 			children = (
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
 				1E00E5742408CC6200B14C9F /* SplashScreen.swift */,
+				1ED53524240B0CC5009B11D3 /* Login */,
 				1E24927123EB53DA00165280 /* Map */,
 				1E0F7C7F2402BD11001B033C /* Visits Home View */,
 			);
@@ -376,6 +429,14 @@
 				1E97274123EB57AE006528ED /* LocationVisitsView.swift */,
 			);
 			path = "Location Visits";
+			sourceTree = "<group>";
+		};
+		1E97D215240B481D004113F7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1ED53520240B0A48009B11D3 /* Alert.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		1E9D784C23E10B4F0020FAFE = {
@@ -406,8 +467,8 @@
 				1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */,
 				1E9D789523E123FC0020FAFE /* CoreData */,
 				1EFD54FE23E14F5500C02BBD /* Services */,
+				1ED53503240A2BC4009B11D3 /* ICloud */,
 				1E9D78A723E1497F0020FAFE /* Models */,
-				1EFE85D1240390620001D0C3 /* Lottie */,
 				1E9D78A523E149160020FAFE /* Views */,
 				1EB865E223F9EC2D00A4B8E1 /* Button Styles */,
 				1EFF83A623E52B7A00FF04A1 /* PreferenceKeys */,
@@ -492,6 +553,7 @@
 		1E9D78A623E149290020FAFE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1EFE85D1240390620001D0C3 /* Lottie */,
 				1E22BF5C23E2970500926030 /* Route.gpx */,
 				1E9D786423E10B520020FAFE /* Preview Assets.xcassets */,
 				1E9D786123E10B520020FAFE /* Assets.xcassets */,
@@ -505,6 +567,7 @@
 		1E9D78A723E1497F0020FAFE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1E97D215240B481D004113F7 /* Login */,
 				1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */,
 				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
 				1EE2CF5623E7CF49009760D6 /* UIColorInputError.swift */,
@@ -523,6 +586,24 @@
 			path = "Button Styles";
 			sourceTree = "<group>";
 		};
+		1ED53503240A2BC4009B11D3 /* ICloud */ = {
+			isa = PBXGroup;
+			children = (
+				1E52B0B3240B101700E4C693 /* Login */,
+				1E52B0B2240B100900E4C693 /* KVS */,
+			);
+			path = ICloud;
+			sourceTree = "<group>";
+		};
+		1ED53524240B0CC5009B11D3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1ED534FF24096D62009B11D3 /* LoginView.swift */,
+				1ED53522240B0C01009B11D3 /* UserStore.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		1EFD54FE23E14F5500C02BBD /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,7 +615,14 @@
 		1EFE85D1240390620001D0C3 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				1EFE85D2240390770001D0C3 /* check-animation.json */,
+				1ED534FD24096B34009B11D3 /* profile.json */,
+				1EFE85D2240390770001D0C3 /* check1.json */,
+				1ED5350E240A38B4009B11D3 /* walking.json */,
+				1ED5351A240AFD64009B11D3 /* loading.json */,
+				1ED53512240A3AEC009B11D3 /* humpingmonkey.json */,
+				1ED53515240A3AF3009B11D3 /* check2.json */,
+				1ED53514240A3AF3009B11D3 /* check3.json */,
+				1ED5351C240B06E3009B11D3 /* error.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -671,10 +759,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED5351D240B06E3009B11D3 /* error.json in Resources */,
 				1E9D786823E10B520020FAFE /* LaunchScreen.storyboard in Resources */,
-				1EFE85D3240390770001D0C3 /* check-animation.json in Resources */,
+				1ED5350F240A38B4009B11D3 /* walking.json in Resources */,
+				1ED5351B240AFD64009B11D3 /* loading.json in Resources */,
+				1EFE85D3240390770001D0C3 /* check1.json in Resources */,
+				1ED53517240A3AF3009B11D3 /* check2.json in Resources */,
 				1E22BF5D23E2970500926030 /* Route.gpx in Resources */,
+				1ED534FE24096B34009B11D3 /* profile.json in Resources */,
+				1ED53513240A3AED009B11D3 /* humpingmonkey.json in Resources */,
 				1E9D786523E10B520020FAFE /* Preview Assets.xcassets in Resources */,
+				1ED53516240A3AF3009B11D3 /* check3.json in Resources */,
 				1E9D786223E10B520020FAFE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,13 +821,16 @@
 				1E9D789D23E125610020FAFE /* Visit+CoreDataProperties.swift in Sources */,
 				1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */,
 				1E6D569423E653990044AB3A /* VSpace.swift in Sources */,
+				1ED53521240B0A48009B11D3 /* Alert.swift in Sources */,
 				1EFF83A823E52B9000FF04A1 /* SizePreferenceKey.swift in Sources */,
 				1E5AF45623E3E25E00A94F10 /* Formatter+Additions.swift in Sources */,
 				1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */,
 				1EFF83B523E5368900FF04A1 /* V0Stack.swift in Sources */,
+				1ED53507240A2C32009B11D3 /* KeyNamespaceable.swift in Sources */,
 				1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */,
 				1EE2CF5723E7CF49009760D6 /* UIColorInputError.swift in Sources */,
 				1E726FF92402FB82002FC8DB /* TagsListView.swift in Sources */,
+				1ED5350024096D62009B11D3 /* LoginView.swift in Sources */,
 				1EFF83B923E53BC200FF04A1 /* ScreenColor.swift in Sources */,
 				1E6D568923E5EEB20044AB3A /* TagView.swift in Sources */,
 				1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */,
@@ -767,6 +865,7 @@
 				1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */,
 				1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */,
 				1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */,
+				1ED53509240A2C90009B11D3 /* ICloudKVS+Account.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Additions.swift in Sources */,
 				1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */,
@@ -775,9 +874,12 @@
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
+				1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* LocationManager.swift in Sources */,
+				1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */,
 				1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */,
 				1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */,
+				1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,
@@ -789,6 +891,8 @@
 				1E6D568B23E5F6F10044AB3A /* BImage.swift in Sources */,
 				1EFC8DC523E76B4200628251 /* AnyTransition.swift in Sources */,
 				1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */,
+				1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */,
+				1ED53505240A2BF4009B11D3 /* BoolICloudKVS.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

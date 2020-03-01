@@ -69,7 +69,7 @@ private extension TagRow {
     private var checkAnimationIfSelected: some View {
         Group {
             if isSelected {
-                LottieView(fileName: "check-animation")
+                LottieView(fileName: "check1")
                     .frame(width: 40, height: 40)
             }
         }

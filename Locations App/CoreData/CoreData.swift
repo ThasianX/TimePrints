@@ -42,7 +42,6 @@ class CoreData: NSObject {
     
     class func initialDbSetup() {
         addDefaultTagIfDoesntExist()
-        // TODO: Include Cloud KVS preference setup here?
     }
 
     private class func addDefaultTagIfDoesntExist() {

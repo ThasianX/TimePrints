@@ -8,6 +8,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let context = CoreData.stack.context
         let contentView = RootView()
             .environment(\.managedObjectContext, context)
+            .environmentObject(UserStore(loginService: MockFailureLoginService()))
             .statusBar(hidden: true)
 
         if let windowScene = scene as? UIWindowScene {

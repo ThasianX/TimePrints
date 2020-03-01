@@ -6,9 +6,11 @@ let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
 
 struct RootView: View {
+    @EnvironmentObject var userStore: UserStore
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
     @State private var showSplash = true
+    @State private var showingLogin = true
     @State private var showingEditTag = false
     @State private var showingLocationVisits = false
     @State private var stayAtLocation = false
@@ -20,14 +22,22 @@ struct RootView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            visitsHomeView
-                .fade(if: !showingHomeView)
-            
-            annotatedMapView
-                .fade(if: showingHomeView)
-            
-            toggleViewButton
-                .fade(if: showingEditTag || showingLocationVisits)
+            if userStore.isLoggedIn {
+                Group {
+                    visitsHomeView
+                        .fade(if: !showingHomeView)
+
+                    annotatedMapView
+                        .fade(if: showingHomeView)
+
+                    toggleViewButton
+                        .fade(if: showingEditTag || showingLocationVisits)
+                }
+            }
+
+            if !userStore.isLoggedIn {
+                loginView
+            }
 
             splashScreen
                 .fade(if: !showSplash)
@@ -146,9 +156,14 @@ private extension RootView {
 }
 
 private extension RootView {
-
     private var splashScreen: SplashScreen {
         SplashScreen(show: $showSplash)
+    }
+}
+
+private extension RootView {
+    private var loginView: LoginView {
+        LoginView()
     }
 }
 
