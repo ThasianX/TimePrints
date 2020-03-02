@@ -8,38 +8,31 @@ struct ScalingCircle: View {
 
     var body: some View {
         ZStack {
-            RadialGradient(gradient: Gradient(colors: [Color.black
-                , Color.blue]), center: .center, startRadius: 5, endRadius: 500)
-                .scaleEffect(1.2)
-            ZStack {
-
-                Circle()
+            Circle()
                 .frame(width: 50, height: 50)
                 .foregroundColor(.white)
-                ZStack {
-                    Circle()  //
-                        .trim(from: 1/2, to: 4/5)
-                        .stroke(style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                        .frame(width: 100, height: 100)
-                        .foregroundColor(.white)
-                    Circle()  //
-                        .trim(from: 1/2, to: 4/5)
-                        .stroke(style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                        .frame(width: 100, height: 100)
-                        .foregroundColor(.blue)
-                        .rotationEffect(.degrees(180))
+            ZStack {
+                Circle()  //
+                    .trim(from: 1/2, to: 4/5)
+                    .stroke(style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.white)
+                Circle()  //
+                    .trim(from: 1/2, to: 4/5)
+                    .stroke(style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.blue)
+                    .rotationEffect(.degrees(180))
 
-                }
-                .rotationEffect(.degrees(rotateOuter ? 360*3 : 0))
-                .animation(Animation.spring(response: 0.87, dampingFraction: 0.1, blendDuration: 0.3).repeatForever(autoreverses: true))
-                .onAppear() {
-                    self.rotateOuter.toggle()
-                }
-            }.scaleEffect(scaleAll ? 1 : 0.3)
-            .animation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true))
-            .onAppear() {
-                self.scaleAll.toggle()
             }
+            .rotationEffect(.degrees(rotateOuter ? 360*3 : 0))
+            .animation(Animation.spring(response: 1.75, dampingFraction: 0.8, blendDuration: 0.3))
+        }
+        .scaleEffect(scaleAll ? 1 : 0.3)
+        .animation(Animation.easeInOut(duration: 1.5))
+        .onTapGesture {
+            self.scaleAll.toggle()
+            self.rotateOuter.toggle()
         }
     }
 }
