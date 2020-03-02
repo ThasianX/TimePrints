@@ -8,4 +8,11 @@ struct AppColors {
         "Lime Green" : .limeGreen,
         "Sky Blue" : .skyBlue
     ]
+
+    static let themes: [UIColor] = [
+        .berryRed,
+        .salmon,
+        .limeGreen,
+        .skyBlue
+    ]
 }
