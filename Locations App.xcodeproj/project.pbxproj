@@ -13,6 +13,8 @@
 		1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C802402BD42001B033C /* VisitsHomeView.swift */; };
 		1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */; };
 		1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D3DB523EF8B2500528241 /* VScroll.swift */; };
+		1E21F307240D60F400BC81DC /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F306240D60F400BC81DC /* ThemePickerView.swift */; };
+		1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F308240D617600BC81DC /* ScalingCircle.swift */; };
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
 		1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */; };
@@ -144,6 +146,8 @@
 		1E0F7C802402BD42001B033C /* VisitsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHomeView.swift; sourceTree = "<group>"; };
 		1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpanadableFAB.swift; sourceTree = "<group>"; };
 		1E1D3DB523EF8B2500528241 /* VScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VScroll.swift; sourceTree = "<group>"; };
+		1E21F306240D60F400BC81DC /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
+		1E21F308240D617600BC81DC /* ScalingCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingCircle.swift; sourceTree = "<group>"; };
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
 		1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
@@ -278,6 +282,15 @@
 				1E3CD7EA2403253600C95ABF /* Locations */,
 			);
 			path = "Visits Home View";
+			sourceTree = "<group>";
+		};
+		1E21F305240D60D100BC81DC /* Theme Picker */ = {
+			isa = PBXGroup;
+			children = (
+				1E21F306240D60F400BC81DC /* ThemePickerView.swift */,
+				1E21F308240D617600BC81DC /* ScalingCircle.swift */,
+			);
+			path = "Theme Picker";
 			sourceTree = "<group>";
 		};
 		1E243288240B722500E983E7 /* Layouts */ = {
@@ -475,6 +488,7 @@
 				1ED53522240B0C01009B11D3 /* UserStore.swift */,
 				1E243290240B742E00E983E7 /* Splash */,
 				1ED53524240B0CC5009B11D3 /* Login */,
+				1E21F305240D60D100BC81DC /* Theme Picker */,
 				1E24927123EB53DA00165280 /* Map */,
 				1E0F7C7F2402BD11001B033C /* Visits Home View */,
 			);
@@ -901,6 +915,7 @@
 				1EFF83B323E5365E00FF04A1 /* H0Stack.swift in Sources */,
 				1EB865E123F9E01400A4B8E1 /* UIApplication.swift in Sources */,
 				1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */,
+				1E21F307240D60F400BC81DC /* ThemePickerView.swift in Sources */,
 				1EDE74D5240B6721002A7C08 /* LocationService.swift in Sources */,
 				1EFF83AD23E52D5800FF04A1 /* View+Extensions.swift in Sources */,
 				1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */,
@@ -950,6 +965,7 @@
 				1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */,
 				1ED53505240A2BF4009B11D3 /* BoolICloudKVS.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
+				1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
