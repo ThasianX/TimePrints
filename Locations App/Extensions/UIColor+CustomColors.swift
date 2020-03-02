@@ -3,13 +3,13 @@ import UIKit
 extension UIColor {
     static let persianPink = UIColor("#F688BB")
 
-    static let pearlyMagenta = UIColor("#AD62AA")
+    static let radicalRed = UIColor("#FF2E63")
 
     static let skyBlue = UIColor("#87CEEB")
 
     static let scarletRed = UIColor("#84142D")
 
-    static let charcoal = UIColor("#30475E")
+    static let violetGum = UIColor("#512B58")
 
     static let gladeGreen = UIColor("#5B8C5A")
 

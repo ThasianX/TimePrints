@@ -3,13 +3,14 @@
 import SwiftUI
 
 struct ThemePickerView: View {
-    @State private var selectedColor = AppColors.themes[0]
+    @State private var selectedColor: UIColor = .gray
 
     let themeColors = AppColors.themes.chunked(into: 2)
 
     var body: some View {
         ZStack {
             ColorAdaptiveVisitsView(color: selectedColor.color)
+                .frame(maxHeight: screen.height)
                 .animation(.easeInOut)
             colorPickerList
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

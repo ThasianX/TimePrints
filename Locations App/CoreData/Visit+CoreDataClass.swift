@@ -98,7 +98,7 @@ extension Visit {
         visit.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
         visit.location.name = "Apple INC"
         visit.isFavorite = true
-        visit.location.tag = Tag.create(name: "Visit", color: .charcoal)
+        visit.location.tag = Tag.create(name: "Visit", color: .berryRed)
         CoreData.stack.save()
         return visit
     }

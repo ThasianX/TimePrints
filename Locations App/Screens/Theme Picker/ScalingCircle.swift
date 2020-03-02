@@ -34,7 +34,7 @@ struct ScalingCircle: View {
 private extension ScalingCircle {
     private var innerCircle: some View {
         Circle()
-            .frame(width: 75, height: 75)
+            .frame(width: 50, height: 50)
             .foregroundColor(uiColor.color)
     }
 
@@ -60,7 +60,7 @@ private extension ScalingCircle {
         Circle()
             .trim(from: 1/2, to: 4/5)
             .stroke(style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
-            .frame(width: 150, height: 150)
+            .frame(width: 100, height: 100)
     }
 }
 
