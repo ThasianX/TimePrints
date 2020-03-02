@@ -7,7 +7,7 @@ extension UIColor {
 
     static let skyBlue = UIColor("#87CEEB")
 
-    static let scarletRed = UIColor("#84142D")
+    static let blackPearl = UIColor("#3E206D")
 
     static let violetGum = UIColor("#512B58")
 

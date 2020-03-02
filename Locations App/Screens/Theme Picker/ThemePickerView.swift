@@ -17,6 +17,11 @@ struct ThemePickerView: View {
                 .background(Color.black.opacity(0.5))
                 .extendToScreenEdges()
         }
+        .onAppear(perform: setSelectedColorToFirstTheme)
+    }
+
+    private func setSelectedColorToFirstTheme() {
+        selectedColor = themeColors[0][0]
     }
 }
 

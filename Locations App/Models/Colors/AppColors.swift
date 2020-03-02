@@ -13,7 +13,7 @@ struct AppColors {
         .cadiumOrange,
         .skyBlue,
         .violetGum,
-        .scarletRed,
+        .blackPearl,
         .gladeGreen,
         .winterHazel,
         .radicalRed
