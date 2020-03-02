@@ -5,5 +5,6 @@ import UIKit
 
 extension UIImage {
     static let tagFill = UIImage(named: "tag.fill")!
+    
     static let infoCircleFill = UIImage(named: "info.circle.fill")!
 }

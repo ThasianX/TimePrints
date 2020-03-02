@@ -10,9 +10,13 @@ struct AppColors {
     ]
 
     static let themes: [UIColor] = [
-        .berryRed,
-        .salmon,
-        .limeGreen,
-        .skyBlue
+        .persianPink,
+        .pearlyMagenta,
+        .skyBlue,
+        .scarletRed,
+        .charcoal,
+        .gladeGreen,
+        .winterHazel,
+        .cadiumOrange
     ]
 }

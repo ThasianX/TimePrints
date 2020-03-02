@@ -7,12 +7,11 @@ fileprivate let ANIMATION_DURATION: Double = 1.5
 fileprivate let UNSELECTED_SCALE_FACTOR: CGFloat = 0.5
 
 struct ScalingCircle: View {
-    @Binding var selectedIndex: Int
-    let index: Int
-    let color: Color
+    @Binding var selectedColor: UIColor
+    let uiColor: UIColor
 
     private var isSelected: Bool {
-        index == selectedIndex
+        uiColor == selectedColor
     }
 
     var body: some View {
@@ -28,7 +27,7 @@ struct ScalingCircle: View {
     }
 
     private func setAsSelectedIndex() {
-        selectedIndex = index
+        selectedColor = uiColor
     }
 }
 
@@ -36,7 +35,7 @@ private extension ScalingCircle {
     private var innerCircle: some View {
         Circle()
             .frame(width: 75, height: 75)
-            .foregroundColor(color)
+            .foregroundColor(uiColor.color)
     }
 
     private var outerRing: some View {
@@ -53,7 +52,7 @@ private extension ScalingCircle {
 
     private var bottomArc: some View {
         semiArc
-            .foregroundColor(color)
+            .foregroundColor(uiColor.color)
             .rotationEffect(.degrees(180))
     }
 
@@ -68,6 +67,6 @@ private extension ScalingCircle {
 struct ScalingCircle_Previews: PreviewProvider {
     static var previews: some View {
         // idk why the binding doesn't work
-        ScalingCircle(selectedIndex: .constant(-1), index: 1, color: .red)
+        ScalingCircle(selectedColor: .constant(.red), uiColor: .blue)
     }
 }

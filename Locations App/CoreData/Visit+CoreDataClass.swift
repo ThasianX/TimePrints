@@ -127,3 +127,13 @@ extension Visit {
         return visits
     }
 }
+
+private extension Date {
+    static func random(range: Int) -> Date {
+        let interval = Date().timeIntervalSince1970
+        let intervalRange = Double(86_400 * range)
+        let random = Double(arc4random_uniform(UInt32(intervalRange)) + 1)
+        let newInterval = interval + (random - (intervalRange / 2.0))
+        return Date(timeIntervalSince1970: newInterval)
+    }
+}
