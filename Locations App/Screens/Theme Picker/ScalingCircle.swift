@@ -2,43 +2,72 @@
 
 import SwiftUI
 
+fileprivate let ROTATION_DEGREES: Double = 1080
+fileprivate let ANIMATION_DURATION: Double = 1.5
+fileprivate let UNSELECTED_SCALE_FACTOR: CGFloat = 0.5
+
 struct ScalingCircle: View {
-    @State private var scaleAll = false
-    @State private var rotateOuter = false
+    @Binding var selectedIndex: Int
+    let index: Int
+    let color: Color
+
+    private var isSelected: Bool {
+        index == selectedIndex
+    }
 
     var body: some View {
         ZStack {
-            Circle()
-                .frame(width: 50, height: 50)
-                .foregroundColor(.white)
-            ZStack {
-                Circle()  //
-                    .trim(from: 1/2, to: 4/5)
-                    .stroke(style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.white)
-                Circle()  //
-                    .trim(from: 1/2, to: 4/5)
-                    .stroke(style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.blue)
-                    .rotationEffect(.degrees(180))
+            innerCircle
+            outerRing
+                .rotationEffect(.degrees(isSelected ? ROTATION_DEGREES : 0))
+                .animation(.spring(response: ANIMATION_DURATION + 0.25, dampingFraction: 0.8, blendDuration: 0.3))
+        }
+        .scaleEffect(isSelected ? 1 : UNSELECTED_SCALE_FACTOR)
+        .animation(.easeInOut(duration: ANIMATION_DURATION))
+        .onTapGesture(perform: setAsSelectedIndex)
+    }
 
-            }
-            .rotationEffect(.degrees(rotateOuter ? 360*3 : 0))
-            .animation(Animation.spring(response: 1.75, dampingFraction: 0.8, blendDuration: 0.3))
+    private func setAsSelectedIndex() {
+        selectedIndex = index
+    }
+}
+
+private extension ScalingCircle {
+    private var innerCircle: some View {
+        Circle()
+            .frame(width: 75, height: 75)
+            .foregroundColor(color)
+    }
+
+    private var outerRing: some View {
+        ZStack {
+            topArc
+            bottomArc
         }
-        .scaleEffect(scaleAll ? 1 : 0.3)
-        .animation(Animation.easeInOut(duration: 1.5))
-        .onTapGesture {
-            self.scaleAll.toggle()
-            self.rotateOuter.toggle()
-        }
+    }
+
+    private var topArc: some View {
+        semiArc
+            .foregroundColor(.white)
+    }
+
+    private var bottomArc: some View {
+        semiArc
+            .foregroundColor(color)
+            .rotationEffect(.degrees(180))
+    }
+
+    private var semiArc: some View {
+        Circle()
+            .trim(from: 1/2, to: 4/5)
+            .stroke(style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
+            .frame(width: 150, height: 150)
     }
 }
 
 struct ScalingCircle_Previews: PreviewProvider {
     static var previews: some View {
-        ScalingCircle()
+        // idk why the binding doesn't work
+        ScalingCircle(selectedIndex: .constant(-1), index: 1, color: .red)
     }
 }

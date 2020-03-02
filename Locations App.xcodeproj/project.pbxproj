@@ -12,6 +12,8 @@
 		1E06D51023FE21AE00467799 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */; };
 		1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C802402BD42001B033C /* VisitsHomeView.swift */; };
 		1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */; };
+		1E125C45240D808100D0919E /* ColorAdaptiveVisitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E125C44240D808100D0919E /* ColorAdaptiveVisitsView.swift */; };
+		1E125C47240D83F200D0919E /* RoundedModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E125C46240D83F200D0919E /* RoundedModifier.swift */; };
 		1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D3DB523EF8B2500528241 /* VScroll.swift */; };
 		1E21F307240D60F400BC81DC /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F306240D60F400BC81DC /* ThemePickerView.swift */; };
 		1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F308240D617600BC81DC /* ScalingCircle.swift */; };
@@ -145,6 +147,8 @@
 		1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
 		1E0F7C802402BD42001B033C /* VisitsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHomeView.swift; sourceTree = "<group>"; };
 		1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpanadableFAB.swift; sourceTree = "<group>"; };
+		1E125C44240D808100D0919E /* ColorAdaptiveVisitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAdaptiveVisitsView.swift; sourceTree = "<group>"; };
+		1E125C46240D83F200D0919E /* RoundedModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedModifier.swift; sourceTree = "<group>"; };
 		1E1D3DB523EF8B2500528241 /* VScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VScroll.swift; sourceTree = "<group>"; };
 		1E21F306240D60F400BC81DC /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
 		1E21F308240D617600BC81DC /* ScalingCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingCircle.swift; sourceTree = "<group>"; };
@@ -289,6 +293,7 @@
 			children = (
 				1E21F306240D60F400BC81DC /* ThemePickerView.swift */,
 				1E21F308240D617600BC81DC /* ScalingCircle.swift */,
+				1E125C44240D808100D0919E /* ColorAdaptiveVisitsView.swift */,
 			);
 			path = "Theme Picker";
 			sourceTree = "<group>";
@@ -713,6 +718,7 @@
 				1E5DBEA823E9C7A100C86641 /* OpacityModifier.swift */,
 				1EFF83AE23E52E5900FF04A1 /* RotatedModifier.swift */,
 				1EFF83AA23E52BC700FF04A1 /* SizeModifier.swift */,
+				1E125C46240D83F200D0919E /* RoundedModifier.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -904,6 +910,7 @@
 				1E6D568923E5EEB20044AB3A /* TagView.swift in Sources */,
 				1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */,
 				1EFF83AB23E52BC700FF04A1 /* SizeModifier.swift in Sources */,
+				1E125C47240D83F200D0919E /* RoundedModifier.swift in Sources */,
 				1EE2CF5923E7D2C2009760D6 /* CustomAnnotationView.swift in Sources */,
 				1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */,
 				1EFF83A323E4E27800FF04A1 /* RandomAccessCollection+Additions.swift in Sources */,
@@ -935,6 +942,7 @@
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,
 				1EE2CF5523E7CE4B009760D6 /* UIColor+Additions.swift in Sources */,
 				1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */,
+				1E125C45240D808100D0919E /* ColorAdaptiveVisitsView.swift in Sources */,
 				1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */,
 				1ED53509240A2C90009B11D3 /* ICloudKVS+Account.swift in Sources */,
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
