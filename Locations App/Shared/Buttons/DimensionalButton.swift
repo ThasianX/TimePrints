@@ -3,11 +3,15 @@
 import SwiftUI
 
 fileprivate let ROTATION_AMOUNT: Double = 360
+fileprivate let ROTATION_ANIMATION_DURATION: Double = 2
+fileprivate let CHECKMARK_ANIMATION_DURATION: Double = 0.5
 
 struct DimensionalButton: View {
     @State private var showFirstStroke = false
     @State private var showSecondStroke = false
     @State private var showCheckmark = false
+
+    let action: () -> Void
 
     var circleColor: Color = .pink
     var checkmarkCircleColor: Color = .green
@@ -22,6 +26,17 @@ struct DimensionalButton: View {
         }
         .frame(width: circleDiameter, height: circleDiameter)
         .contentShape(Circle())
+        .onTapGesture(perform: animateThenExecute)
+    }
+
+    private func animateThenExecute() {
+        showFirstStroke = true
+        showSecondStroke = true
+        showCheckmark = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + ROTATION_ANIMATION_DURATION + CHECKMARK_ANIMATION_DURATION) {
+            self.action()
+        }
     }
 
     private var firstCircleStroke: some View {
@@ -30,12 +45,7 @@ struct DimensionalButton: View {
             .frame(width: circleDiameter, height: circleDiameter)
             .foregroundColor(showFirstStroke ? checkmarkCircleColor : circleColor)
             .rotation3DEffect(.degrees(showFirstStroke ? 0 : ROTATION_AMOUNT), axis: (x: 1, y: 1, z: 1))
-            .animation(Animation.easeIn(duration: 2).delay(1))
-            .onAppear(perform: enableFirstStroke)
-    }
-
-    private func enableFirstStroke() {
-        showFirstStroke.toggle()
+            .animation(Animation.easeIn(duration: ROTATION_ANIMATION_DURATION))
     }
 
     private var secondCircleStroke: some View {
@@ -44,12 +54,7 @@ struct DimensionalButton: View {
             .frame(width: circleDiameter, height: circleDiameter)
             .foregroundColor(showSecondStroke ? checkmarkCircleColor : circleColor)
             .rotation3DEffect(.degrees(showSecondStroke ? 0 : ROTATION_AMOUNT), axis: (x: -1, y: 1, z: 1))
-            .animation(Animation.easeIn(duration: 2).delay(1))
-            .onAppear(perform: enableSecondStroke)
-    }
-
-    private func enableSecondStroke() {
-        showSecondStroke.toggle()
+            .animation(Animation.easeIn(duration: ROTATION_ANIMATION_DURATION))
     }
 
     private var checkmarkView: some View {
@@ -57,12 +62,7 @@ struct DimensionalButton: View {
             .trim(from: 0, to: showCheckmark ? 1 : 0)
             .stroke(style: StrokeStyle(lineWidth: checkmarkLineWidth, lineCap: .round, lineJoin: .round))
             .foregroundColor(checkmarkColor)
-            .animation(Animation.easeInOut.delay(3))
-            .onAppear(perform: animateCheckmark)
-    }
-
-    private func animateCheckmark() {
-        showCheckmark.toggle()
+            .animation(Animation.easeInOut.delay(ROTATION_ANIMATION_DURATION))
     }
 
     private var checkMarkPath: Path {
@@ -103,6 +103,6 @@ private extension DimensionalButton {
 
 struct DimensionalButton_Previews: PreviewProvider {
     static var previews: some View {
-        DimensionalButton()
+        DimensionalButton(action: { })
     }
 }
