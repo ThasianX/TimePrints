@@ -4,6 +4,8 @@ import SwiftUI
 
 struct ThemePickerView: View {
     @State private var selectedColor: UIColor = .clear
+    @State private var instructionsScale: CGFloat = 0
+
     let startingThemeColor: UIColor
     let onSelected: (UIColor) -> Void
 
@@ -23,12 +25,14 @@ struct ThemePickerView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.black.opacity(0.5))
                 .extendToScreenEdges()
+            bottomAlignedInstructionsText
         }
         .onAppear(perform: setSelectedThemeWithAnimation)
     }
 
     private func setSelectedThemeWithAnimation() {
         selectedColor = startingThemeColor
+        instructionsScale = 1
     }
 }
 
@@ -55,6 +59,21 @@ private extension ThemePickerView {
             .onTapGesture {
                 self.onSelected(uiColor)
         }
+    }
+
+    private var bottomAlignedInstructionsText: some View {
+        VStack {
+            Spacer()
+            instructionsText
+                .padding(.bottom)
+                .scaleEffect(instructionsScale)
+                .animation(.spring())
+        }
+    }
+
+    private var instructionsText: some View {
+        Text("What's your favorite color?")
+            .font(.headline)
     }
 }
 
