@@ -4,7 +4,7 @@ import SwiftUI
 
 fileprivate let ROTATION_AMOUNT: Double = 360
 fileprivate let ROTATION_ANIMATION_DURATION: Double = 2
-fileprivate let CHECKMARK_ANIMATION_DURATION: Double = 0.75
+fileprivate let CHECKMARK_ANIMATION_DURATION: Double = 0.6
 
 struct DimensionalButton: View {
     @State private var showFirstStroke = false
