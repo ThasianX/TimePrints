@@ -39,19 +39,31 @@ final class UserStore: ObservableObject {
         loginService.logOut()
     }
 
+    var themeColor: UIColor {
+        UIColor(themeColorService.themeColor)
+    }
+
     func setThemeColor(color: UIColor) {
-        themeColorService.setThemeColor(hex: color.hexString())
+        themeColorService.setThemeColor(hexString: color.hexString())
     }
 }
 
 extension UserStore {
     private func userIsLoggedIn() {
-        // TODO: After logging in, let user choose a theme color for the app, then initialize the CoreData stack and prompt for location permissions
         setLoggedInAlert()
+        setDefaultThemeColor()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + alertAnimationDuration) {
             self.isLoggedIn = true
         }
+    }
+
+    private func setLoggedInAlert() {
+        alert = LoggedInAlert()
+    }
+
+    private func setDefaultThemeColor() {
+        setThemeColor(color: AppColors.themes.first!)
     }
 
     private func userIsNotLoggedIn() {
@@ -63,16 +75,12 @@ extension UserStore {
         }
     }
 
-    private func openSettings() {
-        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-    }
-
-    private func setLoggedInAlert() {
-        alert = LoggedInAlert()
-    }
-
     private func setNotLoggedInAlert() {
         alert = NotLoggedInAlert()
+    }
+
+    private func openSettings() {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
     }
 
     private func resetAlert() {

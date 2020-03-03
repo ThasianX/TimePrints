@@ -9,13 +9,8 @@ struct ThemePickerView: View {
 
     let themeColors = AppColors.themes.chunked(into: 2)
 
-    init(hexString: String?, onSelected: @escaping (UIColor) -> Void) {
-        if let hexString = hexString {
-            startingThemeColor = UIColor(hexString)
-        } else {
-            startingThemeColor = AppColors.themes.first!
-        }
-
+    init(startingThemeColor: UIColor, onSelected: @escaping (UIColor) -> Void) {
+        self.startingThemeColor = startingThemeColor
         self.onSelected = onSelected
     }
 
@@ -47,7 +42,7 @@ private extension ThemePickerView {
     private var colorPickerStack: some View {
         VStack(spacing: 50) {
             ForEach(themeColors, id: \.self) { rowUiColors in
-                HStack {
+                HStack(spacing: 50) {
                     self.scalingCircleView(for: rowUiColors[0])
                     self.scalingCircleView(for: rowUiColors[1])
                 }
@@ -65,6 +60,6 @@ private extension ThemePickerView {
 
 struct ThemePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        ThemePickerView(hexString: nil, onSelected: { _ in })
+        ThemePickerView(startingThemeColor: AppColors.themes.first!, onSelected: { _ in })
     }
 }

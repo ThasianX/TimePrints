@@ -68,7 +68,7 @@ private extension RootView {
     }
 
     private var themePickerView: ThemePickerView {
-        ThemePickerView(hexString: nil, onSelected: userStore.setThemeColor)
+        ThemePickerView(startingThemeColor: userStore.themeColor, onSelected: userStore.setThemeColor)
     }
 
     private var appView: some View {

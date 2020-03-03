@@ -5,8 +5,12 @@ final class ICloudThemeColorService: ThemeColorService {
         ICloudKVS.Account.bool(forKey: .isThemeColorSet)
     }
 
-    func setThemeColor(hex: String) {
+    var themeColor: String {
+        ICloudKVS.Account.string(forKey: .themeColor)!
+    }
+
+    func setThemeColor(hexString: String) {
         ICloudKVS.Account.set(true, for: .isThemeColorSet)
-        ICloudKVS.Account.set(hex, for: .themeColor)
+        ICloudKVS.Account.set(hexString, for: .themeColor)
     }
 }
