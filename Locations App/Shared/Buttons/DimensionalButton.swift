@@ -4,7 +4,7 @@ import SwiftUI
 
 fileprivate let ROTATION_AMOUNT: Double = 360
 fileprivate let ROTATION_ANIMATION_DURATION: Double = 2
-fileprivate let CHECKMARK_ANIMATION_DURATION: Double = 0.6
+fileprivate let CHECKMARK_ANIMATION_DURATION: Double = 0.5
 
 struct DimensionalButton: View {
     @State private var showFirstStroke = false
@@ -23,12 +23,7 @@ struct DimensionalButton: View {
         ZStack {
             firstCircleStroke
             secondCircleStroke
-            image
-                .resizable()
-                .padding()
-                .foregroundColor(checkmarkColor)
-                .fade(if: showFirstStroke)
-                .animation(.easeInOut)
+            scaledImageWhenNoStroke
             checkmarkView
         }
         .frame(width: circleDiameter, height: circleDiameter)
@@ -62,6 +57,15 @@ struct DimensionalButton: View {
             .foregroundColor(showSecondStroke ? checkmarkCircleColor : circleColor)
             .rotation3DEffect(.degrees(showSecondStroke ? 0 : ROTATION_AMOUNT), axis: (x: -1, y: 1, z: 1))
             .animation(Animation.easeIn(duration: ROTATION_ANIMATION_DURATION))
+    }
+
+    private var scaledImageWhenNoStroke: some View {
+        image
+            .resizable()
+            .padding()
+            .foregroundColor(checkmarkColor)
+            .fade(if: showFirstStroke)
+            .animation(.easeInOut)
     }
 
     private var checkmarkView: some View {

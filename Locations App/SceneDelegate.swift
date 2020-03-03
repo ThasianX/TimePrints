@@ -5,7 +5,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let userStore = UserStore(loginService: ICloudLoginService(), themeColorService: ICloudThemeColorService())
+        let userStore = UserStore(
+            loginService: ICloudLoginService(),
+            themeColorService: ICloudThemeColorService(),
+            locationService: CoreLocationService()
+        )
         let locationService = CoreLocationService()
         let context = CoreData.stack.context
         let contentView = RootView(userStore: userStore, locationService: locationService)

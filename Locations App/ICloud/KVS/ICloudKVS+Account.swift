@@ -6,7 +6,7 @@ extension NSUbiquitousKeyValueStore {
     struct Account: AccountKVS {
         enum AccountKey: String {
             case isUserLoggedIn
-            case isThemeColorSet
+            case isInitialThemeSetup
             case themeColor
         }
     }

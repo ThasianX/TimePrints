@@ -1,8 +1,8 @@
 import Foundation
 
 final class ICloudThemeColorService: ThemeColorService {
-    var isThemeColorSet: Bool {
-        ICloudKVS.Account.bool(forKey: .isThemeColorSet)
+    var isInitialThemeSetup: Bool {
+        ICloudKVS.Account.bool(forKey: .isInitialThemeSetup)
     }
 
     var themeColor: String {
@@ -10,7 +10,10 @@ final class ICloudThemeColorService: ThemeColorService {
     }
 
     func setThemeColor(hexString: String) {
-        ICloudKVS.Account.set(true, for: .isThemeColorSet)
         ICloudKVS.Account.set(hexString, for: .themeColor)
+    }
+
+    func finalizeThemeSetup() {
+        ICloudKVS.Account.set(true, for: .isInitialThemeSetup)
     }
 }

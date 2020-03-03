@@ -1,26 +1,32 @@
 import SwiftUI
 
 protocol ThemeColorService {
-    var isThemeColorSet: Bool { get }
+    var isInitialThemeSetup: Bool { get }
     var themeColor: String { get }
     
     func setThemeColor(hexString: String)
+    func finalizeThemeSetup()
 }
 
 final class MockIsSetThemeColorService: ThemeColorService {
-    var isThemeColorSet: Bool = true
+    var isInitialThemeSetup: Bool = true
     var themeColor: String = UIColor.persianPink.hexString()
 
     func setThemeColor(hexString: String) { }
+
+    func finalizeThemeSetup() { }
 }
 
 final class MockIsNotSetThemeColorService: ThemeColorService {
-    var isThemeColorSet: Bool = false
+    var isInitialThemeSetup: Bool = false
     var themeColor: String = ""
 
     func setThemeColor(hexString: String) {
         themeColor = hexString
-        isThemeColorSet = true
+    }
+
+    func finalizeThemeSetup() {
+        isInitialThemeSetup = true
     }
 }
 

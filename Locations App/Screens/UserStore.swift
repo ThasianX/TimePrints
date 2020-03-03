@@ -4,11 +4,11 @@ import SwiftUI
 
 extension UserStore {
     static let mockSuccessLogin: UserStore = {
-        UserStore(loginService: MockSuccessLoginService(), themeColorService: MockIsNotSetThemeColorService())
+        UserStore(loginService: MockSuccessLoginService(), themeColorService: MockIsNotSetThemeColorService(), locationService: MockLocationService())
     }()
 
     static let mockFailedLogin: UserStore = {
-        UserStore(loginService: MockFailureLoginService(), themeColorService: MockIsNotSetThemeColorService())
+        UserStore(loginService: MockFailureLoginService(), themeColorService: MockIsNotSetThemeColorService(), locationService: MockLocationService())
     }()
 }
 
@@ -16,17 +16,19 @@ final class UserStore: ObservableObject {
     @Published var isLoggedIn: Bool
     @Published var alert: Alert? = nil
 
-    @Published var isThemeColorSet: Bool
+    @Published var isInitialThemeSetup: Bool
 
     private let loginService: LoginService
     private let themeColorService: ThemeColorService
+    private let locationService: LocationService
     private let alertAnimationDuration: Double = 2.5
 
-    init(loginService: LoginService, themeColorService: ThemeColorService) {
+    init(loginService: LoginService, themeColorService: ThemeColorService, locationService: LocationService) {
         isLoggedIn = loginService.isUserLoggedIn
-        isThemeColorSet = themeColorService.isThemeColorSet
+        isInitialThemeSetup = themeColorService.isInitialThemeSetup
         self.loginService = loginService
         self.themeColorService = themeColorService
+        self.locationService = locationService
     }
 
     func logIn() {
@@ -45,6 +47,17 @@ final class UserStore: ObservableObject {
 
     func setThemeColor(color: UIColor) {
         themeColorService.setThemeColor(hexString: color.hexString())
+    }
+
+    func finalizeInitialThemeSetup() {
+        isInitialThemeSetup = true
+        performLocationAndDatabaseOperations()
+        themeColorService.finalizeThemeSetup()
+    }
+
+    private func performLocationAndDatabaseOperations() {
+        CoreData.initialDbSetup()
+        locationService.startTrackingVisits()
     }
 }
 
