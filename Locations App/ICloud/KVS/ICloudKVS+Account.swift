@@ -3,9 +3,11 @@
 import Foundation
 
 extension NSUbiquitousKeyValueStore {
-    struct Account: BoolICloudKVS {
-        enum BoolICloudKey: String {
+    struct Account: AccountKVS {
+        enum AccountKey: String {
             case isUserLoggedIn
+            case isThemeColorSet
+            case themeColor
         }
     }
 }

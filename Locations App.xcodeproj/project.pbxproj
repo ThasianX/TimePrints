@@ -18,6 +18,8 @@
 		1E125C4B240DA19B00D0919E /* UIColor+ToColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E125C4A240DA19B00D0919E /* UIColor+ToColor.swift */; };
 		1E125C4D240DAA9900D0919E /* Array+Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E125C4C240DAA9900D0919E /* Array+Chunk.swift */; };
 		1E125C4F240DAB0C00D0919E /* Date+DateComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E125C4E240DAB0C00D0919E /* Date+DateComponents.swift */; };
+		1E125C52240DBA8F00D0919E /* ThemeColorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E125C51240DBA8F00D0919E /* ThemeColorService.swift */; };
+		1E125C56240DEE7200D0919E /* ICloudThemeColorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E125C55240DEE7200D0919E /* ICloudThemeColorService.swift */; };
 		1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D3DB523EF8B2500528241 /* VScroll.swift */; };
 		1E21F307240D60F400BC81DC /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F306240D60F400BC81DC /* ThemePickerView.swift */; };
 		1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F308240D617600BC81DC /* ScalingCircle.swift */; };
@@ -65,7 +67,7 @@
 		1ED534FE24096B34009B11D3 /* profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED534FD24096B34009B11D3 /* profile.json */; };
 		1ED5350024096D62009B11D3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED534FF24096D62009B11D3 /* LoginView.swift */; };
 		1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */; };
-		1ED53505240A2BF4009B11D3 /* BoolICloudKVS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */; };
+		1ED53505240A2BF4009B11D3 /* AccountKVS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53504240A2BF4009B11D3 /* AccountKVS.swift */; };
 		1ED53507240A2C32009B11D3 /* KeyNamespaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */; };
 		1ED53509240A2C90009B11D3 /* ICloudKVS+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */; };
 		1ED5350F240A38B4009B11D3 /* walking.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5350E240A38B4009B11D3 /* walking.json */; };
@@ -156,6 +158,8 @@
 		1E125C4A240DA19B00D0919E /* UIColor+ToColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ToColor.swift"; sourceTree = "<group>"; };
 		1E125C4C240DAA9900D0919E /* Array+Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunk.swift"; sourceTree = "<group>"; };
 		1E125C4E240DAB0C00D0919E /* Date+DateComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateComponents.swift"; sourceTree = "<group>"; };
+		1E125C51240DBA8F00D0919E /* ThemeColorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColorService.swift; sourceTree = "<group>"; };
+		1E125C55240DEE7200D0919E /* ICloudThemeColorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudThemeColorService.swift; sourceTree = "<group>"; };
 		1E1D3DB523EF8B2500528241 /* VScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VScroll.swift; sourceTree = "<group>"; };
 		1E21F306240D60F400BC81DC /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
 		1E21F308240D617600BC81DC /* ScalingCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingCircle.swift; sourceTree = "<group>"; };
@@ -210,7 +214,7 @@
 		1ED534FD24096B34009B11D3 /* profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profile.json; sourceTree = "<group>"; };
 		1ED534FF24096D62009B11D3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudLoginService.swift; sourceTree = "<group>"; };
-		1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolICloudKVS.swift; sourceTree = "<group>"; };
+		1ED53504240A2BF4009B11D3 /* AccountKVS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKVS.swift; sourceTree = "<group>"; };
 		1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyNamespaceable.swift; sourceTree = "<group>"; };
 		1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ICloudKVS+Account.swift"; sourceTree = "<group>"; };
 		1ED5350E240A38B4009B11D3 /* walking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = walking.json; sourceTree = "<group>"; };
@@ -292,6 +296,15 @@
 				1E3CD7EA2403253600C95ABF /* Locations */,
 			);
 			path = "Visits Home View";
+			sourceTree = "<group>";
+		};
+		1E125C50240DBA6B00D0919E /* Theme Color */ = {
+			isa = PBXGroup;
+			children = (
+				1E125C51240DBA8F00D0919E /* ThemeColorService.swift */,
+				1E125C55240DEE7200D0919E /* ICloudThemeColorService.swift */,
+			);
+			path = "Theme Color";
 			sourceTree = "<group>";
 		};
 		1E21F305240D60D100BC81DC /* Theme Picker */ = {
@@ -455,7 +468,7 @@
 		1E52B0B2240B100900E4C693 /* KVS */ = {
 			isa = PBXGroup;
 			children = (
-				1ED53504240A2BF4009B11D3 /* BoolICloudKVS.swift */,
+				1ED53504240A2BF4009B11D3 /* AccountKVS.swift */,
 				1ED53508240A2C90009B11D3 /* ICloudKVS+Account.swift */,
 				1ED53506240A2C32009B11D3 /* KeyNamespaceable.swift */,
 			);
@@ -465,8 +478,8 @@
 		1E52B0B3240B101700E4C693 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */,
 				1ED5351E240B0A27009B11D3 /* LoginService.swift */,
+				1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -675,6 +688,7 @@
 			children = (
 				1E52B0B2240B100900E4C693 /* KVS */,
 				1E52B0B3240B101700E4C693 /* Login */,
+				1E125C50240DBA6B00D0919E /* Theme Color */,
 			);
 			path = ICloud;
 			sourceTree = "<group>";
@@ -943,6 +957,7 @@
 				1E5AF45423E3CCCA00A94F10 /* VisitPreviewCell.swift in Sources */,
 				1EFFA58623E89A3400914607 /* LocationAnnotation.swift in Sources */,
 				1E80278F23E5E9AC0043D119 /* VisitsForDayView.swift in Sources */,
+				1E125C56240DEE7200D0919E /* ICloudThemeColorService.swift in Sources */,
 				1E5AF45223E3CC0500A94F10 /* VisitsPreviewList.swift in Sources */,
 				1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */,
 				1EFF83B123E532FA00FF04A1 /* Array+Sort.swift in Sources */,
@@ -960,6 +975,7 @@
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Sort&Key.swift in Sources */,
 				1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
+				1E125C52240DBA8F00D0919E /* ThemeColorService.swift in Sources */,
 				1E125C4D240DAA9900D0919E /* Array+Chunk.swift in Sources */,
 				1EFE85D0240377170001D0C3 /* LottieView.swift in Sources */,
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
@@ -983,7 +999,7 @@
 				1E6D568B23E5F6F10044AB3A /* BImage.swift in Sources */,
 				1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */,
 				1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */,
-				1ED53505240A2BF4009B11D3 /* BoolICloudKVS.swift in Sources */,
+				1ED53505240A2BF4009B11D3 /* AccountKVS.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
 				1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */,
 			);
