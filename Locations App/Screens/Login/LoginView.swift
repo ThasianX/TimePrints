@@ -17,7 +17,6 @@ struct LoginView: View {
             alertViewIfExists
         }
     }
-
 }
 
 private extension LoginView {

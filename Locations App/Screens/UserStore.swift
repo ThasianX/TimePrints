@@ -6,12 +6,17 @@ final class UserStore: ObservableObject {
     @Published var isLoggedIn: Bool
     @Published var alert: Alert? = nil
 
+    @Published var isThemeColorSet: Bool
+
     private let loginService: LoginService
+    private let themeColorService: ThemeColorService
     private let alertAnimationDuration: Double = 2.5
 
-    init(loginService: LoginService) {
+    init(loginService: LoginService, themeColorService: ThemeColorService) {
         isLoggedIn = loginService.isUserLoggedIn
+        isThemeColorSet = themeColorService.isThemeColorSet
         self.loginService = loginService
+        self.themeColorService = themeColorService
     }
 
     func logIn() {
@@ -20,6 +25,16 @@ final class UserStore: ObservableObject {
         }
     }
 
+    func logOut() {
+        loginService.logOut()
+    }
+
+    func setThemeColor(color: UIColor) {
+        themeColorService.setThemeColor(hex: color.hexString())
+    }
+}
+
+extension UserStore {
     private func userIsLoggedIn() {
         // TODO: After logging in, let user choose a theme color for the app, then initialize the CoreData stack and prompt for location permissions
         setLoggedInAlert()
@@ -31,7 +46,7 @@ final class UserStore: ObservableObject {
 
     private func userIsNotLoggedIn() {
         setNotLoggedInAlert()
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + alertAnimationDuration) {
             self.openSettings()
             self.resetAlert()
@@ -52,9 +67,5 @@ final class UserStore: ObservableObject {
 
     private func resetAlert() {
         alert = nil
-    }
-
-    func logOut() {
-        loginService.logOut()
     }
 }
