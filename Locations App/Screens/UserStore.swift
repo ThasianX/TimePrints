@@ -2,6 +2,16 @@
 
 import SwiftUI
 
+extension UserStore {
+    static let mockSuccessLogin: UserStore = {
+        UserStore(loginService: MockSuccessLoginService(), themeColorService: MockIsNotSetThemeColorService())
+    }()
+
+    static let mockFailedLogin: UserStore = {
+        UserStore(loginService: MockFailureLoginService(), themeColorService: MockIsNotSetThemeColorService())
+    }()
+}
+
 final class UserStore: ObservableObject {
     @Published var isLoggedIn: Bool
     @Published var alert: Alert? = nil

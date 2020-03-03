@@ -53,12 +53,22 @@ private extension View {
 private extension RootView {
     private var viewForLoginState: some View {
         Group {
-            if userStore.isLoggedIn {
-                appView
-            } else {
+            if !userStore.isLoggedIn {
                 loginView
+            } else if !userStore.isThemeColorSet {
+                themePickerView
+            } else {
+                appView
             }
         }
+    }
+
+    private var loginView: LoginView {
+        LoginView(userStore: userStore)
+    }
+
+    private var themePickerView: ThemePickerView {
+        ThemePickerView(hexString: nil, onSelected: userStore.setThemeColor)
     }
 
     private var appView: some View {
@@ -78,10 +88,6 @@ private extension RootView {
     private func performInitialLocationAndDatabaseOperations() {
         CoreData.initialDbSetup()
         locationService.startTrackingVisits()
-    }
-
-    private var loginView: LoginView {
-        LoginView(userStore: userStore)
     }
 }
 
@@ -185,7 +191,7 @@ private extension RootView {
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView(userStore: UserStore(loginService: MockSuccessLoginService()), locationService: MockLocationService())
+        RootView(userStore: .mockSuccessLogin, locationService: MockLocationService())
     }
 }
 
