@@ -23,6 +23,7 @@
 		1E1D3DB623EF8B2500528241 /* VScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D3DB523EF8B2500528241 /* VScroll.swift */; };
 		1E21F307240D60F400BC81DC /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F306240D60F400BC81DC /* ThemePickerView.swift */; };
 		1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F308240D617600BC81DC /* ScalingCircle.swift */; };
+		1E21F30D240EC50700BC81DC /* DimensionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F30C240EC50700BC81DC /* DimensionalButton.swift */; };
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
 		1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */; };
@@ -163,6 +164,7 @@
 		1E1D3DB523EF8B2500528241 /* VScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VScroll.swift; sourceTree = "<group>"; };
 		1E21F306240D60F400BC81DC /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
 		1E21F308240D617600BC81DC /* ScalingCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingCircle.swift; sourceTree = "<group>"; };
+		1E21F30C240EC50700BC81DC /* DimensionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionalButton.swift; sourceTree = "<group>"; };
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
 		1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			children = (
 				1E6D568A23E5F6F10044AB3A /* BImage.swift */,
 				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
+				1E21F30C240EC50700BC81DC /* DimensionalButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -990,6 +993,7 @@
 				1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
+				1E21F30D240EC50700BC81DC /* DimensionalButton.swift in Sources */,
 				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,
 				1E00E5752408CC6200B14C9F /* SplashScreen.swift in Sources */,
 				1EFF83AF23E52E5900FF04A1 /* RotatedModifier.swift in Sources */,
