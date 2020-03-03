@@ -4,16 +4,17 @@ import SwiftUI
 
 fileprivate let ROTATION_AMOUNT: Double = 360
 fileprivate let ROTATION_ANIMATION_DURATION: Double = 2
-fileprivate let CHECKMARK_ANIMATION_DURATION: Double = 0.5
+fileprivate let CHECKMARK_ANIMATION_DURATION: Double = 0.75
 
 struct DimensionalButton: View {
     @State private var showFirstStroke = false
     @State private var showSecondStroke = false
     @State private var showCheckmark = false
 
+    let image: Image
     let action: () -> Void
+    let circleColor: Color
 
-    var circleColor: Color = .pink
     var checkmarkCircleColor: Color = .green
     var checkmarkColor: Color = .white
     var radius: CGFloat = 25
@@ -22,6 +23,12 @@ struct DimensionalButton: View {
         ZStack {
             firstCircleStroke
             secondCircleStroke
+            image
+                .resizable()
+                .padding()
+                .foregroundColor(checkmarkColor)
+                .fade(if: showFirstStroke)
+                .animation(.easeInOut)
             checkmarkView
         }
         .frame(width: circleDiameter, height: circleDiameter)
@@ -103,6 +110,6 @@ private extension DimensionalButton {
 
 struct DimensionalButton_Previews: PreviewProvider {
     static var previews: some View {
-        DimensionalButton(action: { })
+        DimensionalButton(image: Image(systemName: "arrow.right"), action: { }, circleColor: .blue)
     }
 }

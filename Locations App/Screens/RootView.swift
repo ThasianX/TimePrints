@@ -56,7 +56,7 @@ private extension RootView {
             if !userStore.isLoggedIn {
                 loginView
             } else if !userStore.isThemeColorSet {
-                themePickerView
+                themePickerViewWithButton
             } else {
                 appView
             }
@@ -67,8 +67,25 @@ private extension RootView {
         LoginView(userStore: userStore)
     }
 
+    private var themePickerViewWithButton: some View {
+        ZStack(alignment: .topTrailing) {
+            themePickerView
+            transitionToAppButton
+                .padding(.top)
+                .padding(.trailing, 30)
+        }
+    }
+
     private var themePickerView: ThemePickerView {
         ThemePickerView(startingThemeColor: userStore.themeColor, onSelected: userStore.setThemeColor)
+    }
+
+    private var transitionToAppButton: DimensionalButton {
+        DimensionalButton(image: Image(systemName: "arrow.right"), action: transitionToApp, circleColor: UIColor.kingFisherDaisy.color)
+    }
+
+    private func transitionToApp() {
+        userStore.isThemeColorSet = true
     }
 
     private var appView: some View {
