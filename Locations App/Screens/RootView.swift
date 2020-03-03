@@ -26,41 +26,57 @@ struct RootView: View {
         ZStack(alignment: .bottom) {
             viewForLoginState
 
-            splashScreen
-                .fade(if: !showSplash)
+            if showSplash {
+                splashScreen
+            }
         }
-    }
-}
-
-private extension RootView {
-    private var splashScreen: SplashScreen {
-        SplashScreen(show: $showSplash)
-    }
-}
-
-private extension View {
-    func modal(isPresented: Bool) -> some View {
-        self
-            .frame(width: screen.width, height: screen.height * 0.8)
-            .cornerRadius(30)
-            .shadow(radius: 20)
-            .fade(if: !isPresented)
-            .offset(y: isPresented ? screen.height * 0.1 : screen.height)
-            .animation(.spring())
     }
 }
 
 private extension RootView {
     private var viewForLoginState: some View {
         Group {
-            if userStore.isLoggedIn {
-                appView
-            } else {
+            if !userStore.isLoggedIn {
                 loginView
+            } else if !userStore.isInitialThemeSetup {
+                themePickerViewWithButton
+            } else {
+                appView
             }
         }
     }
 
+    private var splashScreen: SplashScreen {
+        SplashScreen(show: $showSplash)
+    }
+}
+
+private extension RootView {
+    private var loginView: LoginView {
+        LoginView(userStore: userStore)
+    }
+}
+
+private extension RootView {
+    private var themePickerViewWithButton: some View {
+        ZStack(alignment: .topTrailing) {
+            themePickerView
+            transitionToAppButton
+                .padding(.top)
+                .padding(.trailing, 35)
+        }
+    }
+
+    private var themePickerView: ThemePickerView {
+        ThemePickerView(startingThemeColor: userStore.themeColor, onSelected: userStore.setThemeColor)
+    }
+
+    private var transitionToAppButton: DimensionalButton {
+        DimensionalButton(image: Image(systemName: "arrow.right"), action: userStore.finalizeInitialThemeSetup, circleColor: UIColor.kingFisherDaisy.color)
+    }
+}
+
+private extension RootView {
     private var appView: some View {
         Group {
             visitsHomeView
@@ -68,30 +84,16 @@ private extension RootView {
 
             annotatedMapView
                 .fade(if: showingHomeView)
-                .onAppear(perform: performInitialLocationAndDatabaseOperations)
 
             toggleViewButton
                 .fade(if: showingEditTag || showingLocationVisits)
         }
     }
 
-    private func performInitialLocationAndDatabaseOperations() {
-        CoreData.initialDbSetup()
-        locationService.startTrackingVisits()
-    }
-
-    private var loginView: LoginView {
-        LoginView(userStore: userStore)
-    }
-}
-
-private extension RootView {
     private var visitsHomeView: some View {
         VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation)
     }
-}
 
-private extension RootView {
     private var annotatedMapView: some View {
         ZStack(alignment: .top) {
             mapView
@@ -151,9 +153,7 @@ private extension RootView {
             selectedLocation: selectedLocation
         )
     }
-}
 
-private extension RootView {
     private var toggleViewButton: some View {
         ZStack {
             toggleBackgroundColor
@@ -183,9 +183,21 @@ private extension RootView {
     }
 }
 
+private extension View {
+    func modal(isPresented: Bool) -> some View {
+        self
+            .frame(width: screen.width, height: screen.height * 0.8)
+            .cornerRadius(30)
+            .shadow(radius: 20)
+            .fade(if: !isPresented)
+            .offset(y: isPresented ? screen.height * 0.1 : screen.height)
+            .animation(.spring())
+    }
+}
+
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView(userStore: UserStore(loginService: MockSuccessLoginService()), locationService: MockLocationService())
+        RootView(userStore: .mockSuccessLogin, locationService: MockLocationService())
     }
 }
 

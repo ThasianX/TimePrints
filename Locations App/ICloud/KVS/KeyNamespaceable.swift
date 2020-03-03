@@ -5,7 +5,11 @@ import Foundation
 protocol KeyNamespaceable { }
 
 extension KeyNamespaceable {
-    static func namespace<T>(_ key: T) -> String where T: RawRepresentable {
-        "\(Self.self).\(key.rawValue)"
+    private static func namespace(_ key: String) -> String {
+        "\(Self.self).\(key)"
+    }
+    
+    static func namespace<T: RawRepresentable>(_ key: T) -> String where T.RawValue == String {
+        namespace(key.rawValue)
     }
 }

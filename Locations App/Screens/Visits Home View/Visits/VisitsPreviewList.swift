@@ -53,8 +53,8 @@ private extension VisitsPreviewList {
 
 private extension VisitsPreviewList {
     private var overlayColor: some View {
-        ScreenColor(Color("salmon"))
-            .saturation(2)
+        ScreenColor(Color(.salmon))
+            .saturation(1.5)
     }
 }
 
@@ -100,7 +100,7 @@ private extension VisitsPreviewList {
     }
 
     private func monthYearSideBarText(date: Date) -> some View {
-        MonthYearSideBar(date: date)
+        MonthYearSideBar(date: date, color: .init(.salmon))
     }
 
     private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {

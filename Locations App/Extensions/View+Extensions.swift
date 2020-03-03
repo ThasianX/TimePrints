@@ -16,6 +16,10 @@ extension View {
     func fade(if condition: Bool) -> some View {
         modifier(OpacityModifier(fade: condition))
     }
+
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        modifier(RoundedModifier(radius: radius, corners: corners))
+    }
     
     func erased() -> AnyView {
         AnyView(self)

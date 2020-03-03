@@ -69,7 +69,7 @@ private extension DayPreviewBlock {
 private extension DayPreviewBlock {
     private var backgroundColor: some View {
         Color("salmon")
-            .saturation(isFilled ? 2 : 1)
+            .saturation(isFilled ? 1.5 : 1)
     }
     
     private var visitsPreviewList: some View {

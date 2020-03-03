@@ -17,7 +17,6 @@ struct LoginView: View {
             alertViewIfExists
         }
     }
-
 }
 
 private extension LoginView {
@@ -157,6 +156,6 @@ private extension LoginView {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(userStore: UserStore(loginService: MockSuccessLoginService()))
+        LoginView(userStore: .mockSuccessLogin)
     }
 }

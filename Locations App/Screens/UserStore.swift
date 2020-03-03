@@ -2,16 +2,33 @@
 
 import SwiftUI
 
+extension UserStore {
+    static let mockSuccessLogin: UserStore = {
+        UserStore(loginService: MockSuccessLoginService(), themeColorService: MockIsNotSetThemeColorService(), locationService: MockLocationService())
+    }()
+
+    static let mockFailedLogin: UserStore = {
+        UserStore(loginService: MockFailureLoginService(), themeColorService: MockIsNotSetThemeColorService(), locationService: MockLocationService())
+    }()
+}
+
 final class UserStore: ObservableObject {
     @Published var isLoggedIn: Bool
     @Published var alert: Alert? = nil
 
+    @Published var isInitialThemeSetup: Bool
+
     private let loginService: LoginService
+    private let themeColorService: ThemeColorService
+    private let locationService: LocationService
     private let alertAnimationDuration: Double = 2.5
 
-    init(loginService: LoginService) {
+    init(loginService: LoginService, themeColorService: ThemeColorService, locationService: LocationService) {
         isLoggedIn = loginService.isUserLoggedIn
+        isInitialThemeSetup = themeColorService.isInitialThemeSetup
         self.loginService = loginService
+        self.themeColorService = themeColorService
+        self.locationService = locationService
     }
 
     func logIn() {
@@ -20,41 +37,66 @@ final class UserStore: ObservableObject {
         }
     }
 
+    func logOut() {
+        loginService.logOut()
+    }
+
+    var themeColor: UIColor {
+        UIColor(themeColorService.themeColor)
+    }
+
+    func setThemeColor(color: UIColor) {
+        themeColorService.setThemeColor(hexString: color.hexString())
+    }
+
+    func finalizeInitialThemeSetup() {
+        isInitialThemeSetup = true
+        performLocationAndDatabaseOperations()
+        themeColorService.finalizeThemeSetup()
+    }
+
+    private func performLocationAndDatabaseOperations() {
+        CoreData.initialDbSetup()
+        locationService.startTrackingVisits()
+    }
+}
+
+extension UserStore {
     private func userIsLoggedIn() {
-        // TODO: After logging in, let user choose a theme color for the app, then initialize the CoreData stack and prompt for location permissions
         setLoggedInAlert()
+        setDefaultThemeColor()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + alertAnimationDuration) {
             self.isLoggedIn = true
         }
     }
 
+    private func setLoggedInAlert() {
+        alert = LoggedInAlert()
+    }
+
+    private func setDefaultThemeColor() {
+        setThemeColor(color: AppColors.themes.first!)
+    }
+
     private func userIsNotLoggedIn() {
         setNotLoggedInAlert()
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + alertAnimationDuration) {
             self.openSettings()
             self.resetAlert()
         }
     }
 
-    private func openSettings() {
-        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-    }
-
-    private func setLoggedInAlert() {
-        alert = LoggedInAlert()
-    }
-
     private func setNotLoggedInAlert() {
         alert = NotLoggedInAlert()
     }
 
-    private func resetAlert() {
-        alert = nil
+    private func openSettings() {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
     }
 
-    func logOut() {
-        loginService.logOut()
+    private func resetAlert() {
+        alert = nil
     }
 }

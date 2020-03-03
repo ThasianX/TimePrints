@@ -98,7 +98,7 @@ extension Visit {
         visit.notes = "Had a great time visiting my friend, who works here. The food is amazing and the pay seems great."
         visit.location.name = "Apple INC"
         visit.isFavorite = true
-        visit.location.tag = Tag.create(name: "Visit", color: .charcoal)
+        visit.location.tag = Tag.create(name: "Visit", color: .berryRed)
         CoreData.stack.save()
         return visit
     }
@@ -125,5 +125,15 @@ extension Visit {
             visits.append(visit)
         }
         return visits
+    }
+}
+
+private extension Date {
+    static func random(range: Int) -> Date {
+        let interval = Date().timeIntervalSince1970
+        let intervalRange = Double(86_400 * range)
+        let random = Double(arc4random_uniform(UInt32(intervalRange)) + 1)
+        let newInterval = interval + (random - (intervalRange / 2.0))
+        return Date(timeIntervalSince1970: newInterval)
     }
 }
