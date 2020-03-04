@@ -17,159 +17,224 @@ struct SplashScreen: View {
     @State private var lineScale: CGFloat = 1
     @State private var textAlpha = 0.0
     @State private var textScale: CGFloat = 1
-    @State private var coverCircleScale: CGFloat = 1
-    @State private var coverCircleAlpha = 0.0
-    @State private var logoImageAlpha = 0.0
+    @State private var pulseCircleScale: CGFloat = 1
+    @State private var pulseCircleAlpha = 0.0
 
     @Binding var show: Bool
 
     var body: some View {
         ZStack {
-            Image("tiles")
-                .resizable(resizingMode: .tile)
+            backgroundTiles
                 .opacity(textAlpha)
                 .scaleEffect(textScale)
 
-            Circle()
-                .fill(kingFisherDaisy)
-                .frame(width: 1, height: 1,
-                       alignment: .center)
-                .scaleEffect(coverCircleScale)
-                .opacity(coverCircleAlpha)
+            pulseCircle
+                .scaleEffect(pulseCircleScale)
+                .opacity(pulseCircleAlpha)
 
-            Text("T           ME")
-                .font(.largeTitle)
-                .foregroundColor(.white)
+            timeText
                 .opacity(textAlpha)
                 .scaleEffect(textScale)
                 .offset(x: -20)
 
-            Image("footprints")
-                .renderingMode(.template)
-                .resizable()
-                .frame(width: 40, height: 40)
-                .offset(x: 90)
-                .foregroundColor(.white)
-                .opacity(logoImageAlpha)
-                .scaleEffect(iZoomFactor)
+            printsText
+                .opacity(textAlpha)
+                .scaleEffect(textScale)
+                .offset(x: 0, y: 60)
 
-            IAnimation(percent: percent)
-                .stroke(Color.white, lineWidth: iLineWidth)
-                .rotationEffect(.degrees(-90))
-                .aspectRatio(1, contentMode: .fit)
-                .padding(20)
-                .onAppear() {
-                    self.handleAnimations()
-            }
-            .scaleEffect(iScale * iZoomFactor)
-            .frame(width: 45, height: 45,
-                   alignment: .center)
-            .offset(x: -35)
-
-            Rectangle()
-                .fill(squareColor)
-                .scaleEffect(squareScale * iZoomFactor)
-                .frame(width: iSquareLength, height: iSquareLength,
-                       alignment: .center)
+            iAnimationView
+                .onAppear(perform: handleAnimations)
+                .scaleEffect(iScale * iZoomFactor)
                 .offset(x: -35)
-                .onAppear() {
-                    self.squareColor = self.kingFisherDaisy
-            }
 
-            Rectangle()
-                .fill(kingFisherDaisy)
+            iSquareView
+                .onAppear(perform: setDefaultSquareColor)
+                .scaleEffect(squareScale * iZoomFactor)
+                .offset(x: -35)
+
+            iRectangleView
                 .scaleEffect(lineScale, anchor: .bottom)
-                .frame(width: lineWidth, height: lineHeight,
-                       alignment: .center)
                 .offset(x: -35  , y: 22)
-
-            Spacer()
         }
         .background(kingFisherDaisy)
-        .edgesIgnoringSafeArea(.all)
+        .extendToScreenEdges()
+    }
+
+    private func setDefaultSquareColor() {
+        squareColor = kingFisherDaisy
     }
 }
 
-extension SplashScreen {
-    var iAnimationDuration: Double { return 1.0 }
-    var iAnimationDelay: Double { return  0.2 }
-    var iExitAnimationDuration: Double { return 0.3 }
-    var finalAnimationDuration: Double { return 0.4 }
-    var minAnimationInterval: Double { return 0.1 }
-    var fadeAnimationDuration: Double { return 0.6 }
+private extension SplashScreen {
+    private var backgroundTiles: some View {
+        Image("tiles")
+            .resizable(resizingMode: .tile)
+    }
+
+    private var pulseCircle: some View {
+        Circle()
+            .fill(kingFisherDaisy)
+            .frame(width: 1, height: 1, alignment: .center)
+    }
+
+    private var timeText: some View {
+        Text("T           ME")
+            .font(.largeTitle)
+            .foregroundColor(.white)
+    }
+
+    private var printsText: some View {
+        Text("PRINTS")
+            .tracking(7)
+            .font(.largeTitle)
+            .foregroundColor(.white)
+    }
+
+    private var iAnimationView: some View {
+        IAnimation(percent: percent)
+            .stroke(Color.white, lineWidth: iLineWidth)
+            .rotationEffect(.degrees(-90))
+            .aspectRatio(1, contentMode: .fit)
+            .padding(20)
+            .frame(width: 45, height: 45, alignment: .center)
+    }
+
+    private var iSquareView: some View {
+        Rectangle()
+            .fill(squareColor)
+            .frame(width: iSquareLength, height: iSquareLength, alignment: .center)
+    }
+
+    private var iRectangleView: some View {
+        Rectangle()
+            .fill(kingFisherDaisy)
+            .frame(width: lineWidth, height: lineHeight,
+                   alignment: .center)
+    }
+}
+
+private extension SplashScreen {
+    var iAnimationDuration: Double { 1.0 }
+    var iAnimationDelay: Double { 0.2 }
+    var iExitAnimationDuration: Double { 0.3 }
+    var finalAnimationDuration: Double { 0.4 }
+    var minAnimationInterval: Double { 0.1 }
+    var fadeAnimationDuration: Double { 0.6 }
 
     func handleAnimations() {
-        runAnimationPart1()
-        runAnimationPart2()
-        runAnimationPart3()
+        runMainAnimation()
+        runBackgroundPulseAnimation()
+        fadeMainAnimation()
         endAnimation()
     }
 
-    func runAnimationPart1() {
+    func runMainAnimation() {
         withAnimation(.easeIn(duration: iAnimationDuration)) {
-            percent = 1
-            iScale = 5
-            lineScale = 1
+            startIAnimation()
         }
 
         withAnimation(Animation.easeIn(duration: iAnimationDuration).delay(0.5)) {
-            textAlpha = 1.0
+            showText()
         }
 
         let deadline: DispatchTime = .now() + iAnimationDuration + iAnimationDelay
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             withAnimation(.easeOut(duration: self.iExitAnimationDuration)) {
-                self.iScale = 0
-                self.lineScale = 0
+                self.completeIAnimation()
             }
             withAnimation(.easeOut(duration: self.minAnimationInterval)) {
-                self.squareScale = 0
+                self.shrinkSquare()
             }
 
-            withAnimation(Animation.spring()) {
-                self.textScale = self.iZoomFactor
+            withAnimation(.spring()) {
+                self.enlargeText()
             }
         }
     }
 
-    func runAnimationPart2() {
+    private func startIAnimation() {
+        percent = 1
+        iScale = 5
+        lineScale = 1
+    }
+
+    private func showText() {
+        textAlpha = 1.0
+    }
+
+    private func completeIAnimation() {
+        iScale = 0
+        lineScale = 0
+    }
+
+    private func shrinkSquare() {
+        squareScale = 0
+    }
+
+    private func enlargeText() {
+        textScale = iZoomFactor
+    }
+
+    func runBackgroundPulseAnimation() {
         let deadline: DispatchTime = .now() + iAnimationDuration + iAnimationDelay + minAnimationInterval
         DispatchQueue.main.asyncAfter(deadline: deadline) {
-            self.squareColor = Color.white
-            self.squareScale = 1
+            self.enlargeWhiteSquare()
             withAnimation(.easeOut(duration: self.fadeAnimationDuration)) {
-                self.logoImageAlpha = 1
-                self.coverCircleAlpha = 1
-                self.coverCircleScale = 1000
+                self.startPulseAnimation()
             }
         }
     }
 
-    func runAnimationPart3() {
+    private func enlargeWhiteSquare() {
+        squareColor = Color.white
+        squareScale = 1
+    }
+
+    private func startPulseAnimation() {
+        pulseCircleAlpha = 1
+        pulseCircleScale = 1000
+    }
+
+    func fadeMainAnimation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2*iAnimationDuration) {
             withAnimation(.easeIn(duration: self.finalAnimationDuration)) {
-                self.textAlpha = 0
-                self.squareColor = self.kingFisherDaisy
-                self.logoImageAlpha = 0
+                self.fadeTextAndResetSquareColor()
             }
         }
+    }
+
+    private func fadeTextAndResetSquareColor() {
+        fadeText()
+        setDefaultSquareColor()
+    }
+
+    private func fadeText() {
+        textAlpha = 0
     }
 
     func endAnimation() {
         let deadline: DispatchTime = .now() + 2*iAnimationDuration + finalAnimationDuration
         DispatchQueue.main.asyncAfter(deadline: deadline) {
-            self.percent = 0
-            self.textScale = 1
-            self.coverCircleAlpha = 0
-            self.coverCircleScale = 1
+            self.resetAnimation()
             withAnimation {
-                self.show = false
+                self.exitView()
             }
         }
     }
+
+    private func resetAnimation() {
+        percent = 0
+        textScale = 1
+        pulseCircleAlpha = 0
+        pulseCircleScale = 1
+    }
+
+    private func exitView() {
+        show = false
+    }
 }
 
-struct IAnimation: Shape {
+fileprivate struct IAnimation: Shape {
     var percent: Double
 
     func path(in rect: CGRect) -> Path {
@@ -186,7 +251,7 @@ struct IAnimation: Shape {
     }
 
     var animatableData: Double {
-        get { return percent }
+        get { percent }
         set { percent = newValue }
     }
 }
