@@ -2,7 +2,6 @@ import SwiftUI
 import Mapbox
 
 struct MapView: UIViewRepresentable {
-    @Environment(\.appTheme) var color: UIColor
     @Binding var trackingMode: MGLUserTrackingMode
     @Binding var selectedLocation: Location?
     @Binding var showingEditTag: Bool
@@ -13,7 +12,7 @@ struct MapView: UIViewRepresentable {
     let annotations: [LocationAnnotation]
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MGLMapView {
-        return MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
+        MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
     }
     
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {

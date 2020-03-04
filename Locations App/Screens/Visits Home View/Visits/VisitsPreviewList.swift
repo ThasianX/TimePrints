@@ -53,7 +53,7 @@ private extension VisitsPreviewList {
 
 private extension VisitsPreviewList {
     private var overlayColor: some View {
-        ScreenColor(Color(.salmon))
+        ScreenColor(.init(.salmon))
             .saturation(1.5)
     }
 }
@@ -90,16 +90,16 @@ private extension VisitsPreviewList {
 
     private func monthYearSideBarWithDayPreviewBlocksView(monthComponent: DateComponents, isFilled: @escaping () -> Bool) -> some View {
         H0Stack {
-            self.monthYearSideBarText(date: monthComponent.date)
+            monthYearSideBarText(date: monthComponent.date)
             V0Stack {
-                ForEach(self.descendingDayComponents(for: monthComponent)) { dayComponent in
+                ForEach(descendingDayComponents(for: monthComponent)) { dayComponent in
                     self.daySideBarWithPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled())
                 }
             }
         }
     }
 
-    private func monthYearSideBarText(date: Date) -> some View {
+    private func monthYearSideBarText(date: Date) -> MonthYearSideBar {
         MonthYearSideBar(date: date, color: .init(.salmon))
     }
 
@@ -109,17 +109,17 @@ private extension VisitsPreviewList {
 
     private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
         HStack {
-            daySideBarText(date: dayComponent.date)
+            daySideBarView(date: dayComponent.date)
             dayPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled)
         }
         .frame(height: 150)
     }
 
-    private func daySideBarText(date: Date) -> some View {
+    private func daySideBarView(date: Date) -> DaySideBar {
         DaySideBar(date: date)
     }
 
-    private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
+    private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> DayPreviewBlock {
         DayPreviewBlock(
             currentDayComponent: $currentDayComponent,
             isPreviewActive: $isPreviewActive,
@@ -150,7 +150,9 @@ private extension VisitsPreviewList {
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
+        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false))
+            .environment(\.managedObjectContext, CoreData.stack.context)
+            .statusBar(hidden: true)
     }
 }
 

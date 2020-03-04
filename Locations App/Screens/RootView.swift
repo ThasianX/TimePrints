@@ -6,7 +6,6 @@ let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
 
 struct RootView: View {
-    @Environment(\.colorScheme) var editMode: ColorScheme
     @ObservedObject var userStore: UserStore
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 

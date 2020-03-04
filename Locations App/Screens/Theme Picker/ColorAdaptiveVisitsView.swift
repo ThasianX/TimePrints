@@ -50,7 +50,6 @@ private extension ColorAdaptiveVisitsView {
 
     private func monthYearSideBarText(date: Date) -> some View {
         MonthYearSideBar(date: date, color: color)
-            .foregroundColor(color)
     }
 
     private func visitsPreviewStack(isFilled: @escaping () -> Bool) -> some View {
