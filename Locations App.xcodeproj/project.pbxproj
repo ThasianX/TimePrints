@@ -62,6 +62,7 @@
 		1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */; };
 		1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */; };
 		1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */; };
+		1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */; };
 		1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */; };
 		1EB865E123F9E01400A4B8E1 /* UIApplication+Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */; };
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
@@ -210,6 +211,7 @@
 		1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversedGeoLocation.swift; sourceTree = "<group>"; };
+		1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentKey+AppTheme.swift"; sourceTree = "<group>"; };
 		1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Editing.swift"; sourceTree = "<group>"; };
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 				1E125C4A240DA19B00D0919E /* UIColor+ToColor.swift */,
 				1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */,
 				1EFF83AC23E52D5800FF04A1 /* View+Extensions.swift */,
+				1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -955,6 +958,7 @@
 				1EFF83AD23E52D5800FF04A1 /* View+Extensions.swift in Sources */,
 				1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */,
 				1EFF839D23E4BF2F00FF04A1 /* DateComponents+Additions.swift in Sources */,
+				1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */,
 				1E06D51023FE21AE00467799 /* UIImage+Additions.swift in Sources */,
 				1E6D568D23E5FEAC0044AB3A /* DayLabel.swift in Sources */,
 				1E5AF45423E3CCCA00A94F10 /* VisitPreviewCell.swift in Sources */,
