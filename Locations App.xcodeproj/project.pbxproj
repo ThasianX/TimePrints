@@ -63,6 +63,7 @@
 		1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */; };
 		1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */; };
 		1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */; };
+		1EB03D25241027DB001146FF /* TransientSplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D24241027DB001146FF /* TransientSplashView.swift */; };
 		1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */; };
 		1EB865E123F9E01400A4B8E1 /* UIApplication+Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */; };
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
@@ -212,6 +213,7 @@
 		1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversedGeoLocation.swift; sourceTree = "<group>"; };
 		1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentKey+AppTheme.swift"; sourceTree = "<group>"; };
+		1EB03D24241027DB001146FF /* TransientSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientSplashView.swift; sourceTree = "<group>"; };
 		1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Editing.swift"; sourceTree = "<group>"; };
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 		1E243290240B742E00E983E7 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				1EB03D24241027DB001146FF /* TransientSplashView.swift */,
 				1E00E5742408CC6200B14C9F /* SplashScreen.swift */,
 			);
 			path = Splash;
@@ -989,6 +992,7 @@
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E125C4F240DAB0C00D0919E /* Date+DateComponents.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
+				1EB03D25241027DB001146FF /* TransientSplashView.swift in Sources */,
 				1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* CoreLocationService.swift in Sources */,
 				1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */,

@@ -9,8 +9,6 @@ struct RootView: View {
     @ObservedObject var userStore: UserStore
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
-    @State private var showSplash = true
-    @State private var showingLogin = true
     @State private var showingEditTag = false
     @State private var showingLocationVisits = false
     @State private var stayAtLocation = false
@@ -26,9 +24,7 @@ struct RootView: View {
         ZStack(alignment: .bottom) {
             viewForLoginState
 
-            if showSplash {
-                splashScreen
-            }
+            transientSplashView
         }
     }
 }
@@ -47,8 +43,8 @@ private extension RootView {
         }
     }
 
-    private var splashScreen: SplashScreen {
-        SplashScreen(show: $showSplash)
+    private var transientSplashView: TransientSplashView {
+        TransientSplashView()
     }
 }
 
