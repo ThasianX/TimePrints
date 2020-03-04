@@ -6,6 +6,7 @@ struct MapView: UIViewRepresentable {
     @Binding var selectedLocation: Location?
     @Binding var showingEditTag: Bool
     @Binding var showingLocationVisits: Bool
+    @Binding var showingToggleButton: Bool
     @Binding var stayAtLocation: Bool
     @Binding var activeVisitLocation: Location?
     
@@ -90,6 +91,11 @@ struct MapView: UIViewRepresentable {
             parent.selectedLocation = location
             parent.stayAtLocation = true
             parent.activeVisitLocation = nil
+            hideToggleButton()
+        }
+
+        private func hideToggleButton() {
+            parent.showingToggleButton = false
         }
     }
 }
@@ -107,6 +113,6 @@ private extension UIButton {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), annotations: [])
+        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), annotations: [])
     }
 }

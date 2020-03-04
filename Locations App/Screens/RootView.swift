@@ -9,13 +9,10 @@ struct RootView: View {
     @ObservedObject var userStore: UserStore
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
-    @State private var showingEditTag = false
-    @State private var showingLocationVisits = false
+    @State private var showingToggleButton: Bool = true
     @State private var stayAtLocation = false
     @State private var showingHomeView = false
 
-    @State private var trackingMode: MGLUserTrackingMode = .follow
-    @State private var selectedLocation: Location? = nil
     @State private var activeVisitLocation: Location? = nil
 
     let locationService: LocationService
@@ -79,11 +76,11 @@ private extension RootView {
             visitsHomeView
                 .fade(if: !showingHomeView)
 
-            annotatedMapView
+            appMapView
                 .fade(if: showingHomeView)
 
             toggleViewButton
-                .fade(if: showingEditTag || showingLocationVisits)
+                .fade(if: !showingToggleButton)
         }
     }
 
@@ -91,64 +88,8 @@ private extension RootView {
         VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation)
     }
 
-    private var annotatedMapView: some View {
-        ZStack(alignment: .top) {
-            mapView
-                .extendToScreenEdges()
-                .disablur(showingEditTag || showingLocationVisits)
-
-            buttonHeader
-                .disablur(showingEditTag || showingLocationVisits)
-
-            editTagView
-                .modal(isPresented: showingEditTag)
-
-            locationVisitsView
-                .modal(isPresented: showingLocationVisits)
-        }
-    }
-
-    private var mapView: some View {
-        MapView(
-            trackingMode: $trackingMode,
-            selectedLocation: $selectedLocation,
-            showingEditTag: $showingEditTag,
-            showingLocationVisits: $showingLocationVisits,
-            stayAtLocation: $stayAtLocation,
-            activeVisitLocation: $activeVisitLocation,
-            annotations: locations.map(LocationAnnotation.init)
-        )
-    }
-
-    private var buttonHeader: some View {
-        HStack {
-            userLocationButton
-            Spacer()
-        }
-        .padding()
-    }
-
-    private var userLocationButton: some View {
-        UserLocationButton(
-            trackingMode: $trackingMode,
-            stayAtLocation: $stayAtLocation,
-            activeVisitLocation: $activeVisitLocation
-        )
-    }
-
-    private var editTagView: some View {
-        EditTagView(
-            show: self.$showingEditTag,
-            location: self.$selectedLocation,
-            stayAtLocation: $stayAtLocation
-        )
-    }
-
-    private var locationVisitsView: some View {
-        LocationVisitsView(
-            show: $showingLocationVisits,
-            selectedLocation: selectedLocation
-        )
+    private var appMapView: some View {
+        AppMapView(showingToggleButton: $showingToggleButton, stayAtLocation: $stayAtLocation, activeVisitLocation: $activeVisitLocation)
     }
 
     private var toggleViewButton: some View {
@@ -177,18 +118,6 @@ private extension RootView {
 
     private var toggleForegroundColor: Color {
         showingHomeView ? .white : .black
-    }
-}
-
-private extension View {
-    func modal(isPresented: Bool) -> some View {
-        self
-            .frame(width: screen.width, height: screen.height * 0.8)
-            .cornerRadius(30)
-            .shadow(radius: 20)
-            .fade(if: !isPresented)
-            .offset(y: isPresented ? screen.height * 0.1 : screen.height)
-            .animation(.spring())
     }
 }
 
