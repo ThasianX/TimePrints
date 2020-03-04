@@ -2,6 +2,7 @@ import SwiftUI
 import Mapbox
 
 struct MapView: UIViewRepresentable {
+    @Environment(\.appTheme) var color: UIColor
     @Binding var trackingMode: MGLUserTrackingMode
     @Binding var selectedLocation: Location?
     @Binding var showingEditTag: Bool

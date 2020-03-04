@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct AppThemeKey: EnvironmentKey {
-    static let defaultValue: Color = .clear
+    static let defaultValue: UIColor = .clear
 }
 
 extension EnvironmentValues {
-    var appTheme: Color {
+    var appTheme: UIColor {
         get {
             self[AppThemeKey.self]
         }

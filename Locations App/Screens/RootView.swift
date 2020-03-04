@@ -43,7 +43,7 @@ private extension RootView {
                 themePickerViewWithButton
             } else {
                 appView
-                    .environment(\.appTheme, userStore.themeColor.color)
+                    .environment(\.appTheme, userStore.themeColor)
             }
         }
     }
