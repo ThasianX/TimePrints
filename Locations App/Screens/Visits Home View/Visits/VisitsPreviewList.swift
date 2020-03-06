@@ -127,12 +127,16 @@ private extension VisitsPreviewList {
     private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> DayPreviewBlock {
         DayPreviewBlock(
             currentDayComponent: $currentDayComponent,
-            isPreviewActive: $isPreviewActive,
-            hideFAB: $hideFAB,
             visits: visitsForDayComponent[dayComponent]!.sortAscByArrivalDate,
             isFilled: isFilled,
-            dayComponent: dayComponent
+            dayComponent: dayComponent,
+            onTap: setPreviewInactive
         )
+    }
+
+    private func setPreviewInactive() {
+        isPreviewActive = false
+        hideFAB = true
     }
 }
 
