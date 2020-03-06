@@ -91,17 +91,7 @@ private extension RootView {
     }
 
     private var toggleViewButton: some View {
-        ZStack {
-            toggleBackgroundColor
-            BImage(perform: toggleVisitsPreviewAndStayAtLocation, image: toggleImage)
-                .foregroundColor(toggleForegroundColor)
-        }
-        .frame(width: 50, height: 50)
-        .clipShape(Circle())
-    }
-
-    private var toggleBackgroundColor: Color {
-        showingHomeView ? .green : .white
+        ToggleButton(toggle: showingHomeView, action: toggleVisitsPreviewAndStayAtLocation)
     }
 
     private func toggleVisitsPreviewAndStayAtLocation() {
@@ -109,13 +99,34 @@ private extension RootView {
         showingHomeView.toggle()
         stayAtLocation = true
     }
+}
 
-    private var toggleImage: Image {
-        showingHomeView ? Image(systemName: "map.fill") : Image(systemName: "list.dash")
-    }
+private extension RootView {
+    private struct ToggleButton: View {
+        let toggle: Bool
+        let action: () -> Void
 
-    private var toggleForegroundColor: Color {
-        showingHomeView ? .white : .black
+        var body: some View {
+            ZStack {
+                backgroundColor
+                BImage(perform: action, image: image)
+                    .foregroundColor(foregroundColor)
+            }
+            .frame(width: 50, height: 50)
+            .clipShape(Circle())
+        }
+
+        private var backgroundColor: Color {
+            toggle ? .green : .white
+        }
+
+        private var image: Image {
+            toggle ? Image(systemName: "map.fill") : Image(systemName: "list.dash")
+        }
+
+        private var foregroundColor: Color {
+            toggle ? .white : .black
+        }
     }
 }
 
