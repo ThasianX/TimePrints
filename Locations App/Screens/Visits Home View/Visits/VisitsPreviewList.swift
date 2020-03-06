@@ -2,9 +2,13 @@ import SwiftUI
 import Mapbox
 
 struct VisitsPreviewList: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+
     @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
+
     @State private var currentDayComponent = DateComponents()
     @State private var isPreviewActive = true
+
     @Binding var showingHomeView: Bool
     @Binding var activeVisitLocation: Location?
     @Binding var hideFAB: Bool
@@ -39,6 +43,7 @@ private extension VisitsPreviewList {
     private var leftAlignedHeader: some View {
         HStack {
             headerText
+                .padding(.leading)
             Spacer()
         }
         .padding()
@@ -47,13 +52,13 @@ private extension VisitsPreviewList {
     private var headerText: some View {
         Text("Visits")
             .font(.largeTitle)
-            .foregroundColor(.white)
+            .foregroundColor(appTheme.color)
     }
 }
 
 private extension VisitsPreviewList {
     private var overlayColor: some View {
-        ScreenColor(.init(.salmon))
+        ScreenColor(appTheme.color)
             .saturation(1.5)
     }
 }
@@ -100,7 +105,7 @@ private extension VisitsPreviewList {
     }
 
     private func monthYearSideBarText(date: Date) -> MonthYearSideBar {
-        MonthYearSideBar(date: date, color: .init(.salmon))
+        MonthYearSideBar(date: date, color: appTheme.color)
     }
 
     private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {

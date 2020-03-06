@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct DayPreviewBlock: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+    
     @State private var visitIndex = 0
     @State private var timer: Timer?
 
@@ -28,32 +30,31 @@ struct DayPreviewBlock: View {
 }
 
 private extension DayPreviewBlock {
-    private func setCurrentDayComponentAndPreviewInactive() {
-        setPreviewInactive()
-        setCurrentDayComponent()
+    private var backgroundColor: some View {
+        appTheme.color
+            .saturation(isFilled ? 1.5 : 1)
     }
-    
-    private func setCurrentDayComponent() {
-        currentDayComponent = dayComponent
-    }
-    
-    private func setPreviewInactive() {
-        isPreviewActive = false
-        hideFAB = true
+
+    private var visitsPreviewList: some View {
+        V0Stack {
+            ForEach(visits[range]) { visit in
+                VisitPreviewCell(visit: visit)
+            }
+        }
     }
 }
 
 private extension DayPreviewBlock {
     private func setTimerForVisitsSlideshow() {
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-            withAnimation {
-                self.onTimerFire()
-            }
+            self.onTimerFire()
         }
     }
 
     private func onTimerFire() {
-        shiftActivePreviewVisitIndex()
+        withAnimation {
+            shiftActivePreviewVisitIndex()
+        }
     }
 
     private func shiftActivePreviewVisitIndex() {
@@ -67,17 +68,18 @@ private extension DayPreviewBlock {
 }
 
 private extension DayPreviewBlock {
-    private var backgroundColor: some View {
-        Color("salmon")
-            .saturation(isFilled ? 1.5 : 1)
+    private func setCurrentDayComponentAndPreviewInactive() {
+        setPreviewInactive()
+        setCurrentDayComponent()
     }
-    
-    private var visitsPreviewList: some View {
-        V0Stack {
-            ForEach(visits[range]) { visit in
-                VisitPreviewCell(visit: visit)
-            }
-        }
+
+    private func setCurrentDayComponent() {
+        currentDayComponent = dayComponent
+    }
+
+    private func setPreviewInactive() {
+        isPreviewActive = false
+        hideFAB = true
     }
 }
 
