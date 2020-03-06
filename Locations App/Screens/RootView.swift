@@ -69,64 +69,7 @@ private extension RootView {
 
 private extension RootView {
     private var appView: some View {
-        Group {
-            visitsHomeView
-                .fade(if: !showingHomeView)
-
-            appMapView
-                .fade(if: showingHomeView)
-                .onAppear(perform: userStore.performLocationAndDatabaseOperations)
-
-            toggleViewButton
-                .fade(if: !showingToggleButton)
-        }
-    }
-
-    private var visitsHomeView: some View {
-        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation)
-    }
-
-    private var appMapView: some View {
-        AppMapView(showingToggleButton: $showingToggleButton, stayAtLocation: $stayAtLocation, activeVisitLocation: $activeVisitLocation)
-    }
-
-    private var toggleViewButton: some View {
-        ToggleButton(toggle: showingHomeView, action: toggleVisitsPreviewAndStayAtLocation)
-    }
-
-    private func toggleVisitsPreviewAndStayAtLocation() {
-        activeVisitLocation = nil
-        showingHomeView.toggle()
-        stayAtLocation = true
-    }
-}
-
-private extension RootView {
-    private struct ToggleButton: View {
-        let toggle: Bool
-        let action: () -> Void
-
-        var body: some View {
-            ZStack {
-                backgroundColor
-                BImage(perform: action, image: image)
-                    .foregroundColor(foregroundColor)
-            }
-            .frame(width: 50, height: 50)
-            .clipShape(Circle())
-        }
-
-        private var backgroundColor: Color {
-            toggle ? .green : .white
-        }
-
-        private var image: Image {
-            toggle ? Image(systemName: "map.fill") : Image(systemName: "list.dash")
-        }
-
-        private var foregroundColor: Color {
-            toggle ? .white : .black
-        }
+        AppView(onAppear: userStore.performLocationAndDatabaseOperations)
     }
 }
 
