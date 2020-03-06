@@ -90,6 +90,7 @@ private extension VisitsForDayView {
 struct VisitsForDayView_Previews: PreviewProvider {
     static var previews: some View {
         VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), visits: Visit.previewVisitDetails, onBack: { },  setActiveVisitLocationAndDisplayMap: { _ in })
+            .environment(\.appTheme, .violetGum)
     }
 }
 

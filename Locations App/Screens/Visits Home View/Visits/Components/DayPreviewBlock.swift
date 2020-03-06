@@ -81,6 +81,7 @@ struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             DayPreviewBlock(currentDayComponent: .constant(DateComponents()), visits: [], isFilled: false, dayComponent: DateComponents(), onTap: { })
+                .environment(\.appTheme, .violetGum)
         }
     }
 }
