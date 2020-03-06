@@ -16,20 +16,19 @@ struct RootView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            viewForLoginState
-
+            viewForAppState
             transientSplashView
         }
     }
 }
 
 private extension RootView {
-    private var viewForLoginState: some View {
+    private var viewForAppState: some View {
         Group {
             if !userStore.isLoggedIn {
                 loginView
             } else if !userStore.isInitialThemeSetup {
-                themePickerViewWithButton
+                setupThemePickerView
             } else {
                 appView
                     .environment(\.appTheme, userStore.themeColor)
@@ -37,39 +36,20 @@ private extension RootView {
         }
     }
 
-    private var transientSplashView: TransientSplashView {
-        TransientSplashView()
-    }
-}
-
-private extension RootView {
     private var loginView: LoginView {
         LoginView(userStore: userStore)
     }
-}
 
-private extension RootView {
-    private var themePickerViewWithButton: some View {
-        ZStack(alignment: .topTrailing) {
-            themePickerView
-            transitionToAppButton
-                .padding(.top)
-                .padding(.trailing, 35)
-        }
+    private var setupThemePickerView: some View {
+        SetupThemePickerView(defaultThemeColor: userStore.themeColor, onSelected: userStore.setThemeColor, onFinalize: userStore.finalizeInitialThemeSetup)
     }
 
-    private var themePickerView: ThemePickerView {
-        ThemePickerView(startingThemeColor: userStore.themeColor, onSelected: userStore.setThemeColor)
-    }
-
-    private var transitionToAppButton: DimensionalButton {
-        DimensionalButton(image: Image(systemName: "arrow.right"), action: userStore.finalizeInitialThemeSetup, circleColor: UIColor.kingFisherDaisy.color)
-    }
-}
-
-private extension RootView {
     private var appView: some View {
         AppView(onAppear: userStore.performLocationAndDatabaseOperations)
+    }
+
+    private var transientSplashView: TransientSplashView {
+        TransientSplashView()
     }
 }
 

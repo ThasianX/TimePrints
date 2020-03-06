@@ -30,6 +30,7 @@
 		1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */; };
 		1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */; };
 		1E558EDD2411FBE80087C5E3 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E558EDC2411FBE80087C5E3 /* AppView.swift */; };
+		1E558EDF2411FD0C0087C5E3 /* SetupThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E558EDE2411FD0C0087C5E3 /* SetupThemePickerView.swift */; };
 		1E5AF45223E3CC0500A94F10 /* VisitsPreviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45123E3CC0500A94F10 /* VisitsPreviewList.swift */; };
 		1E5AF45423E3CCCA00A94F10 /* VisitPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45323E3CCCA00A94F10 /* VisitPreviewCell.swift */; };
 		1E5AF45623E3E25E00A94F10 /* Formatter+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45523E3E25E00A94F10 /* Formatter+DateFormatter.swift */; };
@@ -175,6 +176,7 @@
 		1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 		1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		1E558EDC2411FBE80087C5E3 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		1E558EDE2411FD0C0087C5E3 /* SetupThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupThemePickerView.swift; sourceTree = "<group>"; };
 		1E5AF45123E3CC0500A94F10 /* VisitsPreviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsPreviewList.swift; sourceTree = "<group>"; };
 		1E5AF45323E3CCCA00A94F10 /* VisitPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitPreviewCell.swift; sourceTree = "<group>"; };
 		1E5AF45523E3E25E00A94F10 /* Formatter+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+DateFormatter.swift"; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 		1E21F305240D60D100BC81DC /* Theme Picker */ = {
 			isa = PBXGroup;
 			children = (
+				1E558EDE2411FD0C0087C5E3 /* SetupThemePickerView.swift */,
 				1E21F306240D60F400BC81DC /* ThemePickerView.swift */,
 				1E21F308240D617600BC81DC /* ScalingCircle.swift */,
 				1E125C44240D808100D0919E /* ColorAdaptiveVisitsView.swift */,
@@ -1014,6 +1017,7 @@
 				1E00E5752408CC6200B14C9F /* SplashScreen.swift in Sources */,
 				1EFF83AF23E52E5900FF04A1 /* RotatedModifier.swift in Sources */,
 				1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */,
+				1E558EDF2411FD0C0087C5E3 /* SetupThemePickerView.swift in Sources */,
 				1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */,
 				1EFE85CB240360490001D0C3 /* TagRow.swift in Sources */,
 				1E6D568B23E5F6F10044AB3A /* BImage.swift in Sources */,
