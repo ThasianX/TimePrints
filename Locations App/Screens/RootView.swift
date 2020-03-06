@@ -15,8 +15,6 @@ struct RootView: View {
 
     @State private var activeVisitLocation: Location? = nil
 
-    let locationService: LocationService
-
     var body: some View {
         ZStack(alignment: .bottom) {
             viewForLoginState
@@ -78,6 +76,7 @@ private extension RootView {
 
             appMapView
                 .fade(if: showingHomeView)
+                .onAppear(perform: userStore.performLocationAndDatabaseOperations)
 
             toggleViewButton
                 .fade(if: !showingToggleButton)
@@ -123,7 +122,7 @@ private extension RootView {
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView(userStore: .mockSuccessLogin, locationService: MockLocationService())
+        RootView(userStore: .mockSuccessLogin)
     }
 }
 

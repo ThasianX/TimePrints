@@ -10,9 +10,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             themeColorService: ICloudThemeColorService(),
             locationService: CoreLocationService()
         )
-        let locationService = CoreLocationService()
         let context = CoreData.stack.context
-        let contentView = RootView(userStore: userStore, locationService: locationService)
+        let contentView = RootView(userStore: userStore)
             .environment(\.managedObjectContext, context)
             .statusBar(hidden: true)
 
