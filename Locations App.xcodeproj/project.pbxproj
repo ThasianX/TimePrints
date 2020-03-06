@@ -526,12 +526,12 @@
 			children = (
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
 				1ED53522240B0C01009B11D3 /* UserStore.swift */,
+				1E558EDC2411FBE80087C5E3 /* AppView.swift */,
 				1E243290240B742E00E983E7 /* Splash */,
 				1ED53524240B0CC5009B11D3 /* Login */,
 				1E21F305240D60D100BC81DC /* Theme Picker */,
 				1E24927123EB53DA00165280 /* Map */,
 				1E0F7C7F2402BD11001B033C /* Visits Home View */,
-				1E558EDC2411FBE80087C5E3 /* AppView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
