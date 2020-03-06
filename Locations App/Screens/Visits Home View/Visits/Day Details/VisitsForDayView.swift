@@ -5,10 +5,9 @@ struct VisitsForDayView: View {
     @State var activeTranslation = CGSize.zero
 
     @Binding var currentDayComponent: DateComponents
-    @Binding var isPreviewActive: Bool
-    @Binding var hideFAB: Bool
 
     let visits: [Visit]
+    let onBack: () -> Void
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
 
     private var isShowingVisit: Bool {
@@ -37,12 +36,7 @@ private extension VisitsForDayView {
     }
 
     private var backButton: some View {
-        BImage(perform: setPreviewActive, image: Image(systemName: "arrow.left"))
-    }
-
-    private func setPreviewActive() {
-        isPreviewActive = true
-        hideFAB = false
+        BImage(perform: onBack, image: Image(systemName: "arrow.left"))
     }
 
     private var dayLabel: some View {
@@ -95,7 +89,7 @@ private extension VisitsForDayView {
 
 struct VisitsForDayView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), isPreviewActive: .constant(false), hideFAB: .constant(true), visits: Visit.previewVisitDetails, setActiveVisitLocationAndDisplayMap: { _ in })
+        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), visits: Visit.previewVisitDetails, onBack: { },  setActiveVisitLocationAndDisplayMap: { _ in })
     }
 }
 

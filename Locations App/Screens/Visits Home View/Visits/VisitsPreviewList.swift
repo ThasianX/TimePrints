@@ -140,11 +140,15 @@ private extension VisitsPreviewList {
     private var visitsForActiveDayView: some View {
         VisitsForDayView(
             currentDayComponent: $currentDayComponent,
-            isPreviewActive: $isPreviewActive,
-            hideFAB: $hideFAB,
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
+            onBack: setPreviewActive,
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
+    }
+
+    private func setPreviewActive() {
+        isPreviewActive = true
+        hideFAB = false
     }
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
