@@ -80,24 +80,30 @@ private extension VisitDetailsView {
     }
 
     private var backButton: some View {
-        BackButton(isMapOpen: isMapOpen, isEditingNotes: isEditingNotes, onBack: navigateBack)
+        BackButton(isMapOpen: isMapOpen, isEditingNotes: isEditingNotes, appTheme: appTheme.color, onBack: navigateBack)
     }
 
     private struct BackButton: View {
         let isMapOpen: Bool
         let isEditingNotes: Bool
 
+        let appTheme: Color
         let onBack: () -> Void
 
         var body: some View {
             ZStack {
-                Color(.white)
+                whiteCircle
                     .fade(if: !isMapOpen)
+                    .scaleEffect(isMapOpen ? 1 : 0.8)
                 BImage(perform: onBack, image: backButtonImage)
-                    .foregroundColor(isMapOpen ? .clear : .white)
+                    .foregroundColor(isMapOpen ? appTheme : .white)
             }
-            .frame(width: 30, height: 30)
-            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+        }
+
+        private var whiteCircle: some View {
+            Color(.white)
+                .frame(width: 30, height: 30)
+                .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
         }
 
         private var backButtonImage: Image {
