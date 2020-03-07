@@ -67,8 +67,8 @@ private extension VisitsForDayView {
     private func dynamicVisitRow(index: Int) -> some View {
         GeometryReader { geometry in
             self.makeVisitDetailsView(index: index, visit: self.visits[index])
-                .fade(if: !self.isActiveVisit(at: index))
-                .scaleEffect(!self.isActiveVisit(at: index) ? 0.5 : 1)
+                .fade(if: self.isNotActiveVisit(at: index))
+                .scaleEffect(self.isNotActiveVisit(at: index) ? 0.5 : 1)
                 .offset(y: self.isShowingVisit ? self.topOfScreen(for: geometry) : 0)
         }
     }
@@ -84,7 +84,7 @@ private extension VisitsForDayView {
         .id(visit.tagColor)
     }
 
-    private func isActiveVisit(at index: Int) -> Bool {
+    private func isNotActiveVisit(at index: Int) -> Bool {
         isShowingVisit && !isActiveVisitIndex(index: index)
     }
 
