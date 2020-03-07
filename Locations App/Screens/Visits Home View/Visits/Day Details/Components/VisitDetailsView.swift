@@ -31,8 +31,8 @@ struct VisitDetailsView: View {
                 .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
                 .background(appTheme.color)
                 .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
+                .gesture(exitGestureIfSelected)
                 .onTapGesture(perform: setSelectedVisitIndex)
-                .simultaneousGesture(exitGestureIfSelected)
         }
         .onAppear(perform: setFavoritedStateAndNotesInput)
         .frame(height: VisitCellConstants.height(if: isSelected))
@@ -310,6 +310,7 @@ private extension VisitDetailsView {
 
     private var notesButton: some View {
         NotesButton(isEditingNotes: $isEditingNotes, notesInput: $notesInput, onCommit: commitNoteEdits)
+            .simultaneousGesture(exitGestureIfSelected)
     }
 
     private struct NotesButton: View {
@@ -422,18 +423,19 @@ private extension VisitDetailsView {
     private var exitGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                guard value.translation.height > 0 else { return }
-                guard value.translation.height < 100 else { return }
-                guard value.translation.width < 100 else { return }
+                let height = value.translation.height
+                let width = value.translation.width
+                guard height > 0 && height < 100 else { return }
+                guard width > 0 && width < 50 else { return }
 
                 self.activeTranslation = value.translation
-        }
-        .onEnded { value in
-            if self.activeTranslation.height > 20 || self.activeTranslation.width > 10 {
-                self.resetViewState()
             }
-            self.resetActiveTranslation()
-        }
+            .onEnded { value in
+                if self.activeTranslation.height > 50 || self.activeTranslation.width > 30 {
+                    self.resetViewState()
+                }
+                self.resetActiveTranslation()
+            }
     }
 
     private func resetViewState() {
