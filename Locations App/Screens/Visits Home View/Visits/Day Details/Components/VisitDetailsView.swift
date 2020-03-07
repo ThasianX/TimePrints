@@ -218,7 +218,7 @@ private extension VisitDetailsView {
                     .padding(.bottom, 10)
                 VStack(spacing: 16) {
                     locationAddressText
-                    mapOptionButtons
+                    mapOptionsView
                         .fade(if: !isMapOpen)
                         .scaleEffect(isMapOpen ? 1 : 0)
                 }
@@ -248,39 +248,48 @@ private extension VisitDetailsView {
             .animation(nil)
     }
 
-    private var mapOptionButtons: some View {
-        HStack(spacing: 20) {
-            focusLocationOnAnnotatedMapButton
-            openAppleMapsButton
-        }
-    }
-
-    private var focusLocationOnAnnotatedMapButton: some View {
-        Button(action: focusLocationOnAnnotatedMap) {
-            Image(systemName: "magnifyingglass")
-                .resizable()
-                .frame(width: 35, height: 35)
-        }
-        .buttonStyle(PlainButtonStyle())
+    private var mapOptionsView: some View {
+        MapOptionsView(focusLocationOnAnnotatedMap: focusLocationOnAnnotatedMap, coordinate: visit.location.coordinate)
     }
 
     private func focusLocationOnAnnotatedMap() {
         setActiveVisitLocationAndDisplayMap(visit)
     }
 
-    private var openAppleMapsButton: some View {
-        Button(action: openAppleMaps) {
-            Image(systemName: "arrow.up.right.diamond")
-                .resizable()
-                .frame(width: 35, height: 35)
-        }
-        .buttonStyle(PlainButtonStyle())
-    }
+    private struct MapOptionsView: View {
+        let focusLocationOnAnnotatedMap: () -> Void
+        let coordinate: CLLocationCoordinate2D
 
-    private func openAppleMaps() {
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: visit.location.coordinate, addressDictionary:nil))
-        mapItem.name = "Visit Location"
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+        var body: some View {
+            HStack(spacing: 20) {
+                focusLocationOnAnnotatedMapButton
+                openAppleMapsButton
+            }
+        }
+
+        private var focusLocationOnAnnotatedMapButton: some View {
+            Button(action: focusLocationOnAnnotatedMap) {
+                Image(systemName: "magnifyingglass")
+                    .resizable()
+                    .frame(width: 35, height: 35)
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+
+        private var openAppleMapsButton: some View {
+            Button(action: openAppleMaps) {
+                Image(systemName: "arrow.up.right.diamond")
+                    .resizable()
+                    .frame(width: 35, height: 35)
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+
+        private func openAppleMaps() {
+            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
+            mapItem.name = "Visit Location"
+            mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+        }
     }
 }
 
