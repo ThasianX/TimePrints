@@ -35,6 +35,7 @@ struct EditTagView: View {
     @Binding var show: Bool
     @Binding var location: Location?
     @Binding var stayAtLocation: Bool
+    @Binding var showingToggleButton: Bool
     
     let colors = AppColors.tags
     let identifiers = AppColors.tags.ascendingKeys
@@ -459,6 +460,7 @@ private extension EditTagView {
         stayAtLocation = true
         location = nil
         animatingSelection = false
+        showingToggleButton = true
         resetAlert()
     }
 
@@ -477,6 +479,6 @@ private extension EditTagView {
 
 struct EditTagView_Previews: PreviewProvider {
     static var previews: some View {
-        return EditTagView(show: .constant(true), location: .constant(.preview), stayAtLocation: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
+        return EditTagView(show: .constant(true), location: .constant(.preview), stayAtLocation: .constant(false), showingToggleButton: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

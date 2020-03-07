@@ -51,11 +51,10 @@ final class UserStore: ObservableObject {
 
     func finalizeInitialThemeSetup() {
         isInitialThemeSetup = true
-        performLocationAndDatabaseOperations()
         themeColorService.finalizeThemeSetup()
     }
 
-    private func performLocationAndDatabaseOperations() {
+    func performLocationAndDatabaseOperations() {
         CoreData.initialDbSetup()
         locationService.startTrackingVisits()
     }

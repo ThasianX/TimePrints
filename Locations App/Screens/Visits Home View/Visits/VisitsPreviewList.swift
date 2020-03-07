@@ -2,9 +2,13 @@ import SwiftUI
 import Mapbox
 
 struct VisitsPreviewList: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+
     @FetchRequest(entity: Visit.entity(), sortDescriptors: []) var visits: FetchedResults<Visit>
+
     @State private var currentDayComponent = DateComponents()
     @State private var isPreviewActive = true
+
     @Binding var showingHomeView: Bool
     @Binding var activeVisitLocation: Location?
     @Binding var hideFAB: Bool
@@ -39,6 +43,7 @@ private extension VisitsPreviewList {
     private var leftAlignedHeader: some View {
         HStack {
             headerText
+                .padding(.leading)
             Spacer()
         }
         .padding()
@@ -47,13 +52,13 @@ private extension VisitsPreviewList {
     private var headerText: some View {
         Text("Visits")
             .font(.largeTitle)
-            .foregroundColor(.white)
+            .foregroundColor(appTheme.color)
     }
 }
 
 private extension VisitsPreviewList {
     private var overlayColor: some View {
-        ScreenColor(Color(.salmon))
+        ScreenColor(appTheme.color)
             .saturation(1.5)
     }
 }
@@ -90,17 +95,17 @@ private extension VisitsPreviewList {
 
     private func monthYearSideBarWithDayPreviewBlocksView(monthComponent: DateComponents, isFilled: @escaping () -> Bool) -> some View {
         H0Stack {
-            self.monthYearSideBarText(date: monthComponent.date)
+            monthYearSideBarText(date: monthComponent.date)
             V0Stack {
-                ForEach(self.descendingDayComponents(for: monthComponent)) { dayComponent in
+                ForEach(descendingDayComponents(for: monthComponent)) { dayComponent in
                     self.daySideBarWithPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled())
                 }
             }
         }
     }
 
-    private func monthYearSideBarText(date: Date) -> some View {
-        MonthYearSideBar(date: date, color: .init(.salmon))
+    private func monthYearSideBarText(date: Date) -> MonthYearSideBar {
+        MonthYearSideBar(date: date, color: appTheme.color)
     }
 
     private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
@@ -109,25 +114,29 @@ private extension VisitsPreviewList {
 
     private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
         HStack {
-            daySideBarText(date: dayComponent.date)
+            daySideBarView(date: dayComponent.date)
             dayPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled)
         }
         .frame(height: 150)
     }
 
-    private func daySideBarText(date: Date) -> some View {
+    private func daySideBarView(date: Date) -> DaySideBar {
         DaySideBar(date: date)
     }
 
-    private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
+    private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> DayPreviewBlock {
         DayPreviewBlock(
             currentDayComponent: $currentDayComponent,
-            isPreviewActive: $isPreviewActive,
-            hideFAB: $hideFAB,
             visits: visitsForDayComponent[dayComponent]!.sortAscByArrivalDate,
             isFilled: isFilled,
-            dayComponent: dayComponent
+            dayComponent: dayComponent,
+            onTap: setPreviewInactive
         )
+    }
+
+    private func setPreviewInactive() {
+        isPreviewActive = false
+        hideFAB = true
     }
 }
 
@@ -135,11 +144,15 @@ private extension VisitsPreviewList {
     private var visitsForActiveDayView: some View {
         VisitsForDayView(
             currentDayComponent: $currentDayComponent,
-            isPreviewActive: $isPreviewActive,
-            hideFAB: $hideFAB,
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
+            onBack: setPreviewActive,
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
         )
+    }
+
+    private func setPreviewActive() {
+        isPreviewActive = true
+        hideFAB = false
     }
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
@@ -150,7 +163,9 @@ private extension VisitsPreviewList {
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).statusBar(hidden: true)
+        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false))
+            .environment(\.managedObjectContext, CoreData.stack.context)
+            .statusBar(hidden: true)
     }
 }
 

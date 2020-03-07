@@ -4,11 +4,13 @@ struct LocationVisitsView: View {
     @FetchRequest var visitsForSelectedLocation: FetchedResults<Visit>
     
     @Binding var show: Bool
+    @Binding var showingToggleButton: Bool
     
     let selectedLocation: Location?
     
-    init(show: Binding<Bool>, selectedLocation: Location?) {
+    init(show: Binding<Bool>, showingToggleButton: Binding<Bool>, selectedLocation: Location?) {
         self._show = show
+        self._showingToggleButton = showingToggleButton
         self.selectedLocation = selectedLocation
         
         let locationExists = selectedLocation != nil
@@ -49,7 +51,7 @@ private extension LocationVisitsView {
     }
     
     private var exitButton: some View {
-        BImage(perform: dontShow, image: .init(systemName: "x.circle.fill"))
+        BImage(perform: exitView, image: .init(systemName: "x.circle.fill"))
     }
 }
 
@@ -90,13 +92,14 @@ private extension LocationVisitsView {
 }
 
 private extension LocationVisitsView {
-    private func dontShow() {
-        self.show = false
+    private func exitView() {
+        show = false
+        showingToggleButton = true
     }
 }
 
 struct LocationVisitsView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationVisitsView(show: .constant(true), selectedLocation: .preview).environment(\.managedObjectContext, CoreData.stack.context)
+        LocationVisitsView(show: .constant(true), showingToggleButton: .constant(false), selectedLocation: .preview).environment(\.managedObjectContext, CoreData.stack.context)
     }
 }

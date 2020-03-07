@@ -1,16 +1,17 @@
 import SwiftUI
 
 struct DayPreviewBlock: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+    
     @State private var visitIndex = 0
     @State private var timer: Timer?
 
     @Binding var currentDayComponent: DateComponents
-    @Binding var isPreviewActive: Bool
-    @Binding var hideFAB: Bool
 
     let visits: [Visit]
     let isFilled: Bool
     let dayComponent: DateComponents
+    let onTap: () -> Void
     
     private var range: Range<Int> {
         return visitIndex ..< ((visitIndex + 3 > visits.count) ? visits.count : visitIndex + 3)
@@ -28,32 +29,31 @@ struct DayPreviewBlock: View {
 }
 
 private extension DayPreviewBlock {
-    private func setCurrentDayComponentAndPreviewInactive() {
-        setPreviewInactive()
-        setCurrentDayComponent()
+    private var backgroundColor: some View {
+        appTheme.color
+            .saturation(isFilled ? 1.5 : 1)
     }
-    
-    private func setCurrentDayComponent() {
-        currentDayComponent = dayComponent
-    }
-    
-    private func setPreviewInactive() {
-        isPreviewActive = false
-        hideFAB = true
+
+    private var visitsPreviewList: some View {
+        V0Stack {
+            ForEach(visits[range]) { visit in
+                VisitPreviewCell(visit: visit)
+            }
+        }
     }
 }
 
 private extension DayPreviewBlock {
     private func setTimerForVisitsSlideshow() {
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-            withAnimation {
-                self.onTimerFire()
-            }
+            self.onTimerFire()
         }
     }
 
     private func onTimerFire() {
-        shiftActivePreviewVisitIndex()
+        withAnimation {
+            shiftActivePreviewVisitIndex()
+        }
     }
 
     private func shiftActivePreviewVisitIndex() {
@@ -67,24 +67,21 @@ private extension DayPreviewBlock {
 }
 
 private extension DayPreviewBlock {
-    private var backgroundColor: some View {
-        Color("salmon")
-            .saturation(isFilled ? 1.5 : 1)
+    private func setCurrentDayComponentAndPreviewInactive() {
+        onTap()
+        setCurrentDayComponent()
     }
-    
-    private var visitsPreviewList: some View {
-        V0Stack {
-            ForEach(visits[range]) { visit in
-                VisitPreviewCell(visit: visit)
-            }
-        }
+
+    private func setCurrentDayComponent() {
+        currentDayComponent = dayComponent
     }
 }
 
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), isPreviewActive: .constant(true), hideFAB: .constant(true), visits: [], isFilled: false, dayComponent: DateComponents())
+            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), visits: [], isFilled: false, dayComponent: DateComponents(), onTap: { })
+                .environment(\.appTheme, .violetGum)
         }
     }
 }

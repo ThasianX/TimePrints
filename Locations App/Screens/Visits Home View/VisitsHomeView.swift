@@ -36,6 +36,23 @@ private extension VisitsHomeView {
 }
 
 private extension VisitsHomeView {
+    private var filterContent: some View {
+        ZStack {
+            VisitsPreviewList(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, hideFAB: $hideFAB)
+                .fade(if: !isCurrentFilter(filter: .visits))
+            TagsListView()
+                .fade(if: !isCurrentFilter(filter: .tags))
+            LocationsListView()
+                .fade(if: !isCurrentFilter(filter: .locations))
+        }
+    }
+
+    private func isCurrentFilter(filter: HomeFilter) -> Bool {
+        filter == homeFilter
+    }
+}
+
+private extension VisitsHomeView {
     private var bottomRightAlignedExpandableFAB: some View {
         VStack {
             Spacer()
@@ -68,23 +85,6 @@ private extension VisitsHomeView {
 
     private func setFilterToLocations() {
         homeFilter = .locations
-    }
-}
-
-private extension VisitsHomeView {
-    private var filterContent: some View {
-        ZStack {
-            VisitsPreviewList(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, hideFAB: $hideFAB)
-                .fade(if: !isCurrentFilter(filter: .visits))
-            TagsListView()
-                .fade(if: !isCurrentFilter(filter: .tags))
-            LocationsListView()
-                .fade(if: !isCurrentFilter(filter: .locations))
-        }
-    }
-
-    private func isCurrentFilter(filter: HomeFilter) -> Bool {
-        filter == homeFilter
     }
 }
 

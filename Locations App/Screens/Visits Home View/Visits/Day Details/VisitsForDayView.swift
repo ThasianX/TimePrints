@@ -5,10 +5,9 @@ struct VisitsForDayView: View {
     @State var activeTranslation = CGSize.zero
 
     @Binding var currentDayComponent: DateComponents
-    @Binding var isPreviewActive: Bool
-    @Binding var hideFAB: Bool
 
     let visits: [Visit]
+    let onBack: () -> Void
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
 
     private var isShowingVisit: Bool {
@@ -37,18 +36,15 @@ private extension VisitsForDayView {
     }
 
     private var backButton: some View {
-        BImage(perform: setPreviewActive, image: Image(systemName: "arrow.left"))
-    }
-
-    private func setPreviewActive() {
-        isPreviewActive = true
-        hideFAB = false
+        BImage(perform: onBack, image: Image(systemName: "arrow.left"))
     }
 
     private var dayLabel: some View {
         DayLabel(date: currentDayComponent.date)
     }
+}
 
+private extension VisitsForDayView {
     private var visitsForDayList: some View {
         VScroll {
             makeVisitsStack
@@ -61,19 +57,19 @@ private extension VisitsForDayView {
     private var makeVisitsStack: some View {
         VStack(spacing: 2) {
             ForEach(0..<visits.count, id: \.self) { i in
-                self.dynamicVisitRow(index: i, visit: self.visits[i])
+                self.dynamicVisitRow(index: i)
                     .frame(height: VisitCellConstants.height)
                     .frame(maxWidth: VisitCellConstants.maxWidth(if: self.isShowingVisit))
             }
         }
     }
 
-    private func dynamicVisitRow(index: Int, visit: Visit) -> some View {
+    private func dynamicVisitRow(index: Int) -> some View {
         GeometryReader { geometry in
-            self.makeVisitDetailsView(index: index, visit: visit)
-                .fade(if: self.isShowingVisit && !self.isActiveVisitIndex(index: index))
-                .scaleEffect((self.isShowingVisit && !self.isActiveVisitIndex(index: index)) ? 0.5 : 1)
-                .offset(y: self.isShowingVisit ? -geometry.frame(in: .global).minY : 0)
+            self.makeVisitDetailsView(index: index, visit: self.visits[index])
+                .fade(if: self.isNotActiveVisit(at: index))
+                .scaleEffect(self.isNotActiveVisit(at: index) ? 0.5 : 1)
+                .offset(y: self.isShowingVisit ? self.topOfScreen(for: geometry) : 0)
         }
     }
 
@@ -88,14 +84,23 @@ private extension VisitsForDayView {
         .id(visit.tagColor)
     }
 
+    private func isNotActiveVisit(at index: Int) -> Bool {
+        isShowingVisit && !isActiveVisitIndex(index: index)
+    }
+
     private func isActiveVisitIndex(index: Int) -> Bool {
         index == activeVisitIndex
+    }
+
+    private func topOfScreen(for proxy: GeometryProxy) -> CGFloat {
+        -proxy.frame(in: .global).minY
     }
 }
 
 struct VisitsForDayView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), isPreviewActive: .constant(false), hideFAB: .constant(true), visits: Visit.previewVisitDetails, setActiveVisitLocationAndDisplayMap: { _ in })
+        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), visits: Visit.previewVisitDetails, onBack: { },  setActiveVisitLocationAndDisplayMap: { _ in })
+            .environment(\.appTheme, .violetGum)
     }
 }
 
