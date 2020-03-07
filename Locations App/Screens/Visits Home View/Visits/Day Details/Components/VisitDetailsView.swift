@@ -65,7 +65,7 @@ private extension VisitDetailsView {
 
 private extension VisitDetailsView {
     private var header: some View {
-        HStack(alignment: .center) {
+        HStack {
             backButton
                 .fade(if: !isSelected)
             Spacer()
