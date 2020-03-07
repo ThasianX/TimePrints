@@ -309,89 +309,99 @@ private extension VisitDetailsView {
     }
 
     private var notesButton: some View {
-        Button(action: displayEditNotesView) {
-            VStack(spacing: 2) {
-                dividerView
-                    .padding(.bottom, 20)
+        NotesButton(isEditingNotes: $isEditingNotes, notesInput: $notesInput, onCommit: commitNoteEdits)
+    }
 
-                notesHeaderText
+    private struct NotesButton: View {
+        @Binding var isEditingNotes: Bool
+        @Binding var notesInput: String
 
-                notesContainer
+        let onCommit: () -> Void
 
-                dividerView
-                    .padding(.top, 20)
+        var horizontalPadding: CGFloat = 50
+
+        var body: some View {
+            Button(action: displayEditNotesView) {
+                VStack(spacing: 2) {
+                    dividerView
+                        .padding(.bottom, 20)
+                    notesHeaderText
+                    notesContainer
+                    dividerView
+                        .padding(.top, 20)
+                }
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+
+        private func displayEditNotesView() {
+            isEditingNotes = true
+        }
+
+        private var dividerView: some View {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.black)
+                .frame(width: isEditingNotes ? screen.width - horizontalPadding*2 : screen.width/10, height: 3)
+        }
+
+        private var notesHeaderText: some View {
+            Text("NOTES")
+                .font(.system(size: 22))
+                .fontWeight(.bold)
+                .tracking(2)
+        }
+
+        private var notesContainer: some View {
+            Group {
+                if isEditingNotes {
+                    notesTextView
+                        .frame(width: screen.width - horizontalPadding*2)
+                } else {
+                    visitNotesTextViewWithDefaultTextIfEmpty
+                        .padding(.leading, 40)
+                        .padding(.trailing, 40)
+                }
             }
         }
-        .buttonStyle(PlainButtonStyle())
-    }
 
-    private func displayEditNotesView() {
-        isEditingNotes = true
-    }
-
-    private var dividerView: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .fill(Color.black)
-            .frame(width: isEditingNotes ? screen.width-100 : screen.width/10, height: 3)
-    }
-
-    private var notesHeaderText: some View {
-        Text("NOTES")
-            .font(.system(size: 22))
-            .fontWeight(.bold)
-            .tracking(2)
-    }
-
-    private var notesContainer: some View {
-        Group {
-            if !isEditingNotes {
-                visitNotesTextViewWithDefaultTextIfEmpty
-                    .padding(.leading, 40)
-                    .padding(.trailing, 40)
-            } else {
-                notesTextView
-                    .frame(width: screen.width-100)
+        private var visitNotesTextViewWithDefaultTextIfEmpty: some View {
+            Group {
+                if !notesInput.isEmpty {
+                    visitNotesTextView
+                } else {
+                    emptyNotesText
+                }
             }
         }
-    }
 
-    private var visitNotesTextViewWithDefaultTextIfEmpty: some View {
-        Group {
-            if !visit.notes.isEmpty {
-                visitNotesTextView
-            } else {
-                emptyNotesText
+        private var notesTextView: some View {
+            AutoResizingTextField(isActive: $isEditingNotes, text: $notesInput, onCommit: onCommit)
+        }
+
+        private var visitNotesTextView: some View {
+            GeometryReader { geometry in
+                ScrollView(.vertical, showsIndicators: true) {
+                    Text(self.notesInput)
+                        .font(.caption)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.center)
+                        .frame(
+                            minWidth: geometry.size.width,
+                            idealWidth: geometry.size.width,
+                            maxWidth: geometry.size.width,
+                            minHeight: geometry.size.height,
+                            idealHeight: geometry.size.height,
+                            maxHeight: .infinity,
+                            alignment: .top
+                        )
+                }
             }
         }
-    }
 
-    private var visitNotesTextView: some View {
-        GeometryReader { geometry in
-            ScrollView(.vertical, showsIndicators: true) {
-                Text(self.visit.notes)
-                    .font(.caption)
-                    .lineLimit(nil)
-                    .multilineTextAlignment(.center)
-                    .frame(
-                        minWidth: geometry.size.width,
-                        idealWidth: geometry.size.width,
-                        maxWidth: geometry.size.width,
-                        minHeight: geometry.size.height,
-                        idealHeight: geometry.size.height,
-                        maxHeight: .infinity,
-                        alignment: .top
-                )
-            }
+        private var emptyNotesText: some View {
+            Text("TAP TO ADD")
+                .font(.caption)
         }
-    }
-
-    private var emptyNotesText: some View {
-        Text("TAP TO ADD")
-            .font(.caption)
-    }
-
-    private var notesTextView: some View {
-        AutoResizingTextField(isActive: $isEditingNotes, text: $notesInput, onCommit: commitNoteEdits)
     }
 
     private func commitNoteEdits() {
