@@ -235,7 +235,7 @@ private extension VisitDetailsView {
     }
 
     private var staticMapView: some View {
-        StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, color: .blue)
+        StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, userLocationColor: appTheme, annotationColor: visit.location.accent)
             .frame(width: isMapOpen ? screen.width : screen.width / 2.5, height: isMapOpen ? screen.height * 8 / 15 : screen.width / 2.5)
             .cornerRadius(isMapOpen ? 0 : screen.width / 5)
             .onTapGesture(perform: toggleMapState)

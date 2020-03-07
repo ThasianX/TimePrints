@@ -2,6 +2,8 @@ import Mapbox
 import SwiftUI
 
 struct AppMapView: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
     @State private var trackingMode: MGLUserTrackingMode = .follow
@@ -39,6 +41,7 @@ struct AppMapView: View {
             showingToggleButton: $showingToggleButton,
             stayAtLocation: $stayAtLocation,
             activeVisitLocation: $activeVisitLocation,
+            userLocationColor: appTheme,
             annotations: locations.map(LocationAnnotation.init)
         )
     }
@@ -55,7 +58,8 @@ struct AppMapView: View {
         UserLocationButton(
             trackingMode: $trackingMode,
             stayAtLocation: $stayAtLocation,
-            activeVisitLocation: $activeVisitLocation
+            activeVisitLocation: $activeVisitLocation,
+            color: appTheme.color
         )
     }
 

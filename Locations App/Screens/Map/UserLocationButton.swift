@@ -5,6 +5,8 @@ struct UserLocationButton: View {
     @Binding var trackingMode: MGLUserTrackingMode
     @Binding var stayAtLocation: Bool
     @Binding var activeVisitLocation: Location?
+
+    let color: Color
     
     var shouldRotate: Bool {
         trackingMode == .followWithHeading
@@ -26,6 +28,7 @@ struct UserLocationButton: View {
         Image(systemName: "location.fill")
             .resizable()
             .frame(width: 40, height: 40)
+            .foregroundColor(color)
     }
     
     private func updateTrackingMode() {
@@ -51,8 +54,8 @@ struct UserLocationButton: View {
 struct UserLocationButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            UserLocationButton(trackingMode: .constant(.follow), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil))
-            UserLocationButton(trackingMode: .constant(.followWithHeading), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil))
+            UserLocationButton(trackingMode: .constant(.follow), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), color: .pink)
+            UserLocationButton(trackingMode: .constant(.followWithHeading), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), color: .pink)
         }
     }
 }

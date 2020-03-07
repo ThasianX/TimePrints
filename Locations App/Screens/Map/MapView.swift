@@ -9,11 +9,12 @@ struct MapView: UIViewRepresentable {
     @Binding var showingToggleButton: Bool
     @Binding var stayAtLocation: Bool
     @Binding var activeVisitLocation: Location?
-    
+
+    let userLocationColor: UIColor
     let annotations: [LocationAnnotation]
-    
+
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MGLMapView {
-        MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
+        MGLMapView.makeDefault(with: context.coordinator, tintColor: userLocationColor)
     }
     
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
@@ -113,6 +114,6 @@ private extension UIButton {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), annotations: [])
+        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), userLocationColor: .red, annotations: [])
     }
 }

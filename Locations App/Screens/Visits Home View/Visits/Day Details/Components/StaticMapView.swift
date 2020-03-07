@@ -4,10 +4,11 @@ import Mapbox
 struct StaticMapView: UIViewRepresentable {
     let coordinate: CLLocationCoordinate2D
     let name: String
-    let color: UIColor
+    let userLocationColor: UIColor
+    let annotationColor: UIColor
     
     func makeUIView(context: UIViewRepresentableContext<StaticMapView>) -> MGLMapView {
-        let mapView = MGLMapView.makeDefault(with: context.coordinator, tintColor: .red)
+        let mapView = MGLMapView.makeDefault(with: context.coordinator, tintColor: userLocationColor)
         mapView.setCenter(coordinate, zoomLevel: 13, animated: false)
         return mapView
     }
@@ -35,7 +36,7 @@ struct StaticMapView: UIViewRepresentable {
             guard annotation is MGLPointAnnotation else { return nil }
 
             let annotationView = CustomAnnotationView.makeDefault()
-            annotationView.backgroundColor = parent.color
+            annotationView.backgroundColor = parent.annotationColor
             return annotationView
         }
     }
@@ -43,6 +44,6 @@ struct StaticMapView: UIViewRepresentable {
 
 struct StaticMapView_Previews: PreviewProvider {
     static var previews: some View {
-        StaticMapView(coordinate: .init(latitude: 12.9716, longitude: 77.5946), name: "Tesla Headquarters", color: .salmon)
+        StaticMapView(coordinate: .init(latitude: 12.9716, longitude: 77.5946), name: "Tesla Headquarters", userLocationColor: .red, annotationColor: .violetGum)
     }
 }
