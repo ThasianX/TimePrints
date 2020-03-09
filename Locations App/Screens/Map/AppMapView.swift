@@ -1,10 +1,39 @@
 import Mapbox
 import SwiftUI
 
-final class MapState: ObservableObject {
-    @Published var showingEditTag: Bool = false
-    @Published var showingLocationVisits: Bool = false
-    @Published var selectedLocation: Location? = nil
+enum MapState: Equatable {
+    case showingMap
+    case showingEditTag(Location)
+    case showingLocationVisits(Location)
+
+    var isShowingMap: Bool {
+        self == .showingMap
+    }
+
+    var isShowingEditTag: Bool {
+        if case .showingEditTag(_) = self {
+            return true
+        }
+        return false
+    }
+
+    var isshowingLocationVisits: Bool {
+        if case .showingLocationVisits(_) = self {
+            return true
+        }
+        return false
+    }
+
+    var selectedLocation: Location {
+        switch self {
+        case let .showingEditTag(location):
+            return location
+        case let .showingLocationVisits(location):
+            return location
+        default:
+            fatalError("Should not be calling this in `showingMap`")
+        }
+    }
 }
 
 struct AppMapView: View {
@@ -12,7 +41,7 @@ struct AppMapView: View {
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
     @State private var trackingMode: MGLUserTrackingMode = .follow
-    @ObservedObject private var mapState: MapState = .init()
+    @State private var mapState: MapState = .showingMap
     @State private var routeCoordinates: [CLLocationCoordinate2D]? = nil
 
     @Binding var showingToggleButton: Bool
@@ -23,22 +52,22 @@ struct AppMapView: View {
         ZStack(alignment: .top) {
             mapView
                 .extendToScreenEdges()
-                .disablur(mapState.showingEditTag || mapState.showingLocationVisits)
+                .disablur(!mapState.isShowingMap)
 
             buttonHeader
-                .disablur(mapState.showingEditTag || mapState.showingLocationVisits)
+                .disablur(!mapState.isShowingMap)
 
             editTagView
-                .modal(isPresented: mapState.showingEditTag)
+                .modal(isPresented: mapState.isShowingEditTag)
 
             locationVisitsView
-                .modal(isPresented: mapState.showingLocationVisits)
+                .modal(isPresented: mapState.isshowingLocationVisits)
         }
     }
 
     private var mapView: some View {
         MapView(
-            mapState: mapState,
+            mapState: $mapState,
             trackingMode: $trackingMode,
             showingToggleButton: $showingToggleButton,
             stayAtLocation: $stayAtLocation,
@@ -67,7 +96,7 @@ struct AppMapView: View {
 
     private var editTagView: some View {
         EditTagView(
-            mapState: mapState,
+            mapState: $mapState,
             stayAtLocation: $stayAtLocation,
             showingToggleButton: $showingToggleButton
         )
@@ -75,7 +104,7 @@ struct AppMapView: View {
 
     private var locationVisitsView: some View {
         LocationVisitsView(
-            mapState: mapState,
+            mapState: $mapState,
             showingToggleButton: $showingToggleButton
         )
     }

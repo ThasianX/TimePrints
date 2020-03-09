@@ -32,7 +32,7 @@ struct EditTagView: View {
     @State private var locationsForDeletedTag: Set<Location> = .init()
     @State private var animatingSelection: Bool = false
     
-    @ObservedObject var mapState: MapState
+    @Binding var mapState: MapState
     @Binding var stayAtLocation: Bool
     @Binding var showingToggleButton: Bool
     
@@ -48,29 +48,31 @@ struct EditTagView: View {
     }
 
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading) {
-                header
+        Group {
+            if mapState.isShowingEditTag {
+                VStack(alignment: .leading) {
+                    header
+                        .padding()
+                        .offset(y: isShowingAddOrEdit ? 250 : 0)
+                        .animation(.spring())
+
+                    tagSelectionList
+                        .fade(if: isShowingAddOrEdit)
+                        .scaleEffect(isShowingAddOrEdit ? 0 : 1)
+
+                    VSpace(60)
+                        .fade(if: isShowingAddOrEdit)
+                }
+
+                topAlignedTagDetails
                     .padding()
-                    .offset(y: isShowingAddOrEdit ? 250 : 0)
+                    .fade(if: isntShowingAddNorEdit)
+                    .scaleEffect(!isShowingAddOrEdit ? 0 : 1)
                     .animation(.spring())
-                
-                tagSelectionList
-                    .fade(if: isShowingAddOrEdit)
-                    .scaleEffect(isShowingAddOrEdit ? 0 : 1)
-                
-                VSpace(60)
-                    .fade(if: isShowingAddOrEdit)
+
+                bottomAlignedTransientAlertView
+                    .fade(if: !presentAlert)
             }
-            
-            topAlignedTagDetails
-                .padding()
-                .fade(if: isntShowingAddNorEdit)
-                .scaleEffect(!isShowingAddOrEdit ? 0 : 1)
-                .animation(.spring())
-            
-            bottomAlignedTransientAlertView
-                .fade(if: !presentAlert)
         }
         .disabled(animatingSelection)
     }
@@ -109,7 +111,7 @@ private extension EditTagView {
     }
 
     private var defaultTagColor: Color {
-        mapState.selectedLocation != nil ? Color(mapState.selectedLocation!.accent) : .clear
+        Color(mapState.selectedLocation.accent)
     }
 
     private func headerText(_ text: String) -> some View {
@@ -243,7 +245,7 @@ private extension EditTagView {
     }
 
     private func coloredTextRow(tag: Tag) -> TagRow {
-        TagRow(tag: tag, isSelected: mapState.selectedLocation?.tag == tag)
+        TagRow(tag: tag, isSelected: mapState.selectedLocation.tag == tag)
     }
 
     private func contextMenu(for tag: Tag) -> some View {
@@ -441,13 +443,13 @@ private extension EditTagView {
     }
 
     private func setTagAndExitView(tag: Tag) {
-        if mapState.selectedLocation!.tag == tag {
-            mapState.selectedLocation!.setTag(tag: tag)
-            self.resetView()
+        if mapState.selectedLocation.tag == tag {
+            mapState.selectedLocation.setTag(tag: tag)
+            resetView()
             return
         }
         
-        mapState.selectedLocation!.setTag(tag: tag)
+        mapState.selectedLocation.setTag(tag: tag)
         animatingSelection = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.resetView()
@@ -455,8 +457,7 @@ private extension EditTagView {
     }
 
     private func resetView() {
-        mapState.showingEditTag = false
-        mapState.selectedLocation = nil
+        mapState = .showingMap
         stayAtLocation = true
         animatingSelection = false
         showingToggleButton = true
@@ -470,14 +471,14 @@ private extension EditTagView {
     }
 
     private func resetAlert() {
-        self.presentAlert = false
-        self.alertMessage = ""
-        self.deletedTag = nil
+        presentAlert = false
+        alertMessage = ""
+        deletedTag = nil
     }
 }
 
 struct EditTagView_Previews: PreviewProvider {
     static var previews: some View {
-        return EditTagView(mapState: .init(), stayAtLocation: .constant(false), showingToggleButton: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
+        return EditTagView(mapState: .constant(.showingEditTag(.preview)), stayAtLocation: .constant(false), showingToggleButton: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

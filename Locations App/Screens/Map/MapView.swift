@@ -1,8 +1,15 @@
 import SwiftUI
 import Mapbox
 
+private extension MapView {
+    enum AccessoryType {
+        case tag
+        case visits
+    }
+}
+
 struct MapView: UIViewRepresentable {
-    @ObservedObject var mapState: MapState
+    @Binding var mapState: MapState
     @Binding var trackingMode: MGLUserTrackingMode
     @Binding var showingToggleButton: Bool
     @Binding var stayAtLocation: Bool
@@ -16,7 +23,7 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
-        if mapState.selectedLocation == nil {
+        if mapState == .showingMap {
             if let currentAnnotations = uiView.annotations {
                 uiView.removeAnnotations(currentAnnotations)
             }
@@ -76,21 +83,32 @@ struct MapView: UIViewRepresentable {
             
             switch control.tag {
             case 0:
-                setLocationWithoutRecentering(location: annotation.location)
-                parent.mapState.showingEditTag = true
+                setLocationWithoutRecentering(for: .tag, location: annotation.location)
             case 1:
-                setLocationWithoutRecentering(location: annotation.location)
-                parent.mapState.showingLocationVisits = true
+                setLocationWithoutRecentering(for: .visits, location: annotation.location)
             default:
                 ()
             }
         }
 
-        private func setLocationWithoutRecentering(location: Location) {
-            parent.mapState.selectedLocation = location
+        private func setLocationWithoutRecentering(for accessoryType: AccessoryType, location: Location) {
+            setLocation(for: accessoryType, location: location)
+            preventRecentering()
+            hideToggleButton()
+        }
+
+        private func setLocation(for accessoryType: AccessoryType, location: Location) {
+            switch accessoryType {
+            case .tag:
+                parent.mapState = .showingEditTag(location)
+            case .visits:
+                parent.mapState = .showingLocationVisits(location)
+            }
+        }
+
+        private func preventRecentering() {
             parent.stayAtLocation = true
             parent.activeVisitLocation = nil
-            hideToggleButton()
         }
 
         private func hideToggleButton() {
@@ -112,6 +130,6 @@ private extension UIButton {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(mapState: .init(), trackingMode: .constant(.follow), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), userLocationColor: .red, annotations: [])
+        MapView(mapState: .constant(.showingMap), trackingMode: .constant(.follow), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), userLocationColor: .red, annotations: [])
     }
 }
