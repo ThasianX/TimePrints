@@ -29,6 +29,7 @@ private extension VisitsForDayView {
             HStack {
                 backButton
                 Spacer()
+                routeButton
             }
             dayLabel
         }
@@ -41,6 +42,17 @@ private extension VisitsForDayView {
 
     private var dayLabel: some View {
         DayLabel(date: currentDayComponent.date)
+    }
+
+    private var routeButton: some View {
+        Button(action: {}) {
+            Image("route")
+                .renderingMode(.template)
+                .resizable()
+                .frame(width: 50, height: 50)
+                .foregroundColor(.white)
+        }
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 
