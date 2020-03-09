@@ -87,18 +87,26 @@ private extension VisitsPreviewList {
 
     private func visitsPreviewStack(isFilled: @escaping () -> Bool) -> some View {
         V0Stack {
-            ForEach(descendingMonthComponents) { monthComponent in
-                self.monthYearSideBarWithDayPreviewBlocksView(monthComponent: monthComponent, isFilled: isFilled)
+            ForEach(descendingMonthComponents) { month in
+                self.monthYearSideBarWithDayPreviewBlocksView(
+                    month: month,
+                    daysForMonth: self.descendingDayComponents(for: month),
+                    isFilled: isFilled
+                )
             }
         }
     }
 
-    private func monthYearSideBarWithDayPreviewBlocksView(monthComponent: DateComponents, isFilled: @escaping () -> Bool) -> some View {
+    private func monthYearSideBarWithDayPreviewBlocksView(month: DateComponents, daysForMonth: [DateComponents], isFilled: @escaping () -> Bool) -> some View {
         H0Stack {
-            monthYearSideBarText(date: monthComponent.date)
+            monthYearSideBarText(date: month.date)
             V0Stack {
-                ForEach(descendingDayComponents(for: monthComponent)) { dayComponent in
-                    self.daySideBarWithPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled())
+                ForEach(daysForMonth) { day in
+                    self.daySideBarWithPreviewBlockView(
+                        dayComponent: day,
+                        roundedCorners: self.roundedCorners(for: month, daysForMonth: daysForMonth, day: day),
+                        isFilled: isFilled()
+                    )
                 }
             }
         }
@@ -112,10 +120,10 @@ private extension VisitsPreviewList {
         daysComponentsForMonthComponent[monthComponent]!.sortDescending
     }
 
-    private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
+    private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, roundedCorners: UIRectCorner, isFilled: Bool) -> some View {
         HStack {
             daySideBarView(date: dayComponent.date)
-            dayPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled)
+            dayPreviewBlockView(dayComponent: dayComponent, roundedCorners: roundedCorners, isFilled: isFilled)
         }
         .frame(height: 150)
     }
@@ -124,10 +132,11 @@ private extension VisitsPreviewList {
         DaySideBar(date: date)
     }
 
-    private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> DayPreviewBlock {
+    private func dayPreviewBlockView(dayComponent: DateComponents, roundedCorners: UIRectCorner, isFilled: Bool) -> DayPreviewBlock {
         DayPreviewBlock(
             currentDayComponent: $currentDayComponent,
             visits: visitsForDayComponent[dayComponent]!.sortAscByArrivalDate,
+            roundedCorners: roundedCorners,
             isFilled: isFilled,
             dayComponent: dayComponent,
             onTap: setPreviewInactive
@@ -137,6 +146,25 @@ private extension VisitsPreviewList {
     private func setPreviewInactive() {
         isPreviewActive = false
         hideFAB = true
+    }
+
+    private func roundedCorners(for month: DateComponents, daysForMonth: [DateComponents], day: DateComponents) -> UIRectCorner {
+        var roundedCorners: UIRectCorner = []
+        if isFirstVisit(month: month, daysForMonth: daysForMonth, day: day) {
+            roundedCorners.insert(.topLeft)
+        }
+        if isLastVisit(month: month, daysForMonth: daysForMonth, day: day) {
+            roundedCorners.insert(.bottomLeft)
+        }
+        return roundedCorners
+    }
+
+    private func isFirstVisit(month: DateComponents, daysForMonth: [DateComponents], day: DateComponents) -> Bool {
+        month == descendingMonthComponents.first! && day == daysForMonth.first!
+    }
+
+    private func isLastVisit(month: DateComponents, daysForMonth: [DateComponents], day: DateComponents) -> Bool {
+        month == descendingMonthComponents.last! && day == daysForMonth.last!
     }
 }
 

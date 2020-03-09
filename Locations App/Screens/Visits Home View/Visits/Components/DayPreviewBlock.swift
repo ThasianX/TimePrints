@@ -9,6 +9,7 @@ struct DayPreviewBlock: View {
     @Binding var currentDayComponent: DateComponents
 
     let visits: [Visit]
+    let roundedCorners: UIRectCorner
     let isFilled: Bool
     let dayComponent: DateComponents
     let onTap: () -> Void
@@ -20,6 +21,7 @@ struct DayPreviewBlock: View {
     var body: some View {
         ZStack {
             backgroundColor
+                .cornerRadius(20, corners: roundedCorners)
             visitsPreviewList
                 .animation(.easeInOut)
         }
@@ -80,7 +82,7 @@ private extension DayPreviewBlock {
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), visits: [], isFilled: false, dayComponent: DateComponents(), onTap: { })
+            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), visits: [], roundedCorners: [.topLeft], isFilled: false, dayComponent: DateComponents(), onTap: { })
                 .environment(\.appTheme, .violetGum)
         }
     }
