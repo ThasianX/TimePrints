@@ -23,7 +23,7 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
-        if mapState == .showingMap {
+        if mapState.isShowingMap {
             if let currentAnnotations = uiView.annotations {
                 uiView.removeAnnotations(currentAnnotations)
             }

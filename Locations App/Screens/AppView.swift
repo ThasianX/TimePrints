@@ -6,7 +6,6 @@ struct AppView: View {
     @State private var showingToggleButton: Bool = true
     @State private var stayAtLocation: Bool = false
     @State private var showingHomeView: Bool = false
-
     @State private var activeVisitLocation: Location? = nil
 
     let onAppear: () -> Void

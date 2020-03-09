@@ -8,12 +8,6 @@ let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.heig
 struct RootView: View {
     @ObservedObject var userStore: UserStore
 
-    @State private var showingToggleButton: Bool = true
-    @State private var stayAtLocation: Bool = false
-    @State private var showingHomeView: Bool = false
-
-    @State private var activeVisitLocation: Location? = nil
-
     var body: some View {
         ZStack(alignment: .bottom) {
             viewForAppState
