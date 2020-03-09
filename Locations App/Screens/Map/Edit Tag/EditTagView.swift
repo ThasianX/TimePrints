@@ -48,31 +48,29 @@ struct EditTagView: View {
     }
 
     var body: some View {
-        Group {
-            if mapState.isShowingEditTag {
-                VStack(alignment: .leading) {
-                    header
-                        .padding()
-                        .offset(y: isShowingAddOrEdit ? 250 : 0)
-                        .animation(.spring())
-
-                    tagSelectionList
-                        .fade(if: isShowingAddOrEdit)
-                        .scaleEffect(isShowingAddOrEdit ? 0 : 1)
-
-                    VSpace(60)
-                        .fade(if: isShowingAddOrEdit)
-                }
-
-                topAlignedTagDetails
+        ZStack {
+            VStack(alignment: .leading) {
+                header
                     .padding()
-                    .fade(if: isntShowingAddNorEdit)
-                    .scaleEffect(!isShowingAddOrEdit ? 0 : 1)
+                    .offset(y: isShowingAddOrEdit ? 250 : 0)
                     .animation(.spring())
 
-                bottomAlignedTransientAlertView
-                    .fade(if: !presentAlert)
+                tagSelectionList
+                    .fade(if: isShowingAddOrEdit)
+                    .scaleEffect(isShowingAddOrEdit ? 0 : 1)
+
+                VSpace(60)
+                    .fade(if: isShowingAddOrEdit)
             }
+
+            topAlignedTagDetails
+                .padding()
+                .fade(if: isntShowingAddNorEdit)
+                .scaleEffect(!isShowingAddOrEdit ? 0 : 1)
+                .animation(.spring())
+
+            bottomAlignedTransientAlertView
+                .fade(if: !presentAlert)
         }
         .disabled(animatingSelection)
     }
@@ -111,7 +109,7 @@ private extension EditTagView {
     }
 
     private var defaultTagColor: Color {
-        Color(mapState.selectedLocation.accent)
+        Color(mapState.selectedLocation?.accent ?? .clear)
     }
 
     private func headerText(_ text: String) -> some View {
@@ -245,7 +243,7 @@ private extension EditTagView {
     }
 
     private func coloredTextRow(tag: Tag) -> TagRow {
-        TagRow(tag: tag, isSelected: mapState.selectedLocation.tag == tag)
+        TagRow(tag: tag, isSelected: mapState.selectedLocation?.tag == tag)
     }
 
     private func contextMenu(for tag: Tag) -> some View {
@@ -443,13 +441,13 @@ private extension EditTagView {
     }
 
     private func setTagAndExitView(tag: Tag) {
-        if mapState.selectedLocation.tag == tag {
-            mapState.selectedLocation.setTag(tag: tag)
+        if mapState.selectedLocation!.tag == tag {
+            mapState.selectedLocation!.setTag(tag: tag)
             resetView()
             return
         }
         
-        mapState.selectedLocation.setTag(tag: tag)
+        mapState.selectedLocation!.setTag(tag: tag)
         animatingSelection = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.resetView()

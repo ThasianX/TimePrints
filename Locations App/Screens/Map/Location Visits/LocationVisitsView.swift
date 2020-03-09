@@ -5,36 +5,36 @@ struct LocationVisitsView: View {
     @Binding var showingToggleButton: Bool
     
     var body: some View {
-        Group {
-            if mapState.isshowingLocationVisits {
-                VStack {
-                    headerText
-                        .padding(.bottom, 8)
+        VStack {
+            headerText
+                .padding(.bottom, 8)
 
-                    locationVisitsList
-                    Spacer()
-                    exitButton
-                }
-                .padding()
-            }
+            locationVisitsList
+            Spacer()
+            exitButton
         }
+        .padding()
     }
 }
 
 private extension LocationVisitsView {
     private var headerText: some View {
-        Text("Visits for \(mapState.selectedLocation.name)")
+        Text("Visits for \(mapState.selectedLocation?.name ?? "")")
             .font(.headline)
     }
     
     private var locationVisitsList: some View {
-        FilteredList(predicate: visitsPredicate, sortDescriptors: [arrivalDateSort], spacing: 8) { (visit: Visit) in
-            LocationVisitsRow(visit: visit)
+        Group {
+            if mapState.selectedLocation != nil {
+                FilteredList(predicate: visitsPredicate, sortDescriptors: [arrivalDateSort], spacing: 8) { (visit: Visit) in
+                    LocationVisitsRow(visit: visit)
+                }
+            }
         }
     }
 
     private var visitsPredicate: NSPredicate {
-        NSPredicate(format: "%@ == location", mapState.selectedLocation)
+        NSPredicate(format: "%@ == location", mapState.selectedLocation!)
     }
 
     private var arrivalDateSort: NSSortDescriptor {
