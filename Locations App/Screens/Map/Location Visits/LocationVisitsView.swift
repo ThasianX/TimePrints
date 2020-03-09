@@ -19,13 +19,14 @@ struct LocationVisitsView: View {
 
 private extension LocationVisitsView {
     private var headerText: some View {
-        Text("Visits for \(mapState.selectedLocation?.name ?? "")")
+        let name = mapState.hasSelectedLocation ? mapState.selectedLocation.name : ""
+        return Text("Visits for \(name)")
             .font(.headline)
     }
     
     private var locationVisitsList: some View {
         Group {
-            if mapState.selectedLocation != nil {
+            if mapState.hasSelectedLocation {
                 FilteredList(predicate: visitsPredicate, sortDescriptors: [arrivalDateSort], spacing: 8) { (visit: Visit) in
                     LocationVisitsRow(visit: visit)
                 }
@@ -34,7 +35,7 @@ private extension LocationVisitsView {
     }
 
     private var visitsPredicate: NSPredicate {
-        NSPredicate(format: "%@ == location", mapState.selectedLocation!)
+        NSPredicate(format: "%@ == location", mapState.selectedLocation)
     }
 
     private var arrivalDateSort: NSSortDescriptor {

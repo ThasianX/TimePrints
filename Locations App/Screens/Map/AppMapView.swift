@@ -24,12 +24,21 @@ enum MapState: Equatable {
         return false
     }
 
-    var selectedLocation: Location? {
+    var hasSelectedLocation: Bool {
+        switch self {
+        case .showingEditTag, .showingLocationVisits:
+            return true
+        case .showingMap:
+            return false
+        }
+    }
+
+    var selectedLocation: Location {
         switch self {
         case let .showingEditTag(location), let .showingLocationVisits(location):
             return location
         case .showingMap:
-            return nil
+            fatalError("Should not be calling `selectedLocation` when the map is showing")
         }
     }
 }

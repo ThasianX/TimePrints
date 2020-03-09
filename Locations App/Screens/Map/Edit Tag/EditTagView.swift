@@ -109,7 +109,7 @@ private extension EditTagView {
     }
 
     private var defaultTagColor: Color {
-        Color(mapState.selectedLocation?.accent ?? .clear)
+        mapState.hasSelectedLocation ? Color(mapState.selectedLocation.accent) : Color.clear
     }
 
     private func headerText(_ text: String) -> some View {
@@ -243,7 +243,8 @@ private extension EditTagView {
     }
 
     private func coloredTextRow(tag: Tag) -> TagRow {
-        TagRow(tag: tag, isSelected: mapState.selectedLocation?.tag == tag)
+        let isSelected = mapState.hasSelectedLocation ? mapState.selectedLocation.tag == tag : false
+        return TagRow(tag: tag, isSelected: isSelected)
     }
 
     private func contextMenu(for tag: Tag) -> some View {
@@ -441,13 +442,13 @@ private extension EditTagView {
     }
 
     private func setTagAndExitView(tag: Tag) {
-        if mapState.selectedLocation!.tag == tag {
-            mapState.selectedLocation!.setTag(tag: tag)
+        if mapState.selectedLocation.tag == tag {
+            mapState.selectedLocation.setTag(tag: tag)
             resetView()
             return
         }
         
-        mapState.selectedLocation!.setTag(tag: tag)
+        mapState.selectedLocation.setTag(tag: tag)
         animatingSelection = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.resetView()
