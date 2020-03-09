@@ -2,24 +2,21 @@ import SwiftUI
 
 struct LocationVisitsView: View {
     @FetchRequest var visitsForSelectedLocation: FetchedResults<Visit>
-    
-    @Binding var show: Bool
+
+    @ObservedObject var mapState: MapState
     @Binding var showingToggleButton: Bool
     
-    let selectedLocation: Location?
-    
-    init(show: Binding<Bool>, showingToggleButton: Binding<Bool>, selectedLocation: Location?) {
-        self._show = show
+    init(mapState: MapState, showingToggleButton: Binding<Bool>) {
+        self.mapState = mapState
         self._showingToggleButton = showingToggleButton
-        self.selectedLocation = selectedLocation
         
-        let locationExists = selectedLocation != nil
+        let locationExists = mapState.selectedLocation != nil
         self._visitsForSelectedLocation = FetchRequest(
             entity: Visit.entity(),
             sortDescriptors: [
                 NSSortDescriptor(keyPath: \Visit.arrivalDate, ascending: false)
             ],
-            predicate: locationExists ? NSPredicate(format: "%@ == location", selectedLocation!) : nil
+            predicate: locationExists ? NSPredicate(format: "%@ == location", mapState.selectedLocation!) : nil
         )
     }
     
@@ -38,7 +35,7 @@ struct LocationVisitsView: View {
 
 private extension LocationVisitsView {
     private var headerText: some View {
-        Text("Visits for \(selectedLocation?.name ?? "")")
+        Text("Visits for \(mapState.selectedLocation?.name ?? "")")
             .font(.headline)
     }
     
@@ -93,13 +90,13 @@ private extension LocationVisitsView {
 
 private extension LocationVisitsView {
     private func exitView() {
-        show = false
+        mapState.showingLocationVisits = false
         showingToggleButton = true
     }
 }
 
 struct LocationVisitsView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationVisitsView(show: .constant(true), showingToggleButton: .constant(false), selectedLocation: .preview).environment(\.managedObjectContext, CoreData.stack.context)
+        LocationVisitsView(mapState: .init(), showingToggleButton: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context)
     }
 }

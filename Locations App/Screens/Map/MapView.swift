@@ -2,10 +2,8 @@ import SwiftUI
 import Mapbox
 
 struct MapView: UIViewRepresentable {
+    @ObservedObject var mapState: MapState
     @Binding var trackingMode: MGLUserTrackingMode
-    @Binding var selectedLocation: Location?
-    @Binding var showingEditTag: Bool
-    @Binding var showingLocationVisits: Bool
     @Binding var showingToggleButton: Bool
     @Binding var stayAtLocation: Bool
     @Binding var activeVisitLocation: Location?
@@ -18,7 +16,7 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
-        if selectedLocation == nil {
+        if mapState.selectedLocation == nil {
             if let currentAnnotations = uiView.annotations {
                 uiView.removeAnnotations(currentAnnotations)
             }
@@ -79,17 +77,17 @@ struct MapView: UIViewRepresentable {
             switch control.tag {
             case 0:
                 setLocationWithoutRecentering(location: annotation.location)
-                parent.showingEditTag = true
+                parent.mapState.showingEditTag = true
             case 1:
                 setLocationWithoutRecentering(location: annotation.location)
-                parent.showingLocationVisits = true
+                parent.mapState.showingLocationVisits = true
             default:
                 ()
             }
         }
 
         private func setLocationWithoutRecentering(location: Location) {
-            parent.selectedLocation = location
+            parent.mapState.selectedLocation = location
             parent.stayAtLocation = true
             parent.activeVisitLocation = nil
             hideToggleButton()
@@ -114,6 +112,6 @@ private extension UIButton {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), userLocationColor: .red, annotations: [])
+        MapView(mapState: .init(), trackingMode: .constant(.follow), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), userLocationColor: .red, annotations: [])
     }
 }

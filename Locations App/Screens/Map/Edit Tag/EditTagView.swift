@@ -32,8 +32,7 @@ struct EditTagView: View {
     @State private var locationsForDeletedTag: Set<Location> = .init()
     @State private var animatingSelection: Bool = false
     
-    @Binding var show: Bool
-    @Binding var location: Location?
+    @ObservedObject var mapState: MapState
     @Binding var stayAtLocation: Bool
     @Binding var showingToggleButton: Bool
     
@@ -110,7 +109,7 @@ private extension EditTagView {
     }
 
     private var defaultTagColor: Color {
-        location != nil ? Color(location!.accent) : .clear
+        mapState.selectedLocation != nil ? Color(mapState.selectedLocation!.accent) : .clear
     }
 
     private func headerText(_ text: String) -> some View {
@@ -244,7 +243,7 @@ private extension EditTagView {
     }
 
     private func coloredTextRow(tag: Tag) -> TagRow {
-        TagRow(tag: tag, isSelected: self.location?.tag == tag)
+        TagRow(tag: tag, isSelected: mapState.selectedLocation?.tag == tag)
     }
 
     private func contextMenu(for tag: Tag) -> some View {
@@ -442,13 +441,13 @@ private extension EditTagView {
     }
 
     private func setTagAndExitView(tag: Tag) {
-        if location!.tag == tag {
-            location!.setTag(tag: tag)
+        if mapState.selectedLocation!.tag == tag {
+            mapState.selectedLocation!.setTag(tag: tag)
             self.resetView()
             return
         }
         
-        location!.setTag(tag: tag)
+        mapState.selectedLocation!.setTag(tag: tag)
         animatingSelection = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.resetView()
@@ -456,9 +455,9 @@ private extension EditTagView {
     }
 
     private func resetView() {
-        show = false
+        mapState.showingEditTag = false
+        mapState.selectedLocation = nil
         stayAtLocation = true
-        location = nil
         animatingSelection = false
         showingToggleButton = true
         resetAlert()
@@ -479,6 +478,6 @@ private extension EditTagView {
 
 struct EditTagView_Previews: PreviewProvider {
     static var previews: some View {
-        return EditTagView(show: .constant(true), location: .constant(.preview), stayAtLocation: .constant(false), showingToggleButton: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
+        return EditTagView(mapState: .init(), stayAtLocation: .constant(false), showingToggleButton: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
