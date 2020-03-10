@@ -1,3 +1,4 @@
+import Mapbox
 import SwiftUI
 
 struct AppView: View {
@@ -7,6 +8,7 @@ struct AppView: View {
     @State private var stayAtLocation: Bool = false
     @State private var showingHomeView: Bool = false
     @State private var activeVisitLocation: Location? = nil
+    @State private var activeRouteCoordinates: [CLLocationCoordinate2D] = []
 
     let onAppear: () -> Void
 
@@ -25,11 +27,11 @@ struct AppView: View {
     }
 
     private var visitsHomeView: some View {
-        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation)
+        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, activeRouteCoordinates: $activeRouteCoordinates)
     }
 
     private var appMapView: some View {
-        AppMapView(showingToggleButton: $showingToggleButton, stayAtLocation: $stayAtLocation, activeVisitLocation: $activeVisitLocation)
+        AppMapView(showingToggleButton: $showingToggleButton, stayAtLocation: $stayAtLocation, activeVisitLocation: $activeVisitLocation, activeRouteCoordinates: $activeRouteCoordinates)
     }
 
     private var toggleViewButton: some View {
@@ -40,6 +42,7 @@ struct AppView: View {
         activeVisitLocation = nil
         showingHomeView.toggle()
         stayAtLocation = true
+        activeRouteCoordinates = []
     }
 }
 

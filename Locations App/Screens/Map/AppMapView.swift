@@ -49,11 +49,11 @@ struct AppMapView: View {
 
     @State private var trackingMode: MGLUserTrackingMode = .follow
     @State private var mapState: MapState = .showingMap
-    @State private var routeCoordinates: [CLLocationCoordinate2D]? = nil
 
     @Binding var showingToggleButton: Bool
     @Binding var stayAtLocation: Bool
     @Binding var activeVisitLocation: Location?
+    @Binding var activeRouteCoordinates: [CLLocationCoordinate2D]
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -79,6 +79,7 @@ struct AppMapView: View {
             showingToggleButton: $showingToggleButton,
             stayAtLocation: $stayAtLocation,
             activeVisitLocation: $activeVisitLocation,
+            activeRouteCoordinates: $activeRouteCoordinates,
             userLocationColor: appTheme,
             annotations: locations.map(LocationAnnotation.init)
         )
@@ -97,6 +98,7 @@ struct AppMapView: View {
             trackingMode: $trackingMode,
             stayAtLocation: $stayAtLocation,
             activeVisitLocation: $activeVisitLocation,
+            activeRouteCoordinates: $activeRouteCoordinates,
             color: appTheme.color
         )
     }
@@ -131,6 +133,6 @@ private extension View {
 
 struct AppMapView_Previews: PreviewProvider {
     static var previews: some View {
-        AppMapView(showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil))
+        AppMapView(showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), activeRouteCoordinates: .constant([]))
     }
 }

@@ -12,6 +12,7 @@ struct VisitsPreviewList: View {
     @Binding var showingHomeView: Bool
     @Binding var activeVisitLocation: Location?
     @Binding var hideFAB: Bool
+    @Binding var activeRouteCoordinates: [CLLocationCoordinate2D]
 
     var body: some View {
         var fill = false
@@ -174,7 +175,8 @@ private extension VisitsPreviewList {
             currentDayComponent: $currentDayComponent,
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
             onBack: setPreviewActive,
-            setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
+            setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap,
+            setActiveRouteCoordinates: setActiveRouteCoordinates
         )
     }
 
@@ -187,11 +189,17 @@ private extension VisitsPreviewList {
         self.activeVisitLocation = visit.location
         self.showingHomeView = false
     }
+
+    private func setActiveRouteCoordinates(coordinates: [CLLocationCoordinate2D]) {
+        print(coordinates)
+        activeRouteCoordinates = coordinates
+        showingHomeView = false
+    }
 }
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false))
+        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false), activeRouteCoordinates: .constant([]))
             .environment(\.managedObjectContext, CoreData.stack.context)
             .statusBar(hidden: true)
     }

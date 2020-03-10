@@ -14,6 +14,7 @@ struct MapView: UIViewRepresentable {
     @Binding var showingToggleButton: Bool
     @Binding var stayAtLocation: Bool
     @Binding var activeVisitLocation: Location?
+    @Binding var activeRouteCoordinates: [CLLocationCoordinate2D]
 
     let userLocationColor: UIColor
     let annotations: [LocationAnnotation]
@@ -28,6 +29,12 @@ struct MapView: UIViewRepresentable {
                 uiView.removeAnnotations(currentAnnotations)
             }
             uiView.addAnnotations(annotations)
+
+            if !activeRouteCoordinates.isEmpty {
+                context.coordinator.addAnimatedRoute(mapView: uiView)
+            } else {
+                context.coordinator.removeAnimatedRoute(mapView: uiView)
+            }
         }
 
         if !stayAtLocation {
@@ -40,13 +47,17 @@ struct MapView: UIViewRepresentable {
             uiView.selectAnnotation(annotation, animated: true, completionHandler: { })
         }
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 
     final class Coordinator: NSObject, MGLMapViewDelegate {
+        private let lineIdentifier = "polyline"
         var parent: MapView
+        var timer: Timer?
+        var polylineSource: MGLShapeSource?
+        var currentRouteIndex = 1
 
         init(_ parent: MapView) {
             self.parent = parent
@@ -114,6 +125,79 @@ struct MapView: UIViewRepresentable {
         private func hideToggleButton() {
             parent.showingToggleButton = false
         }
+
+        func addAnimatedRoute(mapView: MGLMapView) {
+            guard let mapStyle = mapView.style else { return }
+
+            addPolyline(to: mapStyle)
+            animatePolyline()
+        }
+
+        private func addPolyline(to style: MGLStyle) {
+            // Add an empty MGLShapeSource, we’ll keep a reference to this and add points to this later.
+            let source = MGLShapeSource(identifier: lineIdentifier, shape: nil, options: nil)
+            style.addSource(source)
+            polylineSource = source
+
+            // Add a layer to style our polyline.
+            let layer = MGLLineStyleLayer(identifier: lineIdentifier, source: source)
+            layer.lineJoin = NSExpression(forConstantValue: "round")
+            layer.lineCap = NSExpression(forConstantValue: "round")
+            layer.lineColor = NSExpression(forConstantValue: UIColor.red)
+
+            // The line width should gradually increase based on the zoom level.
+            layer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)",
+                                           [14: 5, 18: 20])
+            style.addLayer(layer)
+        }
+
+        private func animatePolyline() {
+            currentRouteIndex = 1
+
+            // Start a timer that will simulate adding points to our polyline. This could also represent coordinates being added to our polyline from another source, such as a CLLocationManagerDelegate.
+            timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+        }
+
+        @objc private func tick() {
+            if currentRouteIndex > parent.activeRouteCoordinates.count {
+                timer?.invalidate()
+                timer = nil
+                return
+            }
+
+            // Create a subarray of locations up to the current index.
+            let coordinates = Array(parent.activeRouteCoordinates[0..<currentRouteIndex])
+
+            // Update our MGLShapeSource with the current locations.
+            updatePolylineWithCoordinates(coordinates: coordinates)
+
+            currentRouteIndex += 1
+        }
+
+        private func updatePolylineWithCoordinates(coordinates: [CLLocationCoordinate2D]) {
+            var mutableCoordinates = coordinates
+
+            let polyline = MGLPolylineFeature(coordinates: &mutableCoordinates, count: UInt(mutableCoordinates.count))
+
+            // Updating the MGLShapeSource’s shape will have the map redraw our polyline with the current coordinates.
+            polylineSource?.shape = polyline
+        }
+
+        func removeAnimatedRoute(mapView: MGLMapView) {
+            guard let currentLayers = mapView.style?.layers else { return }
+
+            if currentLayers.filter({$0.identifier == lineIdentifier}).first != nil {
+                guard let mapStyle = mapView.style else { return }
+
+                if let styleLayer = mapStyle.layer(withIdentifier: lineIdentifier)  {
+                    mapStyle.removeLayer(styleLayer)
+                }
+
+                if let source = mapStyle.source(withIdentifier: lineIdentifier) {
+                    mapStyle.removeSource(source)
+                }
+            }
+        }
     }
 }
 
@@ -130,6 +214,6 @@ private extension UIButton {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(mapState: .constant(.showingMap), trackingMode: .constant(.follow), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), userLocationColor: .red, annotations: [])
+        MapView(mapState: .constant(.showingMap), trackingMode: .constant(.follow), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), activeRouteCoordinates: .constant([]), userLocationColor: .red, annotations: [])
     }
 }
