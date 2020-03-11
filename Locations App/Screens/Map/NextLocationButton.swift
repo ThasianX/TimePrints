@@ -16,12 +16,12 @@ struct NextLocationButton: View {
     }
 
     private func goToNextLocation() {
+        stayAtLocation = true
         if activeRoute.isAtEnd {
             activeRoute.restart()
         } else {
             activeRoute.selectNextLocation()
         }
-        stayAtLocation = true
     }
 
     private var nextLocationFillImage: Image {
