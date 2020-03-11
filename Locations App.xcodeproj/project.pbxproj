@@ -27,6 +27,9 @@
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E237EE62415F2E200CEE548 /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E237EE52415F2E200CEE548 /* FilteredList.swift */; };
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
+		1E3237952418595700D370CD /* ActiveRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3237942418595700D370CD /* ActiveRoute.swift */; };
+		1E32379724185E7300D370CD /* NextLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E32379624185E7300D370CD /* NextLocationButton.swift */; };
+		1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3237982418632500D370CD /* CloseRouteButton.swift */; };
 		1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */; };
 		1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */; };
 		1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */; };
@@ -174,6 +177,9 @@
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E237EE52415F2E200CEE548 /* FilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
+		1E3237942418595700D370CD /* ActiveRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRoute.swift; sourceTree = "<group>"; };
+		1E32379624185E7300D370CD /* NextLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLocationButton.swift; sourceTree = "<group>"; };
+		1E3237982418632500D370CD /* CloseRouteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseRouteButton.swift; sourceTree = "<group>"; };
 		1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
 		1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 		1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
@@ -401,6 +407,7 @@
 			children = (
 				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
 				1EFFA58523E89A3400914607 /* LocationAnnotation.swift */,
+				1E3237942418595700D370CD /* ActiveRoute.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -428,6 +435,8 @@
 				1EB03D2624102955001146FF /* AppMapView.swift */,
 				1E7B618E23E284C600F9F974 /* MapView.swift */,
 				1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */,
+				1E32379624185E7300D370CD /* NextLocationButton.swift */,
+				1E3237982418632500D370CD /* CloseRouteButton.swift */,
 				1E24927323EB54A600165280 /* Edit Tag */,
 				1E97274023EB5796006528ED /* Location Visits */,
 			);
@@ -536,7 +545,6 @@
 			isa = PBXGroup;
 			children = (
 				1E9D785F23E10B4F0020FAFE /* RootView.swift */,
-				1ED53522240B0C01009B11D3 /* UserStore.swift */,
 				1E558EDC2411FBE80087C5E3 /* AppView.swift */,
 				1E243290240B742E00E983E7 /* Splash */,
 				1ED53524240B0CC5009B11D3 /* Login */,
@@ -567,6 +575,7 @@
 		1E97D215240B481D004113F7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1ED53522240B0C01009B11D3 /* UserStore.swift */,
 				1ED53520240B0A48009B11D3 /* Alert.swift */,
 			);
 			path = Login;
@@ -970,6 +979,7 @@
 				1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */,
 				1EFF83A323E4E27800FF04A1 /* RandomAccessCollection+Indexed.swift in Sources */,
 				1E97274223EB57AE006528ED /* LocationVisitsView.swift in Sources */,
+				1E3237952418595700D370CD /* ActiveRoute.swift in Sources */,
 				1EFFA58C23E8B1E700914607 /* Location+CoreDataProperties.swift in Sources */,
 				1EFFA58B23E8B1E700914607 /* Location+CoreDataClass.swift in Sources */,
 				1E9D789C23E125610020FAFE /* Visit+CoreDataClass.swift in Sources */,
@@ -1009,6 +1019,7 @@
 				1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
 				1E125C52240DBA8F00D0919E /* ThemeColorService.swift in Sources */,
+				1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */,
 				1E125C4D240DAA9900D0919E /* Array+Chunk.swift in Sources */,
 				1EFE85D0240377170001D0C3 /* LottieView.swift in Sources */,
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
@@ -1026,6 +1037,7 @@
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1E21F30D240EC50700BC81DC /* DimensionalButton.swift in Sources */,
 				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,
+				1E32379724185E7300D370CD /* NextLocationButton.swift in Sources */,
 				1E00E5752408CC6200B14C9F /* SplashScreen.swift in Sources */,
 				1EFF83AF23E52E5900FF04A1 /* RotatedModifier.swift in Sources */,
 				1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */,

@@ -53,16 +53,16 @@ struct AppMapView: View {
     @Binding var showingToggleButton: Bool
     @Binding var stayAtLocation: Bool
     @Binding var activeVisitLocation: Location?
-    @Binding var activeRouteCoordinates: [CLLocationCoordinate2D]
+    @ObservedObject var activeRoute: ActiveRoute
 
     var body: some View {
         ZStack(alignment: .top) {
-            mapView
-                .extendToScreenEdges()
-                .disablur(!mapState.isShowingMap)
-
-            buttonHeader
-                .disablur(!mapState.isShowingMap)
+            Group {
+                mapView
+                    .extendToScreenEdges()
+                buttonHeader
+            }
+            .disablur(!mapState.isShowingMap)
 
             editTagView
                 .modal(isPresented: mapState.isShowingEditTag)
@@ -79,18 +79,29 @@ struct AppMapView: View {
             showingToggleButton: $showingToggleButton,
             stayAtLocation: $stayAtLocation,
             activeVisitLocation: $activeVisitLocation,
-            activeRouteCoordinates: $activeRouteCoordinates,
+            activeRoute: activeRoute,
             userLocationColor: appTheme,
             annotations: locations.map(LocationAnnotation.init)
         )
     }
 
     private var buttonHeader: some View {
-        HStack {
-            userLocationButton
-            Spacer()
+        ZStack {
+            HStack {
+                userLocationButton
+                Spacer()
+            }
+            .padding()
+            .disablur(activeRoute.exists)
+
+            HStack {
+                closeRouteButton
+                Spacer()
+                nextLocationButton
+            }
+            .padding()
+            .fade(if: !activeRoute.exists)
         }
-        .padding()
     }
 
     private var userLocationButton: some View {
@@ -98,24 +109,33 @@ struct AppMapView: View {
             trackingMode: $trackingMode,
             stayAtLocation: $stayAtLocation,
             activeVisitLocation: $activeVisitLocation,
-            activeRouteCoordinates: $activeRouteCoordinates,
-            color: appTheme.color
-        )
+            color: appTheme.color)
+    }
+
+    private var closeRouteButton: some View {
+        CloseRouteButton(
+            activeRoute: activeRoute,
+            stayAtLocation: $stayAtLocation)
+    }
+
+    private var nextLocationButton: some View {
+        NextLocationButton(
+            activeRoute: activeRoute,
+            stayAtLocation: $stayAtLocation,
+            color: appTheme.color)
     }
 
     private var editTagView: some View {
         EditTagView(
             mapState: $mapState,
             stayAtLocation: $stayAtLocation,
-            showingToggleButton: $showingToggleButton
-        )
+            showingToggleButton: $showingToggleButton)
     }
 
     private var locationVisitsView: some View {
         LocationVisitsView(
             mapState: $mapState,
-            showingToggleButton: $showingToggleButton
-        )
+            showingToggleButton: $showingToggleButton)
     }
 }
 
@@ -133,6 +153,6 @@ private extension View {
 
 struct AppMapView_Previews: PreviewProvider {
     static var previews: some View {
-        AppMapView(showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), activeRouteCoordinates: .constant([]))
+        AppMapView(showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), activeRoute: .init())
     }
 }

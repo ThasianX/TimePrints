@@ -8,7 +8,7 @@ struct AppView: View {
     @State private var stayAtLocation: Bool = false
     @State private var showingHomeView: Bool = false
     @State private var activeVisitLocation: Location? = nil
-    @State private var activeRouteCoordinates: [CLLocationCoordinate2D] = []
+    @ObservedObject private var activeRoute: ActiveRoute = .init()
 
     let onAppear: () -> Void
 
@@ -27,11 +27,11 @@ struct AppView: View {
     }
 
     private var visitsHomeView: some View {
-        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, activeRouteCoordinates: $activeRouteCoordinates)
+        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, activeRoute: activeRoute)
     }
 
     private var appMapView: some View {
-        AppMapView(showingToggleButton: $showingToggleButton, stayAtLocation: $stayAtLocation, activeVisitLocation: $activeVisitLocation, activeRouteCoordinates: $activeRouteCoordinates)
+        AppMapView(showingToggleButton: $showingToggleButton, stayAtLocation: $stayAtLocation, activeVisitLocation: $activeVisitLocation, activeRoute: activeRoute)
     }
 
     private var toggleViewButton: some View {
@@ -42,7 +42,7 @@ struct AppView: View {
         activeVisitLocation = nil
         showingHomeView.toggle()
         stayAtLocation = true
-        activeRouteCoordinates = []
+        activeRoute.reset()
     }
 }
 

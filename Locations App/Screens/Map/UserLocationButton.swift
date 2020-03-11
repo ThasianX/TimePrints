@@ -5,7 +5,6 @@ struct UserLocationButton: View {
     @Binding var trackingMode: MGLUserTrackingMode
     @Binding var stayAtLocation: Bool
     @Binding var activeVisitLocation: Location?
-    @Binding var activeRouteCoordinates: [CLLocationCoordinate2D]
 
     let color: Color
     
@@ -43,12 +42,11 @@ struct UserLocationButton: View {
         default:
             fatalError("Other tracking modes not supported")
         }
-        
+
         withAnimation {
             self.trackingMode = mode
             self.stayAtLocation = false
             self.activeVisitLocation = nil
-            self.activeRouteCoordinates = []
         }
     }
 }
@@ -56,8 +54,8 @@ struct UserLocationButton: View {
 struct UserLocationButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            UserLocationButton(trackingMode: .constant(.follow), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), activeRouteCoordinates: .constant([]), color: .pink)
-            UserLocationButton(trackingMode: .constant(.followWithHeading), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), activeRouteCoordinates: .constant([]), color: .pink)
+            UserLocationButton(trackingMode: .constant(.follow), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), color: .pink)
+            UserLocationButton(trackingMode: .constant(.followWithHeading), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), color: .pink)
         }
     }
 }

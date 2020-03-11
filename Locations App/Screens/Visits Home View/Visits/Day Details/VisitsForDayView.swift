@@ -10,7 +10,7 @@ struct VisitsForDayView: View {
     let visits: [Visit]
     let onBack: () -> Void
     let setActiveVisitLocationAndDisplayMap: (Visit) -> Void
-    let setActiveRouteCoordinates: ([CLLocationCoordinate2D]) -> Void
+    let setActiveRouteLocations: ([Location]) -> Void
 
     private var isShowingVisit: Bool {
         activeVisitIndex != -1
@@ -51,14 +51,14 @@ private extension VisitsForDayView {
             Image("route")
                 .renderingMode(.template)
                 .resizable()
-                .frame(width: 50, height: 50)
+                .frame(width: 40, height: 40)
                 .foregroundColor(.white)
         }
-        .buttonStyle(ScaleButtonStyle())
+        .buttonStyle(PlainButtonStyle())
     }
 
     private func convertAndSetActiveRouteCoordinates() {
-        setActiveRouteCoordinates(visits.map { $0.location.coordinate })
+        setActiveRouteLocations(visits.map { $0.location })
     }
 }
 
@@ -117,7 +117,7 @@ private extension VisitsForDayView {
 
 struct VisitsForDayView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), visits: Visit.previewVisitDetails, onBack: { },  setActiveVisitLocationAndDisplayMap: { _ in }, setActiveRouteCoordinates: { _ in })
+        VisitsForDayView(currentDayComponent: .constant(Date().dateComponents), visits: Visit.previewVisitDetails, onBack: { },  setActiveVisitLocationAndDisplayMap: { _ in }, setActiveRouteLocations: { _ in })
             .environment(\.appTheme, .violetGum)
     }
 }
