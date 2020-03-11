@@ -176,7 +176,7 @@ private extension VisitsPreviewList {
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
             onBack: setPreviewActive,
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap,
-            setActiveRouteLocations: setActiveRouteLocations
+            setActiveRouteVisits: setActiveRouteVisits
         )
     }
 
@@ -190,8 +190,8 @@ private extension VisitsPreviewList {
         self.showingHomeView = false
     }
 
-    private func setActiveRouteLocations(locations: [Location]) {
-        activeRoute.setLocations(locations: locations)
+    private func setActiveRouteVisits(visits: [Visit]) {
+        activeRoute.setVisits(visits: visits)
         showingHomeView = false
     }
 }

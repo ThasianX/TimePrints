@@ -31,7 +31,7 @@ struct MapView: UIViewRepresentable {
             uiView.addAnnotations(annotations)
 
             if activeRoute.exists {
-                selectAnnotation(for: activeRoute.currentLocation, with: uiView)
+                selectAnnotation(for: activeRoute.currentVisit.location, with: uiView)
             }
         }
 

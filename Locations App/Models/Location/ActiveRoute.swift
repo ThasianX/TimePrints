@@ -1,39 +1,39 @@
 import SwiftUI
 
 class ActiveRoute: ObservableObject {
-    private var locations: [Location] = []
-    private var locationIndex: Int = 0
+    private var visits: [Visit] = []
+    private var visitsIndex: Int = 0
 
     var exists: Bool {
-        !locations.isEmpty
+        !visits.isEmpty
     }
 
-    var currentLocation: Location {
-        locations[locationIndex]
+    var currentVisit: Visit {
+        visits[visitsIndex]
     }
 
-    func setLocations(locations: [Location]) {
-        self.locations = locations
+    func setVisits(visits: [Visit]) {
+        self.visits = visits
         objectWillChange.send()
     }
 
     var isAtEnd: Bool {
-        locationIndex == locations.count-1
+        visitsIndex == visits.count-1
     }
 
     func selectNextLocation() {
-        locationIndex += 1
+        visitsIndex += 1
         objectWillChange.send()
     }
 
     func restart() {
-        locationIndex = 0
+        visitsIndex = 0
         objectWillChange.send()
     }
 
     func reset() {
-        locations = []
-        locationIndex = 0
+        visits = []
+        visitsIndex = 0
         objectWillChange.send()
     }
 }
