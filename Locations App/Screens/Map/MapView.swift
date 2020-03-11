@@ -26,7 +26,7 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
         if mapState.isShowingMap {
             if activeRoute.exists {
-                selectAnnotation(for: activeRoute.currentVisit.location, with: uiView)
+                centerLocation(activeRoute.currentVisit.location, with: uiView)
             } else {
                 if let currentAnnotations = uiView.annotations {
                     uiView.removeAnnotations(currentAnnotations)
@@ -44,17 +44,14 @@ struct MapView: UIViewRepresentable {
         }
     }
 
+    private func centerLocation(_ location: Location, with map: MGLMapView) {
+        map.setCenter(location.coordinate, zoomLevel: 15, animated: true)
+    }
+
     private func selectAnnotation(for location: Location, with map: MGLMapView) {
         let activeAnnotation = LocationAnnotation(location: location)
-        map.setCenter(location.coordinate, zoomLevel: 15, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-            map.selectAnnotation(activeAnnotation, animated: true, completionHandler: nil)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if map.selectedAnnotations.isEmpty {
-                map.selectAnnotation(activeAnnotation, animated: true, completionHandler: nil)
-            }
-        }
+        centerLocation(location, with: map)
+        map.selectAnnotation(activeAnnotation, animated: true, completionHandler: nil)
     }
 
     func makeCoordinator() -> Coordinator {
