@@ -24,8 +24,10 @@ struct NextLocationButton: View {
         }
     }
 
-    private var nextLocationFillImage: Image {
+    private var nextLocationFillImage: some View {
         Image(systemName: "forward.fill")
+            .resizable()
+            .frame(width: 35, height: 30)
     }
 }
 

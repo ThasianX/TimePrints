@@ -43,6 +43,19 @@ enum MapState: Equatable {
     }
 }
 
+private extension View {
+    func blurBackground(if condition: Bool) -> some View {
+        self
+            .padding(.horizontal)
+            .background(condition ?
+                BlurView(style: .systemChromeMaterialDark)
+                    .cornerRadius(20)
+                    .blur(radius: 20)
+                    .edgesIgnoringSafeArea(.top)
+                : nil)
+    }
+}
+
 struct AppMapView: View {
     @Environment(\.appTheme) private var appTheme: UIColor
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
@@ -61,6 +74,7 @@ struct AppMapView: View {
                 mapViewWithCenterPointer
                     .extendToScreenEdges()
                 buttonHeader
+                    .blurBackground(if: activeRoute.exists)
             }
             .disablur(!mapState.isShowingMap)
 
@@ -128,7 +142,7 @@ struct AppMapView: View {
                 Spacer()
             }
             .padding()
-            .disablur(activeRoute.exists)
+            .fade(if: activeRoute.exists)
 
             HStack {
                 closeRouteButton

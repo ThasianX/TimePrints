@@ -19,6 +19,7 @@ struct UserLocationButton: View {
     private var trackingModeButton: some View {
         Button(action: updateTrackingMode) {
             locationFillImage
+                .foregroundColor(color)
                 .rotationEffect(shouldRotate ? .init(degrees: -45) : .init(degrees: 0))
                 .animation(.spring(response: 0.75, dampingFraction: 0.825, blendDuration: 0))
         }
@@ -28,7 +29,6 @@ struct UserLocationButton: View {
         Image(systemName: "location.fill")
             .resizable()
             .frame(width: 40, height: 40)
-            .foregroundColor(color)
     }
     
     private func updateTrackingMode() {
