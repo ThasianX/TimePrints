@@ -58,7 +58,7 @@ struct AppMapView: View {
     var body: some View {
         ZStack(alignment: .top) {
             Group {
-                mapView
+                mapViewWithCenterPointer
                     .extendToScreenEdges()
                 buttonHeader
             }
@@ -69,6 +69,16 @@ struct AppMapView: View {
 
             locationVisitsView
                 .modal(isPresented: mapState.isshowingLocationVisits)
+        }
+    }
+
+    private var mapViewWithCenterPointer: some View {
+        ZStack {
+            mapView
+            if activeRoute.exists {
+                mapViewCenterIndicator
+                    .offset(y: 20)
+            }
         }
     }
 
@@ -83,6 +93,32 @@ struct AppMapView: View {
             userLocationColor: appTheme,
             annotations: locations.map(LocationAnnotation.init)
         )
+    }
+
+    private var mapViewCenterIndicator: some View {
+        CenterIndicator(color: appTheme.color)
+    }
+
+    struct CenterIndicator: View {
+        @State var show = false
+
+        let color: Color
+
+        var body: some View {
+            Image(systemName: "triangle.fill")
+                .resizable()
+                .frame(width: 15, height: 15)
+                .foregroundColor(color)
+                .scaleEffect(show ? 1 : 0.5)
+                .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
+                .onAppear(perform: makeVisible)
+        }
+
+        private func makeVisible() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.show = true
+            }
+        }
     }
 
     private var buttonHeader: some View {

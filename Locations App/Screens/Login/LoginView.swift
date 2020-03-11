@@ -149,7 +149,7 @@ private extension LoginView {
         }
 
         private func makeVisible() {
-            self.show = true
+            show = true
         }
     }
 }
