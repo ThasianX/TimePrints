@@ -31,7 +31,7 @@ private extension VisitPreviewCell {
     }
     
     private var visitDurationAndAddress: some View {
-        Text("\(visit.visitDuration)    \(visit.location.address)")
+        Text("\(visit.duration)    \(visit.location.address)")
             .font(.caption)
             .lineLimit(1)
     }

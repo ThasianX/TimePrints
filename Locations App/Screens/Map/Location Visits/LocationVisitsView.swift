@@ -68,7 +68,7 @@ private extension LocationVisitsView {
         }
 
         private var visitDurationText: some View {
-            Text(visit.visitDuration)
+            Text(visit.duration)
         }
 
         private var starImageIfFavorited: some View {

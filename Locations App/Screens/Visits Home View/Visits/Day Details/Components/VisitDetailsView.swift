@@ -174,7 +174,7 @@ private extension VisitDetailsView {
     }
 
     private var visitDurationText: some View {
-        Text(visit.visitDuration)
+        Text(visit.duration)
             .font(isSelected ? .system(size: 18) : .system(size: 10))
             .tracking(isSelected ? 2 : 0)
             .animation(nil)

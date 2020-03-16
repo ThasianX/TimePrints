@@ -17,7 +17,7 @@ struct CloseRouteButton: View {
     private var closeRouteFillImage: some View {
         Image(systemName: "stop.fill")
             .resizable()
-            .frame(width: 30, height: 30)
+            .frame(width: 20, height: 20)
     }
 }
 

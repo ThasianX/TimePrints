@@ -29,8 +29,12 @@ extension AppState {
 
 extension AppState {
     struct Route {
-        fileprivate var visits: [Visit] = []
+        fileprivate var visits: [Visit]
         fileprivate var visitsIndex: Int = 0
+
+        init(visits: [Visit] = []) {
+            self.visits = visits
+        }
 
         var exists: Bool {
             !visits.isEmpty
@@ -46,6 +50,18 @@ extension AppState {
 
         var isAtEnd: Bool {
             visitsIndex == visits.count-1
+        }
+
+        var date: Date {
+            visits.first!.arrivalDate
+        }
+
+        var currentIndex: Int {
+            visitsIndex
+        }
+
+        var length: Int {
+            visits.count
         }
 
         mutating func setVisits(visits: [Visit]) {
