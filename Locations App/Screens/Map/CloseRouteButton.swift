@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct CloseRouteButton: View {
-    @ObservedObject var activeRoute: ActiveRoute
-    @Binding var stayAtLocation: Bool
+    @Binding var route: AppState.Route
 
     var body: some View {
         Button(action: closeRoute) {
@@ -12,8 +11,7 @@ struct CloseRouteButton: View {
     }
 
     private func closeRoute() {
-        activeRoute.reset()
-        stayAtLocation = true
+        route.reset()
     }
 
     private var closeRouteFillImage: some View {
@@ -25,6 +23,6 @@ struct CloseRouteButton: View {
 
 struct CloseRouteButton_Previews: PreviewProvider {
     static var previews: some View {
-        CloseRouteButton(activeRoute: .init(), stayAtLocation: .constant(false))
+        CloseRouteButton(route: .constant(.init()))
     }
 }

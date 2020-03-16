@@ -9,10 +9,8 @@ struct VisitsPreviewList: View {
     @State private var currentDayComponent = DateComponents()
     @State private var isPreviewActive = true
 
-    @Binding var showingHomeView: Bool
-    @Binding var activeVisitLocation: Location?
     @Binding var hideFAB: Bool
-    @ObservedObject var activeRoute: ActiveRoute
+    @ObservedObject var appState: AppState
 
     var body: some View {
         var fill = false
@@ -186,19 +184,23 @@ private extension VisitsPreviewList {
     }
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
-        self.activeVisitLocation = visit.location
-        self.showingHomeView = false
+        appState.locationControl.activeForVisit = visit.location
+        showMapView()
     }
 
     private func setActiveRouteVisits(visits: [Visit]) {
-        activeRoute.setVisits(visits: visits)
-        showingHomeView = false
+        appState.route.setVisits(visits: visits)
+        showMapView()
+    }
+
+    private func showMapView() {
+        appState.showing.homeView = false
     }
 }
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false), activeRoute: .init())
+        VisitsPreviewList(hideFAB: .constant(false), appState: .init())
             .environment(\.managedObjectContext, CoreData.stack.context)
             .statusBar(hidden: true)
     }

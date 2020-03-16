@@ -63,10 +63,11 @@ struct AppMapView: View {
     @State private var trackingMode: MGLUserTrackingMode = .follow
     @State private var mapState: MapState = .showingMap
 
-    @Binding var showingToggleButton: Bool
-    @Binding var stayAtLocation: Bool
-    @Binding var activeVisitLocation: Location?
-    @ObservedObject var activeRoute: ActiveRoute
+    @ObservedObject var appState: AppState
+
+    private var routeExists: Bool {
+        appState.route.exists
+    }
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -74,7 +75,7 @@ struct AppMapView: View {
                 mapViewWithCenterPointer
                     .extendToScreenEdges()
                 buttonHeader
-                    .blurBackground(if: activeRoute.exists)
+                    .blurBackground(if: routeExists)
             }
             .disablur(!mapState.isShowingMap)
 
@@ -89,7 +90,7 @@ struct AppMapView: View {
     private var mapViewWithCenterPointer: some View {
         ZStack {
             mapView
-            if activeRoute.exists {
+            if routeExists {
                 mapViewCenterIndicator
                     .offset(y: 20)
             }
@@ -100,10 +101,7 @@ struct AppMapView: View {
         MapView(
             mapState: $mapState,
             trackingMode: $trackingMode,
-            showingToggleButton: $showingToggleButton,
-            stayAtLocation: $stayAtLocation,
-            activeVisitLocation: $activeVisitLocation,
-            activeRoute: activeRoute,
+            appState: appState,
             userLocationColor: appTheme,
             annotations: locations.map(LocationAnnotation.init)
         )
@@ -142,7 +140,7 @@ struct AppMapView: View {
                 Spacer()
             }
             .padding()
-            .fade(if: activeRoute.exists)
+            .fade(if: routeExists)
 
             HStack {
                 closeRouteButton
@@ -150,42 +148,31 @@ struct AppMapView: View {
                 nextLocationButton
             }
             .padding()
-            .fade(if: !activeRoute.exists)
+            .fade(if: !routeExists)
         }
     }
 
     private var userLocationButton: some View {
         UserLocationButton(
             trackingMode: $trackingMode,
-            stayAtLocation: $stayAtLocation,
-            activeVisitLocation: $activeVisitLocation,
+            locationControl: $appState.locationControl,
             color: appTheme.color)
     }
 
     private var closeRouteButton: some View {
-        CloseRouteButton(
-            activeRoute: activeRoute,
-            stayAtLocation: $stayAtLocation)
+        CloseRouteButton(route: $appState.route)
     }
 
     private var nextLocationButton: some View {
-        NextLocationButton(
-            activeRoute: activeRoute,
-            stayAtLocation: $stayAtLocation,
-            color: appTheme.color)
+        NextLocationButton(route: $appState.route, color: appTheme.color)
     }
 
     private var editTagView: some View {
-        EditTagView(
-            mapState: $mapState,
-            stayAtLocation: $stayAtLocation,
-            showingToggleButton: $showingToggleButton)
+        EditTagView(mapState: $mapState, showing: $appState.showing)
     }
 
     private var locationVisitsView: some View {
-        LocationVisitsView(
-            mapState: $mapState,
-            showingToggleButton: $showingToggleButton)
+        LocationVisitsView(mapState: $mapState, showing: $appState.showing)
     }
 }
 
@@ -203,6 +190,6 @@ private extension View {
 
 struct AppMapView_Previews: PreviewProvider {
     static var previews: some View {
-        AppMapView(showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), activeRoute: .init())
+        AppMapView(appState: .init())
     }
 }

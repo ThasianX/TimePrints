@@ -11,10 +11,8 @@ private extension MapView {
 struct MapView: UIViewRepresentable {
     @Binding var mapState: MapState
     @Binding var trackingMode: MGLUserTrackingMode
-    @Binding var showingToggleButton: Bool
-    @Binding var stayAtLocation: Bool
-    @Binding var activeVisitLocation: Location?
-    @ObservedObject var activeRoute: ActiveRoute
+
+    @ObservedObject var appState: AppState
 
     let userLocationColor: UIColor
     let annotations: [LocationAnnotation]
@@ -25,8 +23,8 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
         if mapState.isShowingMap {
-            if activeRoute.exists {
-                centerLocation(activeRoute.currentVisit.location, with: uiView)
+            if appState.route.exists {
+                centerLocation(appState.route.currentLocation, with: uiView)
             } else {
                 if let currentAnnotations = uiView.annotations {
                     uiView.removeAnnotations(currentAnnotations)
@@ -35,11 +33,11 @@ struct MapView: UIViewRepresentable {
             }
         }
 
-        if !stayAtLocation {
+        if !appState.locationControl.stayAtCurrent {
             uiView.userTrackingMode = trackingMode
         }
 
-        if let activeVisitLocation = activeVisitLocation {
+        if let activeVisitLocation = appState.locationControl.activeForVisit {
             selectAnnotation(for: activeVisitLocation, with: uiView)
         }
     }
@@ -120,12 +118,11 @@ struct MapView: UIViewRepresentable {
         }
 
         private func preventRecentering() {
-            parent.stayAtLocation = true
-            parent.activeVisitLocation = nil
+            parent.appState.locationControl.reset(stayAtCurrent: true)
         }
 
         private func hideToggleButton() {
-            parent.showingToggleButton = false
+            parent.appState.showing.toggleButton = false
         }
     }
 }
@@ -143,6 +140,6 @@ private extension UIButton {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(mapState: .constant(.showingMap), trackingMode: .constant(.follow), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), activeRoute: .init(), userLocationColor: .red, annotations: [])
+        MapView(mapState: .constant(.showingMap), trackingMode: .constant(.follow), appState: .init(), userLocationColor: .red, annotations: [])
     }
 }

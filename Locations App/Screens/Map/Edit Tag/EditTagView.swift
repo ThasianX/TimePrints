@@ -33,8 +33,7 @@ struct EditTagView: View {
     @State private var animatingSelection: Bool = false
     
     @Binding var mapState: MapState
-    @Binding var stayAtLocation: Bool
-    @Binding var showingToggleButton: Bool
+    @Binding var showing: AppState.Showing
     
     let colors = AppColors.tags
     let identifiers = AppColors.tags.ascendingKeys
@@ -457,9 +456,8 @@ private extension EditTagView {
 
     private func resetView() {
         mapState = .showingMap
-        stayAtLocation = true
         animatingSelection = false
-        showingToggleButton = true
+        showing.toggleButton = true
         resetAlert()
     }
 
@@ -478,6 +476,6 @@ private extension EditTagView {
 
 struct EditTagView_Previews: PreviewProvider {
     static var previews: some View {
-        return EditTagView(mapState: .constant(.showingEditTag(.preview)), stayAtLocation: .constant(false), showingToggleButton: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
+        return EditTagView(mapState: .constant(.showingEditTag(.preview)), showing: .constant(.init())).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

@@ -1,26 +1,28 @@
 import SwiftUI
 
 struct NextLocationButton: View {
-    @ObservedObject var activeRoute: ActiveRoute
-    @Binding var stayAtLocation: Bool
+    @Binding var route: AppState.Route
 
     let color: Color
+
+    private var isAtEnd: Bool {
+        route.isAtEnd
+    }
 
     var body: some View {
         Button(action: goToNextLocation) {
             nextLocationFillImage
                 .foregroundColor(color)
-                .rotationEffect(activeRoute.isAtEnd ? .init(degrees: -180) : .init(degrees: 0))
+                .rotationEffect(isAtEnd ? .init(degrees: -180) : .init(degrees: 0))
                 .animation(.spring(response: 0.75, dampingFraction: 0.825, blendDuration: 0))
         }
     }
 
     private func goToNextLocation() {
-        stayAtLocation = true
-        if activeRoute.isAtEnd {
-            activeRoute.restart()
+        if isAtEnd {
+            route.restart()
         } else {
-            activeRoute.selectNextLocation()
+            route.selectNextLocation()
         }
     }
 
@@ -33,6 +35,6 @@ struct NextLocationButton: View {
 
 struct NextLocationButton_Previews: PreviewProvider {
     static var previews: some View {
-        NextLocationButton(activeRoute: .init(), stayAtLocation: .constant(false), color: .pink)
+        NextLocationButton(route: .constant(.init()), color: .pink)
     }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LocationVisitsView: View {
     @Binding var mapState: MapState
-    @Binding var showingToggleButton: Bool
+    @Binding var showing: AppState.Showing
     
     var body: some View {
         VStack {
@@ -48,7 +48,7 @@ private extension LocationVisitsView {
     
     private func exitView() {
         mapState = .showingMap
-        showingToggleButton = true
+        showing.toggleButton = true
     }
 }
 
@@ -90,6 +90,7 @@ private extension LocationVisitsView {
 
 struct LocationVisitsView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationVisitsView(mapState: .constant(.showingLocationVisits(.preview)), showingToggleButton: .constant(false)).environment(\.managedObjectContext, CoreData.stack.context)
+        LocationVisitsView(mapState: .constant(.showingLocationVisits(.preview)), showing: .constant(.init()))
+            .environment(\.managedObjectContext, CoreData.stack.context)
     }
 }

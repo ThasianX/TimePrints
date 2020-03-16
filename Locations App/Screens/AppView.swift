@@ -4,51 +4,46 @@ import SwiftUI
 struct AppView: View {
     @Environment(\.appTheme) private var appTheme: UIColor
 
-    @State private var showingToggleButton: Bool = true
-    @State private var stayAtLocation: Bool = false
-    @State private var showingHomeView: Bool = false
-    @State private var activeVisitLocation: Location? = nil
-    @ObservedObject private var activeRoute: ActiveRoute = .init()
+    @ObservedObject private var appState: AppState = .init()
 
     let onAppear: () -> Void
 
     var body: some View {
         Group {
             visitsHomeView
-                .fade(if: !showingHomeView)
+                .fade(if: !appState.showing.homeView)
 
             appMapView
-                .fade(if: showingHomeView)
+                .fade(if: appState.showing.homeView)
                 .onAppear(perform: onAppear)
 
             toggleViewButton
-                .fade(if: !showingToggleButton)
+                .fade(if: !appState.showing.toggleButton)
         }
     }
 
     private var visitsHomeView: some View {
-        VisitsHomeView(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, activeRoute: activeRoute)
+        VisitsHomeView(appState: appState)
     }
 
     private var appMapView: some View {
-        AppMapView(showingToggleButton: $showingToggleButton, stayAtLocation: $stayAtLocation, activeVisitLocation: $activeVisitLocation, activeRoute: activeRoute)
+        AppMapView(appState: appState)
     }
 
     private var toggleViewButton: some View {
-        ToggleButton(toggle: showingHomeView, action: toggleVisitsPreviewAndStayAtLocation)
+        ToggleButton(condition: appState.showing.homeView, action: toggleVisitsPreviewAndStayAtLocation)
     }
 
     private func toggleVisitsPreviewAndStayAtLocation() {
-        activeVisitLocation = nil
-        showingHomeView.toggle()
-        stayAtLocation = true
-        activeRoute.reset()
+        appState.locationControl.reset(stayAtCurrent: true)
+        appState.showing.homeView.toggle()
+        appState.route.reset()
     }
 }
 
 private extension AppView {
     private struct ToggleButton: View {
-        let toggle: Bool
+        let condition: Bool
         let action: () -> Void
 
         var body: some View {
@@ -62,15 +57,15 @@ private extension AppView {
         }
 
         private var backgroundColor: Color {
-            toggle ? .green : .white
+            condition ? .green : .white
         }
 
         private var image: Image {
-            toggle ? Image(systemName: "map.fill") : Image(systemName: "list.dash")
+            condition ? Image(systemName: "map.fill") : Image(systemName: "list.dash")
         }
 
         private var foregroundColor: Color {
-            toggle ? .white : .black
+            condition ? .white : .black
         }
     }
 }

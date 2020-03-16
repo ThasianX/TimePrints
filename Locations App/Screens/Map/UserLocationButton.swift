@@ -3,8 +3,7 @@ import Mapbox
 
 struct UserLocationButton: View {
     @Binding var trackingMode: MGLUserTrackingMode
-    @Binding var stayAtLocation: Bool
-    @Binding var activeVisitLocation: Location?
+    @Binding var locationControl: AppState.LocationControl
 
     let color: Color
     
@@ -45,8 +44,7 @@ struct UserLocationButton: View {
 
         withAnimation {
             self.trackingMode = mode
-            self.stayAtLocation = false
-            self.activeVisitLocation = nil
+            self.locationControl.reset(stayAtCurrent: false)
         }
     }
 }
@@ -54,8 +52,8 @@ struct UserLocationButton: View {
 struct UserLocationButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            UserLocationButton(trackingMode: .constant(.follow), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), color: .pink)
-            UserLocationButton(trackingMode: .constant(.followWithHeading), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), color: .pink)
+            UserLocationButton(trackingMode: .constant(.follow), locationControl: .constant(.init()), color: .pink)
+            UserLocationButton(trackingMode: .constant(.followWithHeading), locationControl: .constant(.init()), color: .pink)
         }
     }
 }

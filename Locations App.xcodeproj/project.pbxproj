@@ -10,6 +10,7 @@
 		1E00E5712408AF9500B14C9F /* TagDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00E5702408AF9500B14C9F /* TagDetailsView.swift */; };
 		1E00E5752408CC6200B14C9F /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00E5742408CC6200B14C9F /* SplashScreen.swift */; };
 		1E06D51023FE21AE00467799 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */; };
+		1E0DB24D241F430D003944C5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0DB24C241F430D003944C5 /* AppState.swift */; };
 		1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C802402BD42001B033C /* VisitsHomeView.swift */; };
 		1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */; };
 		1E125C45240D808100D0919E /* ColorAdaptiveVisitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E125C44240D808100D0919E /* ColorAdaptiveVisitsView.swift */; };
@@ -27,7 +28,6 @@
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E237EE62415F2E200CEE548 /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E237EE52415F2E200CEE548 /* FilteredList.swift */; };
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
-		1E3237952418595700D370CD /* ActiveRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3237942418595700D370CD /* ActiveRoute.swift */; };
 		1E32379724185E7300D370CD /* NextLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E32379624185E7300D370CD /* NextLocationButton.swift */; };
 		1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3237982418632500D370CD /* CloseRouteButton.swift */; };
 		1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */; };
@@ -160,6 +160,7 @@
 		1E00E5702408AF9500B14C9F /* TagDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailsView.swift; sourceTree = "<group>"; };
 		1E00E5742408CC6200B14C9F /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
+		1E0DB24C241F430D003944C5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1E0F7C802402BD42001B033C /* VisitsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHomeView.swift; sourceTree = "<group>"; };
 		1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpanadableFAB.swift; sourceTree = "<group>"; };
 		1E125C44240D808100D0919E /* ColorAdaptiveVisitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAdaptiveVisitsView.swift; sourceTree = "<group>"; };
@@ -177,7 +178,6 @@
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E237EE52415F2E200CEE548 /* FilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
-		1E3237942418595700D370CD /* ActiveRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRoute.swift; sourceTree = "<group>"; };
 		1E32379624185E7300D370CD /* NextLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLocationButton.swift; sourceTree = "<group>"; };
 		1E3237982418632500D370CD /* CloseRouteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseRouteButton.swift; sourceTree = "<group>"; };
 		1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
@@ -307,6 +307,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E0DB24B241F42FB003944C5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1E0DB24C241F430D003944C5 /* AppState.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		1E0F7C7F2402BD11001B033C /* Visits Home View */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,7 +415,6 @@
 			children = (
 				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
 				1EFFA58523E89A3400914607 /* LocationAnnotation.swift */,
-				1E3237942418595700D370CD /* ActiveRoute.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -705,6 +712,7 @@
 		1E9D78A723E1497F0020FAFE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1E0DB24B241F42FB003944C5 /* App */,
 				1E24328F240B73D300E983E7 /* Colors */,
 				1E24328E240B73C100E983E7 /* Location */,
 				1E97D215240B481D004113F7 /* Login */,
@@ -979,7 +987,6 @@
 				1E0F7C832402CC5B001B033C /* ExpanadableFAB.swift in Sources */,
 				1EFF83A323E4E27800FF04A1 /* RandomAccessCollection+Indexed.swift in Sources */,
 				1E97274223EB57AE006528ED /* LocationVisitsView.swift in Sources */,
-				1E3237952418595700D370CD /* ActiveRoute.swift in Sources */,
 				1EFFA58C23E8B1E700914607 /* Location+CoreDataProperties.swift in Sources */,
 				1EFFA58B23E8B1E700914607 /* Location+CoreDataClass.swift in Sources */,
 				1E9D789C23E125610020FAFE /* Visit+CoreDataClass.swift in Sources */,
@@ -1030,6 +1037,7 @@
 				1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* CoreLocationService.swift in Sources */,
 				1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */,
+				1E0DB24D241F430D003944C5 /* AppState.swift in Sources */,
 				1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */,
 				1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */,
 				1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */,

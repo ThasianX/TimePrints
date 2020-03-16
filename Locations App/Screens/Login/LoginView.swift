@@ -71,7 +71,7 @@ private extension LoginView {
     }
 
     private func logIn() {
-        self.userStore.logIn()
+        userStore.logIn()
         isLoggingIn = false
     }
 }

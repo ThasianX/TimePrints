@@ -13,9 +13,7 @@ struct VisitsHomeView: View {
     @State private var homeFilter: HomeFilter = .visits
     @State private var hideFAB: Bool = false
 
-    @Binding var showingHomeView: Bool
-    @Binding var activeVisitLocation: Location?
-    @ObservedObject var activeRoute: ActiveRoute
+    @ObservedObject var appState: AppState
 
     var body: some View {
         ZStack {
@@ -40,7 +38,7 @@ private extension VisitsHomeView {
 private extension VisitsHomeView {
     private var filterContent: some View {
         ZStack {
-            VisitsPreviewList(showingHomeView: $showingHomeView, activeVisitLocation: $activeVisitLocation, hideFAB: $hideFAB, activeRoute: activeRoute)
+            VisitsPreviewList(hideFAB: $hideFAB, appState: appState)
                 .fade(if: !isCurrentFilter(filter: .visits))
             TagsListView()
                 .fade(if: !isCurrentFilter(filter: .tags))
@@ -92,6 +90,6 @@ private extension VisitsHomeView {
 
 struct VisitsHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsHomeView(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), activeRoute: .init())
+        VisitsHomeView(appState: .init())
     }
 }
