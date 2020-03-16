@@ -74,6 +74,8 @@
 		1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */; };
 		1EB865E123F9E01400A4B8E1 /* UIApplication+Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */; };
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
+		1EC19125241FE32800089E8D /* RouteOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC19124241FE32800089E8D /* RouteOverlayView.swift */; };
+		1EC19127241FEF9F00089E8D /* KeyboardResponsiveModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */; };
 		1ED534FE24096B34009B11D3 /* profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED534FD24096B34009B11D3 /* profile.json */; };
 		1ED5350024096D62009B11D3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED534FF24096D62009B11D3 /* LoginView.swift */; };
 		1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */; };
@@ -231,6 +233,8 @@
 		1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Editing.swift"; sourceTree = "<group>"; };
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
+		1EC19124241FE32800089E8D /* RouteOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOverlayView.swift; sourceTree = "<group>"; };
+		1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsiveModifier.swift; sourceTree = "<group>"; };
 		1ED534FD24096B34009B11D3 /* profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profile.json; sourceTree = "<group>"; };
 		1ED534FF24096D62009B11D3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudLoginService.swift; sourceTree = "<group>"; };
@@ -440,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				1EB03D2624102955001146FF /* AppMapView.swift */,
+				1EC19124241FE32800089E8D /* RouteOverlayView.swift */,
 				1E7B618E23E284C600F9F974 /* MapView.swift */,
 				1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */,
 				1E32379624185E7300D370CD /* NextLocationButton.swift */,
@@ -788,6 +793,7 @@
 				1EFF83AE23E52E5900FF04A1 /* RotatedModifier.swift */,
 				1EFF83AA23E52BC700FF04A1 /* SizeModifier.swift */,
 				1E125C46240D83F200D0919E /* RoundedModifier.swift */,
+				1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -998,6 +1004,7 @@
 				1EDE74D5240B6721002A7C08 /* LocationService.swift in Sources */,
 				1E125C49240DA17700D0919E /* UIColor+Hex.swift in Sources */,
 				1EFF83AD23E52D5800FF04A1 /* View+Extensions.swift in Sources */,
+				1EC19127241FEF9F00089E8D /* KeyboardResponsiveModifier.swift in Sources */,
 				1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */,
 				1EFF839D23E4BF2F00FF04A1 /* DateComponents+Additions.swift in Sources */,
 				1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */,
@@ -1024,6 +1031,7 @@
 				1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */,
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Sort&Key.swift in Sources */,
 				1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */,
+				1EC19125241FE32800089E8D /* RouteOverlayView.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
 				1E125C52240DBA8F00D0919E /* ThemeColorService.swift in Sources */,
 				1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */,
