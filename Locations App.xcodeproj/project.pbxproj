@@ -76,6 +76,8 @@
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
 		1EC19125241FE32800089E8D /* RouteOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC19124241FE32800089E8D /* RouteOverlayView.swift */; };
 		1EC19127241FEF9F00089E8D /* KeyboardResponsiveModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */; };
+		1EC1912A241FF23200089E8D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1EC19129241FF23200089E8D /* Introspect */; };
+		1EC1912C2420267800089E8D /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1912B2420267800089E8D /* FavoriteButton.swift */; };
 		1ED534FE24096B34009B11D3 /* profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED534FD24096B34009B11D3 /* profile.json */; };
 		1ED5350024096D62009B11D3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED534FF24096D62009B11D3 /* LoginView.swift */; };
 		1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */; };
@@ -235,6 +237,7 @@
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		1EC19124241FE32800089E8D /* RouteOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOverlayView.swift; sourceTree = "<group>"; };
 		1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsiveModifier.swift; sourceTree = "<group>"; };
+		1EC1912B2420267800089E8D /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		1ED534FD24096B34009B11D3 /* profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profile.json; sourceTree = "<group>"; };
 		1ED534FF24096D62009B11D3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudLoginService.swift; sourceTree = "<group>"; };
@@ -289,6 +292,7 @@
 			files = (
 				1EF6227423FF21C800B28DCF /* MapboxMobileEvents.framework in Frameworks */,
 				1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */,
+				1EC1912A241FF23200089E8D /* Introspect in Frameworks */,
 				1EF6227123FF21C400B28DCF /* Mapbox.framework in Frameworks */,
 				1EFE85CE240377060001D0C3 /* Lottie in Frameworks */,
 			);
@@ -386,6 +390,7 @@
 				1E6D568A23E5F6F10044AB3A /* BImage.swift */,
 				1E0F7C822402CC5B001B033C /* ExpanadableFAB.swift */,
 				1E21F30C240EC50700BC81DC /* DimensionalButton.swift */,
+				1EC1912B2420267800089E8D /* FavoriteButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -818,6 +823,7 @@
 			name = "Locations App";
 			packageProductDependencies = (
 				1EFE85CD240377060001D0C3 /* Lottie */,
+				1EC19129241FF23200089E8D /* Introspect */,
 			);
 			productName = "Locations App";
 			productReference = 1E9D785523E10B4F0020FAFE /* Locations App.app */;
@@ -893,6 +899,7 @@
 			mainGroup = 1E9D784C23E10B4F0020FAFE;
 			packageReferences = (
 				1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				1EC19128241FF23100089E8D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 1E9D785623E10B4F0020FAFE /* Products */;
 			projectDirPath = "";
@@ -1064,6 +1071,7 @@
 				1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */,
 				1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */,
 				1ED53505240A2BF4009B11D3 /* AccountKVS.swift in Sources */,
+				1EC1912C2420267800089E8D /* FavoriteButton.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
 				1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */,
 			);
@@ -1404,6 +1412,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1EC19128241FF23100089E8D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -1415,6 +1431,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1EC19129241FF23200089E8D /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EC19128241FF23100089E8D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		1EFE85CD240377060001D0C3 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */;

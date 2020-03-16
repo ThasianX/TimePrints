@@ -146,33 +146,15 @@ private extension VisitDetailsView {
 
     private var starImageIfNotSelectedAndIsFavorite: some View {
         Group {
-            if !isSelected && isFavorite {
+            if !isSelected && favoriteButton.favorited {
                 Image("star.fill")
                     .foregroundColor(.yellow)
             }
         }
     }
 
-    private var favoriteButton: some View {
-        FavoriteButton(isFavorite: $isFavorite, visit: visit)
-    }
-
-    private struct FavoriteButton: View {
-        @Binding var isFavorite: Bool
-        let visit: Visit
-
-        var body: some View {
-            BImage(perform: favorite, image: favoriteImage)
-                .foregroundColor(.yellow)
-        }
-
-        private func favorite() {
-            isFavorite = visit.favorite()
-        }
-
-        private var favoriteImage: Image {
-            isFavorite ? Image("star.fill") : Image("star")
-        }
+    private var favoriteButton: FavoriteButton {
+        FavoriteButton(visit: visit)
     }
 }
 
@@ -454,7 +436,7 @@ private extension VisitDetailsView {
     }
 
     private func setFavoriteState() {
-        isFavorite = visit.isFavorite
+//        isFavorite = visit.isFavorite
     }
 
     private func updateNotesInput() {
