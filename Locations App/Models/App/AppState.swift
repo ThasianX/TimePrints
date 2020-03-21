@@ -20,7 +20,9 @@ extension AppState {
     struct LocationControl {
         var stayAtCurrent: Bool = false
         var activeForVisit: Location? = nil
+
         var centerCoordinate: CLLocationCoordinate2D = .init()
+        var shouldCenterForRoute = true
 
         mutating func reset(stayAtCurrent: Bool) {
             self.stayAtCurrent = stayAtCurrent
@@ -89,10 +91,6 @@ extension AppState {
         mutating func recenter() {
             let index = visitsIndex
             self.visitsIndex = index
-        }
-
-        mutating func restart() {
-            visitsIndex = 0
         }
 
         mutating func reset() {

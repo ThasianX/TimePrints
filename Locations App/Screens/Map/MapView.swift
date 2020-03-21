@@ -23,7 +23,7 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
         if mapState.isShowingMap {
-            if appState.route.exists {
+            if appState.route.exists && appState.locationControl.shouldCenterForRoute {
                 centerLocation(appState.route.currentLocation, with: uiView)
             } else {
                 if let currentAnnotations = uiView.annotations {
@@ -62,7 +62,17 @@ struct MapView: UIViewRepresentable {
         init(_ parent: MapView) {
             self.parent = parent
         }
-        
+
+        // MARK: Route
+        func mapView(_ mapView: MGLMapView, shouldChangeFrom oldCamera: MGLMapCamera, to newCamera: MGLMapCamera, reason: MGLCameraChangeReason) -> Bool {
+            if parent.appState.route.exists {
+                parent.appState.locationControl.centerCoordinate = mapView.centerCoordinate
+                parent.appState.locationControl.shouldCenterForRoute = false
+            }
+            return true
+        }
+
+        // MARK: Annotation
         func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
             !parent.appState.route.exists
         }

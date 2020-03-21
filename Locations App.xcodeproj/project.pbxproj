@@ -28,7 +28,6 @@
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
 		1E237EE62415F2E200CEE548 /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E237EE52415F2E200CEE548 /* FilteredList.swift */; };
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
-		1E32379724185E7300D370CD /* NextLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E32379624185E7300D370CD /* NextLocationButton.swift */; };
 		1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3237982418632500D370CD /* CloseRouteButton.swift */; };
 		1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */; };
 		1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */; };
@@ -185,7 +184,6 @@
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 		1E237EE52415F2E200CEE548 /* FilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
-		1E32379624185E7300D370CD /* NextLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLocationButton.swift; sourceTree = "<group>"; };
 		1E3237982418632500D370CD /* CloseRouteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseRouteButton.swift; sourceTree = "<group>"; };
 		1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
 		1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
@@ -458,7 +456,6 @@
 				1EC19124241FE32800089E8D /* RouteOverlayView.swift */,
 				1E7B618E23E284C600F9F974 /* MapView.swift */,
 				1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */,
-				1E32379624185E7300D370CD /* NextLocationButton.swift */,
 				1E3237982418632500D370CD /* CloseRouteButton.swift */,
 				1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */,
 				1E24927323EB54A600165280 /* Edit Tag */,
@@ -1079,7 +1076,6 @@
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1E21F30D240EC50700BC81DC /* DimensionalButton.swift in Sources */,
 				1E9D789723E124030020FAFE /* CoreData.swift in Sources */,
-				1E32379724185E7300D370CD /* NextLocationButton.swift in Sources */,
 				1E00E5752408CC6200B14C9F /* SplashScreen.swift in Sources */,
 				1EFF83AF23E52E5900FF04A1 /* RotatedModifier.swift in Sources */,
 				1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */,

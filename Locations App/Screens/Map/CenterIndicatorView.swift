@@ -35,6 +35,8 @@ struct CenterIndicatorView: View {
 
     private func recenterMap() {
         route.recenter()
+        locationControl.centerCoordinate = route.currentVisit.location.coordinate
+        locationControl.shouldCenterForRoute = true
     }
 }
 
