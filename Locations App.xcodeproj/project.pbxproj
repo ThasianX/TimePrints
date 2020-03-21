@@ -98,6 +98,7 @@
 		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
 		1EE2CF5523E7CE4B009760D6 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5423E7CE4B009760D6 /* UIColor+CustomColors.swift */; };
 		1EE2CF5923E7D2C2009760D6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */; };
+		1EF5BEC92425C3F800B34251 /* MapState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BEC82425C3F800B34251 /* MapState.swift */; };
 		1EF6227123FF21C400B28DCF /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227023FF21C400B28DCF /* Mapbox.framework */; };
 		1EF6227223FF21C400B28DCF /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227023FF21C400B28DCF /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EF6227423FF21C800B28DCF /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */; };
@@ -258,6 +259,7 @@
 		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
 		1EE2CF5423E7CE4B009760D6 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		1EF5BEC82425C3F800B34251 /* MapState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapState.swift; sourceTree = "<group>"; };
 		1EF6227023FF21C400B28DCF /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = Carthage/Build/iOS/Mapbox.framework; sourceTree = "<group>"; };
 		1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		1EFC8DC223E7238A00628251 /* StaticMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapView.swift; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 		1E9D78A723E1497F0020FAFE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1EF5BEC52425C3E500B34251 /* Map */,
 				1E0DB24B241F42FB003944C5 /* App */,
 				1E24328F240B73D300E983E7 /* Colors */,
 				1E24328E240B73C100E983E7 /* Location */,
@@ -764,6 +767,14 @@
 				1EDE74D4240B6721002A7C08 /* LocationService.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		1EF5BEC52425C3E500B34251 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				1EF5BEC82425C3F800B34251 /* MapState.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		1EFE85D1240390620001D0C3 /* Lottie */ = {
@@ -1030,6 +1041,7 @@
 				1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */,
 				1E5DBEA723E9C6A000C86641 /* DisableModifier.swift in Sources */,
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,
+				1EF5BEC92425C3F800B34251 /* MapState.swift in Sources */,
 				1EE2CF5523E7CE4B009760D6 /* UIColor+CustomColors.swift in Sources */,
 				1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */,
 				1E125C45240D808100D0919E /* ColorAdaptiveVisitsView.swift in Sources */,

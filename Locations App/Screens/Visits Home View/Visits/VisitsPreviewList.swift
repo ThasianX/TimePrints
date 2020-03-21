@@ -191,10 +191,15 @@ private extension VisitsPreviewList {
     private func setActiveRouteVisits(visits: [Visit]) {
         appState.route.setVisits(visits: visits)
         showMapView()
+        hideToggleButton()
     }
 
     private func showMapView() {
         appState.showing.homeView = false
+    }
+
+    private func hideToggleButton() {
+        appState.showing.toggleButton = false
     }
 }
 

@@ -48,6 +48,10 @@ extension AppState {
             currentVisit.location
         }
 
+        var isAtStart: Bool {
+            visitsIndex == 0
+        }
+
         var isAtEnd: Bool {
             visitsIndex == visits.count-1
         }
@@ -66,6 +70,10 @@ extension AppState {
 
         mutating func setVisits(visits: [Visit]) {
             self.visits = visits
+        }
+
+        mutating func selectPreviousLocation() {
+            visitsIndex -= 1
         }
 
         mutating func selectNextLocation() {
