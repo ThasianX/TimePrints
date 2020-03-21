@@ -99,6 +99,8 @@
 		1EE2CF5523E7CE4B009760D6 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5423E7CE4B009760D6 /* UIColor+CustomColors.swift */; };
 		1EE2CF5923E7D2C2009760D6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */; };
 		1EF5BEC92425C3F800B34251 /* MapState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BEC82425C3F800B34251 /* MapState.swift */; };
+		1EF5BECB2425D64300B34251 /* CenterIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */; };
+		1EF5BECD2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BECC2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift */; };
 		1EF6227123FF21C400B28DCF /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227023FF21C400B28DCF /* Mapbox.framework */; };
 		1EF6227223FF21C400B28DCF /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227023FF21C400B28DCF /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EF6227423FF21C800B28DCF /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */; };
@@ -260,6 +262,8 @@
 		1EE2CF5423E7CE4B009760D6 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		1EF5BEC82425C3F800B34251 /* MapState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapState.swift; sourceTree = "<group>"; };
+		1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterIndicatorView.swift; sourceTree = "<group>"; };
+		1EF5BECC2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Equatable.swift"; sourceTree = "<group>"; };
 		1EF6227023FF21C400B28DCF /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = Carthage/Build/iOS/Mapbox.framework; sourceTree = "<group>"; };
 		1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		1EFC8DC223E7238A00628251 /* StaticMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapView.swift; sourceTree = "<group>"; };
@@ -456,6 +460,7 @@
 				1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */,
 				1E32379624185E7300D370CD /* NextLocationButton.swift */,
 				1E3237982418632500D370CD /* CloseRouteButton.swift */,
+				1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */,
 				1E24927323EB54A600165280 /* Edit Tag */,
 				1E97274023EB5796006528ED /* Location Visits */,
 			);
@@ -703,6 +708,7 @@
 				1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */,
 				1EFF83AC23E52D5800FF04A1 /* View+Extensions.swift */,
 				1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */,
+				1EF5BECC2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1026,6 +1032,7 @@
 				1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */,
 				1EFF839D23E4BF2F00FF04A1 /* DateComponents+Additions.swift in Sources */,
 				1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */,
+				1EF5BECD2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift in Sources */,
 				1E06D51023FE21AE00467799 /* UIImage+Additions.swift in Sources */,
 				1E558EDD2411FBE80087C5E3 /* AppView.swift in Sources */,
 				1E6D568D23E5FEAC0044AB3A /* DayLabel.swift in Sources */,
@@ -1084,6 +1091,7 @@
 				1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */,
 				1ED53505240A2BF4009B11D3 /* AccountKVS.swift in Sources */,
 				1EC1912C2420267800089E8D /* FavoriteButton.swift in Sources */,
+				1EF5BECB2425D64300B34251 /* CenterIndicatorView.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
 				1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */,
 			);

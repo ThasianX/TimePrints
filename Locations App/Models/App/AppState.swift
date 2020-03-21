@@ -1,5 +1,6 @@
 // Kevin Li - 10:15 PM - 3/15/20
 
+import Mapbox
 import SwiftUI
 
 class AppState: ObservableObject {
@@ -19,10 +20,15 @@ extension AppState {
     struct LocationControl {
         var stayAtCurrent: Bool = false
         var activeForVisit: Location? = nil
+        var centerCoordinate: CLLocationCoordinate2D = .init()
 
         mutating func reset(stayAtCurrent: Bool) {
             self.stayAtCurrent = stayAtCurrent
             activeForVisit = nil
+        }
+
+        func isCentered(coordinate: CLLocationCoordinate2D) -> Bool {
+            centerCoordinate == coordinate
         }
     }
 }
@@ -78,6 +84,11 @@ extension AppState {
 
         mutating func selectNextLocation() {
             visitsIndex += 1
+        }
+
+        mutating func recenter() {
+            let index = visitsIndex
+            self.visitsIndex = index
         }
 
         mutating func restart() {

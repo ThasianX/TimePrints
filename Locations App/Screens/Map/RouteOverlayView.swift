@@ -9,8 +9,9 @@ enum RouteOverlayState: Equatable {
 struct RouteOverlayView: View {
     @State private var isEditing: Bool = false
 
-    @Binding var route: AppState.Route
     @Binding var showing: AppState.Showing
+    @Binding var locationControl: AppState.LocationControl
+    @Binding var route: AppState.Route
     let color: Color
 
     private var currentVisit: Visit {
@@ -30,29 +31,7 @@ struct RouteOverlayView: View {
 
 private extension RouteOverlayView {
     private var centerIndicator: some View {
-        CenterIndicator(color: color)
-    }
-
-    struct CenterIndicator: View {
-        @State var show = false
-
-        let color: Color
-
-        var body: some View {
-            Image(systemName: "triangle.fill")
-                .resizable()
-                .frame(width: 15, height: 15)
-                .foregroundColor(color)
-                .scaleEffect(show ? 1 : 0.5)
-                .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
-                .onAppear(perform: makeVisible)
-        }
-
-        private func makeVisible() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.show = true
-            }
-        }
+        CenterIndicatorView(locationControl: $locationControl, route: $route, color: color)
     }
 }
 
@@ -266,7 +245,7 @@ private extension View {
 
 struct RouteOverlayView_Previews: PreviewProvider {
     static var previews: some View {
-        RouteOverlayView(route: .constant(.init(visits: Visit.previewVisits)), showing: .constant(.init()), color: .pink)
+        RouteOverlayView(showing: .constant(.init()), locationControl: .constant(.init()), route: .constant(.init(visits: Visit.previewVisits)), color: .pink)
             .background(Color.gray.extendToScreenEdges())
     }
 }
