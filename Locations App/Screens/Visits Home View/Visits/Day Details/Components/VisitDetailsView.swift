@@ -75,6 +75,7 @@ private extension VisitDetailsView {
             }
             Spacer()
             favoriteButton
+                .id(visit.isFavorite)
                 .fade(if: !isSelected)
         }
     }

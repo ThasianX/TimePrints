@@ -139,7 +139,7 @@ private extension RouteOverlayView {
 
     private var locationNameView: some View {
         LocationNameView(name: currentVisit.location.name, color: color, setLocationName: setLocationName, isEditing: $isEditing)
-            .id(currentVisit.location.name)
+            .id(currentVisit)
     }
 
     private func setLocationName(name: String) {
@@ -234,6 +234,7 @@ private extension RouteOverlayView {
 
         private var favoriteButton: some View {
             FavoriteButton(visit: visit)
+                .id(visit)
         }
     }
 }
