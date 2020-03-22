@@ -41,18 +41,11 @@ class CoreData: NSObject {
     }
     
     class func initialDbSetup() {
-        addDefaultTagIfDoesntExist()
+        addDefaultTag()
     }
 
-    private class func addDefaultTagIfDoesntExist() {
-        let allRecords = NSPredicate(value: true)
-        let tagQuery = CKQuery(recordType: "CD_Tag", predicate: allRecords)
-
-        CKContainer.default().privateCloudDatabase.perform(tagQuery, inZoneWith: nil) { tags, error in
-            if tags?.count == 0 {
-                let tag = Tag.create(name: "Locations", color: .limeGreen)
-                tag.setAsDefault()
-            }
-        }
+    private class func addDefaultTag() {
+        let tag = Tag.create(name: "Locations", color: .limeGreen)
+        tag.setAsDefault()
     }
 }

@@ -8,6 +8,8 @@ struct AppColors {
         "Sky Blue" : .skyBlue
     ]
 
+    static let identifiers: [String] = tags.ascendingKeys
+
     static let themes: [UIColor] = [
         .persianPink,
         .cadiumOrange,

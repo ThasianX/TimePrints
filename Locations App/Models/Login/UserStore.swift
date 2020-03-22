@@ -14,7 +14,7 @@ extension UserStore {
 
 final class UserStore: ObservableObject {
     @Published var isLoggedIn: Bool
-    @Published var alert: Alert? = nil
+    @Published var alert: LottieAlert? = nil
 
     @Published var isInitialThemeSetup: Bool
 
@@ -52,10 +52,10 @@ final class UserStore: ObservableObject {
     func finalizeInitialThemeSetup() {
         isInitialThemeSetup = true
         themeColorService.finalizeThemeSetup()
+        CoreData.initialDbSetup()
     }
 
-    func performLocationAndDatabaseOperations() {
-        CoreData.initialDbSetup()
+    func performLocationOperations() {
         locationService.startTrackingVisits()
     }
 }

@@ -91,7 +91,7 @@
 		1ED5351B240AFD64009B11D3 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5351A240AFD64009B11D3 /* loading.json */; };
 		1ED5351D240B06E3009B11D3 /* error.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED5351C240B06E3009B11D3 /* error.json */; };
 		1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED5351E240B0A27009B11D3 /* LoginService.swift */; };
-		1ED53521240B0A48009B11D3 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53520240B0A48009B11D3 /* Alert.swift */; };
+		1ED53521240B0A48009B11D3 /* LottieAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53520240B0A48009B11D3 /* LottieAlert.swift */; };
 		1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53522240B0C01009B11D3 /* UserStore.swift */; };
 		1EDE74D5240B6721002A7C08 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE74D4240B6721002A7C08 /* LocationService.swift */; };
 		1EE2CF5323E7A5EC009760D6 /* UserLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */; };
@@ -100,6 +100,7 @@
 		1EF5BEC92425C3F800B34251 /* MapState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BEC82425C3F800B34251 /* MapState.swift */; };
 		1EF5BECB2425D64300B34251 /* CenterIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */; };
 		1EF5BECD2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BECC2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift */; };
+		1EF5BED024282B7400B34251 /* TagCoreState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BECF24282B7400B34251 /* TagCoreState.swift */; };
 		1EF6227123FF21C400B28DCF /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227023FF21C400B28DCF /* Mapbox.framework */; };
 		1EF6227223FF21C400B28DCF /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227023FF21C400B28DCF /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EF6227423FF21C800B28DCF /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */; };
@@ -253,7 +254,7 @@
 		1ED5351A240AFD64009B11D3 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		1ED5351C240B06E3009B11D3 /* error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.json; sourceTree = "<group>"; };
 		1ED5351E240B0A27009B11D3 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
-		1ED53520240B0A48009B11D3 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		1ED53520240B0A48009B11D3 /* LottieAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAlert.swift; sourceTree = "<group>"; };
 		1ED53522240B0C01009B11D3 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		1EDE74D4240B6721002A7C08 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationButton.swift; sourceTree = "<group>"; };
@@ -262,6 +263,7 @@
 		1EF5BEC82425C3F800B34251 /* MapState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapState.swift; sourceTree = "<group>"; };
 		1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterIndicatorView.swift; sourceTree = "<group>"; };
 		1EF5BECC2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Equatable.swift"; sourceTree = "<group>"; };
+		1EF5BECF24282B7400B34251 /* TagCoreState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoreState.swift; sourceTree = "<group>"; };
 		1EF6227023FF21C400B28DCF /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = Carthage/Build/iOS/Mapbox.framework; sourceTree = "<group>"; };
 		1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		1EFC8DC223E7238A00628251 /* StaticMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapView.swift; sourceTree = "<group>"; };
@@ -319,14 +321,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1E0DB24B241F42FB003944C5 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				1E0DB24C241F430D003944C5 /* AppState.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
 		1E0F7C7F2402BD11001B033C /* Visits Home View */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,7 +591,7 @@
 			isa = PBXGroup;
 			children = (
 				1ED53522240B0C01009B11D3 /* UserStore.swift */,
-				1ED53520240B0A48009B11D3 /* Alert.swift */,
+				1ED53520240B0A48009B11D3 /* LottieAlert.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -727,8 +721,7 @@
 		1E9D78A723E1497F0020FAFE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1EF5BEC52425C3E500B34251 /* Map */,
-				1E0DB24B241F42FB003944C5 /* App */,
+				1EF5BECE24282B4100B34251 /* State */,
 				1E24328F240B73D300E983E7 /* Colors */,
 				1E24328E240B73C100E983E7 /* Location */,
 				1E97D215240B481D004113F7 /* Login */,
@@ -772,12 +765,14 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
-		1EF5BEC52425C3E500B34251 /* Map */ = {
+		1EF5BECE24282B4100B34251 /* State */ = {
 			isa = PBXGroup;
 			children = (
 				1EF5BEC82425C3F800B34251 /* MapState.swift */,
+				1E0DB24C241F430D003944C5 /* AppState.swift */,
+				1EF5BECF24282B7400B34251 /* TagCoreState.swift */,
 			);
-			path = Map;
+			path = State;
 			sourceTree = "<group>";
 		};
 		1EFE85D1240390620001D0C3 /* Lottie */ = {
@@ -995,7 +990,7 @@
 				1E6D569423E653990044AB3A /* VSpace.swift in Sources */,
 				1EB03D2724102955001146FF /* AppMapView.swift in Sources */,
 				1E237EE62415F2E200CEE548 /* FilteredList.swift in Sources */,
-				1ED53521240B0A48009B11D3 /* Alert.swift in Sources */,
+				1ED53521240B0A48009B11D3 /* LottieAlert.swift in Sources */,
 				1EFF83A823E52B9000FF04A1 /* SizePreferenceKey.swift in Sources */,
 				1E5AF45623E3E25E00A94F10 /* Formatter+DateFormatter.swift in Sources */,
 				1E0F7C812402BD42001B033C /* VisitsHomeView.swift in Sources */,
@@ -1055,6 +1050,7 @@
 				1EFF839B23E4BC9800FF04A1 /* Dictionary+Sort&Key.swift in Sources */,
 				1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */,
 				1EC19125241FE32800089E8D /* RouteOverlayView.swift in Sources */,
+				1EF5BED024282B7400B34251 /* TagCoreState.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
 				1E125C52240DBA8F00D0919E /* ThemeColorService.swift in Sources */,
 				1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */,

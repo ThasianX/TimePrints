@@ -1,12 +1,10 @@
 import SwiftUI
 
-private extension EditTagView {
-    struct DeletedTag {
-        let name: String
-        let color: String
-
-        var uiColor: UIColor {
-            UIColor(color)
+class MapTagState: TagCoreState {
+    func addNewTag(onAdd: (Tag) -> Void) {
+        if isNameCompliable() {
+            let newTag = operation.addNewTag()
+            onAdd(newTag)
         }
     }
 }
@@ -18,60 +16,39 @@ struct EditTagView: View {
             NSSortDescriptor(keyPath: \Tag.name, ascending: true)
         ]
     ) var tags: FetchedResults<Tag>
-    
-    @State private var showAdd: Bool = false
-    @State private var showEdit: Bool = false
-    @State private var nameInput: String = ""
-    @State private var selectedColorIndex: Int = 1
-    @State private var tagInEditing: Tag? = nil
 
-    @State private var deletedTag: DeletedTag? = nil
-    @State private var presentAlert: Bool = false
-    @State private var alertMessage: String = ""
-    @State private var alertItem: DispatchWorkItem = .init(block: {})
-    @State private var locationsForDeletedTag: Set<Location> = .init()
-    @State private var animatingSelection: Bool = false
-    
+    @ObservedObject var tagState: MapTagState = .init()
+
+    @State private var isAnimatingSelection: Bool = false
     @Binding var mapState: MapState
     @Binding var showing: AppState.Showing
-    
-    let colors = AppColors.tags
-    let identifiers = AppColors.tags.ascendingKeys
-
-    private var isShowingAddOrEdit: Bool {
-        showAdd || showEdit
-    }
-
-    private var isntShowingAddNorEdit: Bool {
-        !showAdd && !showEdit
-    }
 
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
                 header
                     .padding()
-                    .offset(y: isShowingAddOrEdit ? 250 : 0)
+                    .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
                     .animation(.spring())
 
                 tagSelectionList
-                    .fade(if: isShowingAddOrEdit)
-                    .scaleEffect(isShowingAddOrEdit ? 0 : 1)
+                    .fade(if: tagState.isShowingAddOrEdit)
+                    .scaleEffect(tagState.isShowingAddOrEdit ? 0 : 1)
 
                 VSpace(60)
-                    .fade(if: isShowingAddOrEdit)
+                    .fade(if: tagState.isShowingAddOrEdit)
             }
 
             topAlignedTagDetails
                 .padding()
-                .fade(if: isntShowingAddNorEdit)
-                .scaleEffect(!isShowingAddOrEdit ? 0 : 1)
+                .fade(if: tagState.isntShowingAddNorEdit)
+                .scaleEffect(!tagState.isShowingAddOrEdit ? 0 : 1)
                 .animation(.spring())
 
             bottomAlignedTransientAlertView
-                .fade(if: !presentAlert)
+                .fade(if: !tagState.alert.isInactive)
         }
-        .disabled(animatingSelection)
+        .disabled(isAnimatingSelection)
     }
 }
 
@@ -91,11 +68,11 @@ private extension EditTagView {
 
             ZStack {
                 headerText("CHOOSE TAG")
-                    .fade(if: isShowingAddOrEdit)
+                    .fade(if: tagState.isShowingAddOrEdit)
                 headerText("MAKE TAG")
-                    .fade(if: !showAdd)
+                    .fade(if: !tagState.operation.add)
                 headerText("EDIT TAG")
-                    .fade(if: !showEdit)
+                    .fade(if: !tagState.operation.edit)
             }
         }
         .animation(.easeInOut)
@@ -104,7 +81,7 @@ private extension EditTagView {
     private var tagImage: some View {
         Image(systemName: "tag.fill")
             .foregroundColor(.white)
-            .colorMultiply(isShowingAddOrEdit ? Color(selectedColor) : defaultTagColor)
+            .colorMultiply(tagState.isShowingAddOrEdit ? tagState.operation.selectedColor.color : defaultTagColor)
     }
 
     private var defaultTagColor: Color {
@@ -122,94 +99,46 @@ private extension EditTagView {
     private var editTagHeaderButtons: some View {
         ZStack {
             addButton
-                .fade(if: isShowingAddOrEdit)
+                .fade(if: tagState.isShowingAddOrEdit)
             HStack(spacing: 16) {
                 xButton
                 checkmarkButton
             }
-            .fade(if: isntShowingAddNorEdit)
+            .fade(if: tagState.isntShowingAddNorEdit)
         }
         .animation(.easeInOut)
     }
 
     private var addButton: some View {
-        BImage(condition: $showAdd, image: Image(systemName: "plus"))
+        BImage(perform: tagState.operation.beginAdd, image: Image(systemName: "plus"))
             .foregroundColor(.white)
     }
 
     private var xButton: some View {
-        BImage(perform: showAdd ? resetAddMode : resetEditMode, image: Image(systemName: "xmark.circle.fill"))
+        BImage(perform: onExit, image: Image(systemName: "xmark.circle.fill"))
             .foregroundColor(.red)
     }
 
-    private func resetAddMode() {
-        resetNameAndColorInput()
-        showAdd = false
-    }
-
-    private func resetEditMode() {
-        tagInEditing = nil
-        resetNameAndColorInput()
-        showEdit = false
+    private func onExit() {
+        if tagState.operation.add {
+            tagState.operation.resetAdd()
+        } else {
+            tagState.operation.resetEdit()
+        }
     }
 
     private var checkmarkButton: some View {
-        BImage(perform: showAdd ? addNewTag : editTag, image: Image(systemName: "checkmark.circle.fill"))
+        BImage(perform: onCommit, image: Image(systemName: "checkmark.circle.fill"))
             .foregroundColor(.white)
-            .colorMultiply(Color(selectedColor))
+            .colorMultiply(tagState.operation.selectedColor.color)
     }
 
-    private var selectedColor: UIColor {
-        colors[identifiers[selectedColorIndex]]!
-    }
-
-    private func addNewTag() {
-        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        guard !name.isEmpty else {
-            configureAlert(with: "Name cannot be empty")
-            return
+    private func onCommit() {
+        if tagState.operation.add {
+            tagState.addNewTag(onAdd: setTagAndExitView)
+        } else {
+            tagState.editTag()
         }
-
-        guard !Tag.containsTag(with: name, color: selectedColor) else {
-            configureAlert(with: "Tag already exists")
-            return
-        }
-
-        createTagAndExitView(name: name)
-    }
-
-    private func configureAlert(with message: String) {
-        alertMessage = message
-        presentAlert = true
-        startTransientAlert()
-    }
-
-    private func createTagAndExitView(name: String) {
-        let tag = Tag.create(name: name, color: selectedColor)
-        resetAddMode()
-        setTagAndExitView(tag: tag)
-    }
-
-    private func editTag() {
-        let name = nameInput.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        guard !name.isEmpty else {
-            configureAlert(with: "Name cannot be empty")
-            return
-        }
-
-        guard !Tag.containsTag(with: name, color: selectedColor) else {
-            configureAlert(with: "Tag already exists")
-            return
-        }
-
-        editTagAndExitEditMode(name: name)
-    }
-
-    private func editTagAndExitEditMode(name: String) {
-        tagInEditing!.edit(name: name, color: selectedColor)
-        resetEditMode()
     }
 }
 
@@ -254,7 +183,7 @@ private extension EditTagView {
     }
 
     private func editButton(for tag: Tag) -> some View {
-        Button(action: { self.displayEditTagAndSetState(tag: tag) }) {
+        Button(action: { self.tagState.operation.setTagToEdit(tag) }) {
             editTextPrecededByPencil
         }
     }
@@ -266,20 +195,8 @@ private extension EditTagView {
         }
     }
 
-    private func displayEditTagAndSetState(tag: Tag) {
-        tagInEditing = tag
-        setEditModeState()
-        showEdit = true
-    }
-
-    func setEditModeState() {
-        nameInput = tagInEditing!.name
-        let identifier = colors.key(for: tagInEditing!.uiColor)!
-        selectedColorIndex = identifiers.firstIndex(of: identifier)!
-    }
-
     private func deleteButton(for tag: Tag) -> some View {
-        Button(action: { self.deleteTagAndDisplayAlert(tag: tag) }) {
+        Button(action: { self.tagState.removeTag(tag) }) {
             deleteTextPrecededByTrash
         }
     }
@@ -289,40 +206,6 @@ private extension EditTagView {
             Text("Delete")
             Image(systemName: "trash.fill")
         }
-    }
-
-    private func deleteTagAndDisplayAlert(tag: Tag) {
-        if tag.isDefault {
-            self.alertMessage = "Default tag cannot be deleted"
-        } else {
-            storeLocationsAndDeleteTag(tag: tag)
-        }
-        self.presentAlert = true
-
-        startTransientAlert()
-    }
-
-    private func storeLocationsAndDeleteTag(tag: Tag) {
-        storeLocationsForDeletedTag(tag: tag)
-        storeTagAndDeleteIt(tag: tag)
-        setTagForAffectedLocationsToDefault()
-    }
-
-    private func storeLocationsForDeletedTag(tag: Tag) {
-        locationsForDeletedTag = tag.locations
-    }
-
-    private func storeTagAndDeleteIt(tag: Tag) {
-        setDeletedTag(tag: tag)
-        tag.delete()
-    }
-
-    private func setDeletedTag(tag: Tag) {
-        self.deletedTag = DeletedTag(name: tag.name, color: tag.color)
-    }
-
-    private func setTagForAffectedLocationsToDefault() {
-        locationsForDeletedTag.forEach { $0.setTag(tag: .default) }
     }
 }
 
@@ -344,14 +227,22 @@ private extension EditTagView {
     }
 
     private var tagNameTextField: some View {
-        TextField("Tag Name...", text: $nameInput)
+        let nameInput = Binding(
+            get: { self.tagState.operation.nameInput },
+            set: { self.tagState.operation.nameInput = $0 })
+
+        return TextField("Tag Name...", text: nameInput)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .multilineTextAlignment(.center)
     }
 
     private var tagColorPicker: some View {
-        Picker(selection: $selectedColorIndex, label: Text("")) {
-            ForEach(0..<identifiers.count) { index in
+        let selectedColorIndex = Binding(
+            get: { self.tagState.operation.selectedColorIndex },
+            set: { self.tagState.operation.selectedColorIndex = $0 })
+
+        return Picker(selection: selectedColorIndex, label: Text("")) {
+            ForEach(0..<AppColors.identifiers.count) { index in
                 self.coloredTextRow(at: index)
                     .tag(index)
             }
@@ -360,7 +251,7 @@ private extension EditTagView {
     }
 
     private func coloredTextRow(at index: Int) -> ColoredTextRow {
-        ColoredTextRow(text: identifiers[index], color: colors[self.identifiers[index]]!, selected: false, useStaticForegroundColor: true)
+        ColoredTextRow(text: AppColors.identifiers[index], color: AppColors.tags[AppColors.identifiers[index]]!, selected: false, useStaticForegroundColor: true)
     }
 }
 
@@ -381,13 +272,13 @@ private extension EditTagView {
 
     private var deletedTagMessageDefaultsAlertMessage: some View {
         Group {
-            if deletedTag != nil {
+            if tagState.alert.isRemoval {
                 deletedTagName
                     .padding(.trailing, 8)
 
                 revertButton
                     .padding(8)
-                    .background(Color(deletedTag!.uiColor))
+                    .background(tagState.alert.deletedTag.uiColor.color)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             } else {
                 alertMessageText
@@ -396,59 +287,38 @@ private extension EditTagView {
     }
 
     private var deletedTagName: some View {
-        Text("Deleted: \(deletedTag!.name)")
+        Text("Deleted: \(tagState.alert.deletedTag.name)")
             .font(.system(size: 20))
             .foregroundColor(.white)
             .animation(nil)
     }
 
     private var revertButton: some View {
-        Button(action: revert) {
-            revertText
+        Button(action: tagState.revertDeletion) {
+            Text("Revert")
+                .font(.system(size: 20))
+                .foregroundColor(.white)
+                .animation(nil)
         }
-    }
-
-    private var revertText: some View {
-        Text("Revert")
-            .font(.system(size: 20))
-            .foregroundColor(.white)
-            .animation(nil)
-    }
-
-    private func revert() {
-        if let deletedTag = deletedTag {
-            let tag = Tag.create(name: deletedTag.name, hex: deletedTag.color)
-            revertTagForAffectedLocations(to: tag)
-            resetAlert()
-        }
-    }
-
-    private func revertTagForAffectedLocations(to tag: Tag) {
-        locationsForDeletedTag.forEach { $0.setTag(tag: tag) }
     }
 
     private var alertMessageText: some View {
-        Text(alertMessage)
+        Text(tagState.alert.message)
             .foregroundColor(.white)
             .animation(nil)
     }
 }
 
 private extension EditTagView {
-    private func resetNameAndColorInput() {
-        nameInput = ""
-        selectedColorIndex = 1
-    }
-
     private func setTagAndExitView(tag: Tag) {
         if mapState.selectedLocation.tag == tag {
-            mapState.selectedLocation.setTag(tag: tag)
             resetView()
             return
         }
         
         mapState.selectedLocation.setTag(tag: tag)
-        animatingSelection = true
+        isAnimatingSelection = true
+        // 1.5 seconds is duration it takes for the checkmark lottie to finish
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.resetView()
         }
@@ -456,21 +326,9 @@ private extension EditTagView {
 
     private func resetView() {
         mapState = .showingMap
-        animatingSelection = false
         showing.toggleButton = true
-        resetAlert()
-    }
-
-    private func startTransientAlert() {
-        alertItem.cancel()
-        alertItem = DispatchWorkItem { self.resetAlert() }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: alertItem)
-    }
-
-    private func resetAlert() {
-        presentAlert = false
-        alertMessage = ""
-        deletedTag = nil
+        isAnimatingSelection = false
+        tagState.alert.stop()
     }
 }
 

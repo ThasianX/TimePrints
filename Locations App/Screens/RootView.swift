@@ -39,7 +39,7 @@ private extension RootView {
     }
 
     private var appView: some View {
-        AppView(onAppear: userStore.performLocationAndDatabaseOperations)
+        AppView(onAppear: userStore.performLocationOperations)
     }
 
     private var transientSplashView: TransientSplashView {
