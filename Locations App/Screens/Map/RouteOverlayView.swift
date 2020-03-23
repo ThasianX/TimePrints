@@ -2,12 +2,26 @@ import Introspect
 import SwiftUI
 
 enum RouteOverlayState: Equatable {
-    case showingEditTag(Location)
-    case showingEditNotes(Visit)
+    case none
+    case editingLocationName
+    case editingTag
+    case editingNotes
+
+    var isEditingLocationName: Bool {
+        self == .editingLocationName
+    }
+
+    var isEditingTag: Bool {
+        self == .editingTag
+    }
+
+    var isEditingNotes: Bool {
+        self == .editingNotes
+    }
 }
 
 struct RouteOverlayView: View {
-    @State private var isEditing: Bool = false
+    @State private var overlayState: RouteOverlayState = .none
 
     @Binding var mapState: MapState
     @ObservedObject var appState: AppState
@@ -24,6 +38,9 @@ struct RouteOverlayView: View {
                 .offset(y: 15)
             routeInfoAndControlsView
             controlButtons
+
+            editTagView
+                .fade(if: !overlayState.isEditingTag)
         }
     }
 }
@@ -99,7 +116,7 @@ private extension RouteOverlayView {
             nextLocationButton
                 .fade(if: appState.route.isAtEnd)
         }
-        .fade(if: isEditing)
+        .fade(if: overlayState.isEditingLocationName)
         .foregroundColor(color)
         .padding(32)
     }
@@ -137,8 +154,20 @@ private extension RouteOverlayView {
     }
 
     private var locationNameView: some View {
-        LocationNameView(name: currentVisit.location.name, color: color, setLocationName: setLocationName, isEditing: $isEditing)
+        LocationNameView(
+            name: currentVisit.location.name,
+            color: color,
+            setLocationName: setLocationName,
+            setEditingStateForLocationName: setEditingStateForLocationName)
             .id(currentVisit)
+    }
+
+    private func setEditingStateForLocationName(_ isEditing: Bool) {
+        if isEditing {
+            overlayState = .editingLocationName
+        } else {
+            overlayState = .none
+        }
     }
 
     private func setLocationName(name: String) {
@@ -150,13 +179,13 @@ private extension RouteOverlayView {
 
         let setLocationName: (String) -> Void
         let color: Color
-        @Binding var isEditing: Bool
+        let setEditingStateForLocationName: (Bool) -> Void
 
-        init(name: String, color: Color, setLocationName: @escaping (String) -> Void, isEditing: Binding<Bool>) {
+        init(name: String, color: Color, setLocationName: @escaping (String) -> Void, setEditingStateForLocationName: @escaping (Bool) -> Void) {
             self._nameInput = State(initialValue: name)
             self.setLocationName = setLocationName
             self.color = color
-            self._isEditing = isEditing
+            self.setEditingStateForLocationName = setEditingStateForLocationName
         }
 
         var body: some View {
@@ -168,26 +197,22 @@ private extension RouteOverlayView {
         private var locationNameTextField: some View {
             LocationNameTextField(
                 nameInput: $nameInput,
-                isEditing: $isEditing,
                 textColor: color,
+                onEditingChanged: setEditingStateForLocationName,
                 onCommit: _setLocationName)
         }
 
         struct LocationNameTextField: View {
             @Binding var nameInput: String
-            @Binding var isEditing: Bool
 
             let textColor: Color
+            let onEditingChanged: (Bool) -> Void
             let onCommit: () -> Void
 
             var body: some View {
                 TextField("Location Name", text: $nameInput, onEditingChanged: onEditingChanged, onCommit: onCommit)
                     .foregroundColor(textColor)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-            }
-
-            private func onEditingChanged(isEditing: Bool) {
-                self.isEditing = isEditing
             }
         }
 
@@ -216,17 +241,31 @@ private extension RouteOverlayView {
     }
 
     private var editTagButton: some View {
-        BImage(perform: {}, image: Image(systemName: "tag.fill"))
+        BImage(perform: setStateToEditingTag, image: Image(systemName: "tag.fill"))
             .foregroundColor(currentVisit.tagColor.color)
     }
 
+    private func setStateToEditingTag() {
+        overlayState = .editingTag
+    }
+
     private var editNotesButton: some View {
-        BImage(perform: {}, image: Image(systemName: "text.bubble.fill"))
+        BImage(perform: setStateToEditingNotes, image: Image(systemName: "text.bubble.fill"))
+    }
+
+    private func setStateToEditingNotes() {
+        overlayState = .editingNotes
     }
 
     private var favoriteButton: some View {
         FavoriteButton(visit: currentVisit)
             .id(currentVisit.isFavorite)
+    }
+}
+
+private extension RouteOverlayView {
+    private var editTagView: some View {
+        EditTagView(tagProvider: appState.route.self, onReset: {})
     }
 }
 
