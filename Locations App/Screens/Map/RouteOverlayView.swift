@@ -9,13 +9,12 @@ enum RouteOverlayState: Equatable {
 struct RouteOverlayView: View {
     @State private var isEditing: Bool = false
 
-    @Binding var showing: AppState.Showing
-    @Binding var locationControl: AppState.LocationControl
-    @Binding var route: AppState.Route
+    @Binding var mapState: MapState
+    @ObservedObject var appState: AppState
     let color: Color
 
     private var currentVisit: Visit {
-        route.currentVisit
+        appState.route.currentVisit
     }
 
     var body: some View {
@@ -31,7 +30,7 @@ struct RouteOverlayView: View {
 
 private extension RouteOverlayView {
     private var centerIndicator: some View {
-        CenterIndicatorView(locationControl: $locationControl, route: $route, color: color)
+        CenterIndicatorView(locationControl: $appState.locationControl, route: $appState.route, color: color)
     }
 }
 
@@ -64,15 +63,15 @@ private extension RouteOverlayView {
 
     private var routeInformationView: some View {
         VStack(alignment: .leading) {
-            Text(route.date.fullMonthWithDayAndYear)
+            Text(appState.route.date.fullMonthWithDayAndYear)
                 .font(.title)
                 .foregroundColor(color)
             HStack(alignment: .bottom, spacing: 2) {
-                Text("\(route.currentIndex+1)")
+                Text("\(appState.route.currentIndex+1)")
                     .font(.title)
                     .bold()
                     .foregroundColor(color)
-                Text("/ \(route.length)")
+                Text("/ \(appState.route.length)")
                     .font(.subheadline)
                     .foregroundColor(color)
                     .saturation(0.5)
@@ -86,8 +85,8 @@ private extension RouteOverlayView {
     }
 
     private func closeRoute() {
-        route.reset()
-        showing.toggleButton = true
+        appState.route.reset()
+        appState.showing.toggleButton = true
     }
 }
 
@@ -95,10 +94,10 @@ private extension RouteOverlayView {
     private var controlButtons: some View {
         HStack {
             previousLocationButton
-                .fade(if: route.isAtStart)
+                .fade(if: appState.route.isAtStart)
             Spacer()
             nextLocationButton
-                .fade(if: route.isAtEnd)
+                .fade(if: appState.route.isAtEnd)
         }
         .fade(if: isEditing)
         .foregroundColor(color)
@@ -110,7 +109,7 @@ private extension RouteOverlayView {
     }
 
     private func selectPreviousLocation() {
-        route.selectPreviousLocation()
+        appState.route.selectPreviousLocation()
         setLocationCenterCoordinate()
     }
 
@@ -119,13 +118,13 @@ private extension RouteOverlayView {
     }
 
     private func selectNextLocation() {
-        route.selectNextLocation()
+        appState.route.selectNextLocation()
         setLocationCenterCoordinate()
     }
 
     private func setLocationCenterCoordinate() {
-        locationControl.centerCoordinate = route.currentVisit.location.coordinate
-        locationControl.shouldCenterForRoute = true
+        appState.locationControl.centerCoordinate = appState.route.currentVisit.location.coordinate
+        appState.locationControl.shouldCenterForRoute = true
     }
 }
 
@@ -206,36 +205,32 @@ private extension RouteOverlayView {
 
 private extension RouteOverlayView {
     private var visitOptionsView: some View {
-        VisitOptions(visit: currentVisit)
+        HStack {
+            editTagButton
+            Spacer()
+            editNotesButton
+            Spacer()
+            favoriteButton
+        }
+        .padding()
     }
 
-    private struct VisitOptions: View {
-        let visit: Visit
+    private var editTagButton: some View {
+        BImage(perform: {}, image: Image(systemName: "tag.fill"))
+            .foregroundColor(currentVisit.tagColor.color)
+    }
 
-        var body: some View {
-            HStack {
-                editTagButton
-                Spacer()
-                editNotesButton
-                Spacer()
-                favoriteButton
-            }
-            .padding()
-        }
+    private func showEditTag() {
+        EditTagView(mapState: $mapState, showing: $appState.showing)
+    }
 
-        private var editTagButton: some View {
-            BImage(perform: {}, image: Image(systemName: "tag.fill"))
-                .foregroundColor(visit.tagColor.color)
-        }
+    private var editNotesButton: some View {
+        BImage(perform: {}, image: Image(systemName: "text.bubble.fill"))
+    }
 
-        private var editNotesButton: some View {
-            BImage(perform: {}, image: Image(systemName: "text.bubble.fill"))
-        }
-
-        private var favoriteButton: some View {
-            FavoriteButton(visit: visit)
-                .id(visit)
-        }
+    private var favoriteButton: some View {
+        FavoriteButton(visit: currentVisit)
+            .id(currentVisit.isFavorite)
     }
 }
 
@@ -253,7 +248,7 @@ private extension View {
 
 struct RouteOverlayView_Previews: PreviewProvider {
     static var previews: some View {
-        RouteOverlayView(showing: .constant(.init()), locationControl: .constant(.init()), route: .constant(.init(visits: Visit.previewVisits)), color: .pink)
+        RouteOverlayView(mapState: .constant(.showingMap), appState: .init(), color: .red)
             .background(Color.gray.extendToScreenEdges())
     }
 }

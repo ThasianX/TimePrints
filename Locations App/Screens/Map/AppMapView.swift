@@ -64,9 +64,8 @@ struct AppMapView: View {
 
     private var routeOverlayView: some View {
         RouteOverlayView(
-            showing: $appState.showing,
-            locationControl: $appState.locationControl,
-            route: $appState.route,
+            mapState: $mapState,
+            appState: appState,
             color: appTheme.color)
     }
 

@@ -39,7 +39,7 @@ struct EditTagView: View {
                     .fade(if: tagState.isShowingAddOrEdit)
             }
 
-            topAlignedTagDetails
+            topAlignedTagOperationsView
                 .padding()
                 .fade(if: tagState.isntShowingAddNorEdit)
                 .scaleEffect(!tagState.isShowingAddOrEdit ? 0 : 1)
@@ -54,258 +54,33 @@ struct EditTagView: View {
 
 private extension EditTagView {
     private var header: some View {
-        HStack {
-            editTagHeaderView
-            Spacer()
-            editTagHeaderButtons
-        }
-        .padding(.horizontal)
+        TagHeader(
+            tagState: tagState,
+            normalTagColor: mapState.hasSelectedLocation ? Color(mapState.selectedLocation.accent) : Color.clear,
+            onSelect: setTagAndExitView)
     }
 
-    private var editTagHeaderView: some View {
-        HStack {
-            tagImage
-
-            ZStack {
-                headerText("CHOOSE TAG")
-                    .fade(if: tagState.isShowingAddOrEdit)
-                headerText("MAKE TAG")
-                    .fade(if: !tagState.operation.add)
-                headerText("EDIT TAG")
-                    .fade(if: !tagState.operation.edit)
-            }
-        }
-        .animation(.easeInOut)
-    }
-
-    private var tagImage: some View {
-        Image(systemName: "tag.fill")
-            .foregroundColor(.white)
-            .colorMultiply(tagState.isShowingAddOrEdit ? tagState.operation.selectedColor.color : defaultTagColor)
-    }
-
-    private var defaultTagColor: Color {
-        mapState.hasSelectedLocation ? Color(mapState.selectedLocation.accent) : Color.clear
-    }
-
-    private func headerText(_ text: String) -> some View {
-        Text(text)
-            .tracking(5)
-            .font(.system(size: 20))
-            .bold()
-            .foregroundColor(.white)
-    }
-
-    private var editTagHeaderButtons: some View {
-        ZStack {
-            addButton
-                .fade(if: tagState.isShowingAddOrEdit)
-            HStack(spacing: 16) {
-                xButton
-                checkmarkButton
-            }
-            .fade(if: tagState.isntShowingAddNorEdit)
-        }
-        .animation(.easeInOut)
-    }
-
-    private var addButton: some View {
-        BImage(perform: tagState.operation.beginAdd, image: Image(systemName: "plus"))
-            .foregroundColor(.white)
-    }
-
-    private var xButton: some View {
-        BImage(perform: onExit, image: Image(systemName: "xmark.circle.fill"))
-            .foregroundColor(.red)
-    }
-
-    private func onExit() {
-        if tagState.operation.add {
-            tagState.operation.resetAdd()
-        } else {
-            tagState.operation.resetEdit()
-        }
-    }
-
-    private var checkmarkButton: some View {
-        BImage(perform: onCommit, image: Image(systemName: "checkmark.circle.fill"))
-            .foregroundColor(.white)
-            .colorMultiply(tagState.operation.selectedColor.color)
-    }
-
-    private func onCommit() {
-        if tagState.operation.add {
-            tagState.addNewTag(onAdd: setTagAndExitView)
-        } else {
-            tagState.editTag()
-        }
-    }
-}
-
-private extension EditTagView {
     private var tagSelectionList: some View {
-        VScroll {
-            tagSelectionStack
-        }
+        TagSelectionList(
+            tagState: tagState,
+            tags: Array(tags),
+            onSelect: setTagAndExitView,
+            selectedLocationTag: mapState.hasSelectedLocation ? mapState.selectedLocation.tag : nil)
     }
 
-    private var tagSelectionStack: some View {
+    private var topAlignedTagOperationsView: some View {
         VStack {
-            ForEach(tags) { tag in
-                self.interactiveColoredTextRow(tag: tag)
-                    .padding(.horizontal)
-                    .id(tag.name)
-                    .id(tag.color)
-            }
-        }
-    }
-
-    private func interactiveColoredTextRow(tag: Tag) -> some View {
-        coloredTextRow(tag: tag)
-            .onTapGesture {
-                self.setTagAndExitView(tag: tag)
-            }
-            .contextMenu {
-                self.contextMenu(for: tag)
-            }
-    }
-
-    private func coloredTextRow(tag: Tag) -> TagRow {
-        let isSelected = mapState.hasSelectedLocation ? mapState.selectedLocation.tag == tag : false
-        return TagRow(tag: tag, isSelected: isSelected)
-    }
-
-    private func contextMenu(for tag: Tag) -> some View {
-        VStack {
-            editButton(for: tag)
-            deleteButton(for: tag)
-        }
-    }
-
-    private func editButton(for tag: Tag) -> some View {
-        Button(action: { self.tagState.operation.setTagToEdit(tag) }) {
-            editTextPrecededByPencil
-        }
-    }
-
-    private var editTextPrecededByPencil: some View {
-        HStack {
-            Text("Edit")
-            Image(systemName: "pencil")
-        }
-    }
-
-    private func deleteButton(for tag: Tag) -> some View {
-        Button(action: { self.tagState.removeTag(tag) }) {
-            deleteTextPrecededByTrash
-        }
-    }
-
-    private var deleteTextPrecededByTrash: some View {
-        HStack {
-            Text("Delete")
-            Image(systemName: "trash.fill")
-        }
-    }
-}
-
-private extension EditTagView {
-    private var topAlignedTagDetails: some View {
-        VStack {
-            tagDetailsView
+            TagOperationsView(tagState: tagState)
             Spacer()
         }
     }
 
-    private var tagDetailsView: some View {
-        VStack {
-            tagNameTextField
-                .padding(.init(top: 0, leading: 30, bottom: 0, trailing: 30))
-
-            tagColorPicker
-        }
-    }
-
-    private var tagNameTextField: some View {
-        let nameInput = Binding(
-            get: { self.tagState.operation.nameInput },
-            set: { self.tagState.operation.nameInput = $0 })
-
-        return TextField("Tag Name...", text: nameInput)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .multilineTextAlignment(.center)
-    }
-
-    private var tagColorPicker: some View {
-        let selectedColorIndex = Binding(
-            get: { self.tagState.operation.selectedColorIndex },
-            set: { self.tagState.operation.selectedColorIndex = $0 })
-
-        return Picker(selection: selectedColorIndex, label: Text("")) {
-            ForEach(0..<AppColors.identifiers.count) { index in
-                self.coloredTextRow(at: index)
-                    .tag(index)
-            }
-        }
-        .labelsHidden()
-    }
-
-    private func coloredTextRow(at index: Int) -> ColoredTextRow {
-        ColoredTextRow(text: AppColors.identifiers[index], color: AppColors.tags[AppColors.identifiers[index]]!, selected: false, useStaticForegroundColor: true)
-    }
-}
-
-private extension EditTagView {
     private var bottomAlignedTransientAlertView: some View {
         VStack {
             Spacer()
-            transientAlertView
+            TransientAlertView(tagState: tagState)
                 .padding()
         }
-    }
-
-    private var transientAlertView: some View {
-        HStack {
-            deletedTagMessageDefaultsAlertMessage
-        }
-    }
-
-    private var deletedTagMessageDefaultsAlertMessage: some View {
-        Group {
-            if tagState.alert.isRemoval {
-                deletedTagName
-                    .padding(.trailing, 8)
-
-                revertButton
-                    .padding(8)
-                    .background(tagState.alert.deletedTag.uiColor.color)
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            } else {
-                alertMessageText
-            }
-        }
-    }
-
-    private var deletedTagName: some View {
-        Text("Deleted: \(tagState.alert.deletedTag.name)")
-            .font(.system(size: 20))
-            .foregroundColor(.white)
-            .animation(nil)
-    }
-
-    private var revertButton: some View {
-        Button(action: tagState.revertDeletion) {
-            Text("Revert")
-                .font(.system(size: 20))
-                .foregroundColor(.white)
-                .animation(nil)
-        }
-    }
-
-    private var alertMessageText: some View {
-        Text(tagState.alert.message)
-            .foregroundColor(.white)
-            .animation(nil)
     }
 }
 
