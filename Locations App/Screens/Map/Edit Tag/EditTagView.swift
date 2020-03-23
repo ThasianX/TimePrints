@@ -46,7 +46,7 @@ struct EditTagView: View {
                 .animation(.spring())
 
             bottomAlignedTransientAlertView
-                .fade(if: !tagState.alert.isInactive)
+                .fade(if: tagState.alert.isInactive)
         }
         .disabled(isAnimatingSelection)
     }
