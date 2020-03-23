@@ -31,16 +31,22 @@ struct RouteOverlayView: View {
         appState.route.currentVisit
     }
 
+    var blurBackground: Bool {
+        overlayState != .none
+    }
+
     var body: some View {
         ZStack {
             // Offset of 15 to account for the center annotation size
-            centerIndicator
-                .offset(y: 15)
-            routeInfoAndControlsView
-            controlButtons
+            Group {
+                centerIndicator
+                    .offset(y: 15)
+                routeInfoAndControlsView
+                controlButtons
+            }
 
             editTagView
-                .fade(if: !overlayState.isEditingTag)
+                .modal(isPresented: overlayState.isEditingTag)
         }
     }
 }
@@ -270,6 +276,16 @@ private extension RouteOverlayView {
 }
 
 private extension View {
+    func modal(isPresented: Bool) -> some View {
+        self
+            .frame(width: screen.width, height: screen.height * 0.8)
+            .offset(y: isPresented ? 0 : screen.height)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black.opacity(0.8).extendToScreenEdges())
+            .fade(if: !isPresented)
+            .animation(.spring())
+    }
+
     func blurBackground() -> some View {
         self
             .padding(.horizontal)

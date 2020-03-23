@@ -62,7 +62,7 @@ struct AppMapView: View {
             color: appTheme.color)
     }
 
-    private var routeOverlayView: some View {
+    private var routeOverlayView: RouteOverlayView {
         RouteOverlayView(
             mapState: $mapState,
             appState: appState,
@@ -87,10 +87,10 @@ private extension View {
     func modal(isPresented: Bool) -> some View {
         self
             .frame(width: screen.width, height: screen.height * 0.8)
-            .cornerRadius(30)
-            .shadow(radius: 20)
+            .offset(y: isPresented ? 0 : screen.height)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black.opacity(0.3).extendToScreenEdges())
             .fade(if: !isPresented)
-            .offset(y: isPresented ? screen.height * 0.1 : screen.height)
             .animation(.spring())
     }
 
