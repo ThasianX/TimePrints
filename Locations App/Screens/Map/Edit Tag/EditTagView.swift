@@ -18,10 +18,10 @@ struct EditTagView: View {
     ) var tags: FetchedResults<Tag>
 
     @ObservedObject var tagState: MapTagState = .init()
-
     @State private var isAnimatingSelection: Bool = false
-    @Binding var mapState: MapState
-    @Binding var showing: AppState.Showing
+
+    let tagProvider: TagProvider
+    let onReset: () -> Void
 
     var body: some View {
         ZStack {
@@ -56,7 +56,7 @@ private extension EditTagView {
     private var header: some View {
         TagHeader(
             tagState: tagState,
-            normalTagColor: mapState.hasSelectedLocation ? Color(mapState.selectedLocation.accent) : Color.clear,
+            normalTagColor: tagProvider.normalTagColor,
             onSelect: setTagAndExitView)
     }
 
@@ -65,7 +65,7 @@ private extension EditTagView {
             tagState: tagState,
             tags: Array(tags),
             onSelect: setTagAndExitView,
-            selectedLocationTag: mapState.hasSelectedLocation ? mapState.selectedLocation.tag : nil)
+            selectedLocationTag: tagProvider.selectedLocation?.tag)
     }
 
     private var topAlignedTagOperationsView: some View {
@@ -86,12 +86,12 @@ private extension EditTagView {
 
 private extension EditTagView {
     private func setTagAndExitView(tag: Tag) {
-        if mapState.selectedLocation.tag == tag {
+        if tagProvider.selectedLocation!.tag == tag {
             resetView()
             return
         }
         
-        mapState.selectedLocation.setTag(tag: tag)
+        tagProvider.selectedLocation!.setTag(tag: tag)
         isAnimatingSelection = true
         // 1.5 seconds is duration it takes for the checkmark lottie to finish
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -100,8 +100,7 @@ private extension EditTagView {
     }
 
     private func resetView() {
-        mapState = .showingMap
-        showing.toggleButton = true
+        onReset()
         isAnimatingSelection = false
         tagState.alert.stop()
     }
@@ -109,6 +108,6 @@ private extension EditTagView {
 
 struct EditTagView_Previews: PreviewProvider {
     static var previews: some View {
-        return EditTagView(mapState: .constant(.showingEditTag(.preview)), showing: .constant(.init())).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
+        return EditTagView(tagProvider: MapState.showingEditTag(.preview), onReset: {}).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

@@ -105,6 +105,7 @@
 		1EF5BED624289B3E00B34251 /* TagSelectionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BED524289B3E00B34251 /* TagSelectionList.swift */; };
 		1EF5BED824289D5700B34251 /* TagOperationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BED724289D5700B34251 /* TagOperationsView.swift */; };
 		1EF5BEDA24289DF900B34251 /* TransientAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BED924289DF900B34251 /* TransientAlertView.swift */; };
+		1EF5BEDD2428A1AF00B34251 /* TagProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5BEDC2428A1AF00B34251 /* TagProvider.swift */; };
 		1EF6227123FF21C400B28DCF /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227023FF21C400B28DCF /* Mapbox.framework */; };
 		1EF6227223FF21C400B28DCF /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227023FF21C400B28DCF /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EF6227423FF21C800B28DCF /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */; };
@@ -272,6 +273,7 @@
 		1EF5BED524289B3E00B34251 /* TagSelectionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSelectionList.swift; sourceTree = "<group>"; };
 		1EF5BED724289D5700B34251 /* TagOperationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagOperationsView.swift; sourceTree = "<group>"; };
 		1EF5BED924289DF900B34251 /* TransientAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientAlertView.swift; sourceTree = "<group>"; };
+		1EF5BEDC2428A1AF00B34251 /* TagProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagProvider.swift; sourceTree = "<group>"; };
 		1EF6227023FF21C400B28DCF /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = Carthage/Build/iOS/Mapbox.framework; sourceTree = "<group>"; };
 		1EF6227323FF21C800B28DCF /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		1EFC8DC223E7238A00628251 /* StaticMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapView.swift; sourceTree = "<group>"; };
@@ -428,8 +430,8 @@
 		1E24328E240B73C100E983E7 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
 				1EFFA58523E89A3400914607 /* LocationAnnotation.swift */,
+				1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -602,8 +604,8 @@
 		1E97D215240B481D004113F7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				1ED53522240B0C01009B11D3 /* UserStore.swift */,
 				1ED53520240B0A48009B11D3 /* LottieAlert.swift */,
+				1ED53522240B0C01009B11D3 /* UserStore.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -733,6 +735,7 @@
 		1E9D78A723E1497F0020FAFE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1EF5BEDB2428A19F00B34251 /* Tags */,
 				1EF5BECE24282B4100B34251 /* State */,
 				1E24328F240B73D300E983E7 /* Colors */,
 				1E24328E240B73C100E983E7 /* Location */,
@@ -780,11 +783,19 @@
 		1EF5BECE24282B4100B34251 /* State */ = {
 			isa = PBXGroup;
 			children = (
-				1EF5BEC82425C3F800B34251 /* MapState.swift */,
 				1E0DB24C241F430D003944C5 /* AppState.swift */,
+				1EF5BEC82425C3F800B34251 /* MapState.swift */,
 				1EF5BECF24282B7400B34251 /* TagCoreState.swift */,
 			);
 			path = State;
+			sourceTree = "<group>";
+		};
+		1EF5BEDB2428A19F00B34251 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				1EF5BEDC2428A1AF00B34251 /* TagProvider.swift */,
+			);
+			path = Tags;
 			sourceTree = "<group>";
 		};
 		1EFE85D1240390620001D0C3 /* Lottie */ = {
@@ -1056,6 +1067,7 @@
 				1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */,
 				1EF5BEC92425C3F800B34251 /* MapState.swift in Sources */,
 				1EE2CF5523E7CE4B009760D6 /* UIColor+CustomColors.swift in Sources */,
+				1EF5BEDD2428A1AF00B34251 /* TagProvider.swift in Sources */,
 				1EF5BED624289B3E00B34251 /* TagSelectionList.swift in Sources */,
 				1EFC8DC323E7238A00628251 /* StaticMapView.swift in Sources */,
 				1E125C45240D808100D0919E /* ColorAdaptiveVisitsView.swift in Sources */,

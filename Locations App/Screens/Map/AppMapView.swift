@@ -70,7 +70,12 @@ struct AppMapView: View {
     }
 
     private var editTagView: some View {
-        EditTagView(mapState: $mapState, showing: $appState.showing)
+        EditTagView(tagProvider: mapState.self, onReset: onReset)
+    }
+
+    private func onReset() {
+        mapState = .showingMap
+        appState.showing.toggleButton = true
     }
 
     private var locationVisitsView: some View {

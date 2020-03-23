@@ -36,7 +36,7 @@ extension AppState {
 }
 
 extension AppState {
-    struct Route {
+    struct Route: TagProvider {
         fileprivate var visits: [Visit]
         fileprivate var visitsIndex: Int = 0
 
@@ -96,6 +96,14 @@ extension AppState {
         mutating func reset() {
             visits = []
             visitsIndex = 0
+        }
+
+        var normalTagColor: Color {
+            selectedLocation!.accent.color
+        }
+
+        var selectedLocation: Location? {
+            currentVisit.location
         }
     }
 }

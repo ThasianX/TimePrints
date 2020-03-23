@@ -19,7 +19,7 @@ struct LocationVisitsView: View {
 
 private extension LocationVisitsView {
     private var headerText: some View {
-        let name = mapState.hasSelectedLocation ? mapState.selectedLocation.name : ""
+        let name = mapState.hasSelectedLocation ? mapState.selectedLocation!.name : ""
         return Text("Visits for \(name)")
             .font(.headline)
     }
@@ -35,7 +35,7 @@ private extension LocationVisitsView {
     }
 
     private var visitsPredicate: NSPredicate {
-        NSPredicate(format: "%@ == location", mapState.selectedLocation)
+        NSPredicate(format: "%@ == location", mapState.selectedLocation!)
     }
 
     private var arrivalDateSort: NSSortDescriptor {

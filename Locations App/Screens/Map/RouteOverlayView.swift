@@ -220,10 +220,6 @@ private extension RouteOverlayView {
             .foregroundColor(currentVisit.tagColor.color)
     }
 
-    private func showEditTag() {
-        EditTagView(mapState: $mapState, showing: $appState.showing)
-    }
-
     private var editNotesButton: some View {
         BImage(perform: {}, image: Image(systemName: "text.bubble.fill"))
     }
