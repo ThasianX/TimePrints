@@ -26,12 +26,14 @@ class TagCoreState: ObservableObject {
     }
 
     func addNewTag() {
+        UIApplication.shared.endEditing(true)
         if isNameCompliable() {
             operation.addNewTag()
         }
     }
 
     func editTag() {
+        UIApplication.shared.endEditing(true)
         if isNameCompliable() {
             operation.editTag()
         }
@@ -130,6 +132,7 @@ extension TagCoreState {
         }
 
         func reset() {
+            UIApplication.shared.endEditing(true)
             tag = nil
             nameInput = ""
             selectedColorIndex = 0

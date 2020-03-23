@@ -2,6 +2,7 @@ import SwiftUI
 
 class MapTagState: TagCoreState {
     func addNewTag(onAdd: (Tag) -> Void) {
+        UIApplication.shared.endEditing(true)
         if isNameCompliable() {
             let newTag = operation.addNewTag()
             onAdd(newTag)
@@ -93,15 +94,20 @@ private extension EditTagView {
         
         tagProvider.selectedLocation!.setTag(tag: tag)
         isAnimatingSelection = true
+
         // 1.5 seconds is duration it takes for the checkmark lottie to finish
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.resetView()
+        }
+
+        // This line is necessary because it's possible to tap on the closing modal view which will cause an error
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            self.isAnimatingSelection = false
         }
     }
 
     private func resetView() {
         onReset()
-        isAnimatingSelection = false
         tagState.alert.stop()
     }
 }
