@@ -32,6 +32,7 @@
 		1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */; };
 		1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */; };
 		1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */; };
+		1E4723232429D76B004FCF7D /* RouteTagHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4723222429D76B004FCF7D /* RouteTagHeader.swift */; };
 		1E558EDD2411FBE80087C5E3 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E558EDC2411FBE80087C5E3 /* AppView.swift */; };
 		1E558EDF2411FD0C0087C5E3 /* SetupThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E558EDE2411FD0C0087C5E3 /* SetupThemePickerView.swift */; };
 		1E5AF45223E3CC0500A94F10 /* VisitsPreviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45123E3CC0500A94F10 /* VisitsPreviewList.swift */; };
@@ -70,6 +71,10 @@
 		1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */; };
 		1EB03D25241027DB001146FF /* TransientSplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D24241027DB001146FF /* TransientSplashView.swift */; };
 		1EB03D2724102955001146FF /* AppMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D2624102955001146FF /* AppMapView.swift */; };
+		1EB424E32429C4C00035F43E /* EditNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424E22429C4C00035F43E /* EditNotesView.swift */; };
+		1EB424E52429CFEA0035F43E /* RouteEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424E42429CFEA0035F43E /* RouteEditTagView.swift */; };
+		1EB424E92429D3500035F43E /* VisitOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424E82429D3500035F43E /* VisitOptionsView.swift */; };
+		1EB424EB2429D48A0035F43E /* ScaleFadeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424EA2429D48A0035F43E /* ScaleFadeModifier.swift */; };
 		1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */; };
 		1EB865E123F9E01400A4B8E1 /* UIApplication+Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */; };
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
@@ -194,6 +199,7 @@
 		1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
 		1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 		1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		1E4723222429D76B004FCF7D /* RouteTagHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTagHeader.swift; sourceTree = "<group>"; };
 		1E558EDC2411FBE80087C5E3 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		1E558EDE2411FD0C0087C5E3 /* SetupThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupThemePickerView.swift; sourceTree = "<group>"; };
 		1E5AF45123E3CC0500A94F10 /* VisitsPreviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsPreviewList.swift; sourceTree = "<group>"; };
@@ -239,6 +245,10 @@
 		1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentKey+AppTheme.swift"; sourceTree = "<group>"; };
 		1EB03D24241027DB001146FF /* TransientSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientSplashView.swift; sourceTree = "<group>"; };
 		1EB03D2624102955001146FF /* AppMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMapView.swift; sourceTree = "<group>"; };
+		1EB424E22429C4C00035F43E /* EditNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotesView.swift; sourceTree = "<group>"; };
+		1EB424E42429CFEA0035F43E /* RouteEditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEditTagView.swift; sourceTree = "<group>"; };
+		1EB424E82429D3500035F43E /* VisitOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitOptionsView.swift; sourceTree = "<group>"; };
+		1EB424EA2429D48A0035F43E /* ScaleFadeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleFadeModifier.swift; sourceTree = "<group>"; };
 		1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Editing.swift"; sourceTree = "<group>"; };
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
@@ -456,12 +466,10 @@
 		1E24927123EB53DA00165280 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				1EB424E62429D3100035F43E /* Route */,
 				1EB03D2624102955001146FF /* AppMapView.swift */,
-				1EC19124241FE32800089E8D /* RouteOverlayView.swift */,
 				1E7B618E23E284C600F9F974 /* MapView.swift */,
 				1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */,
-				1E3237982418632500D370CD /* CloseRouteButton.swift */,
-				1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */,
 				1E24927323EB54A600165280 /* Edit Tag */,
 				1E97274023EB5796006528ED /* Location Visits */,
 			);
@@ -745,6 +753,28 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1EB424E62429D3100035F43E /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				1EC19124241FE32800089E8D /* RouteOverlayView.swift */,
+				1EB424E72429D3220035F43E /* Components */,
+			);
+			path = Route;
+			sourceTree = "<group>";
+		};
+		1EB424E72429D3220035F43E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1E3237982418632500D370CD /* CloseRouteButton.swift */,
+				1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */,
+				1EB424E42429CFEA0035F43E /* RouteEditTagView.swift */,
+				1EB424E82429D3500035F43E /* VisitOptionsView.swift */,
+				1E4723222429D76B004FCF7D /* RouteTagHeader.swift */,
+				1EB424E22429C4C00035F43E /* EditNotesView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		1EB865E223F9EC2D00A4B8E1 /* Button Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,6 +861,7 @@
 				1EFF83AA23E52BC700FF04A1 /* SizeModifier.swift */,
 				1E125C46240D83F200D0919E /* RoundedModifier.swift */,
 				1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */,
+				1EB424EA2429D48A0035F43E /* ScaleFadeModifier.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -1009,6 +1040,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E9D789D23E125610020FAFE /* Visit+CoreDataProperties.swift in Sources */,
+				1EB424E92429D3500035F43E /* VisitOptionsView.swift in Sources */,
 				1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */,
 				1E6D569423E653990044AB3A /* VSpace.swift in Sources */,
 				1EB03D2724102955001146FF /* AppMapView.swift in Sources */,
@@ -1037,6 +1069,7 @@
 				1E9D789C23E125610020FAFE /* Visit+CoreDataClass.swift in Sources */,
 				1E5AF45823E3E2E500A94F10 /* Date+ToString.swift in Sources */,
 				1EFF83B323E5365E00FF04A1 /* H0Stack.swift in Sources */,
+				1E4723232429D76B004FCF7D /* RouteTagHeader.swift in Sources */,
 				1EB865E123F9E01400A4B8E1 /* UIApplication+Editing.swift in Sources */,
 				1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */,
 				1EF5BEDA24289DF900B34251 /* TransientAlertView.swift in Sources */,
@@ -1061,6 +1094,7 @@
 				1EFF83B123E532FA00FF04A1 /* Array+Sort.swift in Sources */,
 				1E00E5712408AF9500B14C9F /* TagDetailsView.swift in Sources */,
 				1EFE9F4723FC225D00E94D67 /* MGLMapView+Default.swift in Sources */,
+				1EB424E52429CFEA0035F43E /* RouteEditTagView.swift in Sources */,
 				1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */,
 				1EF5BED824289D5700B34251 /* TagOperationsView.swift in Sources */,
 				1E5DBEA723E9C6A000C86641 /* DisableModifier.swift in Sources */,
@@ -1080,12 +1114,14 @@
 				1EF5BED024282B7400B34251 /* TagCoreState.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
 				1E125C52240DBA8F00D0919E /* ThemeColorService.swift in Sources */,
+				1EB424E32429C4C00035F43E /* EditNotesView.swift in Sources */,
 				1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */,
 				1E125C4D240DAA9900D0919E /* Array+Chunk.swift in Sources */,
 				1EFE85D0240377170001D0C3 /* LottieView.swift in Sources */,
 				1E7B618F23E284C600F9F974 /* MapView.swift in Sources */,
 				1EFF839723E4A4F900FF04A1 /* MonthYearSideBar.swift in Sources */,
 				1E125C4F240DAB0C00D0919E /* Date+DateComponents.swift in Sources */,
+				1EB424EB2429D48A0035F43E /* ScaleFadeModifier.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
 				1EB03D25241027DB001146FF /* TransientSplashView.swift in Sources */,
 				1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */,

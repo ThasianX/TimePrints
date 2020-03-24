@@ -1,23 +1,29 @@
 import SwiftUI
 
-struct TagHeader: View {
+struct RouteTagHeader: View {
     @ObservedObject var tagState: TagCoreState
 
+    let isButton: Bool
+    let onTagTap: () -> Void
     let normalTagColor: Color
-    let onSelect: ((Tag) -> Void)?
+    let onSelect: (Tag) -> Void
 
     var body: some View {
         HStack {
             editTagHeaderView
-            Spacer()
-            editTagHeaderButtons
+            Group {
+                Spacer()
+                editTagHeaderButtons
+            }
+            .scaleFade(if: isButton)
         }
-        .padding(.horizontal)
+        .padding(.horizontal, isButton ? 0 : 16)
     }
 
     private var editTagHeaderView: some View {
         HStack {
             tagImage
+                .onTapGesture(perform: onTagTap)
 
             ZStack {
                 headerText("CHOOSE TAG")
@@ -27,6 +33,7 @@ struct TagHeader: View {
                 headerText("EDIT TAG")
                     .fade(if: !tagState.operation.edit)
             }
+            .scaleFade(if: isButton)
         }
         .animation(.easeInOut)
     }
@@ -85,7 +92,7 @@ struct TagHeader: View {
     private func onCommit() {
         if tagState.operation.add {
             if let tagState = tagState as? AddNewTagState {
-                tagState.addNewTag(onAdd: onSelect!)
+                tagState.addNewTag(onAdd: onSelect)
             } else {
                 tagState.addNewTag()
             }
@@ -95,8 +102,8 @@ struct TagHeader: View {
     }
 }
 
-struct TagHeader_Previews: PreviewProvider {
+struct RouteTagHeader_Previews: PreviewProvider {
     static var previews: some View {
-        TagHeader(tagState: .init(), normalTagColor: .red, onSelect: {_ in})
+        RouteTagHeader(tagState: .init(), isButton: true, onTagTap: { }, normalTagColor: .red, onSelect: { _ in })
     }
 }

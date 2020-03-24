@@ -2,10 +2,14 @@ import Introspect
 import SwiftUI
 
 enum RouteOverlayState: Equatable {
-    case none
+    case normal
     case editingLocationName
     case editingTag
     case editingNotes
+
+    var isNormal: Bool {
+        self == .normal
+    }
 
     var isEditingLocationName: Bool {
         self == .editingLocationName
@@ -21,7 +25,7 @@ enum RouteOverlayState: Equatable {
 }
 
 struct RouteOverlayView: View {
-    @State private var overlayState: RouteOverlayState = .none
+    @State private var overlayState: RouteOverlayState = .normal
 
     @Binding var mapState: MapState
     @ObservedObject var appState: AppState
@@ -29,10 +33,6 @@ struct RouteOverlayView: View {
 
     private var currentVisit: Visit {
         appState.route.currentVisit
-    }
-
-    var blurBackground: Bool {
-        overlayState != .none
     }
 
     var body: some View {
@@ -172,7 +172,7 @@ private extension RouteOverlayView {
         if isEditing {
             overlayState = .editingLocationName
         } else {
-            overlayState = .none
+            overlayState = .normal
         }
     }
 
