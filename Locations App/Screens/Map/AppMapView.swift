@@ -24,9 +24,12 @@ struct AppMapView: View {
             }
             .disablur(!mapState.isShowingMap)
 
-            if routeExists {
-                routeOverlayView
+            Group {
+                if routeExists {
+                    routeOverlayView
+                }
             }
+            .scaleFade(if: !routeExists)
 
             editTagView
                 .modal(isPresented: mapState.isShowingEditTag)

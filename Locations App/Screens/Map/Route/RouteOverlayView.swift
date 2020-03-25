@@ -56,28 +56,23 @@ private extension RouteOverlayView {
     private var routeInfoAndControlsView: some View {
         VStack {
             Group {
-                if overlayState.isNormal {
-                    header
-                        .blurBackground()
-                    Spacer()
-                }
+                header
+                    .blurBackground(withPadding: true)
+                Spacer()
             }
             .scaleFade(if: !overlayState.isNormal)
 
             VStack {
-                Group {
-                    if overlayState.isNormal || overlayState.isEditingLocationName {
-                        detailView
-                    }
-                }
-                .scaleFade(if: !overlayState.isNormal && !overlayState.isEditingLocationName)
+                detailView
+                    .scaleFade(if: !overlayState.isNormal && !overlayState.isEditingLocationName)
                 visitOptionsView
                     .scaleFade(if: overlayState.isEditingLocationName)
             }
             .padding(.bottom)
-            .blurBackground()
+            .blurBackground(withPadding: !overlayState.isEditingTag)
             .keyboardResponsive()
         }
+        .offset(y: overlayState.isEditingTag || overlayState.isEditingNotes ? -100 : 0)
     }
 }
 
@@ -248,9 +243,9 @@ private extension RouteOverlayView {
 }
 
 private extension View {
-    func blurBackground() -> some View {
+    func blurBackground(withPadding: Bool) -> some View {
         self
-            .padding(.horizontal)
+            .padding(.horizontal, withPadding ? 16 : 0)
             .background(
                 BlurView(style: .systemUltraThinMaterialDark)
                     .cornerRadius(20)

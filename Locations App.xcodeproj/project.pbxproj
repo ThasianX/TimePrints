@@ -466,10 +466,10 @@
 		1E24927123EB53DA00165280 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				1EB424E62429D3100035F43E /* Route */,
 				1EB03D2624102955001146FF /* AppMapView.swift */,
 				1E7B618E23E284C600F9F974 /* MapView.swift */,
 				1EE2CF5223E7A5EC009760D6 /* UserLocationButton.swift */,
+				1EB424E62429D3100035F43E /* Route */,
 				1E24927323EB54A600165280 /* Edit Tag */,
 				1E97274023EB5796006528ED /* Location Visits */,
 			);

@@ -25,7 +25,7 @@ struct RouteEditTagView: View {
                 Group {
                     if overlayState.isEditingTag {
                         tagSelectionList
-                            .padding(overlayState.isEditingTag ? 60 : 0)
+                            .padding(.bottom, overlayState.isEditingTag ? 60 : 0)
                             .scaleFade(if: tagState.isShowingAddOrEdit)
                     }
                 }
@@ -47,6 +47,9 @@ struct RouteEditTagView: View {
             .scaleFade(if: !overlayState.isEditingTag)
         }
         .disabled(isAnimatingSelection)
+        .padding(.top, overlayState.isEditingTag ? 100 : 0)
+        .padding(.bottom, overlayState.isEditingTag ? 50 : 0)
+        .frame(width: overlayState.isEditingTag ? screen.width : nil, height: overlayState.isEditingTag ? screen.height : nil)
     }
 }
 
