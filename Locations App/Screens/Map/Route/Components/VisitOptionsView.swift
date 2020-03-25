@@ -9,19 +9,27 @@ struct VisitOptionsView: View {
     var body: some View {
         HStack {
             Group {
-                routeEditTagView
-                Spacer()
+                if !overlayState.isEditingNotes {
+                    routeEditTagView
+                    Spacer()
+                }
             }
             .scaleFade(if: overlayState.isEditingNotes)
 
             Group {
-                editNotesButton
-                Spacer()
+                if !overlayState.isEditingTag {
+                    editNotesButton
+                    Spacer()
+                }
             }
             .scaleFade(if: overlayState.isEditingTag)
 
-            favoriteButton
-                .scaleFade(if: overlayState.isEditingTag || overlayState.isEditingNotes)
+            Group {
+                if overlayState.isNormal {
+                    favoriteButton
+                }
+            }
+            .scaleFade(if: !overlayState.isNormal)
         }
         .padding()
     }
@@ -46,6 +54,7 @@ struct VisitOptionsView: View {
 
 struct VisitOptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitOptionsView()
+        VisitOptionsView(overlayState: .constant(.normal), tagProvider: AppState.Route.init(), visit: .preview)
     }
 }
+

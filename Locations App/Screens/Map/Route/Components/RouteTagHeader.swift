@@ -12,8 +12,10 @@ struct RouteTagHeader: View {
         HStack {
             editTagHeaderView
             Group {
-                Spacer()
-                editTagHeaderButtons
+                if !isButton {
+                    Spacer()
+                    editTagHeaderButtons
+                }
             }
             .scaleFade(if: isButton)
         }
@@ -26,12 +28,14 @@ struct RouteTagHeader: View {
                 .onTapGesture(perform: onTagTap)
 
             ZStack {
-                headerText("CHOOSE TAG")
-                    .fade(if: tagState.isShowingAddOrEdit)
-                headerText("MAKE TAG")
-                    .fade(if: !tagState.operation.add)
-                headerText("EDIT TAG")
-                    .fade(if: !tagState.operation.edit)
+                if !isButton {
+                    headerText("CHOOSE TAG")
+                        .fade(if: tagState.isShowingAddOrEdit)
+                    headerText("MAKE TAG")
+                        .fade(if: !tagState.operation.add)
+                    headerText("EDIT TAG")
+                        .fade(if: !tagState.operation.edit)
+                }
             }
             .scaleFade(if: isButton)
         }

@@ -18,28 +18,33 @@ struct RouteEditTagView: View {
         ZStack {
             VStack(alignment: .leading) {
                 header
-                    .padding()
+                    .padding(overlayState.isEditingTag ? 16 : 0)
                     .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
                     .animation(.spring())
 
-                tagSelectionList
-                    .fade(if: tagState.isShowingAddOrEdit)
-                    .scaleEffect(tagState.isShowingAddOrEdit ? 0 : 1)
-
-                VSpace(60)
-                    .fade(if: tagState.isShowingAddOrEdit)
+                Group {
+                    if overlayState.isEditingTag {
+                        tagSelectionList
+                            .padding(overlayState.isEditingTag ? 60 : 0)
+                            .scaleFade(if: tagState.isShowingAddOrEdit)
+                    }
+                }
+                .scaleFade(if: !overlayState.isEditingTag)
+                .animation(.spring())
             }
 
             Group {
-                topAlignedTagOperationsView
-                    .padding()
-                    .fade(if: tagState.isntShowingAddNorEdit)
-                    .scaleEffect(!tagState.isShowingAddOrEdit ? 0 : 1)
-                    .animation(.spring())
+                if overlayState.isEditingTag {
+                    topAlignedTagOperationsView
+                        .padding()
+                        .scaleFade(if: tagState.isntShowingAddNorEdit)
+                        .animation(.spring())
 
-                bottomAlignedTransientAlertView
-                    .fade(if: tagState.alert.isInactive)
+                    bottomAlignedTransientAlertView
+                        .scaleFade(if: tagState.alert.isInactive)
+                }
             }
+            .scaleFade(if: !overlayState.isEditingTag)
         }
         .disabled(isAnimatingSelection)
     }
@@ -57,7 +62,9 @@ private extension RouteEditTagView {
 
     private func startEditingTag() {
         if !overlayState.isEditingTag {
-            overlayState = .editingTag
+            withAnimation {
+                overlayState = .editingTag
+            }
         }
     }
 
@@ -108,6 +115,7 @@ private extension RouteEditTagView {
 
     private func resetView() {
         // TODO: Reset whatever necessary in RouteOverlayView
+        overlayState = .normal
         tagState.alert.stop()
     }
 }

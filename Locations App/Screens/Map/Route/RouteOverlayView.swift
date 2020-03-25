@@ -38,15 +38,10 @@ struct RouteOverlayView: View {
     var body: some View {
         ZStack {
             // Offset of 15 to account for the center annotation size
-            Group {
-                centerIndicator
-                    .offset(y: 15)
-                routeInfoAndControlsView
-                controlButtons
-            }
-
-            editTagView
-                .modal(isPresented: overlayState.isEditingTag)
+            centerIndicator
+                .offset(y: 15)
+            controlButtons
+            routeInfoAndControlsView
         }
     }
 }
@@ -60,12 +55,24 @@ private extension RouteOverlayView {
 private extension RouteOverlayView {
     private var routeInfoAndControlsView: some View {
         VStack {
-            header
-                .blurBackground()
-            Spacer()
+            Group {
+                if overlayState.isNormal {
+                    header
+                        .blurBackground()
+                    Spacer()
+                }
+            }
+            .scaleFade(if: !overlayState.isNormal)
+
             VStack {
-                detailView
+                Group {
+                    if overlayState.isNormal || overlayState.isEditingLocationName {
+                        detailView
+                    }
+                }
+                .scaleFade(if: !overlayState.isNormal && !overlayState.isEditingLocationName)
                 visitOptionsView
+                    .scaleFade(if: overlayState.isEditingLocationName)
             }
             .padding(.bottom)
             .blurBackground()
@@ -236,56 +243,11 @@ private extension RouteOverlayView {
 
 private extension RouteOverlayView {
     private var visitOptionsView: some View {
-        HStack {
-            editTagButton
-            Spacer()
-            editNotesButton
-            Spacer()
-            favoriteButton
-        }
-        .padding()
-    }
-
-    private var editTagButton: some View {
-        BImage(perform: setStateToEditingTag, image: Image(systemName: "tag.fill"))
-            .foregroundColor(currentVisit.tagColor.color)
-    }
-
-    private func setStateToEditingTag() {
-        overlayState = .editingTag
-    }
-
-    private var editNotesButton: some View {
-        BImage(perform: setStateToEditingNotes, image: Image(systemName: "text.bubble.fill"))
-    }
-
-    private func setStateToEditingNotes() {
-        overlayState = .editingNotes
-    }
-
-    private var favoriteButton: some View {
-        FavoriteButton(visit: currentVisit)
-            .id(currentVisit.isFavorite)
-    }
-}
-
-private extension RouteOverlayView {
-    private var editTagView: some View {
-        EditTagView(tagProvider: appState.route.self, onReset: {})
+        VisitOptionsView(overlayState: $overlayState, tagProvider: appState.route.self, visit: appState.route.currentVisit)
     }
 }
 
 private extension View {
-    func modal(isPresented: Bool) -> some View {
-        self
-            .frame(width: screen.width, height: screen.height * 0.8)
-            .offset(y: isPresented ? 0 : screen.height)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black.opacity(0.8).extendToScreenEdges())
-            .fade(if: !isPresented)
-            .animation(.spring())
-    }
-
     func blurBackground() -> some View {
         self
             .padding(.horizontal)
