@@ -1,5 +1,6 @@
 // Kevin Li - 4:15 PM - 2/29/20
 
+import IQKeyboardManagerSwift
 import SwiftUI
 
 extension UserStore {
@@ -55,8 +56,18 @@ final class UserStore: ObservableObject {
         CoreData.initialDbSetup()
     }
 
-    func performLocationOperations() {
+    func performLocationOperationsAndSetUpKeyboard() {
+        performLocationOperations()
+        setUpKeyboard()
+    }
+
+    private func performLocationOperations() {
         locationService.startTrackingVisits()
+    }
+
+    private func setUpKeyboard() {
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.toolbarTintColor = themeColor
     }
 }
 
