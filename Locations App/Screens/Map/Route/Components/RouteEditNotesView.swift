@@ -32,12 +32,10 @@ private extension RouteEditNotesView {
     }
 
     private func adjustEditingState() {
-        if overlayState.isEditingNotes {
-            withAnimation {
+        withAnimation {
+            if overlayState.isEditingNotes {
                 resetNoteState()
-            }
-        } else {
-            withAnimation {
+            } else {
                 overlayState = .editingNotes
             }
         }
