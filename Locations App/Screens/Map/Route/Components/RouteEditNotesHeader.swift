@@ -24,8 +24,13 @@ struct RouteEditNotesHeader: View {
     }
 
     private var notesImage: some View {
-        Image(systemName: "text.bubble.fill")
-            .foregroundColor(.white)
+        ZStack {
+            Image(systemName: "text.bubble.fill")
+                .fade(if: !isButton)
+            Image(systemName: "xmark.circle.fill")
+                .fade(if: isButton)
+        }
+        .foregroundColor(.white)
     }
 
     private var notesText: some View {
