@@ -20,6 +20,7 @@ struct AppMapView: View {
                 mapView
                     .extendToScreenEdges()
                 buttonHeader
+                    .fade(if: routeExists)
                     .blurBackground(if: routeExists)
             }
             .disablur(!mapState.isShowingMap)
