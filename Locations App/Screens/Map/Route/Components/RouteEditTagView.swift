@@ -57,8 +57,8 @@ private extension RouteEditTagView {
     private var header: some View {
         RouteTagHeader(
             tagState: tagState,
-            isButton: overlayState.isNormal,
-            onTagTap: startEditingTag,
+            isButton: !overlayState.isEditingTag,
+            onButtonTap: startEditingTag,
             normalTagColor: tagProvider.normalTagColor,
             onSelect: setTagAndExitView)
     }

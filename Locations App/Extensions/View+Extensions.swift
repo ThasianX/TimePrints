@@ -21,10 +21,6 @@ extension View {
         modifier(RoundedModifier(radius: radius, corners: corners))
     }
 
-    func keyboardResponsive() -> some View {
-        modifier(KeyboardResponsiveModifier())
-    }
-
     func scaleFade(if condition: Bool) -> some View {
         modifier(ScaleFadeModifier(condition: condition))
     }

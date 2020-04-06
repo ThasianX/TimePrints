@@ -33,12 +33,14 @@
 		1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */; };
 		1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */; };
 		1E4723232429D76B004FCF7D /* RouteTagHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4723222429D76B004FCF7D /* RouteTagHeader.swift */; };
+		1E4879F3243AED1300048816 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1E4879F2243AED1300048816 /* IQKeyboardManagerSwift */; };
 		1E558EDD2411FBE80087C5E3 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E558EDC2411FBE80087C5E3 /* AppView.swift */; };
 		1E558EDF2411FD0C0087C5E3 /* SetupThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E558EDE2411FD0C0087C5E3 /* SetupThemePickerView.swift */; };
 		1E5AF45223E3CC0500A94F10 /* VisitsPreviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45123E3CC0500A94F10 /* VisitsPreviewList.swift */; };
 		1E5AF45423E3CCCA00A94F10 /* VisitPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45323E3CCCA00A94F10 /* VisitPreviewCell.swift */; };
 		1E5AF45623E3E25E00A94F10 /* Formatter+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45523E3E25E00A94F10 /* Formatter+DateFormatter.swift */; };
 		1E5AF45823E3E2E500A94F10 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AF45723E3E2E500A94F10 /* Date+ToString.swift */; };
+		1E5B271924392794000E0054 /* RouteEditNotesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B271824392794000E0054 /* RouteEditNotesHeader.swift */; };
 		1E5DBEA723E9C6A000C86641 /* DisableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBEA623E9C6A000C86641 /* DisableModifier.swift */; };
 		1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBEA823E9C7A100C86641 /* OpacityModifier.swift */; };
 		1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D568623E5ED5B0044AB3A /* VisitDetailsView.swift */; };
@@ -71,16 +73,14 @@
 		1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */; };
 		1EB03D25241027DB001146FF /* TransientSplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D24241027DB001146FF /* TransientSplashView.swift */; };
 		1EB03D2724102955001146FF /* AppMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D2624102955001146FF /* AppMapView.swift */; };
-		1EB424E32429C4C00035F43E /* EditNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424E22429C4C00035F43E /* EditNotesView.swift */; };
+		1EB424E32429C4C00035F43E /* RouteEditNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424E22429C4C00035F43E /* RouteEditNotesView.swift */; };
 		1EB424E52429CFEA0035F43E /* RouteEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424E42429CFEA0035F43E /* RouteEditTagView.swift */; };
 		1EB424E92429D3500035F43E /* VisitOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424E82429D3500035F43E /* VisitOptionsView.swift */; };
 		1EB424EB2429D48A0035F43E /* ScaleFadeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB424EA2429D48A0035F43E /* ScaleFadeModifier.swift */; };
-		1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */; };
+		1EB865DF23F9D53F00A4B8E1 /* AutoResizingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865DE23F9D53F00A4B8E1 /* AutoResizingTextField.swift */; };
 		1EB865E123F9E01400A4B8E1 /* UIApplication+Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */; };
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
 		1EC19125241FE32800089E8D /* RouteOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC19124241FE32800089E8D /* RouteOverlayView.swift */; };
-		1EC19127241FEF9F00089E8D /* KeyboardResponsiveModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */; };
-		1EC1912A241FF23200089E8D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1EC19129241FF23200089E8D /* Introspect */; };
 		1EC1912C2420267800089E8D /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1912B2420267800089E8D /* FavoriteButton.swift */; };
 		1ED534FE24096B34009B11D3 /* profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED534FD24096B34009B11D3 /* profile.json */; };
 		1ED5350024096D62009B11D3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED534FF24096D62009B11D3 /* LoginView.swift */; };
@@ -206,6 +206,7 @@
 		1E5AF45323E3CCCA00A94F10 /* VisitPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitPreviewCell.swift; sourceTree = "<group>"; };
 		1E5AF45523E3E25E00A94F10 /* Formatter+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+DateFormatter.swift"; sourceTree = "<group>"; };
 		1E5AF45723E3E2E500A94F10 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
+		1E5B271824392794000E0054 /* RouteEditNotesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEditNotesHeader.swift; sourceTree = "<group>"; };
 		1E5DBEA623E9C6A000C86641 /* DisableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableModifier.swift; sourceTree = "<group>"; };
 		1E5DBEA823E9C7A100C86641 /* OpacityModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityModifier.swift; sourceTree = "<group>"; };
 		1E6D568623E5ED5B0044AB3A /* VisitDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitDetailsView.swift; sourceTree = "<group>"; };
@@ -245,15 +246,14 @@
 		1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentKey+AppTheme.swift"; sourceTree = "<group>"; };
 		1EB03D24241027DB001146FF /* TransientSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientSplashView.swift; sourceTree = "<group>"; };
 		1EB03D2624102955001146FF /* AppMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMapView.swift; sourceTree = "<group>"; };
-		1EB424E22429C4C00035F43E /* EditNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotesView.swift; sourceTree = "<group>"; };
+		1EB424E22429C4C00035F43E /* RouteEditNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEditNotesView.swift; sourceTree = "<group>"; };
 		1EB424E42429CFEA0035F43E /* RouteEditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEditTagView.swift; sourceTree = "<group>"; };
 		1EB424E82429D3500035F43E /* VisitOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitOptionsView.swift; sourceTree = "<group>"; };
 		1EB424EA2429D48A0035F43E /* ScaleFadeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleFadeModifier.swift; sourceTree = "<group>"; };
-		1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		1EB865DE23F9D53F00A4B8E1 /* AutoResizingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoResizingTextField.swift; sourceTree = "<group>"; };
 		1EB865E023F9E01400A4B8E1 /* UIApplication+Editing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Editing.swift"; sourceTree = "<group>"; };
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		1EC19124241FE32800089E8D /* RouteOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOverlayView.swift; sourceTree = "<group>"; };
-		1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsiveModifier.swift; sourceTree = "<group>"; };
 		1EC1912B2420267800089E8D /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		1ED534FD24096B34009B11D3 /* profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profile.json; sourceTree = "<group>"; };
 		1ED534FF24096D62009B11D3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -316,9 +316,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E4879F3243AED1300048816 /* IQKeyboardManagerSwift in Frameworks */,
 				1EF6227423FF21C800B28DCF /* MapboxMobileEvents.framework in Frameworks */,
 				1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */,
-				1EC1912A241FF23200089E8D /* Introspect in Frameworks */,
 				1EF6227123FF21C400B28DCF /* Mapbox.framework in Frameworks */,
 				1EFE85CE240377060001D0C3 /* Lottie in Frameworks */,
 			);
@@ -424,7 +424,7 @@
 		1E24328C240B733000E983E7 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
-				1EB865DE23F9D53F00A4B8E1 /* CustomTextField.swift */,
+				1EB865DE23F9D53F00A4B8E1 /* AutoResizingTextField.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -707,10 +707,12 @@
 			children = (
 				1E125C4C240DAA9900D0919E /* Array+Chunk.swift */,
 				1EFF83B023E532FA00FF04A1 /* Array+Sort.swift */,
+				1EF5BECC2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift */,
 				1E125C4E240DAB0C00D0919E /* Date+DateComponents.swift */,
 				1E5AF45723E3E2E500A94F10 /* Date+ToString.swift */,
 				1EFF839C23E4BF2F00FF04A1 /* DateComponents+Additions.swift */,
 				1EFF839A23E4BC9800FF04A1 /* Dictionary+Sort&Key.swift */,
+				1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */,
 				1E5AF45523E3E25E00A94F10 /* Formatter+DateFormatter.swift */,
 				1EFE9F4623FC225D00E94D67 /* MGLMapView+Default.swift */,
 				1EFF83A223E4E27800FF04A1 /* RandomAccessCollection+Indexed.swift */,
@@ -720,8 +722,6 @@
 				1E125C4A240DA19B00D0919E /* UIColor+ToColor.swift */,
 				1E06D50F23FE21AE00467799 /* UIImage+Additions.swift */,
 				1EFF83AC23E52D5800FF04A1 /* View+Extensions.swift */,
-				1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */,
-				1EF5BECC2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -767,10 +767,11 @@
 			children = (
 				1E3237982418632500D370CD /* CloseRouteButton.swift */,
 				1EF5BECA2425D64300B34251 /* CenterIndicatorView.swift */,
-				1EB424E42429CFEA0035F43E /* RouteEditTagView.swift */,
 				1EB424E82429D3500035F43E /* VisitOptionsView.swift */,
+				1EB424E42429CFEA0035F43E /* RouteEditTagView.swift */,
 				1E4723222429D76B004FCF7D /* RouteTagHeader.swift */,
-				1EB424E22429C4C00035F43E /* EditNotesView.swift */,
+				1EB424E22429C4C00035F43E /* RouteEditNotesView.swift */,
+				1E5B271824392794000E0054 /* RouteEditNotesHeader.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -860,7 +861,6 @@
 				1EFF83AE23E52E5900FF04A1 /* RotatedModifier.swift */,
 				1EFF83AA23E52BC700FF04A1 /* SizeModifier.swift */,
 				1E125C46240D83F200D0919E /* RoundedModifier.swift */,
-				1EC19126241FEF9F00089E8D /* KeyboardResponsiveModifier.swift */,
 				1EB424EA2429D48A0035F43E /* ScaleFadeModifier.swift */,
 			);
 			path = "View Modifiers";
@@ -886,7 +886,7 @@
 			name = "Locations App";
 			packageProductDependencies = (
 				1EFE85CD240377060001D0C3 /* Lottie */,
-				1EC19129241FF23200089E8D /* Introspect */,
+				1E4879F2243AED1300048816 /* IQKeyboardManagerSwift */,
 			);
 			productName = "Locations App";
 			productReference = 1E9D785523E10B4F0020FAFE /* Locations App.app */;
@@ -962,7 +962,7 @@
 			mainGroup = 1E9D784C23E10B4F0020FAFE;
 			packageReferences = (
 				1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				1EC19128241FF23100089E8D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				1E4879F1243AED1300048816 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 1E9D785623E10B4F0020FAFE /* Products */;
 			projectDirPath = "";
@@ -1077,7 +1077,6 @@
 				1EDE74D5240B6721002A7C08 /* LocationService.swift in Sources */,
 				1E125C49240DA17700D0919E /* UIColor+Hex.swift in Sources */,
 				1EFF83AD23E52D5800FF04A1 /* View+Extensions.swift in Sources */,
-				1EC19127241FEF9F00089E8D /* KeyboardResponsiveModifier.swift in Sources */,
 				1EFF839F23E4CE7500FF04A1 /* DayPreviewBlock.swift in Sources */,
 				1EFF839D23E4BF2F00FF04A1 /* DateComponents+Additions.swift in Sources */,
 				1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */,
@@ -1114,7 +1113,7 @@
 				1EF5BED024282B7400B34251 /* TagCoreState.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
 				1E125C52240DBA8F00D0919E /* ThemeColorService.swift in Sources */,
-				1EB424E32429C4C00035F43E /* EditNotesView.swift in Sources */,
+				1EB424E32429C4C00035F43E /* RouteEditNotesView.swift in Sources */,
 				1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */,
 				1E125C4D240DAA9900D0919E /* Array+Chunk.swift in Sources */,
 				1EFE85D0240377170001D0C3 /* LottieView.swift in Sources */,
@@ -1128,9 +1127,10 @@
 				1E9D788C23E10C670020FAFE /* CoreLocationService.swift in Sources */,
 				1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */,
 				1E0DB24D241F430D003944C5 /* AppState.swift in Sources */,
-				1EB865DF23F9D53F00A4B8E1 /* CustomTextField.swift in Sources */,
+				1EB865DF23F9D53F00A4B8E1 /* AutoResizingTextField.swift in Sources */,
 				1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */,
 				1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */,
+				1E5B271924392794000E0054 /* RouteEditNotesHeader.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1EF5BED4242897F800B34251 /* TagHeader.swift in Sources */,
@@ -1488,12 +1488,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1EC19128241FF23100089E8D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+		1E4879F1243AED1300048816 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
+				minimumVersion = 6.5.5;
 			};
 		};
 		1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -1507,10 +1507,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1EC19129241FF23200089E8D /* Introspect */ = {
+		1E4879F2243AED1300048816 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1EC19128241FF23100089E8D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
+			package = 1E4879F1243AED1300048816 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		1EFE85CD240377060001D0C3 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

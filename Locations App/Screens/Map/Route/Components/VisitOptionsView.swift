@@ -39,16 +39,12 @@ struct VisitOptionsView: View {
     }
 
     private var editNotesButton: some View {
-        BImage(perform: setStateToEditingNotes, image: Image(systemName: "text.bubble.fill"))
-    }
-
-    private func setStateToEditingNotes() {
-        overlayState = .editingNotes
+        RouteEditNotesView(overlayState: $overlayState, visit: visit)
     }
 
     private var favoriteButton: some View {
         FavoriteButton(visit: visit)
-            .id(visit.isFavorite)
+            .id(visit)
     }
 }
 

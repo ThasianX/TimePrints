@@ -129,7 +129,7 @@ private extension VisitDetailsView {
     private func resetNoteState() {
         isEditingNotes = false
         UIApplication.shared.endEditing(true)
-        updateNotesInput()
+        commitNoteEdits()
     }
 
     private func unselectRow() {
@@ -359,7 +359,7 @@ private extension VisitDetailsView {
         }
 
         private var notesTextView: some View {
-            AutoResizingTextField(isActive: $isEditingNotes, text: $notesInput, onCommit: onCommit)
+            AutoResizingTextField(text: $notesInput, isActive: isEditingNotes)
         }
 
         private var visitNotesTextView: some View {
@@ -437,7 +437,7 @@ private extension VisitDetailsView {
     }
 
     private func setFavoriteState() {
-//        isFavorite = visit.isFavorite
+        isFavorite = visit.isFavorite
     }
 
     private func updateNotesInput() {

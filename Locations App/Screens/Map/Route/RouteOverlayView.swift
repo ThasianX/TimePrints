@@ -70,7 +70,6 @@ private extension RouteOverlayView {
             }
             .padding(.bottom)
             .blurBackground(withPadding: !overlayState.isEditingTag)
-            .keyboardResponsive()
         }
         .offset(y: overlayState.isEditingTag || overlayState.isEditingNotes ? -100 : 0)
     }
@@ -162,10 +161,13 @@ private extension RouteOverlayView {
     }
 
     private var locationNameView: some View {
-        LocationNameView(
-            name: currentVisit.location.name,
+        let nameInput = Binding(
+            get: { self.currentVisit.location.name },
+            set: { self.currentVisit.setLocationName($0) })
+
+        return LocationNameView(
+            nameInput: nameInput,
             color: color,
-            setLocationName: setLocationName,
             setEditingStateForLocationName: setEditingStateForLocationName)
             .id(currentVisit)
     }
@@ -183,18 +185,10 @@ private extension RouteOverlayView {
     }
 
     private struct LocationNameView: View {
-        @State private var nameInput: String
+        @Binding var nameInput: String
 
-        let setLocationName: (String) -> Void
         let color: Color
         let setEditingStateForLocationName: (Bool) -> Void
-
-        init(name: String, color: Color, setLocationName: @escaping (String) -> Void, setEditingStateForLocationName: @escaping (Bool) -> Void) {
-            self._nameInput = State(initialValue: name)
-            self.setLocationName = setLocationName
-            self.color = color
-            self.setEditingStateForLocationName = setEditingStateForLocationName
-        }
 
         var body: some View {
             locationNameTextField
@@ -206,8 +200,7 @@ private extension RouteOverlayView {
             LocationNameTextField(
                 nameInput: $nameInput,
                 textColor: color,
-                onEditingChanged: setEditingStateForLocationName,
-                onCommit: _setLocationName)
+                onEditingChanged: setEditingStateForLocationName)
         }
 
         struct LocationNameTextField: View {
@@ -215,17 +208,12 @@ private extension RouteOverlayView {
 
             let textColor: Color
             let onEditingChanged: (Bool) -> Void
-            let onCommit: () -> Void
 
             var body: some View {
-                TextField("Location Name", text: $nameInput, onEditingChanged: onEditingChanged, onCommit: onCommit)
+                TextField("Location Name", text: $nameInput, onEditingChanged: onEditingChanged)
                     .foregroundColor(textColor)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
-        }
-
-        private func _setLocationName() {
-            setLocationName(nameInput)
         }
     }
 

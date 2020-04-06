@@ -3,26 +3,22 @@ import SwiftUI
 struct AutoResizingTextField: View {
     @State private var dynamicHeight: CGFloat = 100
 
-    @Binding var isActive: Bool
     @Binding var text: String
 
-    let onCommit: () -> Void
+    let isActive: Bool
     var keyboardType: UIKeyboardType = .default
 
     var body: some View {
-        CustomTextField(isActive: $isActive, text: $text, calculatedHeight: $dynamicHeight, onCommit: onCommit, keyboardType: keyboardType)
+        CustomTextField(text: $text, calculatedHeight: $dynamicHeight, isActive: isActive, keyboardType: keyboardType)
             .frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
     }
 }
 
 struct CustomTextField: UIViewRepresentable {
-    typealias UIViewType = UITextView
-
-    @Binding var isActive: Bool
     @Binding var text: String
     @Binding var calculatedHeight: CGFloat
 
-    let onCommit: () -> Void
+    let isActive: Bool
     let keyboardType: UIKeyboardType
 
     func makeUIView(context: UIViewRepresentableContext<CustomTextField>) -> UITextView {
@@ -33,11 +29,11 @@ struct CustomTextField: UIViewRepresentable {
         textField.isUserInteractionEnabled = true
         textField.isScrollEnabled = true
         textField.keyboardType = keyboardType
-        textField.returnKeyType = .done
         textField.backgroundColor = .clear
         textField.font = UIFont.preferredFont(forTextStyle: .body)
         textField.textColor = .white
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
         return textField
     }
 
@@ -75,21 +71,17 @@ struct CustomTextField: UIViewRepresentable {
             parent.text = textView.text
             parent.recalculateHeight(view: textView)
         }
+    }
+}
 
-        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-            if text == "\n" {
-                textView.resignFirstResponder()
-                parent.isActive = false
-                parent.onCommit()
-                return false
-            }
-            return true
-        }
+extension UITextView {
+    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
+       self.resignFirstResponder()
     }
 }
 
 struct CustomTextField_Previews: PreviewProvider {
     static var previews: some View {
-        AutoResizingTextField(isActive: .constant(true), text: .constant(""), onCommit: { })
+        AutoResizingTextField(text: .constant(""), isActive: true)
     }
 }

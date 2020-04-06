@@ -4,7 +4,7 @@ struct RouteTagHeader: View {
     @ObservedObject var tagState: TagCoreState
 
     let isButton: Bool
-    let onTagTap: () -> Void
+    let onButtonTap: () -> Void
     let normalTagColor: Color
     let onSelect: (Tag) -> Void
 
@@ -25,7 +25,7 @@ struct RouteTagHeader: View {
     private var editTagHeaderView: some View {
         HStack {
             tagImage
-                .onTapGesture(perform: onTagTap)
+                .onTapGesture(perform: onButtonTap)
 
             ZStack {
                 if !isButton {
@@ -108,6 +108,6 @@ struct RouteTagHeader: View {
 
 struct RouteTagHeader_Previews: PreviewProvider {
     static var previews: some View {
-        RouteTagHeader(tagState: .init(), isButton: true, onTagTap: { }, normalTagColor: .red, onSelect: { _ in })
+        RouteTagHeader(tagState: .init(), isButton: true, onButtonTap: { }, normalTagColor: .red, onSelect: { _ in })
     }
 }
