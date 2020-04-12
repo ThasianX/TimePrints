@@ -37,11 +37,13 @@ struct RouteOverlayView: View {
 
     var body: some View {
         ZStack {
-            // Offset of 15 to account for the center annotation size
-            centerIndicator
-                .offset(y: 15)
-            controlButtons
-            routeInfoAndControlsView
+            if appState.route.exists {
+                // Offset of 15 to account for the center annotation size
+                centerIndicator
+                    .offset(y: 15)
+                controlButtons
+                routeInfoAndControlsView
+            }
         }
     }
 }
