@@ -17,7 +17,7 @@ struct CloseRouteButton: View {
 
     private func closeRoute() {
         animatingExit = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.action()
         }
     }

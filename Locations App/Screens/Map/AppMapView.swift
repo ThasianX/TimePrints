@@ -34,7 +34,6 @@ struct AppMapView: View {
 
             locationVisitsView
                 .modal(isPresented: mapState.isshowingLocationVisits)
-
         }
     }
 
