@@ -10,7 +10,7 @@ struct VisitOptionsView: View {
         HStack {
             Group {
                 if !overlayState.isEditingNotes {
-                    routeEditTagView
+                    editTagButton
                     Spacer()
                 }
             }
@@ -34,7 +34,7 @@ struct VisitOptionsView: View {
         .padding()
     }
 
-    private var routeEditTagView: RouteEditTagView {
+    private var editTagButton: RouteEditTagView {
         RouteEditTagView(overlayState: $overlayState, tagProvider: tagProvider)
     }
 
