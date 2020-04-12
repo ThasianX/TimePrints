@@ -1,5 +1,6 @@
 // Kevin Li - 10:15 PM - 3/15/20
 
+import Combine
 import Mapbox
 import SwiftUI
 
@@ -7,21 +8,37 @@ class AppState: ObservableObject {
     @Published var showing: Showing = .init()
     @Published var locationControl: LocationControl = .init()
     @Published var route: Route = .init()
-}
 
-extension AppState {
-    struct Showing {
-        var toggleButton: Bool = true
-        var homeView: Bool = false
+    var anyCancellable = Set<AnyCancellable>()
+
+    init() {
+        showing.objectWillChange.sink { _ in
+            self.objectWillChange.send()
+        }.store(in: &anyCancellable)
+
+        locationControl.objectWillChange.sink { _ in
+            self.objectWillChange.send()
+        }.store(in: &anyCancellable)
+
+        route.objectWillChange.sink { _ in
+            self.objectWillChange.send()
+        }.store(in: &anyCancellable)
     }
 }
 
 extension AppState {
-    struct LocationControl {
-        var stayAtCurrent: Bool = false
-        var activeForVisit: Location? = nil
+    class Showing: ObservableObject {
+        @Published var toggleButton: Bool = true
+        @Published var homeView: Bool = false
+    }
+}
 
-        mutating func reset(stayAtCurrent: Bool) {
+extension AppState {
+    class LocationControl: ObservableObject {
+        @Published var stayAtCurrent: Bool = false
+        @Published var activeForVisit: Location? = nil
+
+        func reset(stayAtCurrent: Bool) {
             self.stayAtCurrent = stayAtCurrent
             activeForVisit = nil
         }
@@ -29,11 +46,11 @@ extension AppState {
 }
 
 extension AppState {
-    struct Route: TagProvider {
-        fileprivate var visits: [Visit]
-        fileprivate var visitsIndex: Int = 0
+    class Route: TagProvider, ObservableObject {
+        @Published private var visits: [Visit]
+        @Published private var visitsIndex: Int = 0
 
-        var isCentered = true
+        @Published var isCentered = true
 
         init(visits: [Visit] = []) {
             self.visits = visits
@@ -71,28 +88,28 @@ extension AppState {
             visits.count
         }
 
-        mutating func setVisits(visits: [Visit]) {
+        func setVisits(visits: [Visit]) {
             self.visits = visits
             isCentered = true
         }
 
-        mutating func selectPreviousLocation() {
+        func selectPreviousLocation() {
             visitsIndex -= 1
             isCentered = true
         }
 
-        mutating func selectNextLocation() {
+        func selectNextLocation() {
             visitsIndex += 1
             isCentered = true
         }
 
-        mutating func recenter() {
+        func recenter() {
             let index = visitsIndex
             visitsIndex = index
             isCentered = true
         }
 
-        mutating func reset() {
+        func reset() {
             visits = []
             visitsIndex = 0
         }
