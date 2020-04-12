@@ -134,7 +134,6 @@ private extension RouteOverlayView {
 
     private func selectPreviousLocation() {
         appState.route.selectPreviousLocation()
-        setLocationCenterCoordinate()
     }
 
     private var nextLocationButton: some View {
@@ -143,12 +142,6 @@ private extension RouteOverlayView {
 
     private func selectNextLocation() {
         appState.route.selectNextLocation()
-        setLocationCenterCoordinate()
-    }
-
-    private func setLocationCenterCoordinate() {
-        appState.locationControl.centerCoordinate = appState.route.currentVisit.location.coordinate
-        appState.locationControl.shouldCenterForRoute = true
     }
 }
 

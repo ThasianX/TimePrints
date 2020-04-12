@@ -190,18 +190,12 @@ private extension VisitsPreviewList {
 
     private func setActiveRouteVisitsAndDisplayMap(visits: [Visit]) {
         setActiveRouteVisits(visits: visits)
-        setAndCenterRouteOnFirstVisit()
         showMapView()
         hideToggleButton()
     }
 
     private func setActiveRouteVisits(visits: [Visit]) {
         appState.route.setVisits(visits: visits)
-    }
-
-    private func setAndCenterRouteOnFirstVisit() {
-        appState.locationControl.centerCoordinate = appState.route.currentVisit.location.coordinate
-        appState.locationControl.shouldCenterForRoute = true
     }
 
     private func showMapView() {

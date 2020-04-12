@@ -21,16 +21,9 @@ extension AppState {
         var stayAtCurrent: Bool = false
         var activeForVisit: Location? = nil
 
-        var centerCoordinate: CLLocationCoordinate2D = .init()
-        var shouldCenterForRoute = true
-
         mutating func reset(stayAtCurrent: Bool) {
             self.stayAtCurrent = stayAtCurrent
             activeForVisit = nil
-        }
-
-        func isCentered(coordinate: CLLocationCoordinate2D) -> Bool {
-            centerCoordinate == coordinate
         }
     }
 }
@@ -39,6 +32,8 @@ extension AppState {
     struct Route: TagProvider {
         fileprivate var visits: [Visit]
         fileprivate var visitsIndex: Int = 0
+
+        var isCentered = true
 
         init(visits: [Visit] = []) {
             self.visits = visits
@@ -78,19 +73,23 @@ extension AppState {
 
         mutating func setVisits(visits: [Visit]) {
             self.visits = visits
+            isCentered = true
         }
 
         mutating func selectPreviousLocation() {
             visitsIndex -= 1
+            isCentered = true
         }
 
         mutating func selectNextLocation() {
             visitsIndex += 1
+            isCentered = true
         }
 
         mutating func recenter() {
             let index = visitsIndex
-            self.visitsIndex = index
+            visitsIndex = index
+            isCentered = true
         }
 
         mutating func reset() {

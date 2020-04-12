@@ -5,18 +5,14 @@ struct CenterIndicatorView: View {
     @Binding var route: AppState.Route
     let color: Color
 
-    private var isCentered: Bool {
-        locationControl.isCentered(coordinate: route.currentVisit.location.coordinate)
-    }
-
     var body: some View {
         ZStack {
             centerIndicator
-                .scaleEffect(isCentered ? 1 : 0.1)
-                .fade(if: !isCentered)
+                .scaleEffect(route.isCentered ? 1 : 0.1)
+                .fade(if: !route.isCentered)
             recenterMapButton
-                .scaleEffect(!isCentered ? 1 : 0.1)
-                .fade(if: isCentered)
+                .scaleEffect(!route.isCentered ? 1 : 0.1)
+                .fade(if: route.isCentered)
         }
         .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
     }
@@ -35,8 +31,6 @@ struct CenterIndicatorView: View {
 
     private func recenterMap() {
         route.recenter()
-        locationControl.centerCoordinate = route.currentVisit.location.coordinate
-        locationControl.shouldCenterForRoute = true
     }
 }
 
