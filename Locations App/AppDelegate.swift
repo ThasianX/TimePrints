@@ -1,5 +1,6 @@
-import UIKit
 import CoreData
+import IQKeyboardManagerSwift
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

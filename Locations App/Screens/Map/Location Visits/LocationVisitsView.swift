@@ -1,33 +1,14 @@
 import SwiftUI
 
 struct LocationVisitsView: View {
-    @FetchRequest var visitsForSelectedLocation: FetchedResults<Visit>
-    
-    @Binding var show: Bool
-    @Binding var showingToggleButton: Bool
-    
-    let selectedLocation: Location?
-    
-    init(show: Binding<Bool>, showingToggleButton: Binding<Bool>, selectedLocation: Location?) {
-        self._show = show
-        self._showingToggleButton = showingToggleButton
-        self.selectedLocation = selectedLocation
-        
-        let locationExists = selectedLocation != nil
-        self._visitsForSelectedLocation = FetchRequest(
-            entity: Visit.entity(),
-            sortDescriptors: [
-                NSSortDescriptor(keyPath: \Visit.arrivalDate, ascending: false)
-            ],
-            predicate: locationExists ? NSPredicate(format: "%@ == location", selectedLocation!) : nil
-        )
-    }
+    @Binding var mapState: MapState
+    @Binding var showing: AppState.Showing
     
     var body: some View {
         VStack {
             headerText
                 .padding(.bottom, 8)
-            
+
             locationVisitsList
             Spacer()
             exitButton
@@ -38,20 +19,36 @@ struct LocationVisitsView: View {
 
 private extension LocationVisitsView {
     private var headerText: some View {
-        Text("Visits for \(selectedLocation?.name ?? "")")
+        let name = mapState.hasSelectedLocation ? mapState.selectedLocation!.name : ""
+        return Text("Visits for \(name)")
             .font(.headline)
     }
     
     private var locationVisitsList: some View {
-        VStack(spacing: 8) {
-            ForEach(visitsForSelectedLocation) { visit in
-                LocationVisitsRow(visit: visit)
+        Group {
+            if mapState.hasSelectedLocation {
+                FilteredList(predicate: visitsPredicate, sortDescriptors: [arrivalDateSort], spacing: 8) { (visit: Visit) in
+                    LocationVisitsRow(visit: visit)
+                }
             }
         }
+    }
+
+    private var visitsPredicate: NSPredicate {
+        NSPredicate(format: "%@ == location", mapState.selectedLocation!)
+    }
+
+    private var arrivalDateSort: NSSortDescriptor {
+        NSSortDescriptor(keyPath: \Visit.arrivalDate, ascending: false)
     }
     
     private var exitButton: some View {
         BImage(perform: exitView, image: .init(systemName: "x.circle.fill"))
+    }
+    
+    private func exitView() {
+        mapState = .showingMap
+        showing.toggleButton = true
     }
 }
 
@@ -71,7 +68,7 @@ private extension LocationVisitsView {
         }
 
         private var visitDurationText: some View {
-            Text(visit.visitDuration)
+            Text(visit.duration)
         }
 
         private var starImageIfFavorited: some View {
@@ -91,15 +88,9 @@ private extension LocationVisitsView {
     }
 }
 
-private extension LocationVisitsView {
-    private func exitView() {
-        show = false
-        showingToggleButton = true
-    }
-}
-
 struct LocationVisitsView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationVisitsView(show: .constant(true), showingToggleButton: .constant(false), selectedLocation: .preview).environment(\.managedObjectContext, CoreData.stack.context)
+        LocationVisitsView(mapState: .constant(.showingLocationVisits(.preview)), showing: .constant(.init()))
+            .environment(\.managedObjectContext, CoreData.stack.context)
     }
 }

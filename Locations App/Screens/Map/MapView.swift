@@ -1,14 +1,18 @@
 import SwiftUI
 import Mapbox
 
+private extension MapView {
+    enum AccessoryType {
+        case tag
+        case visits
+    }
+}
+
 struct MapView: UIViewRepresentable {
+    @Binding var mapState: MapState
     @Binding var trackingMode: MGLUserTrackingMode
-    @Binding var selectedLocation: Location?
-    @Binding var showingEditTag: Bool
-    @Binding var showingLocationVisits: Bool
-    @Binding var showingToggleButton: Bool
-    @Binding var stayAtLocation: Bool
-    @Binding var activeVisitLocation: Location?
+
+    @ObservedObject var appState: AppState
 
     let userLocationColor: UIColor
     let annotations: [LocationAnnotation]
@@ -18,24 +22,36 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MGLMapView, context: UIViewRepresentableContext<MapView>) {
-        if selectedLocation == nil {
-            if let currentAnnotations = uiView.annotations {
-                uiView.removeAnnotations(currentAnnotations)
+        if mapState.isShowingMap {
+            if appState.route.exists && appState.route.isCentered {
+                centerLocation(appState.route.currentLocation, with: uiView)
+            } else {
+                if let currentAnnotations = uiView.annotations {
+                    uiView.removeAnnotations(currentAnnotations)
+                }
+                uiView.addAnnotations(annotations)
             }
-            uiView.addAnnotations(annotations)
         }
 
-        if !stayAtLocation {
+        if !appState.locationControl.stayAtCurrent {
             uiView.userTrackingMode = trackingMode
         }
 
-        if let activeVisitLocation = activeVisitLocation {
-            let annotation = LocationAnnotation(location: activeVisitLocation)
-            uiView.setCenter(activeVisitLocation.coordinate, zoomLevel: 16, animated: true)
-            uiView.selectAnnotation(annotation, animated: true, completionHandler: { })
+        if let activeVisitLocation = appState.locationControl.activeForVisit {
+            selectAnnotation(for: activeVisitLocation, with: uiView)
         }
     }
-    
+
+    private func centerLocation(_ location: Location, with map: MGLMapView) {
+        map.setCenter(location.coordinate, zoomLevel: 15, animated: true)
+    }
+
+    private func selectAnnotation(for location: Location, with map: MGLMapView) {
+        let activeAnnotation = LocationAnnotation(location: location)
+        centerLocation(location, with: map)
+        map.selectAnnotation(activeAnnotation, animated: true, completionHandler: nil)
+    }
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -46,9 +62,18 @@ struct MapView: UIViewRepresentable {
         init(_ parent: MapView) {
             self.parent = parent
         }
-        
+
+        // MARK: Route
+        func mapView(_ mapView: MGLMapView, shouldChangeFrom oldCamera: MGLMapCamera, to newCamera: MGLMapCamera, reason: MGLCameraChangeReason) -> Bool {
+            if parent.appState.route.exists && parent.appState.route.isCentered {
+                parent.appState.route.isCentered = false
+            }
+            return true
+        }
+
+        // MARK: Annotation
         func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-            true
+            !parent.appState.route.exists
         }
         
         func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
@@ -78,25 +103,35 @@ struct MapView: UIViewRepresentable {
             
             switch control.tag {
             case 0:
-                setLocationWithoutRecentering(location: annotation.location)
-                parent.showingEditTag = true
+                setLocationWithoutRecentering(for: .tag, location: annotation.location)
             case 1:
-                setLocationWithoutRecentering(location: annotation.location)
-                parent.showingLocationVisits = true
+                setLocationWithoutRecentering(for: .visits, location: annotation.location)
             default:
                 ()
             }
         }
 
-        private func setLocationWithoutRecentering(location: Location) {
-            parent.selectedLocation = location
-            parent.stayAtLocation = true
-            parent.activeVisitLocation = nil
+        private func setLocationWithoutRecentering(for accessoryType: AccessoryType, location: Location) {
+            setLocation(for: accessoryType, location: location)
+            preventRecentering()
             hideToggleButton()
         }
 
+        private func setLocation(for accessoryType: AccessoryType, location: Location) {
+            switch accessoryType {
+            case .tag:
+                parent.mapState = .showingEditTag(location)
+            case .visits:
+                parent.mapState = .showingLocationVisits(location)
+            }
+        }
+
+        private func preventRecentering() {
+            parent.appState.locationControl.reset(stayAtCurrent: true)
+        }
+
         private func hideToggleButton() {
-            parent.showingToggleButton = false
+            parent.appState.showing.toggleButton = false
         }
     }
 }
@@ -114,6 +149,6 @@ private extension UIButton {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(trackingMode: .constant(.follow), selectedLocation: .constant(nil), showingEditTag: .constant(false), showingLocationVisits: .constant(false), showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), userLocationColor: .red, annotations: [])
+        MapView(mapState: .constant(.showingMap), trackingMode: .constant(.follow), appState: .init(), userLocationColor: .red, annotations: [])
     }
 }

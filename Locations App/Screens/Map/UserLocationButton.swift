@@ -3,8 +3,7 @@ import Mapbox
 
 struct UserLocationButton: View {
     @Binding var trackingMode: MGLUserTrackingMode
-    @Binding var stayAtLocation: Bool
-    @Binding var activeVisitLocation: Location?
+    @Binding var locationControl: AppState.LocationControl
 
     let color: Color
     
@@ -19,6 +18,7 @@ struct UserLocationButton: View {
     private var trackingModeButton: some View {
         Button(action: updateTrackingMode) {
             locationFillImage
+                .foregroundColor(color)
                 .rotationEffect(shouldRotate ? .init(degrees: -45) : .init(degrees: 0))
                 .animation(.spring(response: 0.75, dampingFraction: 0.825, blendDuration: 0))
         }
@@ -28,7 +28,6 @@ struct UserLocationButton: View {
         Image(systemName: "location.fill")
             .resizable()
             .frame(width: 40, height: 40)
-            .foregroundColor(color)
     }
     
     private func updateTrackingMode() {
@@ -42,11 +41,10 @@ struct UserLocationButton: View {
         default:
             fatalError("Other tracking modes not supported")
         }
-        
+
         withAnimation {
             self.trackingMode = mode
-            self.stayAtLocation = false
-            self.activeVisitLocation = nil
+            self.locationControl.reset(stayAtCurrent: false)
         }
     }
 }
@@ -54,8 +52,8 @@ struct UserLocationButton: View {
 struct UserLocationButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            UserLocationButton(trackingMode: .constant(.follow), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), color: .pink)
-            UserLocationButton(trackingMode: .constant(.followWithHeading), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil), color: .pink)
+            UserLocationButton(trackingMode: .constant(.follow), locationControl: .constant(.init()), color: .pink)
+            UserLocationButton(trackingMode: .constant(.followWithHeading), locationControl: .constant(.init()), color: .pink)
         }
     }
 }

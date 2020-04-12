@@ -1,16 +1,6 @@
 import SwiftUI
 
-class AddNewTagState: TagCoreState {
-    func addNewTag(onAdd: (Tag) -> Void) {
-        UIApplication.shared.endEditing(true)
-        if isNameCompliable() {
-            let newTag = operation.addNewTag()
-            onAdd(newTag)
-        }
-    }
-}
-
-struct EditTagView: View {
+struct RouteEditTagView: View {
     @FetchRequest(
         entity: Tag.entity(),
         sortDescriptors: [
@@ -21,44 +11,64 @@ struct EditTagView: View {
     @ObservedObject var tagState: AddNewTagState = .init()
     @State private var isAnimatingSelection: Bool = false
 
+    @Binding var overlayState: RouteOverlayState
     let tagProvider: TagProvider
-    let onReset: () -> Void
 
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
                 header
-                    .padding()
+                    .padding(overlayState.isEditingTag ? 16 : 0)
                     .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
                     .animation(.spring())
 
-                tagSelectionList
-                    .fade(if: tagState.isShowingAddOrEdit)
-                    .scaleEffect(tagState.isShowingAddOrEdit ? 0.1 : 1)
-
-                VSpace(60)
-                    .fade(if: tagState.isShowingAddOrEdit)
+                Group {
+                    if overlayState.isEditingTag {
+                        tagSelectionList
+                            .padding(.bottom, overlayState.isEditingTag ? 60 : 0)
+                            .scaleFade(if: tagState.isShowingAddOrEdit)
+                    }
+                }
+                .scaleFade(if: !overlayState.isEditingTag)
+                .animation(.spring())
             }
 
-            topAlignedTagOperationsView
-                .padding()
-                .fade(if: tagState.isntShowingAddNorEdit)
-                .scaleEffect(!tagState.isShowingAddOrEdit ? 0.1 : 1)
-                .animation(.spring())
+            Group {
+                if overlayState.isEditingTag {
+                    topAlignedTagOperationsView
+                        .padding()
+                        .scaleFade(if: tagState.isntShowingAddNorEdit)
+                        .animation(.spring())
 
-            bottomAlignedTransientAlertView
-                .fade(if: tagState.alert.isInactive)
+                    bottomAlignedTransientAlertView
+                        .scaleFade(if: tagState.alert.isInactive)
+                }
+            }
+            .scaleFade(if: !overlayState.isEditingTag)
         }
         .disabled(isAnimatingSelection)
+        .padding(.top, overlayState.isEditingTag ? 100 : 0)
+        .padding(.bottom, overlayState.isEditingTag ? 50 : 0)
+        .frame(width: overlayState.isEditingTag ? screen.width : nil, height: overlayState.isEditingTag ? screen.height : nil)
     }
 }
 
-private extension EditTagView {
+private extension RouteEditTagView {
     private var header: some View {
-        TagHeader(
+        RouteTagHeader(
             tagState: tagState,
+            isButton: !overlayState.isEditingTag,
+            onButtonTap: startEditingTag,
             normalTagColor: tagProvider.normalTagColor,
             onSelect: setTagAndExitView)
+    }
+
+    private func startEditingTag() {
+        if !overlayState.isEditingTag {
+            withAnimation {
+                overlayState = .editingTag
+            }
+        }
     }
 
     private var tagSelectionList: some View {
@@ -85,13 +95,13 @@ private extension EditTagView {
     }
 }
 
-private extension EditTagView {
+private extension RouteEditTagView {
     private func setTagAndExitView(tag: Tag) {
         if tagProvider.selectedLocation!.tag == tag {
             resetView()
             return
         }
-        
+
         tagProvider.selectedLocation!.setTag(tag: tag)
         isAnimatingSelection = true
 
@@ -107,13 +117,14 @@ private extension EditTagView {
     }
 
     private func resetView() {
-        onReset()
+        // TODO: Reset whatever necessary in RouteOverlayView
+        overlayState = .normal
         tagState.alert.stop()
     }
 }
-
-struct EditTagView_Previews: PreviewProvider {
+struct RouteEditTagView_Previews: PreviewProvider {
     static var previews: some View {
-        return EditTagView(tagProvider: MapState.showingEditTag(.preview), onReset: {}).environment(\.managedObjectContext, CoreData.stack.context).background(Color.black.edgesIgnoringSafeArea(.all))
+        RouteEditTagView(overlayState: .constant(.editingTag), tagProvider: AppState.Route.init(visits: Visit.previewVisits))
     }
 }
+

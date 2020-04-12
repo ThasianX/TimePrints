@@ -102,6 +102,11 @@ extension Location {
 }
 
 extension Location {
+    func setName(_ name: String) {
+        self.name = name
+        CoreData.stack.save()
+    }
+
     func setTag(tag: Tag) {
         self.tag = tag
         CoreData.stack.save()

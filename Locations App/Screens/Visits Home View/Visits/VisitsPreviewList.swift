@@ -9,9 +9,8 @@ struct VisitsPreviewList: View {
     @State private var currentDayComponent = DateComponents()
     @State private var isPreviewActive = true
 
-    @Binding var showingHomeView: Bool
-    @Binding var activeVisitLocation: Location?
     @Binding var hideFAB: Bool
+    @ObservedObject var appState: AppState
 
     var body: some View {
         var fill = false
@@ -174,7 +173,8 @@ private extension VisitsPreviewList {
             currentDayComponent: $currentDayComponent,
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
             onBack: setPreviewActive,
-            setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap
+            setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap,
+            setActiveRouteVisitsAndDisplayMap: setActiveRouteVisitsAndDisplayMap
         )
     }
 
@@ -184,14 +184,32 @@ private extension VisitsPreviewList {
     }
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
-        self.activeVisitLocation = visit.location
-        self.showingHomeView = false
+        appState.locationControl.activeForVisit = visit.location
+        showMapView()
+    }
+
+    private func setActiveRouteVisitsAndDisplayMap(visits: [Visit]) {
+        setActiveRouteVisits(visits: visits)
+        showMapView()
+        hideToggleButton()
+    }
+
+    private func setActiveRouteVisits(visits: [Visit]) {
+        appState.route.setVisits(visits: visits)
+    }
+
+    private func showMapView() {
+        appState.showing.homeView = false
+    }
+
+    private func hideToggleButton() {
+        appState.showing.toggleButton = false
     }
 }
 
 struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsPreviewList(showingHomeView: .constant(true), activeVisitLocation: .constant(nil), hideFAB: .constant(false))
+        VisitsPreviewList(hideFAB: .constant(false), appState: .init())
             .environment(\.managedObjectContext, CoreData.stack.context)
             .statusBar(hidden: true)
     }

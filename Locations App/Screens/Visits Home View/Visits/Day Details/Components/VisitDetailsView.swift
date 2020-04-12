@@ -75,6 +75,7 @@ private extension VisitDetailsView {
             }
             Spacer()
             favoriteButton
+                .id(visit.isFavorite)
                 .fade(if: !isSelected)
         }
     }
@@ -128,7 +129,7 @@ private extension VisitDetailsView {
     private func resetNoteState() {
         isEditingNotes = false
         UIApplication.shared.endEditing(true)
-        updateNotesInput()
+        commitNoteEdits()
     }
 
     private func unselectRow() {
@@ -146,33 +147,15 @@ private extension VisitDetailsView {
 
     private var starImageIfNotSelectedAndIsFavorite: some View {
         Group {
-            if !isSelected && isFavorite {
+            if !isSelected && favoriteButton.favorited {
                 Image("star.fill")
                     .foregroundColor(.yellow)
             }
         }
     }
 
-    private var favoriteButton: some View {
-        FavoriteButton(isFavorite: $isFavorite, visit: visit)
-    }
-
-    private struct FavoriteButton: View {
-        @Binding var isFavorite: Bool
-        let visit: Visit
-
-        var body: some View {
-            BImage(perform: favorite, image: favoriteImage)
-                .foregroundColor(.yellow)
-        }
-
-        private func favorite() {
-            isFavorite = visit.favorite()
-        }
-
-        private var favoriteImage: Image {
-            isFavorite ? Image("star.fill") : Image("star")
-        }
+    private var favoriteButton: FavoriteButton {
+        FavoriteButton(visit: visit)
     }
 }
 
@@ -192,7 +175,7 @@ private extension VisitDetailsView {
     }
 
     private var visitDurationText: some View {
-        Text(visit.visitDuration)
+        Text(visit.duration)
             .font(isSelected ? .system(size: 18) : .system(size: 10))
             .tracking(isSelected ? 2 : 0)
             .animation(nil)
@@ -376,7 +359,7 @@ private extension VisitDetailsView {
         }
 
         private var notesTextView: some View {
-            AutoResizingTextField(isActive: $isEditingNotes, text: $notesInput, onCommit: onCommit)
+            AutoResizingTextField(text: $notesInput, isActive: isEditingNotes)
         }
 
         private var visitNotesTextView: some View {

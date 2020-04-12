@@ -6,7 +6,7 @@ struct LoginView: View {
     @ObservedObject var userStore: UserStore
     @State private var isLoggingIn = false
 
-    private var alert: Alert? {
+    private var alert: LottieAlert? {
         userStore.alert
     }
 
@@ -71,7 +71,7 @@ private extension LoginView {
     }
 
     private func logIn() {
-        self.userStore.logIn()
+        userStore.logIn()
         isLoggingIn = false
     }
 }
@@ -109,7 +109,7 @@ private extension LoginView {
 
     private struct AlertView: View {
         @State var show = false
-        let alert: Alert
+        let alert: LottieAlert
 
         var body: some View {
             alertView
@@ -149,7 +149,7 @@ private extension LoginView {
         }
 
         private func makeVisible() {
-            self.show = true
+            show = true
         }
     }
 }

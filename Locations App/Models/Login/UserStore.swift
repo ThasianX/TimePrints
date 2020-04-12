@@ -1,5 +1,6 @@
 // Kevin Li - 4:15 PM - 2/29/20
 
+import IQKeyboardManagerSwift
 import SwiftUI
 
 extension UserStore {
@@ -14,7 +15,7 @@ extension UserStore {
 
 final class UserStore: ObservableObject {
     @Published var isLoggedIn: Bool
-    @Published var alert: Alert? = nil
+    @Published var alert: LottieAlert? = nil
 
     @Published var isInitialThemeSetup: Bool
 
@@ -52,11 +53,21 @@ final class UserStore: ObservableObject {
     func finalizeInitialThemeSetup() {
         isInitialThemeSetup = true
         themeColorService.finalizeThemeSetup()
+        CoreData.initialDbSetup()
     }
 
-    func performLocationAndDatabaseOperations() {
-        CoreData.initialDbSetup()
+    func performLocationOperationsAndSetUpKeyboard() {
+        performLocationOperations()
+        setUpKeyboard()
+    }
+
+    private func performLocationOperations() {
         locationService.startTrackingVisits()
+    }
+
+    private func setUpKeyboard() {
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.toolbarTintColor = themeColor
     }
 }
 

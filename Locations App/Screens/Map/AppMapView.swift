@@ -3,44 +3,45 @@ import SwiftUI
 
 struct AppMapView: View {
     @Environment(\.appTheme) private var appTheme: UIColor
-
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var locations: FetchedResults<Location>
 
     @State private var trackingMode: MGLUserTrackingMode = .follow
-    @State private var showingEditTag = false
-    @State private var showingLocationVisits = false
-    @State private var selectedLocation: Location? = nil
+    @State private var mapState: MapState = .showingMap
 
-    @Binding var showingToggleButton: Bool
-    @Binding var stayAtLocation: Bool
-    @Binding var activeVisitLocation: Location?
+    @ObservedObject var appState: AppState
+
+    private var routeExists: Bool {
+        appState.route.exists
+    }
 
     var body: some View {
         ZStack(alignment: .top) {
-            mapView
-                .extendToScreenEdges()
-                .disablur(showingEditTag || showingLocationVisits)
+            Group {
+                mapView
+                    .extendToScreenEdges()
+                buttonHeader
+                    .fade(if: routeExists)
+                    .blurBackground(if: routeExists)
+            }
+            .disablur(!mapState.isShowingMap)
 
-            buttonHeader
-                .disablur(showingEditTag || showingLocationVisits)
+            if routeExists {
+                routeOverlayView
+            }
 
             editTagView
-                .modal(isPresented: showingEditTag)
+                .modal(isPresented: mapState.isShowingEditTag)
 
             locationVisitsView
-                .modal(isPresented: showingLocationVisits)
+                .modal(isPresented: mapState.isshowingLocationVisits)
         }
     }
 
     private var mapView: some View {
         MapView(
+            mapState: $mapState,
             trackingMode: $trackingMode,
-            selectedLocation: $selectedLocation,
-            showingEditTag: $showingEditTag,
-            showingLocationVisits: $showingLocationVisits,
-            showingToggleButton: $showingToggleButton,
-            stayAtLocation: $stayAtLocation,
-            activeVisitLocation: $activeVisitLocation,
+            appState: appState,
             userLocationColor: appTheme,
             annotations: locations.map(LocationAnnotation.init)
         )
@@ -57,27 +58,28 @@ struct AppMapView: View {
     private var userLocationButton: some View {
         UserLocationButton(
             trackingMode: $trackingMode,
-            stayAtLocation: $stayAtLocation,
-            activeVisitLocation: $activeVisitLocation,
-            color: appTheme.color
-        )
+            locationControl: $appState.locationControl,
+            color: appTheme.color)
+    }
+
+    private var routeOverlayView: RouteOverlayView {
+        RouteOverlayView(
+            mapState: $mapState,
+            appState: appState,
+            color: appTheme.color)
     }
 
     private var editTagView: some View {
-        EditTagView(
-            show: $showingEditTag,
-            location: $selectedLocation,
-            stayAtLocation: $stayAtLocation,
-            showingToggleButton: $showingToggleButton
-        )
+        EditTagView(tagProvider: mapState.self, onReset: onReset)
+    }
+
+    private func onReset() {
+        mapState = .showingMap
+        appState.showing.toggleButton = true
     }
 
     private var locationVisitsView: some View {
-        LocationVisitsView(
-            show: $showingLocationVisits,
-            showingToggleButton: $showingToggleButton,
-            selectedLocation: selectedLocation
-        )
+        LocationVisitsView(mapState: $mapState, showing: $appState.showing)
     }
 }
 
@@ -85,16 +87,27 @@ private extension View {
     func modal(isPresented: Bool) -> some View {
         self
             .frame(width: screen.width, height: screen.height * 0.8)
-            .cornerRadius(30)
-            .shadow(radius: 20)
+            .offset(y: isPresented ? 0 : screen.height)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black.opacity(0.3).extendToScreenEdges())
             .fade(if: !isPresented)
-            .offset(y: isPresented ? screen.height * 0.1 : screen.height)
             .animation(.spring())
+    }
+
+    func blurBackground(if condition: Bool) -> some View {
+        self
+            .padding(.horizontal)
+            .background(condition ?
+                BlurView(style: .systemChromeMaterialDark)
+                    .cornerRadius(20)
+                    .blur(radius: 20)
+                    .edgesIgnoringSafeArea(.top)
+                : nil)
     }
 }
 
 struct AppMapView_Previews: PreviewProvider {
     static var previews: some View {
-        AppMapView(showingToggleButton: .constant(true), stayAtLocation: .constant(false), activeVisitLocation: .constant(nil))
+        AppMapView(appState: .init())
     }
 }

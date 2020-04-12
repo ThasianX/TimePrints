@@ -45,6 +45,10 @@ public class Visit: NSManagedObject {
 }
 
 extension Visit {
+    func setLocationName(_ name: String) {
+        self.location.setName(name)
+    }
+
     func setNotes(_ notes: String) {
         self.notes = notes
         CoreData.stack.save()
@@ -70,12 +74,15 @@ extension Visit {
 }
 
 extension Visit {
-    var visitDuration: String {
-        var arrivalTime = self.arrivalDate.timeOnlyWithPadding
+    var duration: String {
+        var duration = self.arrivalDate.timeOnlyWithPadding
         if let departureTime = departureDate?.timeOnlyWithPadding {
-            arrivalTime += " ➝ " + departureTime
+            duration += " ➝ " + departureTime
+            if departureDate?.fullDayOfWeek != arrivalDate.fullDayOfWeek {
+                duration += "  ➤"
+            }
         }
-        return arrivalTime
+        return duration
     }
 
     var tagName: String {
@@ -109,6 +116,7 @@ extension Visit {
             let date = Date.random(range: 100)
             for _ in 0..<10 {
                 let visit = preview
+                visit.location.name = "Apple INC"
                 visit.arrivalDate = date
                 visits.append(visit)
             }

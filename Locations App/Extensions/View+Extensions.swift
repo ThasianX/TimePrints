@@ -20,7 +20,13 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         modifier(RoundedModifier(radius: radius, corners: corners))
     }
-    
+
+    func scaleFade(if condition: Bool) -> some View {
+        modifier(ScaleFadeModifier(condition: condition))
+    }
+}
+
+extension View {
     func erased() -> AnyView {
         AnyView(self)
     }
