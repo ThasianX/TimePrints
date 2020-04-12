@@ -1,14 +1,11 @@
 import SwiftUI
 
 struct CloseRouteButton: View {
-    @State private var animateExit: Bool = false
+    @Binding var animatingExit: Bool
     let action: () -> Void
 
     var body: some View {
         closeRouteButton
-            .scaleEffect(animateExit ? 0 : 1)
-            .rotationEffect(animateExit ? Angle(degrees: 360) : Angle(degrees : 0))
-            .animation(.spring())
     }
 
     private var closeRouteButton: some View {
@@ -19,8 +16,8 @@ struct CloseRouteButton: View {
     }
 
     private func closeRoute() {
-        animateExit = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        animatingExit = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.action()
         }
     }
@@ -34,6 +31,6 @@ struct CloseRouteButton: View {
 
 struct CloseRouteButton_Previews: PreviewProvider {
     static var previews: some View {
-        CloseRouteButton(action: { })
+        CloseRouteButton(animatingExit: .constant(false), action: { })
     }
 }

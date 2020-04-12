@@ -25,7 +25,9 @@ struct AppMapView: View {
             }
             .disablur(!mapState.isShowingMap)
 
-            routeOverlayView
+            if routeExists {
+                routeOverlayView
+            }
 
             editTagView
                 .modal(isPresented: mapState.isShowingEditTag)

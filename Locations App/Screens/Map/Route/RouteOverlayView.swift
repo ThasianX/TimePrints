@@ -26,6 +26,7 @@ enum RouteOverlayState: Equatable {
 
 struct RouteOverlayView: View {
     @State private var overlayState: RouteOverlayState = .normal
+    @State private var animatingExit = false
 
     @Binding var mapState: MapState
     @ObservedObject var appState: AppState
@@ -45,6 +46,8 @@ struct RouteOverlayView: View {
                 routeInfoAndControlsView
             }
         }
+        .fade(if: animatingExit)
+        .animation(.easeInOut)
     }
 }
 
@@ -107,7 +110,7 @@ private extension RouteOverlayView {
     }
 
     private var closeRouteButton: some View {
-        CloseRouteButton(action: closeRoute)
+        CloseRouteButton(animatingExit: $animatingExit, action: closeRoute)
     }
 
     private func closeRoute() {
