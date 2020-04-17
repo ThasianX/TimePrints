@@ -74,10 +74,21 @@ final class UserStore: ObservableObject {
 extension UserStore {
     private func userIsLoggedIn() {
         setLoggedInAlert()
-        setDefaultThemeColor()
+        setIsInitialThemeSetup()
+        setDefaultThemeColorIfThemeNotSetup()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + alertAnimationDuration) {
             self.isLoggedIn = true
+        }
+    }
+
+    private func setIsInitialThemeSetup() {
+        isInitialThemeSetup = themeColorService.isInitialThemeSetup
+    }
+
+    private func setDefaultThemeColorIfThemeNotSetup() {
+        if !isInitialThemeSetup {
+            setDefaultThemeColor()
         }
     }
 
