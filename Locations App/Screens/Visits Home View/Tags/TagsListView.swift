@@ -2,17 +2,6 @@
 
 import SwiftUI
 
-private extension TagsListView {
-    struct DeletedTag {
-        let name: String
-        let color: String
-
-        var uiColor: UIColor {
-            UIColor(color)
-        }
-    }
-}
-
 struct TagsListView: View {
     @FetchRequest(
         entity: Tag.entity(),
