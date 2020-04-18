@@ -3,6 +3,8 @@
 import SwiftUI
 
 struct TagsListView: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+
     @FetchRequest(
         entity: Tag.entity(),
         sortDescriptors: [
@@ -47,7 +49,7 @@ private extension TagsListView {
     private var header: some View {
         TagHeader(
             tagState: tagState,
-            normalTagColor: .clear)
+            normalTagColor: appTheme.color)
     }
 
     private var tagSelectionList: some View {
