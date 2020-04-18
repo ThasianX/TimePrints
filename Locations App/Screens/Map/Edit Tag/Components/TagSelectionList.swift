@@ -20,6 +20,7 @@ struct TagSelectionList: View {
                     .padding(.horizontal)
                     .id(tag.name)
                     .id(tag.color)
+                    .id(tag.locations.count)
             }
         }
     }
