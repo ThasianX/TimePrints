@@ -24,7 +24,7 @@ struct TagsListView: View {
                     .fade(if: tagState.isShowingAddOrEdit)
                     .scaleEffect(tagState.isShowingAddOrEdit ? 0.1 : 1)
 
-                VSpace(60)
+                VSpace(160)
                     .fade(if: tagState.isShowingAddOrEdit)
             }
 
@@ -36,6 +36,7 @@ struct TagsListView: View {
 
             bottomAlignedTransientAlertView
                 .fade(if: tagState.alert.isInactive)
+                .padding(.bottom, 100)
         }
         .animation(.spring())
     }
