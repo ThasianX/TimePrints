@@ -4,7 +4,7 @@ struct TagHeader: View {
     @ObservedObject var tagState: TagCoreState
 
     let normalTagColor: Color
-    let onSelect: ((Tag) -> Void)?
+    var onSelect: ((Tag) -> Void)? = nil
 
     var body: some View {
         HStack {

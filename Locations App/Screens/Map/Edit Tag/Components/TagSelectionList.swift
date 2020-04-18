@@ -5,7 +5,7 @@ struct TagSelectionList: View {
 
     let tags: [Tag]
     let onSelect: (Tag) -> Void
-    let selectedLocationTag: Tag?
+    var selectedLocationTag: Tag? = nil
 
     var body: some View {
         VScroll {
