@@ -6,10 +6,6 @@ struct TagRow: View {
     let tag: Tag
     let isSelected: Bool
 
-    private var tagColor: Color {
-        Color(tag.uiColor)
-    }
-
     var body: some View {
         HStack {
             HStack(spacing: 12) {
@@ -21,7 +17,7 @@ struct TagRow: View {
             numberOfFavoritedVisitsView
         }
         .padding(12)
-        .background(tagColor)
+        .background(tag.uiColor.color)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 }

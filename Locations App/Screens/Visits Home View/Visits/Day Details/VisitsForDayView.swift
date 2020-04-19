@@ -65,14 +65,14 @@ private extension VisitsForDayView {
 private extension VisitsForDayView {
     private var visitsForDayList: some View {
         VScroll {
-            makeVisitsStack
+            visitsForDayStack
                 .frame(width: screen.width)
                 .padding(.bottom, 600)
                 .animation(.spring())
         }
     }
 
-    private var makeVisitsStack: some View {
+    private var visitsForDayStack: some View {
         VStack(spacing: 2) {
             ForEach(0..<visits.count, id: \.self) { i in
                 self.dynamicVisitRow(index: i)
@@ -84,14 +84,14 @@ private extension VisitsForDayView {
 
     private func dynamicVisitRow(index: Int) -> some View {
         GeometryReader { geometry in
-            self.makeVisitDetailsView(index: index, visit: self.visits[index])
+            self.visitDetailsView(index: index, visit: self.visits[index])
                 .fade(if: self.isNotActiveVisit(at: index))
                 .scaleEffect(self.isNotActiveVisit(at: index) ? 0.5 : 1)
                 .offset(y: self.isShowingVisit ? self.topOfScreen(for: geometry) : 0)
         }
     }
 
-    private func makeVisitDetailsView(index: Int, visit: Visit) -> some View {
+    private func visitDetailsView(index: Int, visit: Visit) -> some View {
         VisitDetailsView(
             selectedIndex: $activeVisitIndex,
             index: index,

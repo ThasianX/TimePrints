@@ -5,11 +5,27 @@ import SwiftUI
 struct TagDetailsView: View {
     let tag: Tag
 
-    private var tagColor: Color {
-        Color(tag.uiColor)
+    @Binding var selectedTag: Tag?
+
+    private var isSelected: Bool {
+        selectedTag == tag
     }
 
     var body: some View {
+        tagDetailsView
+            .padding(12)
+            .frame(height: TagCellConstants.height(if: isSelected))
+            .frame(maxWidth: TagCellConstants.maxWidth(if: isSelected))
+            .extendToScreenEdges()
+            .background(tag.uiColor.color)
+            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+            .animation(.spring())
+            .onTapGesture(perform: setSelectedTag)
+    }
+}
+
+private extension TagDetailsView {
+    private var tagDetailsView: some View {
         VStack {
             HStack {
                 HStack(spacing: 12) {
@@ -20,9 +36,6 @@ struct TagDetailsView: View {
                 numberOfFavoritedVisitsView
             }
         }
-        .padding(12)
-        .background(tagColor)
-        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 }
 
@@ -114,8 +127,14 @@ private extension TagDetailsView {
     }
 }
 
+private extension TagDetailsView {
+    private func setSelectedTag() {
+        selectedTag = tag
+    }
+}
+
 struct TagDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        TagDetailsView(tag: .preview)
+        TagDetailsView(tag: .preview, selectedTag: .constant(nil))
     }
 }

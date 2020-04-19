@@ -32,6 +32,7 @@
 		1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */; };
 		1E3F498F244BF1E300775F81 /* TagPreviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F498E244BF1E300775F81 /* TagPreviewList.swift */; };
 		1E3F4992244BF36A00775F81 /* TagContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F4991244BF36A00775F81 /* TagContextMenu.swift */; };
+		1E3F4994244C01D100775F81 /* TagCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F4993244C01D100775F81 /* TagCellConstants.swift */; };
 		1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */; };
 		1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */; };
 		1E4723232429D76B004FCF7D /* RouteTagHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4723222429D76B004FCF7D /* RouteTagHeader.swift */; };
@@ -201,6 +202,7 @@
 		1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
 		1E3F498E244BF1E300775F81 /* TagPreviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPreviewList.swift; sourceTree = "<group>"; };
 		1E3F4991244BF36A00775F81 /* TagContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagContextMenu.swift; sourceTree = "<group>"; };
+		1E3F4993244C01D100775F81 /* TagCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCellConstants.swift; sourceTree = "<group>"; };
 		1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 		1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		1E4723222429D76B004FCF7D /* RouteTagHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTagHeader.swift; sourceTree = "<group>"; };
@@ -839,6 +841,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF5BEDC2428A1AF00B34251 /* TagProvider.swift */,
+				1E3F4993244C01D100775F81 /* TagCellConstants.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -1163,6 +1166,7 @@
 				1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */,
 				1ED53505240A2BF4009B11D3 /* AccountKVS.swift in Sources */,
 				1EC1912C2420267800089E8D /* FavoriteButton.swift in Sources */,
+				1E3F4994244C01D100775F81 /* TagCellConstants.swift in Sources */,
 				1EF5BECB2425D64300B34251 /* CenterIndicatorView.swift in Sources */,
 				1EFF839523E49E0900FF04A1 /* DaySideBar.swift in Sources */,
 				1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */,

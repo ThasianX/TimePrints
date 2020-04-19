@@ -13,31 +13,29 @@ struct TagsListView: View {
     ) var tags: FetchedResults<Tag>
 
     @ObservedObject var tagState: TagCoreState = .init()
+    @State private var selectedTag: Tag? = nil
+
+    private var isShowingTag: Bool {
+        selectedTag != nil
+    }
 
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading) {
-                header
-                    .padding()
-                    .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
-                    .animation(.spring())
+        ZStack(alignment: .top) {
+            header
+                .padding()
+                .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
+                .scaleFade(if: isShowingTag)
 
-                tagSelectionList
-                    .fade(if: tagState.isShowingAddOrEdit)
-                    .scaleEffect(tagState.isShowingAddOrEdit ? 0.1 : 1)
-
-                VSpace(160)
-                    .fade(if: tagState.isShowingAddOrEdit)
-            }
+            tagPreviewList
+                .offset(y: isShowingTag ? 0 : 60)
+                .scaleFade(if: tagState.isShowingAddOrEdit)
 
             topAlignedTagOperationsView
                 .padding()
-                .fade(if: tagState.isntShowingAddNorEdit)
-                .scaleEffect(!tagState.isShowingAddOrEdit ? 0.1 : 1)
-                .animation(.spring())
+                .scaleFade(if: tagState.isntShowingAddNorEdit || isShowingTag)
 
             bottomAlignedTransientAlertView
-                .fade(if: tagState.alert.isInactive)
+                .fade(if: tagState.alert.isInactive || isShowingTag)
                 .padding(.bottom, 100)
         }
         .animation(.spring())
@@ -51,11 +49,10 @@ private extension TagsListView {
             normalTagColor: appTheme.color)
     }
 
-    private var tagSelectionList: some View {
-        TagSelectionList(
-            tagState: tagState,
-            tags: Array(tags),
-            onSelect: { _ in })
+    private var tagPreviewList: some View {
+        TagPreviewList(tagState: tagState,
+                       selectedTag: $selectedTag,
+                       tags: Array(tags))
     }
 
     private var topAlignedTagOperationsView: some View {
