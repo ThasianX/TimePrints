@@ -42,7 +42,6 @@ struct TagsListView: View {
         }
         .animation(.spring())
     }
-
 }
 
 private extension TagsListView {
