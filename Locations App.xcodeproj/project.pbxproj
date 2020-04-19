@@ -33,6 +33,7 @@
 		1E3F498F244BF1E300775F81 /* TagPreviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F498E244BF1E300775F81 /* TagPreviewList.swift */; };
 		1E3F4992244BF36A00775F81 /* TagContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F4991244BF36A00775F81 /* TagContextMenu.swift */; };
 		1E3F4994244C01D100775F81 /* TagCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F4993244C01D100775F81 /* TagCellConstants.swift */; };
+		1E3F4997244C147D00775F81 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1E3F4996244C147D00775F81 /* Introspect */; };
 		1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */; };
 		1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */; };
 		1E4723232429D76B004FCF7D /* RouteTagHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4723222429D76B004FCF7D /* RouteTagHeader.swift */; };
@@ -323,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E4879F3243AED1300048816 /* IQKeyboardManagerSwift in Frameworks */,
+				1E3F4997244C147D00775F81 /* Introspect in Frameworks */,
 				1EF6227423FF21C800B28DCF /* MapboxMobileEvents.framework in Frameworks */,
 				1E9D789023E10DE60020FAFE /* CloudKit.framework in Frameworks */,
 				1EF6227123FF21C400B28DCF /* Mapbox.framework in Frameworks */,
@@ -904,6 +906,7 @@
 			packageProductDependencies = (
 				1EFE85CD240377060001D0C3 /* Lottie */,
 				1E4879F2243AED1300048816 /* IQKeyboardManagerSwift */,
+				1E3F4996244C147D00775F81 /* Introspect */,
 			);
 			productName = "Locations App";
 			productReference = 1E9D785523E10B4F0020FAFE /* Locations App.app */;
@@ -980,6 +983,7 @@
 			packageReferences = (
 				1EFE85CC240377060001D0C3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				1E4879F1243AED1300048816 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				1E3F4995244C147D00775F81 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 1E9D785623E10B4F0020FAFE /* Products */;
 			projectDirPath = "";
@@ -1508,6 +1512,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1E3F4995244C147D00775F81 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		1E4879F1243AED1300048816 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -1527,6 +1539,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1E3F4996244C147D00775F81 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E3F4995244C147D00775F81 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		1E4879F2243AED1300048816 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1E4879F1243AED1300048816 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
