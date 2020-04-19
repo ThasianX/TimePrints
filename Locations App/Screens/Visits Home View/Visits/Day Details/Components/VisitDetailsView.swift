@@ -22,23 +22,20 @@ struct VisitDetailsView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .top) {
-            visitDetailsView
-                .padding(.top, isSelected ? 80 : 12)
-                .padding(.leading, isSelected ? 0 : 40)
-                .padding(.trailing, isSelected ? 0 : 40)
-                .frame(height: VisitCellConstants.height(if: isSelected))
-                .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
-                .background(appTheme.color)
-                .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
-                .gesture(exitGestureIfSelected)
-                .onTapGesture(perform: setSelectedVisitIndex)
-        }
-        .onAppear(perform: setFavoritedStateAndNotesInput)
-        .frame(height: VisitCellConstants.height(if: isSelected))
-        .extendToScreenEdges()
-        .scaleEffect(1 - (self.activeTranslation.height+self.activeTranslation.width)/1000)
-        .animation(.spring())
+        visitDetailsView
+            .padding(.top, isSelected ? 80 : 12)
+            .padding(.leading, isSelected ? 0 : 40)
+            .padding(.trailing, isSelected ? 0 : 40)
+            .frame(height: VisitCellConstants.height(if: isSelected))
+            .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
+            .background(appTheme.color)
+            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
+            .gesture(exitGestureIfSelected)
+            .onTapGesture(perform: setSelectedVisitIndex)
+            .extendToScreenEdges()
+            .scaleEffect(1 - ((activeTranslation.height + activeTranslation.width) / 1000))
+            .animation(.spring())
+            .onAppear(perform: setFavoritedStateAndNotesInput)
     }
 }
 
