@@ -30,6 +30,8 @@
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
 		1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3237982418632500D370CD /* CloseRouteButton.swift */; };
 		1E3CD7EC2403254A00C95ABF /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */; };
+		1E3F498F244BF1E300775F81 /* TagPreviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F498E244BF1E300775F81 /* TagPreviewList.swift */; };
+		1E3F4992244BF36A00775F81 /* TagContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F4991244BF36A00775F81 /* TagContextMenu.swift */; };
 		1E3FEB0D23E8CC7E000C4A0B /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */; };
 		1E3FEB1123E8CFDE000C4A0B /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */; };
 		1E4723232429D76B004FCF7D /* RouteTagHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4723222429D76B004FCF7D /* RouteTagHeader.swift */; };
@@ -197,6 +199,8 @@
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
 		1E3237982418632500D370CD /* CloseRouteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseRouteButton.swift; sourceTree = "<group>"; };
 		1E3CD7EB2403254A00C95ABF /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
+		1E3F498E244BF1E300775F81 /* TagPreviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPreviewList.swift; sourceTree = "<group>"; };
+		1E3F4991244BF36A00775F81 /* TagContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagContextMenu.swift; sourceTree = "<group>"; };
 		1E3FEB0C23E8CC7E000C4A0B /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 		1E3FEB1023E8CFDE000C4A0B /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		1E4723222429D76B004FCF7D /* RouteTagHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTagHeader.swift; sourceTree = "<group>"; };
@@ -537,6 +541,14 @@
 			path = Locations;
 			sourceTree = "<group>";
 		};
+		1E3F4990244BF36000775F81 /* Context Menus */ = {
+			isa = PBXGroup;
+			children = (
+				1E3F4991244BF36A00775F81 /* TagContextMenu.swift */,
+			);
+			path = "Context Menus";
+			sourceTree = "<group>";
+		};
 		1E52B0B2240B100900E4C693 /* KVS */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				1E726FF82402FB82002FC8DB /* TagsListView.swift */,
+				1E3F498E244BF1E300775F81 /* TagPreviewList.swift */,
 				1E00E5702408AF9500B14C9F /* TagDetailsView.swift */,
 			);
 			path = Tags;
@@ -568,6 +581,7 @@
 		1E7B618C23E284A700F9F974 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1E3F4990244BF36000775F81 /* Context Menus */,
 				1E237EE42415F2D400CEE548 /* List */,
 				1E24328A240B72F000E983E7 /* Buttons */,
 				1E24328B240B732400E983E7 /* Colors */,
@@ -1112,6 +1126,7 @@
 				1EC19125241FE32800089E8D /* RouteOverlayView.swift in Sources */,
 				1EF5BED024282B7400B34251 /* TagCoreState.swift in Sources */,
 				1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */,
+				1E3F498F244BF1E300775F81 /* TagPreviewList.swift in Sources */,
 				1E125C52240DBA8F00D0919E /* ThemeColorService.swift in Sources */,
 				1EB424E32429C4C00035F43E /* RouteEditNotesView.swift in Sources */,
 				1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */,
@@ -1123,6 +1138,7 @@
 				1EB424EB2429D48A0035F43E /* ScaleFadeModifier.swift in Sources */,
 				1E6D568723E5ED5B0044AB3A /* VisitDetailsView.swift in Sources */,
 				1EB03D25241027DB001146FF /* TransientSplashView.swift in Sources */,
+				1E3F4992244BF36A00775F81 /* TagContextMenu.swift in Sources */,
 				1ED53519240A3C9A009B11D3 /* BlurView.swift in Sources */,
 				1E9D788C23E10C670020FAFE /* CoreLocationService.swift in Sources */,
 				1ED53523240B0C01009B11D3 /* UserStore.swift in Sources */,

@@ -31,46 +31,12 @@ struct TagSelectionList: View {
                 self.onSelect(tag)
             }
             .contextMenu {
-                self.contextMenu(for: tag)
+                TagContextMenu(tagState: tagState, tag: tag)
             }
     }
 
     private func coloredTextRow(tag: Tag) -> TagRow {
-        let isSelected = selectedLocationTag == tag
-        return TagRow(tag: tag, isSelected: isSelected)
-    }
-
-    private func contextMenu(for tag: Tag) -> some View {
-        VStack {
-            editButton(for: tag)
-            deleteButton(for: tag)
-        }
-    }
-
-    private func editButton(for tag: Tag) -> some View {
-        Button(action: { self.tagState.operation.setTagToEdit(tag) }) {
-            editTextPrecededByPencil
-        }
-    }
-
-    private var editTextPrecededByPencil: some View {
-        HStack {
-            Text("Edit")
-            Image(systemName: "pencil")
-        }
-    }
-
-    private func deleteButton(for tag: Tag) -> some View {
-        Button(action: { self.tagState.removeTag(tag) }) {
-            deleteTextPrecededByTrash
-        }
-    }
-
-    private var deleteTextPrecededByTrash: some View {
-        HStack {
-            Text("Delete")
-            Image(systemName: "trash.fill")
-        }
+        TagRow(tag: tag, isSelected: selectedLocationTag == tag)
     }
 }
 
