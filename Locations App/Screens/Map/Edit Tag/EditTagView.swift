@@ -25,30 +25,24 @@ struct EditTagView: View {
     let onReset: () -> Void
 
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading) {
-                header
-                    .padding()
-                    .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
-                    .animation(.spring())
+        ZStack(alignment: .top) {
+            header
+                .padding()
+                .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
 
-                tagSelectionList
-                    .fade(if: tagState.isShowingAddOrEdit)
-                    .scaleEffect(tagState.isShowingAddOrEdit ? 0.1 : 1)
-
-                VSpace(60)
-                    .fade(if: tagState.isShowingAddOrEdit)
-            }
+            tagSelectionList
+                .padding(.bottom, 125)
+                .offset(y: 60)
+                .scaleFade(if: tagState.isShowingAddOrEdit)
 
             topAlignedTagOperationsView
                 .padding()
-                .fade(if: tagState.isntShowingAddNorEdit)
-                .scaleEffect(!tagState.isShowingAddOrEdit ? 0.1 : 1)
-                .animation(.spring())
+                .scaleFade(if: tagState.isntShowingAddNorEdit)
 
             bottomAlignedTransientAlertView
                 .fade(if: tagState.alert.isInactive)
         }
+        .animation(.spring())
         .disabled(isAnimatingSelection)
     }
 }

@@ -27,8 +27,8 @@ struct TagsListView: View {
                 .scaleFade(if: isShowingTag)
 
             tagPreviewList
-                .offset(y: isShowingTag ? 0 : 60)
                 .padding(.bottom, 225)
+                .offset(y: isShowingTag ? 0 : 60)
                 .scaleFade(if: tagState.isShowingAddOrEdit)
 
             topAlignedTagOperationsView
@@ -36,8 +36,8 @@ struct TagsListView: View {
                 .scaleFade(if: tagState.isntShowingAddNorEdit || isShowingTag)
 
             bottomAlignedTransientAlertView
-                .fade(if: tagState.alert.isInactive || isShowingTag)
                 .padding(.bottom, 100)
+                .fade(if: tagState.alert.isInactive || isShowingTag)
         }
         .animation(.spring())
     }
