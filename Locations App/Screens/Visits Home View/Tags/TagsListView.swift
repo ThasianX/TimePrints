@@ -28,6 +28,7 @@ struct TagsListView: View {
 
             tagPreviewList
                 .offset(y: isShowingTag ? 0 : 60)
+                .padding(.bottom, 225)
                 .scaleFade(if: tagState.isShowingAddOrEdit)
 
             topAlignedTagOperationsView
