@@ -27,7 +27,7 @@ struct TagsListView: View {
                 .scaleFade(if: isShowingTag)
 
             tagPreviewList
-                .padding(.bottom, 225)
+                .padding(.bottom, isShowingTag ? 0 : 225)
                 .offset(y: isShowingTag ? 0 : 60)
                 .scaleFade(if: tagState.isShowingAddOrEdit)
 
