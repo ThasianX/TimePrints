@@ -10,7 +10,7 @@ struct AppView: View {
 
     var body: some View {
         Group {
-            visitsHomeView
+            homeView
                 .fade(if: !appState.showing.homeView)
 
             appMapView
@@ -22,8 +22,8 @@ struct AppView: View {
         }
     }
 
-    private var visitsHomeView: some View {
-        VisitsHomeView(appState: appState)
+    private var homeView: some View {
+        HomeView(appState: appState)
     }
 
     private var appMapView: some View {

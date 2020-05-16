@@ -9,7 +9,7 @@ enum HomeFilter {
     case locations
 }
 
-struct VisitsHomeView: View {
+struct HomeView: View {
     @State private var homeFilter: HomeFilter = .visits
     @State private var hideFAB: Bool = false
 
@@ -29,13 +29,13 @@ struct VisitsHomeView: View {
     }
 }
 
-private extension VisitsHomeView {
+private extension HomeView {
     private var backgroundColor: some View {
         ScreenColor(UIColor.black)
     }
 }
 
-private extension VisitsHomeView {
+private extension HomeView {
     private var filterContent: some View {
         ZStack {
             VisitsPreviewList(hideFAB: $hideFAB, appState: appState)
@@ -52,7 +52,7 @@ private extension VisitsHomeView {
     }
 }
 
-private extension VisitsHomeView {
+private extension HomeView {
     private var bottomRightAlignedExpandableFAB: some View {
         VStack {
             Spacer()
@@ -90,6 +90,6 @@ private extension VisitsHomeView {
 
 struct VisitsHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsHomeView(appState: .init())
+        HomeView(appState: .init())
     }
 }
