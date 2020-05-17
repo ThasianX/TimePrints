@@ -24,6 +24,10 @@ extension View {
     func scaleFade(if condition: Bool) -> some View {
         modifier(ScaleFadeModifier(condition: condition))
     }
+
+    func resignKeyboardOnDrag() -> some View {
+        modifier(ResignKeyboardOnDragGesture())
+    }
 }
 
 extension View {
