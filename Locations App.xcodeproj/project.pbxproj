@@ -74,6 +74,7 @@
 		1E9D789E23E125610020FAFE /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */; };
 		1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */; };
 		1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */; };
+		1EA65CBD2470C0DC002795FC /* TagDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA65CBC2470C0DC002795FC /* TagDetailsHeaderView.swift */; };
 		1EB03D21240F4B34001146FF /* EnvironmentKey+AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */; };
 		1EB03D25241027DB001146FF /* TransientSplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D24241027DB001146FF /* TransientSplashView.swift */; };
 		1EB03D2724102955001146FF /* AppMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB03D2624102955001146FF /* AppMapView.swift */; };
@@ -250,6 +251,7 @@
 		1E9D789A23E125610020FAFE /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1E9D789B23E125610020FAFE /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E9D78A023E12BC80020FAFE /* ReversedGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversedGeoLocation.swift; sourceTree = "<group>"; };
+		1EA65CBC2470C0DC002795FC /* TagDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailsHeaderView.swift; sourceTree = "<group>"; };
 		1EB03D20240F4B34001146FF /* EnvironmentKey+AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentKey+AppTheme.swift"; sourceTree = "<group>"; };
 		1EB03D24241027DB001146FF /* TransientSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientSplashView.swift; sourceTree = "<group>"; };
 		1EB03D2624102955001146FF /* AppMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMapView.swift; sourceTree = "<group>"; };
@@ -578,6 +580,7 @@
 				1E726FF82402FB82002FC8DB /* TagsListView.swift */,
 				1E3F498E244BF1E300775F81 /* TagPreviewList.swift */,
 				1E00E5702408AF9500B14C9F /* TagDetailsView.swift */,
+				1EA65CBC2470C0DC002795FC /* TagDetailsHeaderView.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 				1EFF83B523E5368900FF04A1 /* V0Stack.swift in Sources */,
 				1ED53507240A2C32009B11D3 /* KeyNamespaceable.swift in Sources */,
 				1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */,
+				1EA65CBD2470C0DC002795FC /* TagDetailsHeaderView.swift in Sources */,
 				1E726FF92402FB82002FC8DB /* TagsListView.swift in Sources */,
 				1ED5350024096D62009B11D3 /* LoginView.swift in Sources */,
 				1EFF83B923E53BC200FF04A1 /* ScreenColor.swift in Sources */,
