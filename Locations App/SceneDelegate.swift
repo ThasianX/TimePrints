@@ -8,7 +8,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let userStore = UserStore(
             loginService: ICloudLoginService(),
             themeColorService: ICloudThemeColorService(),
-            locationService: CoreLocationService()
+            locationService: CoreLocationService.shared
         )
         let context = CoreData.stack.context
         let contentView = RootView(userStore: userStore)

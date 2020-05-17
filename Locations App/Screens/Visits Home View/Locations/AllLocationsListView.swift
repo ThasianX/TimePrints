@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct LocationsListView: View {
+struct AllLocationsListView: View {
     @FetchRequest(entity: Location.entity(), sortDescriptors: []) var visits: FetchedResults<Location>
 
     var body: some View {
@@ -12,6 +12,6 @@ struct LocationsListView: View {
 
 struct LocationsListView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationsListView()
+        AllLocationsListView()
     }
 }

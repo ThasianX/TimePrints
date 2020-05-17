@@ -1,18 +1,32 @@
-import Foundation
 import CoreLocation
+import Foundation
 
 class CoreLocationService: NSObject, LocationService {
+
     private let locationManager = CLLocationManager()
     private let geoCoder = CLGeocoder()
+
+    static let shared = CoreLocationService()
     
     override init() {
         super.init()
         locationManager.delegate = self
     }
 
+    private var currentLocation: CLLocation {
+        locationManager.location!
+    }
+
     func startTrackingVisits() {
         locationManager.requestAlwaysAuthorization()
         locationManager.startMonitoringVisits()
+    }
+
+    func distanceFromCurrentLocation(location: Location) -> String {
+        let targetLocation = location.clLocation
+        let distanceInMeters = Measurement(value: currentLocation.distance(from: targetLocation), unit: UnitLength.meters)
+        let distanceInMiles = distanceInMeters.converted(to: .miles).value
+        return "\(String(format: "%.1f", distanceInMiles)) mi"
     }
 }
 

@@ -42,7 +42,7 @@ private extension HomeView {
                 .fade(if: !isCurrentFilter(filter: .visits))
             TagsListView()
                 .fade(if: !isCurrentFilter(filter: .tags))
-            LocationsListView()
+            AllLocationsListView()
                 .fade(if: !isCurrentFilter(filter: .locations))
         }
     }
