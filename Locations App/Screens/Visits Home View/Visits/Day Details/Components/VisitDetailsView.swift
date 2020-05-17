@@ -24,8 +24,7 @@ struct VisitDetailsView: View {
     var body: some View {
         visitDetailsView
             .padding(.top, isSelected ? 80 : 12)
-            .padding(.leading, isSelected ? 0 : 40)
-            .padding(.trailing, isSelected ? 0 : 40)
+            .padding(.horizontal, isSelected ? 0 : 40)
             .frame(height: VisitCellConstants.height(if: isSelected))
             .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
             .background(appTheme.color)
