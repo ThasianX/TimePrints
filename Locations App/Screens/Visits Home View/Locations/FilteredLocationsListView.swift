@@ -7,6 +7,7 @@ struct FilteredLocationsListView: View {
     @State private var showCancelButton = false
 
     let locations: [Location]
+    let setActiveLocationAndDisplayMap: (Location) -> Void
 
     var body: some View {
         filteredLocationsListView
@@ -94,6 +95,9 @@ private extension FilteredLocationsListView {
     }
 
     private func locationRowView(for location: Location) -> LocationRowView {
-        LocationRowView(location: location, locationService: CoreLocationService.shared)
+        LocationRowView(
+            location: location,
+            locationService: CoreLocationService.shared,
+            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
     }
 }

@@ -6,6 +6,9 @@ struct TagDetailsView: View {
     let tag: Tag
 
     @Binding var selectedTag: Tag?
+    @Binding var hideFAB: Bool
+
+    let setActiveLocationAndDisplayMap: (Location) -> Void
 
     private var isSelected: Bool {
         selectedTag == tag
@@ -31,7 +34,9 @@ private extension TagDetailsView {
             tagDetailsHeaderView
                 .padding(.horizontal, isSelected ? 30 : 12)
             if isSelected {
-                LocationsForTagView(tag: tag)
+                LocationsForTagView(
+                    tag: tag,
+                    setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
                 Spacer()
             }
         }
@@ -43,17 +48,19 @@ private extension TagDetailsView {
 
     private func navigateBack() {
         selectedTag = nil
+        hideFAB = false
     }
 }
 
 private extension TagDetailsView {
     private func setSelectedTag() {
         selectedTag = tag
+        hideFAB = true
     }
 }
 
 struct TagDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        TagDetailsView(tag: .preview, selectedTag: .constant(nil))
+        TagDetailsView(tag: .preview, selectedTag: .constant(nil), hideFAB: .constant(true), setActiveLocationAndDisplayMap: { _ in })
     }
 }

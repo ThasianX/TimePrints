@@ -5,8 +5,10 @@ import SwiftUI
 struct TagPreviewList: View {
     @ObservedObject var tagState: TagCoreState
     @Binding var selectedTag: Tag?
+    @Binding var hideFAB: Bool
 
     let tags: [Tag]
+    let setActiveLocationAndDisplayMap: (Location) -> Void
 
     private var isShowingTag: Bool {
         selectedTag != nil
@@ -51,7 +53,11 @@ struct TagPreviewList: View {
     }
 
     private func tagDetailsView(tag: Tag) -> TagDetailsView {
-        TagDetailsView(tag: tag, selectedTag: $selectedTag)
+        TagDetailsView(
+            tag: tag,
+            selectedTag: $selectedTag,
+            hideFAB: $hideFAB,
+            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
     }
 
     private func isNotActiveTag(tag: Tag) -> Bool {
@@ -69,6 +75,6 @@ struct TagPreviewList: View {
 
 struct TagPreviewList_Previews: PreviewProvider {
     static var previews: some View {
-        TagPreviewList(tagState: .init(), selectedTag: .constant(nil), tags: [.preview])
+        TagPreviewList(tagState: .init(), selectedTag: .constant(nil), hideFAB: .constant(true), tags: [.preview], setActiveLocationAndDisplayMap: { _ in })
     }
 }

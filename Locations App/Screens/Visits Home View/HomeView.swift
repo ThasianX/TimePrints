@@ -40,7 +40,7 @@ private extension HomeView {
         ZStack {
             VisitsPreviewList(hideFAB: $hideFAB, appState: appState)
                 .fade(if: !isCurrentFilter(filter: .visits))
-            TagsListView()
+            TagsListView(showing: appState.showing, locationControl: appState.locationControl, hideFAB: $hideFAB)
                 .fade(if: !isCurrentFilter(filter: .tags))
             AllLocationsListView()
                 .fade(if: !isCurrentFilter(filter: .locations))

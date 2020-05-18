@@ -15,6 +15,10 @@ struct TagsListView: View {
     @ObservedObject var tagState: TagCoreState = .init()
     @State private var selectedTag: Tag? = nil
 
+    @ObservedObject var showing: AppState.Showing
+    @ObservedObject var locationControl: AppState.LocationControl
+    @Binding var hideFAB: Bool
+
     private var isShowingTag: Bool {
         selectedTag != nil
     }
@@ -53,7 +57,22 @@ private extension TagsListView {
     private var tagPreviewList: some View {
         TagPreviewList(tagState: tagState,
                        selectedTag: $selectedTag,
-                       tags: Array(tags))
+                       hideFAB: $hideFAB,
+                       tags: Array(tags),
+                       setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
+    }
+
+    private func toggleNavigationButton() {
+        hideFAB.toggle()
+    }
+
+    private func setActiveLocationAndDisplayMap(location: Location) {
+        locationControl.currentlyFocused = location
+        showMapView()
+    }
+
+    private func showMapView() {
+        showing.homeView = false
     }
 
     private var topAlignedTagOperationsView: some View {
@@ -74,6 +93,6 @@ private extension TagsListView {
 
 struct TagsListView_Previews: PreviewProvider {
     static var previews: some View {
-        TagsListView()
+        TagsListView(showing: .init(), locationControl: .init(), hideFAB: .constant(true))
     }
 }

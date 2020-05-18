@@ -184,7 +184,7 @@ private extension VisitsPreviewList {
     }
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
-        appState.locationControl.activeForVisit = visit.location
+        appState.locationControl.currentlyFocused = visit.location
         showMapView()
     }
 

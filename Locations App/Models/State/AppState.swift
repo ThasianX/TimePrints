@@ -36,11 +36,11 @@ extension AppState {
 extension AppState {
     class LocationControl: ObservableObject {
         @Published var stayAtCurrent: Bool = false
-        @Published var activeForVisit: Location? = nil
+        @Published var currentlyFocused: Location? = nil
 
         func reset(stayAtCurrent: Bool) {
             self.stayAtCurrent = stayAtCurrent
-            activeForVisit = nil
+            currentlyFocused = nil
         }
     }
 }

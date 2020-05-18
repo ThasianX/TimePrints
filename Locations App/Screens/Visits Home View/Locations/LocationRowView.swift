@@ -5,9 +5,11 @@ import SwiftUI
 struct LocationRowView: View {
     let location: Location
     let locationService: LocationService
+    let setActiveLocationAndDisplayMap: (Location) -> Void
 
     var body: some View {
         locationRowView
+            .onTapGesture(perform: onTap)
     }
 
     private var locationRowView: some View {
@@ -20,6 +22,12 @@ struct LocationRowView: View {
             distanceFromCurrentLocationText
         }
         .padding(6)
+    }
+}
+
+private extension LocationRowView {
+    private func onTap() {
+        setActiveLocationAndDisplayMap(location)
     }
 }
 
@@ -69,7 +77,7 @@ private extension LocationRowView {
 
 struct LocationRowView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationRowView(location: .preview, locationService: MockLocationService())
+        LocationRowView(location: .preview, locationService: MockLocationService(), setActiveLocationAndDisplayMap: { _ in })
             .background(Color.pink)
             .previewLayout(.sizeThatFits)
     }
