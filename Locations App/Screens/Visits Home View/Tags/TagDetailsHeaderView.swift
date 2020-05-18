@@ -4,6 +4,8 @@ import SwiftUI
 
 struct TagDetailsHeaderView: View {
     let tag: Tag
+    let isSelected: Bool
+    let navigateBack: () -> Void
 
     var body: some View {
         tagDetailsHeaderView
@@ -11,6 +13,10 @@ struct TagDetailsHeaderView: View {
 
     private var tagDetailsHeaderView: some View {
         HStack {
+            if isSelected {
+                backButton
+                Spacer()
+            }
             tagDetailsStack
             Spacer()
             numberOfFavoritedVisitsView
@@ -19,6 +25,10 @@ struct TagDetailsHeaderView: View {
 }
 
 private extension TagDetailsHeaderView {
+    private var backButton: some View {
+        BImage(perform: navigateBack, image: Image(systemName: "arrow.left"))
+    }
+
     private var tagDetailsStack: some View {
         VStack(alignment: .leading) {
             tagNameText

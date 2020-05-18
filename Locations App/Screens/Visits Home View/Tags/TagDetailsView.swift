@@ -14,7 +14,7 @@ struct TagDetailsView: View {
     var body: some View {
         tagDetailsView
             .padding(.top, isSelected ? 80 : 12)
-            .padding([.bottom, .horizontal], 12)
+            .padding(.bottom, isSelected ? 0 : 12)
             .frame(height: TagCellConstants.height(if: isSelected))
             .frame(maxWidth: TagCellConstants.maxWidth(if: isSelected))
             .extendToScreenEdges()
@@ -29,6 +29,7 @@ private extension TagDetailsView {
     private var tagDetailsView: some View {
         VStack {
             tagDetailsHeaderView
+                .padding(.horizontal, isSelected ? 30 : 12)
             if isSelected {
                 LocationsForTagView(tag: tag)
                 Spacer()
@@ -37,7 +38,11 @@ private extension TagDetailsView {
     }
 
     private var tagDetailsHeaderView: TagDetailsHeaderView {
-        TagDetailsHeaderView(tag: tag)
+        TagDetailsHeaderView(tag: tag, isSelected: isSelected, navigateBack: navigateBack)
+    }
+
+    private func navigateBack() {
+        selectedTag = nil
     }
 }
 
