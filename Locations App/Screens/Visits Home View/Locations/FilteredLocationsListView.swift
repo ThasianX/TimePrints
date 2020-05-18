@@ -4,10 +4,10 @@ import SwiftUI
 
 struct FilteredLocationsListView: View {
     @State private var query = ""
-    @State private var showCancelButton = false
 
     let locations: [Location]
     let setActiveLocationAndDisplayMap: (Location) -> Void
+    let color: Color
 
     var body: some View {
         filteredLocationsListView
@@ -25,20 +25,14 @@ struct FilteredLocationsListView: View {
 private extension FilteredLocationsListView {
     private var searchView: some View {
         HStack {
-            HStack {
-                magnifyingImage
-                searchTextField
-                resetFilterButton
-            }
-            .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-            .foregroundColor(.gray)
-            .background(Color.black)
-            .cornerRadius(10.0)
-
-            if showCancelButton {
-                cancelSearchButton
-            }
+            magnifyingImage
+            searchTextField
+            resetFilterButton
         }
+        .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+        .foregroundColor(.gray)
+        .background(color.saturation(0.5))
+        .cornerRadius(10.0)
         .padding(.horizontal)
     }
 
@@ -47,11 +41,7 @@ private extension FilteredLocationsListView {
     }
 
     private var searchTextField: some View {
-        TextField("Search locations...", text: $query, onEditingChanged: filterLocations)
-    }
-
-    private func filterLocations(_ isEditing: Bool) {
-        showCancelButton = true
+        TextField("Search locations...", text: $query)
     }
 
     private var resetFilterButton: some View {
@@ -66,21 +56,6 @@ private extension FilteredLocationsListView {
     private func resetFilter() {
         withAnimation {
             query = ""
-        }
-    }
-
-    private var cancelSearchButton: some View {
-        Button("Cancel") {
-            self.cancelSearch()
-        }
-        .foregroundColor(Color(.systemBlue))
-    }
-
-    private func cancelSearch() {
-        withAnimation {
-            UIApplication.shared.endEditing(true)
-            query = ""
-            showCancelButton = false
         }
     }
 }

@@ -10,6 +10,7 @@ struct LocationsForTagView: View {
         FilteredLocationsListView(
             locations: Array(tag.locations)
                 .sorted(by: { $0.name < $1.name }),
-            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
+            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap,
+            color: tag.uiColor.color)
     }
 }
