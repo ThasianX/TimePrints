@@ -47,9 +47,7 @@ struct TagPreviewList: View {
                     self.isShowingTag ? nil : TagContextMenu(tagState: self.tagState, tag: tag)
                 }
                 .fade(if: self.isNotActiveTag(tag: tag))
-                .scaleEffect(self.isNotActiveTag(tag: tag) ? 0.5 : 1)
-                .offset(x: self.isNotActiveTag(tag: tag) ? screen.width : 0,
-                        y: self.isShowingTag ? self.topOfScreen(for: geometry) : 0)
+                .offset(y: self.isActiveTag(tag: tag) ? self.topOfScreen(for: geometry) : 0)
         }
     }
 
@@ -71,6 +69,13 @@ struct TagPreviewList: View {
 
     private func topOfScreen(for proxy: GeometryProxy) -> CGFloat {
         -proxy.frame(in: .global).minY
+    }
+
+    private func expandOffset(for tag: Tag) -> CGFloat {
+        if tag.name < selectedTag!.name {
+            return screen.height
+        }
+        return -screen.height
     }
 }
 
