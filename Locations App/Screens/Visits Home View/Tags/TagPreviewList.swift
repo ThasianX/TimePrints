@@ -42,7 +42,7 @@ struct TagPreviewList: View {
         GeometryReader { geometry in
             self.tagDetailsView(tag: tag)
                 .contextMenu {
-                    TagContextMenu(tagState: self.tagState, tag: tag)
+                    self.isShowingTag ? nil : TagContextMenu(tagState: self.tagState, tag: tag)
                 }
                 .fade(if: self.isNotActiveTag(tag: tag))
                 .scaleEffect(self.isNotActiveTag(tag: tag) ? 0.5 : 1)
