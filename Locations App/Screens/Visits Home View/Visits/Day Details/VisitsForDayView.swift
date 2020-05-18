@@ -68,7 +68,6 @@ private extension VisitsForDayView {
             visitsForDayStack
                 .frame(width: screen.width)
                 .padding(.bottom, 600)
-                .animation(.spring())
         }
     }
 

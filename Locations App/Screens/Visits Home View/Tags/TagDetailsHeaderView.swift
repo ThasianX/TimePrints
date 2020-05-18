@@ -14,9 +14,13 @@ struct TagDetailsHeaderView: View {
     private var tagDetailsHeaderView: some View {
         HStack {
             if isSelected {
-                backButton
-                Spacer()
+                Group {
+                    backButton
+                    Spacer()
+                }
+                .transition(.scale)
             }
+
             tagDetailsStack
             Spacer()
             numberOfFavoritedVisitsView

@@ -16,6 +16,7 @@ struct TagDetailsView: View {
 
     var body: some View {
         tagDetailsView
+            .animation(.spring())
             .padding(.top, isSelected ? 80 : 12)
             .padding(.bottom, isSelected ? 0 : 12)
             .frame(height: TagCellConstants.height(if: isSelected))
@@ -23,7 +24,7 @@ struct TagDetailsView: View {
             .extendToScreenEdges()
             .background(tag.uiColor.color)
             .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-            .animation(.spring())
+            .animation(.easeInOut)
             .onTapGesture(perform: setSelectedTag)
     }
 }
@@ -47,15 +48,19 @@ private extension TagDetailsView {
     }
 
     private func navigateBack() {
-        selectedTag = nil
-        hideFAB = false
+        withAnimation {
+            selectedTag = nil
+            hideFAB = false
+        }
     }
 }
 
 private extension TagDetailsView {
     private func setSelectedTag() {
-        selectedTag = tag
-        hideFAB = true
+        withAnimation {
+            selectedTag = tag
+            hideFAB = true
+        }
     }
 }
 

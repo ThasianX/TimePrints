@@ -48,7 +48,8 @@ struct TagPreviewList: View {
                 }
                 .fade(if: self.isNotActiveTag(tag: tag))
                 .scaleEffect(self.isNotActiveTag(tag: tag) ? 0.5 : 1)
-                .offset(y: self.isShowingTag ? self.topOfScreen(for: geometry) : 0)
+                .offset(x: self.isNotActiveTag(tag: tag) ? screen.width : 0,
+                        y: self.isShowingTag ? self.topOfScreen(for: geometry) : 0)
         }
     }
 
