@@ -29,7 +29,10 @@ private extension TagDetailsView {
     private var tagDetailsView: some View {
         VStack {
             tagDetailsHeaderView
-            Spacer()
+            if isSelected {
+                LocationsForTagView(tag: tag)
+                Spacer()
+            }
         }
     }
 
