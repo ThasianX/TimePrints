@@ -14,6 +14,14 @@ struct TagPreviewList: View {
         selectedTag != nil
     }
 
+    private var tagsUpToSelectedTag: [Tag] {
+        if let selectedTag = selectedTag,
+            let index = tags.firstIndex(of: selectedTag) {
+            return Array(tags.prefix(through: index))
+        }
+        return tags
+    }
+
     var body: some View {
         tagPreviewList
     }
@@ -28,7 +36,7 @@ struct TagPreviewList: View {
 
     private var tagPreviewStack: some View {
         VStack {
-            ForEach(tags) { tag in
+            ForEach(tagsUpToSelectedTag) { tag in
                 self.dynamicTagRow(tag: tag)
                     .id(tag.name)
                     .id(tag.color)
@@ -46,7 +54,6 @@ struct TagPreviewList: View {
                 .contextMenu {
                     self.isShowingTag ? nil : TagContextMenu(tagState: self.tagState, tag: tag)
                 }
-                .fade(if: self.isNotActiveTag(tag: tag))
                 .offset(y: self.isActiveTag(tag: tag) ? self.topOfScreen(for: geometry) : 0)
         }
     }
