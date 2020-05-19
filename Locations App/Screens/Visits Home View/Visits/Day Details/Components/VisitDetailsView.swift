@@ -23,17 +23,18 @@ struct VisitDetailsView: View {
 
     var body: some View {
         visitDetailsView
+            .animation(.spring())
             .padding(.top, isSelected ? 80 : 12)
             .padding(.horizontal, isSelected ? 0 : 40)
             .frame(height: VisitCellConstants.height(if: isSelected))
             .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
+            .extendToScreenEdges()
             .background(appTheme.color)
             .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
+            .scaleEffect(1 - ((activeTranslation.height + activeTranslation.width) / 1000))
+            .animation(.easeInOut)
             .gesture(exitGestureIfSelected)
             .onTapGesture(perform: setSelectedVisitIndex)
-            .extendToScreenEdges()
-            .scaleEffect(1 - ((activeTranslation.height + activeTranslation.width) / 1000))
-            .animation(.spring())
             .onAppear(perform: setFavoritedStateAndNotesInput)
     }
 }

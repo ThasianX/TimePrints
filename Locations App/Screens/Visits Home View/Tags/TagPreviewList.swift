@@ -30,7 +30,6 @@ struct TagPreviewList: View {
         VScroll {
             tagPreviewStack
                 .frame(width: screen.width)
-                .animation(.spring())
         }
     }
 
@@ -76,13 +75,6 @@ struct TagPreviewList: View {
 
     private func topOfScreen(for proxy: GeometryProxy) -> CGFloat {
         -proxy.frame(in: .global).minY
-    }
-
-    private func expandOffset(for tag: Tag) -> CGFloat {
-        if tag.name < selectedTag!.name {
-            return screen.height
-        }
-        return -screen.height
     }
 }
 

@@ -85,8 +85,7 @@ private extension VisitsForDayView {
         GeometryReader { geometry in
             self.visitDetailsView(index: index, visit: self.visits[index])
                 .fade(if: self.isNotActiveVisit(at: index))
-                .scaleEffect(self.isNotActiveVisit(at: index) ? 0.5 : 1)
-                .offset(y: self.isShowingVisit ? self.topOfScreen(for: geometry) : 0)
+                .offset(y: self.isActiveVisitIndex(index: index) ? self.topOfScreen(for: geometry) : 0)
         }
     }
 
