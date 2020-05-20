@@ -25,7 +25,6 @@ struct TagDetailsView: View {
             .background(tag.uiColor.color)
             .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
             .animation(.easeInOut)
-            .onTapGesture(perform: setSelectedTag)
     }
 }
 
@@ -34,6 +33,8 @@ private extension TagDetailsView {
         VStack {
             tagDetailsHeaderView
                 .padding(.horizontal, isSelected ? 30 : 12)
+                .contentShape(Rectangle())
+                .onTapGesture(perform: setSelectedTag)
             if isSelected {
                 LocationsForTagView(
                     tag: tag,

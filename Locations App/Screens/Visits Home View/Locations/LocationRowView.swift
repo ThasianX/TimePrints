@@ -9,6 +9,7 @@ struct LocationRowView: View {
 
     var body: some View {
         locationRowView
+            .contentShape(Rectangle())
             .onTapGesture(perform: onTap)
     }
 
