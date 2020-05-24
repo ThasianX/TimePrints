@@ -18,6 +18,7 @@ struct FilteredLocationsListView: View {
             searchView
             filteredLocationsView
                 .resignKeyboardOnDrag()
+                .padding(.bottom, 25)
         }
     }
 }

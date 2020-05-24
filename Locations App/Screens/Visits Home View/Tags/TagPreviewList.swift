@@ -30,6 +30,10 @@ struct TagPreviewList: View {
         VScroll {
             tagPreviewStack
                 .frame(width: screen.width)
+                // Necessary for shorter lists to fill up the gap in size
+                // after the offset. This makes the content in the expanded
+                // row clickable and interactable
+                .padding(.bottom, 650)
         }
     }
 
