@@ -39,7 +39,6 @@ private extension TagDetailsView {
                 LocationsForTagView(
                     tag: tag,
                     setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
-                Spacer()
             }
         }
     }

@@ -56,6 +56,7 @@
 		1E7B618F23E284C600F9F974 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B618E23E284C600F9F974 /* MapView.swift */; };
 		1E80278F23E5E9AC0043D119 /* VisitsForDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E80278E23E5E9AC0043D119 /* VisitsForDayView.swift */; };
 		1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8909CD23F880070008500E /* VisitCellConstants.swift */; };
+		1E92C754247A262600885A45 /* RadarSpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E92C753247A262600885A45 /* RadarSpinnerView.swift */; };
 		1E97274223EB57AE006528ED /* LocationVisitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E97274123EB57AE006528ED /* LocationVisitsView.swift */; };
 		1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785823E10B4F0020FAFE /* AppDelegate.swift */; };
 		1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */; };
@@ -230,6 +231,7 @@
 		1E7B618E23E284C600F9F974 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		1E80278E23E5E9AC0043D119 /* VisitsForDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsForDayView.swift; sourceTree = "<group>"; };
 		1E8909CD23F880070008500E /* VisitCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitCellConstants.swift; sourceTree = "<group>"; };
+		1E92C753247A262600885A45 /* RadarSpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarSpinnerView.swift; sourceTree = "<group>"; };
 		1E97274123EB57AE006528ED /* LocationVisitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVisitsView.swift; sourceTree = "<group>"; };
 		1E9D785523E10B4F0020FAFE /* Locations App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Locations App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9D785823E10B4F0020FAFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				1ED53518240A3C9A009B11D3 /* BlurView.swift */,
 				1EE2CF5823E7D2C2009760D6 /* CustomAnnotationView.swift */,
 				1EFE85CF240377170001D0C3 /* LottieView.swift */,
+				1E92C753247A262600885A45 /* RadarSpinnerView.swift */,
 				1E6D568823E5EEB20044AB3A /* TagView.swift */,
 			);
 			path = Views;
@@ -552,7 +555,6 @@
 			children = (
 				1E3CD7EB2403254A00C95ABF /* AllLocationsListView.swift */,
 				1EA65CC42471BE48002795FC /* FilteredLocationsListView.swift */,
-				1EA65CBE2470C1F2002795FC /* LocationsForTagView.swift */,
 				1EA65CC02470CC6C002795FC /* LocationRowView.swift */,
 			);
 			path = Locations;
@@ -592,6 +594,7 @@
 				1E3F498E244BF1E300775F81 /* TagPreviewList.swift */,
 				1E00E5702408AF9500B14C9F /* TagDetailsView.swift */,
 				1EA65CBC2470C0DC002795FC /* TagDetailsHeaderView.swift */,
+				1EA65CBE2470C1F2002795FC /* LocationsForTagView.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -1184,6 +1187,7 @@
 				1E558EDF2411FD0C0087C5E3 /* SetupThemePickerView.swift in Sources */,
 				1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */,
 				1EFE85CB240360490001D0C3 /* TagRow.swift in Sources */,
+				1E92C754247A262600885A45 /* RadarSpinnerView.swift in Sources */,
 				1E6D568B23E5F6F10044AB3A /* BImage.swift in Sources */,
 				1EFF83B723E53ACB00FF04A1 /* EdgeModifier.swift in Sources */,
 				1EA65CC72471C2AA002795FC /* ResignKeyboardOnDragGestureModifier.swift in Sources */,
