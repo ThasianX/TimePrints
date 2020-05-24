@@ -19,8 +19,8 @@ struct TagHeader: View {
         HStack {
             tagImage
 
-            ZStack {
-                headerText("CHOOSE TAG")
+            ZStack(alignment: .leading) {
+                headerText("TAGS")
                     .fade(if: tagState.isShowingAddOrEdit)
                 headerText("MAKE TAG")
                     .fade(if: !tagState.operation.add)
