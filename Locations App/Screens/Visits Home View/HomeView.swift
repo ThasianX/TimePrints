@@ -19,7 +19,7 @@ struct HomeView: View {
         ZStack {
             backgroundColor
 
-            filterContent
+            selectedContent
 
             bottomRightAlignedExpandableFAB
                 .padding(.trailing, 16)
@@ -36,19 +36,24 @@ private extension HomeView {
 }
 
 private extension HomeView {
-    private var filterContent: some View {
-        ZStack {
-            VisitsPreviewList(hideFAB: $hideFAB, appState: appState)
-                .fade(if: !isCurrentFilter(filter: .visits))
-            TagsListView(showing: appState.showing, locationControl: appState.locationControl, hideFAB: $hideFAB)
-                .fade(if: !isCurrentFilter(filter: .tags))
-            AllLocationsListView(showing: appState.showing, locationControl: appState.locationControl)
-                .fade(if: !isCurrentFilter(filter: .locations))
+    private var selectedContent: AnyView {
+        switch homeFilter {
+        case .visits:
+            return VisitsPreviewList(
+                hideFAB: $hideFAB,
+                appState: appState).erased()
+        case .tags:
+            return
+                TagsListView(
+                    showing: appState.showing,
+                    locationControl: appState.locationControl,
+                    hideFAB: $hideFAB).erased()
+        case .locations:
+            return
+                AllLocationsListView(
+                    showing: appState.showing,
+                    locationControl: appState.locationControl).erased()
         }
-    }
-
-    private func isCurrentFilter(filter: HomeFilter) -> Bool {
-        filter == homeFilter
     }
 }
 
