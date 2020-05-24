@@ -33,7 +33,7 @@ private extension TagDetailsView {
     private var tagDetailsView: some View {
         VStack {
             tagDetailsHeaderView
-                .padding(.horizontal, isSelected ? 30 : 12)
+                .equatable()
                 .contentShape(Rectangle())
                 .onTapGesture(perform: setSelectedTag)
             if isSelected {
@@ -41,6 +41,12 @@ private extension TagDetailsView {
                     tag: tag,
                     setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
             }
+        }
+    }
+    private func setSelectedTag() {
+        withAnimation {
+            selectedTag = tag
+            hideFAB = true
         }
     }
 
@@ -52,15 +58,6 @@ private extension TagDetailsView {
         withAnimation {
             selectedTag = nil
             hideFAB = false
-        }
-    }
-}
-
-private extension TagDetailsView {
-    private func setSelectedTag() {
-        withAnimation {
-            selectedTag = tag
-            hideFAB = true
         }
     }
 }

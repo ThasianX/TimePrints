@@ -62,10 +62,6 @@ private extension TagsListView {
                        setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
     }
 
-    private func toggleNavigationButton() {
-        hideFAB.toggle()
-    }
-
     private func setActiveLocationAndDisplayMap(location: Location) {
         locationControl.currentlyFocused = location
         showMapView()

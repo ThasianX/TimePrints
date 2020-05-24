@@ -2,6 +2,13 @@
 
 import SwiftUI
 
+extension TagDetailsHeaderView: Equatable {
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.tag == rhs.tag &&
+            lhs.isSelected == rhs.isSelected
+    }
+}
+
 struct TagDetailsHeaderView: View {
     let tag: Tag
     let isSelected: Bool
@@ -9,6 +16,7 @@ struct TagDetailsHeaderView: View {
 
     var body: some View {
         tagDetailsHeaderView
+            .padding(.horizontal, isSelected ? 30 : 12)
     }
 
     private var tagDetailsHeaderView: some View {
