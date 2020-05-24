@@ -30,6 +30,7 @@
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
 		1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3237982418632500D370CD /* CloseRouteButton.swift */; };
 		1E3CD7EC2403254A00C95ABF /* AllLocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* AllLocationsListView.swift */; };
+		1E3E545A247AEBC80036C70F /* ExitDragGestureModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E5459247AEBC80036C70F /* ExitDragGestureModifier.swift */; };
 		1E3F498F244BF1E300775F81 /* TagPreviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F498E244BF1E300775F81 /* TagPreviewList.swift */; };
 		1E3F4992244BF36A00775F81 /* TagContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F4991244BF36A00775F81 /* TagContextMenu.swift */; };
 		1E3F4994244C01D100775F81 /* TagCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3F4993244C01D100775F81 /* TagCellConstants.swift */; };
@@ -207,6 +208,7 @@
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
 		1E3237982418632500D370CD /* CloseRouteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseRouteButton.swift; sourceTree = "<group>"; };
 		1E3CD7EB2403254A00C95ABF /* AllLocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsListView.swift; sourceTree = "<group>"; };
+		1E3E5459247AEBC80036C70F /* ExitDragGestureModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitDragGestureModifier.swift; sourceTree = "<group>"; };
 		1E3F498E244BF1E300775F81 /* TagPreviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPreviewList.swift; sourceTree = "<group>"; };
 		1E3F4991244BF36A00775F81 /* TagContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagContextMenu.swift; sourceTree = "<group>"; };
 		1E3F4993244C01D100775F81 /* TagCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCellConstants.swift; sourceTree = "<group>"; };
@@ -899,6 +901,7 @@
 				1EB424EA2429D48A0035F43E /* ScaleFadeModifier.swift */,
 				1EFF83AA23E52BC700FF04A1 /* SizeModifier.swift */,
 				1EA65CC62471C2AA002795FC /* ResignKeyboardOnDragGestureModifier.swift */,
+				1E3E5459247AEBC80036C70F /* ExitDragGestureModifier.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -1115,6 +1118,7 @@
 				1EB865E123F9E01400A4B8E1 /* UIApplication+Editing.swift in Sources */,
 				1E9D78A123E12BC80020FAFE /* ReversedGeoLocation.swift in Sources */,
 				1EF5BEDA24289DF900B34251 /* TransientAlertView.swift in Sources */,
+				1E3E545A247AEBC80036C70F /* ExitDragGestureModifier.swift in Sources */,
 				1E21F307240D60F400BC81DC /* ThemePickerView.swift in Sources */,
 				1EDE74D5240B6721002A7C08 /* LocationService.swift in Sources */,
 				1E125C49240DA17700D0919E /* UIColor+Hex.swift in Sources */,

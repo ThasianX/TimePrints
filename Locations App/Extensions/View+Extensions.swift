@@ -1,32 +1,36 @@
 import SwiftUI
 
 extension View {
-    func rotated(_ angle: Angle) -> some View {
-        modifier(RotatedModifier(angle: angle))
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        modifier(RoundedModifier(radius: radius, corners: corners))
+    }
+
+    func disablur(_ disabled: Bool) -> some View {
+        modifier(DisableModifier(disabled: disabled))
+    }
+
+    func exitOnDrag(if isSelected: Bool, onExit: @escaping () -> Void) -> some View {
+        modifier(ExitDragGestureModifier(isSelected: isSelected, onExit: onExit))
     }
     
     func extendToScreenEdges() -> some View {
         modifier(EdgeModifier())
     }
     
-    func disablur(_ disabled: Bool) -> some View {
-        modifier(DisableModifier(disabled: disabled))
-    }
-    
     func fade(if condition: Bool) -> some View {
         modifier(OpacityModifier(fade: condition))
     }
 
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        modifier(RoundedModifier(radius: radius, corners: corners))
+    func resignKeyboardOnDrag() -> some View {
+        modifier(ResignKeyboardOnDragGesture())
+    }
+
+    func rotated(_ angle: Angle) -> some View {
+        modifier(RotatedModifier(angle: angle))
     }
 
     func scaleFade(if condition: Bool) -> some View {
         modifier(ScaleFadeModifier(condition: condition))
-    }
-
-    func resignKeyboardOnDrag() -> some View {
-        modifier(ResignKeyboardOnDragGesture())
     }
 }
 

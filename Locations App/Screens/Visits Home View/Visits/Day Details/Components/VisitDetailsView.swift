@@ -9,7 +9,6 @@ struct VisitDetailsView: View {
     @State private var isEditingNotes = false
 
     @State private var notesInput = ""
-    @State private var activeTranslation: CGSize = .zero
 
     @Binding var selectedIndex: Int
 
@@ -31,9 +30,8 @@ struct VisitDetailsView: View {
             .extendToScreenEdges()
             .background(appTheme.color)
             .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
-            .scaleEffect(1 - ((activeTranslation.height + activeTranslation.width) / 1000))
             .animation(.easeInOut)
-            .gesture(exitGestureIfSelected)
+            .exitOnDrag(if: isSelected, onExit: resetViewState)
             .onTapGesture(perform: setSelectedVisitIndex)
             .onAppear(perform: setFavoritedStateAndNotesInput)
     }
@@ -290,7 +288,6 @@ private extension VisitDetailsView {
 
     private var notesButton: some View {
         NotesButton(isEditingNotes: $isEditingNotes, notesInput: $notesInput, onCommit: commitNoteEdits)
-            .simultaneousGesture(exitGestureIfSelected)
     }
 
     private struct NotesButton: View {
@@ -396,36 +393,10 @@ private extension VisitDetailsView {
         self.selectedIndex = index
     }
 
-    private var exitGestureIfSelected: some Gesture {
-        return isSelected ? exitGesture : nil
-    }
-
-    private var exitGesture: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                let height = value.translation.height
-                let width = value.translation.width
-                guard height > 0 && height < 100 else { return }
-                guard width > 0 && width < 50 else { return }
-
-                self.activeTranslation = value.translation
-            }
-            .onEnded { value in
-                if self.activeTranslation.height > 50 || self.activeTranslation.width > 30 {
-                    self.resetViewState()
-                }
-                self.resetActiveTranslation()
-            }
-    }
-
     private func resetViewState() {
         resetNoteState()
         minimizeMap()
         unselectRow()
-    }
-
-    private func resetActiveTranslation() {
-        activeTranslation = .zero
     }
 
     private func setFavoritedStateAndNotesInput() {

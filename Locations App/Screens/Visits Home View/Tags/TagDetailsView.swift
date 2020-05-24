@@ -23,8 +23,9 @@ struct TagDetailsView: View {
             .frame(maxWidth: TagCellConstants.maxWidth(if: isSelected))
             .extendToScreenEdges()
             .background(tag.uiColor.color)
-            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 15, style: .continuous))
             .animation(.easeInOut)
+            .exitOnDrag(if: isSelected, onExit: navigateBack)
     }
 }
 
