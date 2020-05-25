@@ -7,6 +7,7 @@ struct ExitDragGestureModifier: ViewModifier {
 
     let isSelected: Bool
     let onExit: () -> Void
+    let isSimultaneous: Bool
 
     private var exitGestureIfSelected: some Gesture {
         return isSelected ? exitGesture : nil
@@ -35,8 +36,16 @@ struct ExitDragGestureModifier: ViewModifier {
     }
 
     func body(content: Content) -> some View {
-        content
-            .scaleEffect(1 - ((activeTranslation.height + activeTranslation.width) / 1000))
-            .gesture(exitGestureIfSelected)
+        Group {
+            if isSimultaneous {
+                content
+                    .scaleEffect(1 - ((activeTranslation.height + activeTranslation.width) / 1000))
+                    .simultaneousGesture(exitGestureIfSelected)
+            } else {
+                content
+                    .scaleEffect(1 - ((activeTranslation.height + activeTranslation.width) / 1000))
+                    .gesture(exitGestureIfSelected)
+            }
+        }
     }
 }

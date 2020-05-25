@@ -9,11 +9,20 @@ extension View {
         modifier(DisableModifier(disabled: disabled))
     }
 
-    func exitOnDrag(if isSelected: Bool, onExit: @escaping () -> Void) -> some View {
-        modifier(ExitDragGestureModifier(isSelected: isSelected, onExit: onExit))
+    func exitOnDrag(
+        if isSelected: Bool,
+        onExit: @escaping () -> Void,
+        isSimultaneous: Bool = false) -> some View {
+        modifier(ExitDragGestureModifier(
+            isSelected: isSelected,
+            onExit: onExit,
+            isSimultaneous: isSimultaneous))
     }
 
-    func expandableAndFoldable(foldOffset: CGFloat, shouldFold: Bool, isActiveIndex: Bool) -> some View {
+    func expandableAndFoldable(
+        foldOffset: CGFloat,
+        shouldFold: Bool,
+        isActiveIndex: Bool) -> some View {
         modifier(ExpandAndFoldModifier(
             foldOffset: foldOffset,
             shouldFold: shouldFold,

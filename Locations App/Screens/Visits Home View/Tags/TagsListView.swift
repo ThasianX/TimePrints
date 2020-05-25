@@ -65,6 +65,7 @@ private extension TagsListView {
     private func setActiveLocationAndDisplayMap(location: Location) {
         locationControl.currentlyFocused = location
         showMapView()
+        UIApplication.shared.endEditing(true)
     }
 
     private func showMapView() {

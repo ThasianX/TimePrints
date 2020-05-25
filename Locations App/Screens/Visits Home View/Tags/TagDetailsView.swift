@@ -25,7 +25,7 @@ struct TagDetailsView: View {
             .background(tag.uiColor.color)
             .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 15, style: .continuous))
             .animation(.easeInOut)
-            .exitOnDrag(if: isSelected, onExit: navigateBack)
+            .exitOnDrag(if: isSelected, onExit: navigateBack, isSimultaneous: true)
     }
 }
 
@@ -37,9 +37,7 @@ private extension TagDetailsView {
                 .contentShape(Rectangle())
                 .onTapGesture(perform: setSelectedTag)
             if isSelected {
-                LocationsForTagView(
-                    tag: tag,
-                    setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
+                locationsForTagView
             }
         }
     }
@@ -59,6 +57,12 @@ private extension TagDetailsView {
             selectedTag = nil
             hideFAB = false
         }
+    }
+
+    private var locationsForTagView: LocationsForTagView {
+        LocationsForTagView(
+            tag: tag,
+            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
     }
 }
 
