@@ -79,6 +79,7 @@ private extension VisitsForDayView {
                 .padding(.top, 20)
                 .padding(.bottom, 600)
         }
+        .id(currentDayComponent)
     }
 
     private var visitsForDayStack: some View {
