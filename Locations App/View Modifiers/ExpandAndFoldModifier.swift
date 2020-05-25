@@ -55,7 +55,7 @@ private struct _ExpandAndFoldModifier: ViewModifier {
     }
 
     private var opacity: Double {
-        guard shouldFold && shouldStartFolding else { return 1 }
+        guard shouldFold && shouldStartFolding && (foldDelta >= 0) else { return 1 }
         // 0.4 padding because we don't want the cell to fully fade when it's folded
         return foldDelta + 0.4
     }
