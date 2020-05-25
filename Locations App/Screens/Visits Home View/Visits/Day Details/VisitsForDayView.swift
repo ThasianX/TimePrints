@@ -20,7 +20,7 @@ struct VisitsForDayView: View {
         ZStack(alignment: .top) {
             header
             visitsForDayList
-                .offset(y: !isShowingVisit ? 100 : 0)
+                .offset(y: !isShowingVisit ? 110 : 0)
         }
     }
 }
@@ -86,6 +86,8 @@ private extension VisitsForDayView {
             self.visitDetailsView(index: index, visit: self.visits[index])
                 .fade(if: self.isNotActiveVisit(at: index))
                 .offset(y: self.isActiveVisitIndex(index: index) ? self.topOfScreen(for: geometry) : 0)
+                .rotation3DEffect(self.rotationAngle(for: geometry), axis: (x: -200, y: 0, z: 0), anchor: .bottom)
+                .opacity(self.opacity(for: geometry))
         }
     }
 
@@ -110,6 +112,28 @@ private extension VisitsForDayView {
 
     private func topOfScreen(for proxy: GeometryProxy) -> CGFloat {
         -proxy.frame(in: .global).minY
+    }
+
+    private func rotationAngle(for proxy: GeometryProxy) -> Angle {
+        guard !isShowingVisit else { return .degrees(0) }
+        let minY = proxy.frame(in: .global).minY
+        return .degrees(minY < 150 ? -foldDegree(for: minY) : 0)
+    }
+
+    private func foldDegree(for minY: CGFloat) -> Double {
+        let delta = foldDelta(for: minY)
+        guard delta >= 0 else { return 90 }
+        return 90 - (90 * delta)
+    }
+
+    private func opacity(for proxy: GeometryProxy) -> Double {
+        guard !isShowingVisit else { return 1 }
+        let minY = proxy.frame(in: .global).minY
+        return minY < 150 ? foldDelta(for: minY) + 0.4 : 1
+    }
+
+    private func foldDelta(for minY: CGFloat) -> Double {
+        Double((VisitCellConstants.height + (minY - 150)) / VisitCellConstants.height)
     }
 }
 
