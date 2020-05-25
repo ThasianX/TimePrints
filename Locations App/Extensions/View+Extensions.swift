@@ -12,6 +12,13 @@ extension View {
     func exitOnDrag(if isSelected: Bool, onExit: @escaping () -> Void) -> some View {
         modifier(ExitDragGestureModifier(isSelected: isSelected, onExit: onExit))
     }
+
+    func expandableAndFoldable(foldOffset: CGFloat, shouldFold: Bool, isActiveIndex: Bool) -> some View {
+        modifier(ExpandAndFoldModifier(
+            foldOffset: foldOffset,
+            shouldFold: shouldFold,
+            isActiveIndex: isActiveIndex))
+    }
     
     func extendToScreenEdges() -> some View {
         modifier(EdgeModifier())

@@ -3,7 +3,6 @@ import SwiftUI
 
 struct VisitsForDayView: View {
     @State private var activeVisitIndex: Int = -1
-    @State var activeTranslation = CGSize.zero
 
     @Binding var currentDayComponent: DateComponents
 
@@ -20,7 +19,7 @@ struct VisitsForDayView: View {
         ZStack(alignment: .top) {
             header
             visitsForDayList
-                .offset(y: !isShowingVisit ? 110 : 0)
+                .offset(y: !isShowingVisit ? 95 : 0)
         }
     }
 }
@@ -67,6 +66,7 @@ private extension VisitsForDayView {
         VScroll {
             visitsForDayStack
                 .frame(width: screen.width)
+                .padding(.top, 20)
                 .padding(.bottom, 600)
         }
     }
@@ -82,13 +82,12 @@ private extension VisitsForDayView {
     }
 
     private func dynamicVisitRow(index: Int) -> some View {
-        GeometryReader { geometry in
-            self.visitDetailsView(index: index, visit: self.visits[index])
-                .fade(if: self.isNotActiveVisit(at: index))
-                .offset(y: self.isActiveVisitIndex(index: index) ? self.topOfScreen(for: geometry) : 0)
-                .rotation3DEffect(self.rotationAngle(for: geometry), axis: (x: -200, y: 0, z: 0), anchor: .bottom)
-                .opacity(self.opacity(for: geometry))
-        }
+        visitDetailsView(index: index, visit: visits[index])
+            .fade(if: isNotActiveVisit(at: index))
+            .expandableAndFoldable(
+                foldOffset: 160,
+                shouldFold: !isShowingVisit,
+                isActiveIndex: isActiveVisitIndex(index: index))
     }
 
     private func visitDetailsView(index: Int, visit: Visit) -> some View {
