@@ -2,6 +2,8 @@ import Mapbox
 import SwiftUI
 
 struct VisitsForDayView: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+
     @State private var activeVisitIndex: Int = -1
 
     @Binding var currentDayComponent: DateComponents
@@ -21,6 +23,14 @@ struct VisitsForDayView: View {
             visitsForDayList
                 .offset(y: !isShowingVisit ? 95 : 0)
         }
+        .background(backgroundColor)
+        .animation(.spring())
+    }
+
+    private var backgroundColor: some View {
+        appTheme.color.saturation(1.5)
+            .frame(height: screen.height + 50)
+            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
     }
 }
 
@@ -107,32 +117,6 @@ private extension VisitsForDayView {
 
     private func isActiveVisitIndex(index: Int) -> Bool {
         index == activeVisitIndex
-    }
-
-    private func topOfScreen(for proxy: GeometryProxy) -> CGFloat {
-        -proxy.frame(in: .global).minY
-    }
-
-    private func rotationAngle(for proxy: GeometryProxy) -> Angle {
-        guard !isShowingVisit else { return .degrees(0) }
-        let minY = proxy.frame(in: .global).minY
-        return .degrees(minY < 150 ? -foldDegree(for: minY) : 0)
-    }
-
-    private func foldDegree(for minY: CGFloat) -> Double {
-        let delta = foldDelta(for: minY)
-        guard delta >= 0 else { return 90 }
-        return 90 - (90 * delta)
-    }
-
-    private func opacity(for proxy: GeometryProxy) -> Double {
-        guard !isShowingVisit else { return 1 }
-        let minY = proxy.frame(in: .global).minY
-        return minY < 150 ? foldDelta(for: minY) + 0.4 : 1
-    }
-
-    private func foldDelta(for minY: CGFloat) -> Double {
-        Double((VisitCellConstants.height + (minY - 150)) / VisitCellConstants.height)
     }
 }
 
