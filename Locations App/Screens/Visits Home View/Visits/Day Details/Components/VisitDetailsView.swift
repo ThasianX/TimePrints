@@ -44,14 +44,11 @@ private extension VisitDetailsView {
                 .padding(.bottom, isSelected ? 10 : 0)
                 .padding(.horizontal, isSelected ? 30 : 0)
             coreDetailsView
-                .scaleEffect(isMapOpen || isEditingNotes ? 0 : 1)
-                .fade(if: isMapOpen || isEditingNotes)
+                .scaleFade(if: isMapOpen || isEditingNotes)
             interactableMapViewIfSelected
-                .scaleEffect(isEditingNotes ? 0 : 1)
-                .fade(if: isEditingNotes)
+                .scaleFade(if: isEditingNotes)
             notesIfSelected
-                .fade(if: isMapOpen)
-                .scaleEffect(isMapOpen ? 0 : 1)
+                .scaleFade(if: isMapOpen)
                 .padding(.bottom, 100)
             Spacer()
         }
@@ -203,8 +200,7 @@ private extension VisitDetailsView {
                 VStack(spacing: 16) {
                     locationAddressText
                     mapOptionsView
-                        .fade(if: !isMapOpen)
-                        .scaleEffect(isMapOpen ? 1 : 0)
+                        .scaleFade(if: !isMapOpen)
                 }
                 .padding(.leading, 80)
                 .padding(.trailing, 80)
@@ -390,7 +386,7 @@ private extension VisitDetailsView {
 
 private extension VisitDetailsView {
     private func setSelectedVisitIndex() {
-        self.selectedIndex = index
+        selectedIndex = index
     }
 
     private func resetViewState() {
