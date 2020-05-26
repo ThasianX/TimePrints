@@ -356,18 +356,10 @@ private extension VisitDetailsView {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     Text(self.notesInput)
-                        .font(.caption)
+                        .fixedSize(horizontal: false, vertical: true)
                         .lineLimit(nil)
                         .multilineTextAlignment(.center)
-                        .frame(
-                            minWidth: geometry.size.width,
-                            idealWidth: geometry.size.width,
-                            maxWidth: geometry.size.width,
-                            minHeight: geometry.size.height,
-                            idealHeight: geometry.size.height,
-                            maxHeight: .infinity,
-                            alignment: .top
-                        )
+                        .frame(width: geometry.size.width)
                 }
             }
         }

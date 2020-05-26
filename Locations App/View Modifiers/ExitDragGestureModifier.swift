@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct ExitDragGestureModifier: ViewModifier {
-    @State var activeTranslation: CGSize = .zero
+    @State private var activeTranslation: CGSize = .zero
 
     let isSelected: Bool
     let onExit: () -> Void
