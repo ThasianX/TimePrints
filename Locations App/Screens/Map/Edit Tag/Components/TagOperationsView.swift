@@ -1,3 +1,4 @@
+import Introspect
 import SwiftUI
 
 struct TagOperationsView: View {
@@ -20,6 +21,13 @@ struct TagOperationsView: View {
         return TextField("Tag Name...", text: nameInput)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .multilineTextAlignment(.center)
+            .introspectTextField { textField in
+                if self.tagState.isShowingAddOrEdit {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        textField.becomeFirstResponder()
+                    }
+                }
+            }
     }
 
     private var tagColorPicker: some View {

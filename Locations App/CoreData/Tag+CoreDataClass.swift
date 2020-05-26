@@ -90,11 +90,9 @@ extension Tag {
         CoreData.stack.save()
     }
 
-    @discardableResult
-    func delete() -> Tag {
-        let tag = self
+    func delete() {
         CoreData.stack.context.delete(self)
-        return tag
+        CoreData.stack.save()
     }
 }
 

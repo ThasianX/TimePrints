@@ -2,8 +2,9 @@ import Mapbox
 import SwiftUI
 
 struct VisitsForDayView: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+
     @State private var activeVisitIndex: Int = -1
-    @State var activeTranslation = CGSize.zero
 
     @Binding var currentDayComponent: DateComponents
 
@@ -20,8 +21,16 @@ struct VisitsForDayView: View {
         ZStack(alignment: .top) {
             header
             visitsForDayList
-                .offset(y: !isShowingVisit ? 100 : 0)
+                .offset(y: !isShowingVisit ? 95 : 0)
         }
+        .background(backgroundColor)
+        .animation(.spring())
+    }
+
+    private var backgroundColor: some View {
+        appTheme.color.saturation(1.5)
+            .frame(height: screen.height + 50)
+            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
     }
 }
 
@@ -65,14 +74,15 @@ private extension VisitsForDayView {
 private extension VisitsForDayView {
     private var visitsForDayList: some View {
         VScroll {
-            makeVisitsStack
+            visitsForDayStack
                 .frame(width: screen.width)
+                .padding(.top, 20)
                 .padding(.bottom, 600)
-                .animation(.spring())
         }
+        .id(currentDayComponent)
     }
 
-    private var makeVisitsStack: some View {
+    private var visitsForDayStack: some View {
         VStack(spacing: 2) {
             ForEach(0..<visits.count, id: \.self) { i in
                 self.dynamicVisitRow(index: i)
@@ -83,15 +93,15 @@ private extension VisitsForDayView {
     }
 
     private func dynamicVisitRow(index: Int) -> some View {
-        GeometryReader { geometry in
-            self.makeVisitDetailsView(index: index, visit: self.visits[index])
-                .fade(if: self.isNotActiveVisit(at: index))
-                .scaleEffect(self.isNotActiveVisit(at: index) ? 0.5 : 1)
-                .offset(y: self.isShowingVisit ? self.topOfScreen(for: geometry) : 0)
-        }
+        visitDetailsView(index: index, visit: visits[index])
+            .fade(if: isNotActiveVisit(at: index))
+            .expandableAndFoldable(
+                foldOffset: 160,
+                shouldFold: !isShowingVisit,
+                isActiveIndex: isActiveVisitIndex(index: index))
     }
 
-    private func makeVisitDetailsView(index: Int, visit: Visit) -> some View {
+    private func visitDetailsView(index: Int, visit: Visit) -> some View {
         VisitDetailsView(
             selectedIndex: $activeVisitIndex,
             index: index,
@@ -108,10 +118,6 @@ private extension VisitsForDayView {
 
     private func isActiveVisitIndex(index: Int) -> Bool {
         index == activeVisitIndex
-    }
-
-    private func topOfScreen(for proxy: GeometryProxy) -> CGFloat {
-        -proxy.frame(in: .global).minY
     }
 }
 

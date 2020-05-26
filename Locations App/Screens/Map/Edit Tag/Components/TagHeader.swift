@@ -4,7 +4,7 @@ struct TagHeader: View {
     @ObservedObject var tagState: TagCoreState
 
     let normalTagColor: Color
-    let onSelect: ((Tag) -> Void)?
+    var onSelect: ((Tag) -> Void)? = nil
 
     var body: some View {
         HStack {
@@ -19,8 +19,8 @@ struct TagHeader: View {
         HStack {
             tagImage
 
-            ZStack {
-                headerText("CHOOSE TAG")
+            ZStack(alignment: .leading) {
+                headerText("TAGS")
                     .fade(if: tagState.isShowingAddOrEdit)
                 headerText("MAKE TAG")
                     .fade(if: !tagState.operation.add)

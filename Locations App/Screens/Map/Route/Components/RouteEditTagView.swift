@@ -15,33 +15,24 @@ struct RouteEditTagView: View {
     let tagProvider: TagProvider
 
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading) {
-                header
-                    .padding(overlayState.isEditingTag ? 16 : 0)
-                    .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
-                    .animation(.spring())
-
-                Group {
-                    if overlayState.isEditingTag {
-                        tagSelectionList
-                            .padding(.bottom, overlayState.isEditingTag ? 60 : 0)
-                            .scaleFade(if: tagState.isShowingAddOrEdit)
-                    }
-                }
-                .scaleFade(if: !overlayState.isEditingTag)
-                .animation(.spring())
-            }
+        ZStack(alignment: .top) {
+            header
+                .padding(overlayState.isEditingTag ? 16 : 0)
+                .offset(y: tagState.isShowingAddOrEdit ? 250 : 0)
 
             Group {
                 if overlayState.isEditingTag {
+                    tagSelectionList
+                        .padding(.bottom, overlayState.isEditingTag ? 125 : 0)
+                        .offset(y: 60)
+                        .scaleFade(if: tagState.isShowingAddOrEdit)
+
                     topAlignedTagOperationsView
                         .padding()
                         .scaleFade(if: tagState.isntShowingAddNorEdit)
-                        .animation(.spring())
 
                     bottomAlignedTransientAlertView
-                        .scaleFade(if: tagState.alert.isInactive)
+                        .fade(if: tagState.alert.isInactive)
                 }
             }
             .scaleFade(if: !overlayState.isEditingTag)
@@ -50,6 +41,7 @@ struct RouteEditTagView: View {
         .padding(.top, overlayState.isEditingTag ? 100 : 0)
         .padding(.bottom, overlayState.isEditingTag ? 50 : 0)
         .frame(width: overlayState.isEditingTag ? screen.width : nil, height: overlayState.isEditingTag ? screen.height : nil)
+        .animation(.spring())
     }
 }
 

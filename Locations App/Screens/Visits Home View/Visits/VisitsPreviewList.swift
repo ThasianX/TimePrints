@@ -27,12 +27,9 @@ struct VisitsPreviewList: View {
                     .extendToScreenEdges()
             }
 
-            overlayColor
-                .fade(if: isPreviewActive)
-
             visitsForActiveDayView
                 .fade(if: isPreviewActive)
-                .scaleEffect(isPreviewActive ? 0 : 1)
+                .scaleEffect(isPreviewActive ? 0.5 : 1)
                 .animation(.spring())
         }
     }
@@ -52,13 +49,6 @@ private extension VisitsPreviewList {
         Text("Visits")
             .font(.largeTitle)
             .foregroundColor(appTheme.color)
-    }
-}
-
-private extension VisitsPreviewList {
-    private var overlayColor: some View {
-        ScreenColor(appTheme.color)
-            .saturation(1.5)
     }
 }
 
@@ -138,11 +128,11 @@ private extension VisitsPreviewList {
             roundedCorners: roundedCorners,
             isFilled: isFilled,
             dayComponent: dayComponent,
-            onTap: setPreviewInactive
+            onTap: setPreviewInactiveAndHideTheFAB
         )
     }
 
-    private func setPreviewInactive() {
+    private func setPreviewInactiveAndHideTheFAB() {
         isPreviewActive = false
         hideFAB = true
     }
@@ -172,19 +162,19 @@ private extension VisitsPreviewList {
         VisitsForDayView(
             currentDayComponent: $currentDayComponent,
             visits: visitsForDayComponent[currentDayComponent]?.sortAscByArrivalDate ?? [],
-            onBack: setPreviewActive,
+            onBack: setPreviewActiveAndShowTheFAB,
             setActiveVisitLocationAndDisplayMap: setActiveVisitLocationAndDisplayMap,
             setActiveRouteVisitsAndDisplayMap: setActiveRouteVisitsAndDisplayMap
         )
     }
 
-    private func setPreviewActive() {
+    private func setPreviewActiveAndShowTheFAB() {
         isPreviewActive = true
         hideFAB = false
     }
 
     private func setActiveVisitLocationAndDisplayMap(visit: Visit) {
-        appState.locationControl.activeForVisit = visit.location
+        appState.locationControl.currentlyFocused = visit.location
         showMapView()
     }
 

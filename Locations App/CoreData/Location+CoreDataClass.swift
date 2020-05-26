@@ -124,8 +124,12 @@ extension Location {
         UIColor(self.tag.color)
     }
 
+    var clLocation: CLLocation {
+        CLLocation(latitude: latitude, longitude: longitude)
+    }
+
     var coordinate: CLLocationCoordinate2D {
-        .init(latitude: self.latitude, longitude: self.longitude)
+        clLocation.coordinate
     }
 }
 

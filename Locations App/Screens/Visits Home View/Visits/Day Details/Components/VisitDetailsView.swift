@@ -9,7 +9,6 @@ struct VisitDetailsView: View {
     @State private var isEditingNotes = false
 
     @State private var notesInput = ""
-    @State private var activeTranslation: CGSize = .zero
 
     @Binding var selectedIndex: Int
 
@@ -22,23 +21,19 @@ struct VisitDetailsView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .top) {
-            visitDetailsView
-                .padding(.top, isSelected ? 80 : 12)
-                .padding(.leading, isSelected ? 0 : 40)
-                .padding(.trailing, isSelected ? 0 : 40)
-                .frame(height: VisitCellConstants.height(if: isSelected))
-                .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
-                .background(appTheme.color)
-                .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
-                .gesture(exitGestureIfSelected)
-                .onTapGesture(perform: setSelectedVisitIndex)
-        }
-        .onAppear(perform: setFavoritedStateAndNotesInput)
-        .frame(height: VisitCellConstants.height(if: isSelected))
-        .extendToScreenEdges()
-        .scaleEffect(1 - (self.activeTranslation.height+self.activeTranslation.width)/1000)
-        .animation(.spring())
+        visitDetailsView
+            .animation(.spring())
+            .padding(.top, isSelected ? 80 : 12)
+            .padding(.horizontal, isSelected ? 0 : 40)
+            .frame(height: VisitCellConstants.height(if: isSelected))
+            .frame(maxWidth: VisitCellConstants.maxWidth(if: isSelected))
+            .extendToScreenEdges()
+            .background(appTheme.color)
+            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 30 : 10, style: .continuous))
+            .animation(.easeInOut)
+            .exitOnDrag(if: isSelected, onExit: resetViewState)
+            .onTapGesture(perform: setSelectedVisitIndex)
+            .onAppear(perform: setFavoritedStateAndNotesInput)
     }
 }
 
@@ -49,14 +44,11 @@ private extension VisitDetailsView {
                 .padding(.bottom, isSelected ? 10 : 0)
                 .padding(.horizontal, isSelected ? 30 : 0)
             coreDetailsView
-                .scaleEffect(isMapOpen || isEditingNotes ? 0 : 1)
-                .fade(if: isMapOpen || isEditingNotes)
+                .scaleFade(if: isMapOpen || isEditingNotes)
             interactableMapViewIfSelected
-                .scaleEffect(isEditingNotes ? 0 : 1)
-                .fade(if: isEditingNotes)
+                .scaleFade(if: isEditingNotes)
             notesIfSelected
-                .fade(if: isMapOpen)
-                .scaleEffect(isMapOpen ? 0 : 1)
+                .scaleFade(if: isMapOpen)
                 .padding(.bottom, 100)
             Spacer()
         }
@@ -208,8 +200,7 @@ private extension VisitDetailsView {
                 VStack(spacing: 16) {
                     locationAddressText
                     mapOptionsView
-                        .fade(if: !isMapOpen)
-                        .scaleEffect(isMapOpen ? 1 : 0)
+                        .scaleFade(if: !isMapOpen)
                 }
                 .padding(.leading, 80)
                 .padding(.trailing, 80)
@@ -293,7 +284,6 @@ private extension VisitDetailsView {
 
     private var notesButton: some View {
         NotesButton(isEditingNotes: $isEditingNotes, notesInput: $notesInput, onCommit: commitNoteEdits)
-            .simultaneousGesture(exitGestureIfSelected)
     }
 
     private struct NotesButton: View {
@@ -396,39 +386,13 @@ private extension VisitDetailsView {
 
 private extension VisitDetailsView {
     private func setSelectedVisitIndex() {
-        self.selectedIndex = index
-    }
-
-    private var exitGestureIfSelected: some Gesture {
-        return isSelected ? exitGesture : nil
-    }
-
-    private var exitGesture: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                let height = value.translation.height
-                let width = value.translation.width
-                guard height > 0 && height < 100 else { return }
-                guard width > 0 && width < 50 else { return }
-
-                self.activeTranslation = value.translation
-            }
-            .onEnded { value in
-                if self.activeTranslation.height > 50 || self.activeTranslation.width > 30 {
-                    self.resetViewState()
-                }
-                self.resetActiveTranslation()
-            }
+        selectedIndex = index
     }
 
     private func resetViewState() {
         resetNoteState()
         minimizeMap()
         unselectRow()
-    }
-
-    private func resetActiveTranslation() {
-        activeTranslation = .zero
     }
 
     private func setFavoritedStateAndNotesInput() {

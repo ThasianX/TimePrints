@@ -1,28 +1,46 @@
-// Kevin Li - 8:37 PM - 2/23/20
+// Kevin Li - 5:46 PM - 5/16/20
 
 import SwiftUI
 
-struct TagRow: View {
-    let tag: Tag
-    let isSelected: Bool
-
-    var body: some View {
-        HStack {
-            HStack(spacing: 12) {
-                tagDetailsStack
-                checkAnimationIfSelected
-            }
-            Spacer()
-
-            numberOfFavoritedVisitsView
-        }
-        .padding(12)
-        .background(tag.uiColor.color)
-        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+extension TagDetailsHeaderView: Equatable {
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.tag == rhs.tag &&
+            lhs.isSelected == rhs.isSelected
     }
 }
 
-private extension TagRow {
+struct TagDetailsHeaderView: View {
+    let tag: Tag
+    let isSelected: Bool
+    let navigateBack: () -> Void
+
+    var body: some View {
+        tagDetailsHeaderView
+            .padding(.horizontal, isSelected ? 30 : 12)
+    }
+
+    private var tagDetailsHeaderView: some View {
+        HStack {
+            if isSelected {
+                Group {
+                    backButton
+                    Spacer()
+                }
+                .transition(.scale)
+            }
+
+            tagDetailsStack
+            Spacer()
+            numberOfFavoritedVisitsView
+        }
+    }
+}
+
+private extension TagDetailsHeaderView {
+    private var backButton: some View {
+        BImage(perform: navigateBack, image: Image(systemName: "arrow.left"))
+    }
+
     private var tagDetailsStack: some View {
         VStack(alignment: .leading) {
             tagNameText
@@ -61,18 +79,7 @@ private extension TagRow {
     }
 }
 
-private extension TagRow {
-    private var checkAnimationIfSelected: some View {
-        Group {
-            if isSelected {
-                LottieView(fileName: "check1")
-                    .frame(width: 40, height: 40)
-            }
-        }
-    }
-}
-
-private extension TagRow {
+private extension TagDetailsHeaderView {
     private var numberOfFavoritedVisitsView: some View {
         ZStack {
             starImage
@@ -118,11 +125,5 @@ private extension TagRow {
                 favorited + (visit.isFavorite ? 1 : 0)
             })
         })
-    }
-}
-
-struct TagRow_Previews: PreviewProvider {
-    static var previews: some View {
-        TagRow(tag: .preview, isSelected: true).environment(\.managedObjectContext, CoreData.stack.context)
     }
 }

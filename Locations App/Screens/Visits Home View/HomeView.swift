@@ -9,7 +9,7 @@ enum HomeFilter {
     case locations
 }
 
-struct VisitsHomeView: View {
+struct HomeView: View {
     @State private var homeFilter: HomeFilter = .visits
     @State private var hideFAB: Bool = false
 
@@ -19,7 +19,7 @@ struct VisitsHomeView: View {
         ZStack {
             backgroundColor
 
-            filterContent
+            selectedContent
 
             bottomRightAlignedExpandableFAB
                 .padding(.trailing, 16)
@@ -29,30 +29,35 @@ struct VisitsHomeView: View {
     }
 }
 
-private extension VisitsHomeView {
+private extension HomeView {
     private var backgroundColor: some View {
         ScreenColor(UIColor.black)
     }
 }
 
-private extension VisitsHomeView {
-    private var filterContent: some View {
-        ZStack {
-            VisitsPreviewList(hideFAB: $hideFAB, appState: appState)
-                .fade(if: !isCurrentFilter(filter: .visits))
-            TagsListView()
-                .fade(if: !isCurrentFilter(filter: .tags))
-            LocationsListView()
-                .fade(if: !isCurrentFilter(filter: .locations))
+private extension HomeView {
+    private var selectedContent: AnyView {
+        switch homeFilter {
+        case .visits:
+            return VisitsPreviewList(
+                hideFAB: $hideFAB,
+                appState: appState).erased()
+        case .tags:
+            return
+                TagsListView(
+                    showing: appState.showing,
+                    locationControl: appState.locationControl,
+                    hideFAB: $hideFAB).erased()
+        case .locations:
+            return
+                AllLocationsListView(
+                    showing: appState.showing,
+                    locationControl: appState.locationControl).erased()
         }
-    }
-
-    private func isCurrentFilter(filter: HomeFilter) -> Bool {
-        filter == homeFilter
     }
 }
 
-private extension VisitsHomeView {
+private extension HomeView {
     private var bottomRightAlignedExpandableFAB: some View {
         VStack {
             Spacer()
@@ -90,6 +95,6 @@ private extension VisitsHomeView {
 
 struct VisitsHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        VisitsHomeView(appState: .init())
+        HomeView(appState: .init())
     }
 }

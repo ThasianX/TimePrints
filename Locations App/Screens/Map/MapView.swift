@@ -37,7 +37,7 @@ struct MapView: UIViewRepresentable {
             uiView.userTrackingMode = trackingMode
         }
 
-        if let activeVisitLocation = appState.locationControl.activeForVisit {
+        if let activeVisitLocation = appState.locationControl.currentlyFocused {
             selectAnnotation(for: activeVisitLocation, with: uiView)
         }
     }
