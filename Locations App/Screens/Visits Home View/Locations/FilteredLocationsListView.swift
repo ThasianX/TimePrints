@@ -4,6 +4,7 @@ import SwiftUI
 
 struct FilteredLocationsListView: View {
     @State private var query = ""
+    @State private var showCancelButton: Bool = false
 
     let locations: [Location]
     let setActiveLocationAndDisplayMap: (Location) -> Void
@@ -26,14 +27,20 @@ struct FilteredLocationsListView: View {
 private extension FilteredLocationsListView {
     private var searchView: some View {
         HStack {
-            magnifyingImage
-            searchTextField
-            resetFilterButton
+            HStack {
+                magnifyingImage
+                searchTextField
+                resetFilterButton
+            }
+            .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+            .foregroundColor(.gray)
+            .background(color.saturation(0.5))
+            .cornerRadius(10.0)
+
+            if showCancelButton {
+                cancelButton
+            }
         }
-        .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-        .foregroundColor(.gray)
-        .background(color.saturation(0.5))
-        .cornerRadius(10.0)
         .padding(.horizontal)
     }
 
@@ -42,7 +49,11 @@ private extension FilteredLocationsListView {
     }
 
     private var searchTextField: some View {
-        TextField("Search locations...", text: $query)
+        TextField("Search locations...", text: $query, onEditingChanged: onEditingChanged)
+    }
+
+    private func onEditingChanged(_ isEditing: Bool) {
+        showCancelButton = true
     }
 
     private var resetFilterButton: some View {
@@ -50,14 +61,21 @@ private extension FilteredLocationsListView {
             self.resetFilter()
         }) {
             Image(systemName: "xmark.circle.fill")
-                .opacity(query == "" ? 0 : 1)
+                .fade(if: query.isEmpty)
         }
     }
 
     private func resetFilter() {
-        withAnimation {
-            query = ""
+        query = ""
+    }
+
+    private var cancelButton: some View {
+        Button("Cancel") {
+            UIApplication.shared.endEditing(true) // this must be placed before the other commands here
+            self.query = ""
+            self.showCancelButton = false
         }
+        .foregroundColor(.white)
     }
 }
 
