@@ -94,11 +94,11 @@ private extension VisitsForDayView {
 
     private func dynamicVisitRow(index: Int) -> some View {
         visitDetailsView(index: index, visit: visits[index])
-            .fade(if: isNotActiveVisit(at: index))
+            .fade(if: isVisitNotActive(at: index))
             .expandableAndFoldable(
                 foldOffset: 160,
                 shouldFold: !isShowingVisit,
-                isActiveIndex: isActiveVisitIndex(index: index))
+                isActiveIndex: isVisitIndexActive(at: index))
     }
 
     private func visitDetailsView(index: Int, visit: Visit) -> some View {
@@ -112,12 +112,12 @@ private extension VisitsForDayView {
         .id(visit.tagColor)
     }
 
-    private func isNotActiveVisit(at index: Int) -> Bool {
-        isShowingVisit && !isActiveVisitIndex(index: index)
+    private func isVisitNotActive(at index: Int) -> Bool {
+        isShowingVisit && !isVisitIndexActive(at: index)
     }
 
-    private func isActiveVisitIndex(index: Int) -> Bool {
-        index == activeVisitIndex
+    private func isVisitIndexActive(at index: Int) -> Bool {
+         index == activeVisitIndex
     }
 }
 
