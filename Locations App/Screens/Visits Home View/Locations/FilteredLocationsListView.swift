@@ -21,6 +21,7 @@ struct FilteredLocationsListView: View {
                 .resignKeyboardOnDrag()
                 .padding(.bottom, 25)
         }
+        .animation(.easeInOut)
     }
 }
 
