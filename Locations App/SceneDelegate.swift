@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let context = CoreData.stack.context
         let contentView = RootView(userStore: userStore)
             .environment(\.managedObjectContext, context)
-            .statusBar(hidden: true)
 
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

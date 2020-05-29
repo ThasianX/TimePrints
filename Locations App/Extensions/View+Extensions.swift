@@ -20,10 +20,12 @@ extension View {
     }
 
     func expandableAndFoldable(
+        rowHeight: CGFloat,
         foldOffset: CGFloat,
         shouldFold: Bool,
         isActiveIndex: Bool) -> some View {
         modifier(ExpandAndFoldModifier(
+            rowHeight: rowHeight,
             foldOffset: foldOffset,
             shouldFold: shouldFold,
             isActiveIndex: isActiveIndex))

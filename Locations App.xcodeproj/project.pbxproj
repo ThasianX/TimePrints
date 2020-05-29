@@ -60,6 +60,7 @@
 		1E8909CE23F880070008500E /* VisitCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8909CD23F880070008500E /* VisitCellConstants.swift */; };
 		1E92C754247A262600885A45 /* RadarSpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E92C753247A262600885A45 /* RadarSpinnerView.swift */; };
 		1E97274223EB57AE006528ED /* LocationVisitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E97274123EB57AE006528ED /* LocationVisitsView.swift */; };
+		1E97571B2480A54200847313 /* AnyTransition+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E97571A2480A54200847313 /* AnyTransition+Custom.swift */; };
 		1E9D785923E10B4F0020FAFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785823E10B4F0020FAFE /* AppDelegate.swift */; };
 		1E9D785B23E10B4F0020FAFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */; };
 		1E9D785E23E10B4F0020FAFE /* Locations_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E9D785C23E10B4F0020FAFE /* Locations_App.xcdatamodeld */; };
@@ -237,6 +238,7 @@
 		1E8909CD23F880070008500E /* VisitCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitCellConstants.swift; sourceTree = "<group>"; };
 		1E92C753247A262600885A45 /* RadarSpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarSpinnerView.swift; sourceTree = "<group>"; };
 		1E97274123EB57AE006528ED /* LocationVisitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVisitsView.swift; sourceTree = "<group>"; };
+		1E97571A2480A54200847313 /* AnyTransition+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Custom.swift"; sourceTree = "<group>"; };
 		1E9D785523E10B4F0020FAFE /* Locations App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Locations App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9D785823E10B4F0020FAFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E9D785A23E10B4F0020FAFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -744,6 +746,7 @@
 		1E9D78A223E13C5E0020FAFE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1E97571A2480A54200847313 /* AnyTransition+Custom.swift */,
 				1E125C4C240DAA9900D0919E /* Array+Chunk.swift */,
 				1EFF83B023E532FA00FF04A1 /* Array+Sort.swift */,
 				1EF5BECC2425D7A600B34251 /* CLLocationCoordinate2D+Equatable.swift */,
@@ -1201,6 +1204,7 @@
 				1EA65CC72471C2AA002795FC /* ResignKeyboardOnDragGestureModifier.swift in Sources */,
 				1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */,
 				1ED53505240A2BF4009B11D3 /* AccountKVS.swift in Sources */,
+				1E97571B2480A54200847313 /* AnyTransition+Custom.swift in Sources */,
 				1EC1912C2420267800089E8D /* FavoriteButton.swift in Sources */,
 				1E3F4994244C01D100775F81 /* TagCellConstants.swift in Sources */,
 				1EF5BECB2425D64300B34251 /* CenterIndicatorView.swift in Sources */,
