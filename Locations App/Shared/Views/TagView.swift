@@ -10,7 +10,6 @@ struct TagView: View {
                 name
             }
         }
-        .id(tag.color)
         .frame(width: displayName ? nil : 30, height: displayName ? nil : 5)
         .background(roundedAndFilledRectangle)
         .animation(.spring())

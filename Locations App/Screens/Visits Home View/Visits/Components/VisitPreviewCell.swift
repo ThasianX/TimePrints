@@ -2,14 +2,19 @@ import SwiftUI
 
 struct VisitPreviewCell: View {
     let visit: Visit
+
+    private var location: Location {
+        visit.location
+    }
     
     var body: some View {
         HStack(alignment: .center) {
-            TagView(tag: visit.location.tag)
+            TagView(tag: location.tag)
                 .rotated(.degrees(90))
 
             VStack(alignment: .leading) {
                 locationName
+                    .id(location.name)
                 visitDurationAndAddress
             }
         
@@ -24,14 +29,14 @@ struct VisitPreviewCell: View {
 
 private extension VisitPreviewCell {
     private var locationName: some View {
-        Text(visit.location.name)
+        Text(location.name)
             .font(.headline)
             .fontWeight(.bold)
             .lineLimit(1)
     }
     
     private var visitDurationAndAddress: some View {
-        Text("\(visit.duration)    \(visit.location.address)")
+        Text("\(visit.duration)    \(location.address)")
             .font(.caption)
             .lineLimit(1)
     }
