@@ -2,10 +2,14 @@ import SwiftUI
 
 struct VisitPreviewCell: View {
     let visit: Visit
+
+    private var location: Location {
+        visit.location
+    }
     
     var body: some View {
         HStack(alignment: .center) {
-            TagView(tag: visit.location.tag)
+            TagView(tag: location.tag)
                 .rotated(.degrees(90))
 
             VStack(alignment: .leading) {
@@ -14,8 +18,10 @@ struct VisitPreviewCell: View {
             }
         
             Spacer()
-            
-            favoriteIcon
+
+            if visit.isFavorite {
+                favoriteIcon
+            }
         }
         .frame(height: 50)
         .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
@@ -24,26 +30,22 @@ struct VisitPreviewCell: View {
 
 private extension VisitPreviewCell {
     private var locationName: some View {
-        Text(visit.location.name)
+        Text(location.name)
             .font(.headline)
             .fontWeight(.bold)
             .lineLimit(1)
     }
     
     private var visitDurationAndAddress: some View {
-        Text("\(visit.duration)    \(visit.location.address)")
+        Text("\(visit.duration)    \(location.address)")
             .font(.caption)
             .lineLimit(1)
     }
     
     private var favoriteIcon: some View {
-        Group {
-            if visit.isFavorite {
-                Image(systemName: "star.fill")
-                    .imageScale(.medium)
-                    .foregroundColor(.yellow)
-            }
-        }
+        Image(systemName: "star.fill")
+            .imageScale(.medium)
+            .foregroundColor(.yellow)
     }
 }
 
