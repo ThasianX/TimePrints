@@ -93,7 +93,6 @@ private extension VisitsPreviewList {
                 ForEach(daysForMonth) { day in
                     self.daySideBarWithPreviewBlockView(
                         dayComponent: day,
-                        roundedCorners: self.roundedCorners(for: month, daysForMonth: daysForMonth, day: day),
                         isFilled: isFilled()
                     )
                 }
@@ -109,10 +108,10 @@ private extension VisitsPreviewList {
         daysComponentsForMonthComponent[monthComponent]!.sortDescending
     }
 
-    private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, roundedCorners: UIRectCorner, isFilled: Bool) -> some View {
+    private func daySideBarWithPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
         HStack {
             daySideBarView(date: dayComponent.date)
-            dayPreviewBlockView(dayComponent: dayComponent, roundedCorners: roundedCorners, isFilled: isFilled)
+            dayPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled)
         }
         .frame(height: 150)
     }
@@ -121,39 +120,20 @@ private extension VisitsPreviewList {
         DaySideBar(date: date)
     }
 
-    private func dayPreviewBlockView(dayComponent: DateComponents, roundedCorners: UIRectCorner, isFilled: Bool) -> DayPreviewBlock {
-        DayPreviewBlock(
+    private func dayPreviewBlockView(dayComponent: DateComponents, isFilled: Bool) -> some View {
+        let visits = visitsForDayComponent[dayComponent]!.sortAscByArrivalDate
+        return DayPreviewBlock(
             currentDayComponent: $currentDayComponent,
-            visits: visitsForDayComponent[dayComponent]!.sortAscByArrivalDate,
-            roundedCorners: roundedCorners,
-            isFilled: isFilled,
             dayComponent: dayComponent,
-            onTap: setPreviewInactiveAndHideTheFAB
-        )
+            visits: visits,
+            isFilled: isFilled,
+            onTap: setPreviewInactiveAndHideTheFAB)
+            .id(visits)
     }
 
     private func setPreviewInactiveAndHideTheFAB() {
         isPreviewActive = false
         hideFAB = true
-    }
-
-    private func roundedCorners(for month: DateComponents, daysForMonth: [DateComponents], day: DateComponents) -> UIRectCorner {
-        var roundedCorners: UIRectCorner = []
-        if isFirstVisit(month: month, daysForMonth: daysForMonth, day: day) {
-            roundedCorners.insert(.topLeft)
-        }
-        if isLastVisit(month: month, daysForMonth: daysForMonth, day: day) {
-            roundedCorners.insert(.bottomLeft)
-        }
-        return roundedCorners
-    }
-
-    private func isFirstVisit(month: DateComponents, daysForMonth: [DateComponents], day: DateComponents) -> Bool {
-        month == descendingMonthComponents.first! && day == daysForMonth.first!
-    }
-
-    private func isLastVisit(month: DateComponents, daysForMonth: [DateComponents], day: DateComponents) -> Bool {
-        month == descendingMonthComponents.last! && day == daysForMonth.last!
     }
 }
 

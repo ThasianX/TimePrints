@@ -12,4 +12,3 @@ extension Visit: Identifiable {
     @NSManaged public var isFavorite: Bool
     @NSManaged public var location: Location
 }
-

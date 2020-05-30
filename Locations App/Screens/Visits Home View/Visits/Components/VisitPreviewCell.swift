@@ -14,13 +14,14 @@ struct VisitPreviewCell: View {
 
             VStack(alignment: .leading) {
                 locationName
-                    .id(location.name)
                 visitDurationAndAddress
             }
         
             Spacer()
-            
-            favoriteIcon
+
+            if visit.isFavorite {
+                favoriteIcon
+            }
         }
         .frame(height: 50)
         .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
@@ -42,13 +43,9 @@ private extension VisitPreviewCell {
     }
     
     private var favoriteIcon: some View {
-        Group {
-            if visit.isFavorite {
-                Image(systemName: "star.fill")
-                    .imageScale(.medium)
-                    .foregroundColor(.yellow)
-            }
-        }
+        Image(systemName: "star.fill")
+            .imageScale(.medium)
+            .foregroundColor(.yellow)
     }
 }
 

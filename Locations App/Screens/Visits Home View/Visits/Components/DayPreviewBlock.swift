@@ -2,31 +2,49 @@ import SwiftUI
 
 struct DayPreviewBlock: View {
     @Environment(\.appTheme) private var appTheme: UIColor
-    
-    @State private var visitIndex = 0
-    @State private var timer: Timer?
+
+    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    @State var visitIndex = 0
 
     @Binding var currentDayComponent: DateComponents
 
-    let visits: [Visit]
-    let roundedCorners: UIRectCorner
-    let isFilled: Bool
     let dayComponent: DateComponents
+    let visits: [Visit]
+    let isFilled: Bool
     let onTap: () -> Void
     
     private var range: Range<Int> {
-        return visitIndex ..< ((visitIndex + 3 > visits.count) ? visits.count : visitIndex + 3)
+        guard visits.count > 3 && visitIndex+3 <= visits.count else {
+            return visitIndex..<visits.count
+        }
+        return visitIndex..<visitIndex+3
     }
     
     var body: some View {
         ZStack {
             backgroundColor
-                .cornerRadius(20, corners: roundedCorners)
             visitsPreviewList
                 .animation(.easeInOut)
         }
-        .onAppear(perform: setTimerForVisitsSlideshow)
         .onTapGesture(perform: setCurrentDayComponentAndPreviewInactive)
+        .onAppear(perform: setUpVisitsSlideShow)
+        .onReceive(timer) { _ in
+            self.shiftActivePreviewVisitIndex()
+        }
+    }
+
+    private func setUpVisitsSlideShow() {
+        if visits.count <= 3 {
+            // To reduce memory usage, we don't want the timer to fire when
+            // visits count is less than 3(no slideshow)
+            timer.upstream.connect().cancel()
+        }
+    }
+
+    private func shiftActivePreviewVisitIndex() {
+        let startingVisitIndexOfNextSlide = visitIndex + 3
+        let startingVisitIndexOfNextSlideIsValid = startingVisitIndexOfNextSlide < visits.count
+        visitIndex = startingVisitIndexOfNextSlideIsValid ? startingVisitIndexOfNextSlide : 0
     }
 }
 
@@ -40,30 +58,10 @@ private extension DayPreviewBlock {
         V0Stack {
             ForEach(visits[range]) { visit in
                 VisitPreviewCell(visit: visit)
+                    .id(visit.location.tag.color)
+                    .id(visit.location.name)
+                    .id(visit.isFavorite)
             }
-        }
-    }
-}
-
-private extension DayPreviewBlock {
-    private func setTimerForVisitsSlideshow() {
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-            self.onTimerFire()
-        }
-    }
-
-    private func onTimerFire() {
-        withAnimation {
-            shiftActivePreviewVisitIndex()
-        }
-    }
-
-    private func shiftActivePreviewVisitIndex() {
-        let visitIndexExists = self.visitIndex < self.visits.count-3
-        if visitIndexExists {
-            self.visitIndex += 3
-        } else {
-            self.visitIndex = 0
         }
     }
 }
@@ -82,7 +80,7 @@ private extension DayPreviewBlock {
 struct DayPreviewBlock_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), visits: [], roundedCorners: [.topLeft], isFilled: false, dayComponent: DateComponents(), onTap: { })
+            DayPreviewBlock(currentDayComponent: .constant(DateComponents()), dayComponent: DateComponents(), visits: [], isFilled: false, onTap: { })
                 .environment(\.appTheme, .violetGum)
         }
     }
