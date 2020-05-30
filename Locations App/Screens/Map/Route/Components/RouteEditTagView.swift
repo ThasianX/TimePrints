@@ -109,7 +109,6 @@ private extension RouteEditTagView {
     }
 
     private func resetView() {
-        // TODO: Reset whatever necessary in RouteOverlayView
         overlayState = .normal
         tagState.alert.stop()
     }

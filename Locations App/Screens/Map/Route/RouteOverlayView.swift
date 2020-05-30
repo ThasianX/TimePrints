@@ -153,21 +153,16 @@ private extension RouteOverlayView {
 private extension RouteOverlayView {
     private var detailView: some View {
         VStack {
-            locationNameView
+            locationNameTextField
             visitDurationText
         }
     }
 
-    private var locationNameView: some View {
-        let nameInput = Binding(
-            get: { self.currentVisit.location.name },
-            set: { self.currentVisit.setLocationName($0) })
-
-        return LocationNameView(
-            nameInput: nameInput,
-            color: color,
-            setEditingStateForLocationName: setEditingStateForLocationName)
-            .id(currentVisit)
+    private var locationNameTextField: some View {
+        LocationNameTextField(
+            location: currentVisit.location,
+            textColor: color,
+            onEditingChanged: setEditingStateForLocationName)
     }
 
     private func setEditingStateForLocationName(_ isEditing: Bool) {
@@ -175,43 +170,6 @@ private extension RouteOverlayView {
             overlayState = .editingLocationName
         } else {
             overlayState = .normal
-        }
-    }
-
-    private func setLocationName(name: String) {
-        currentVisit.setLocationName(name)
-    }
-
-    private struct LocationNameView: View {
-        @Binding var nameInput: String
-
-        let color: Color
-        let setEditingStateForLocationName: (Bool) -> Void
-
-        var body: some View {
-            locationNameTextField
-                .padding(.vertical)
-                .padding(.horizontal, 32)
-        }
-
-        private var locationNameTextField: some View {
-            LocationNameTextField(
-                nameInput: $nameInput,
-                textColor: color,
-                onEditingChanged: setEditingStateForLocationName)
-        }
-
-        struct LocationNameTextField: View {
-            @Binding var nameInput: String
-
-            let textColor: Color
-            let onEditingChanged: (Bool) -> Void
-
-            var body: some View {
-                TextField("Location Name", text: $nameInput, onEditingChanged: onEditingChanged)
-                    .foregroundColor(textColor)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-            }
         }
     }
 
