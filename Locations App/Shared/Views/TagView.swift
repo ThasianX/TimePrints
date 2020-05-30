@@ -6,10 +6,11 @@ struct TagView: View {
     
     var body: some View {
         ZStack {
-            name
-                .fade(if: !displayName)
-                .scaleEffect(displayName ? 1 : 0)
+            if displayName {
+                name
+            }
         }
+        .id(tag.color)
         .frame(width: displayName ? nil : 30, height: displayName ? nil : 5)
         .background(roundedAndFilledRectangle)
         .animation(.spring())
@@ -21,7 +22,6 @@ private extension TagView {
         Text(tag.name.uppercased())
             .font(.caption)
             .padding(6)
-            .animation(nil)
     }
     
     private var roundedAndFilledRectangle: some View {

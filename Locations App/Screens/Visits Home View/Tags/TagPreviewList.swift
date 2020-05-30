@@ -57,7 +57,7 @@ struct TagPreviewList: View {
                 .contextMenu {
                     self.isShowingTag ? nil : TagContextMenu(tagState: self.tagState, tag: tag)
                 }
-                .offset(y: self.isActiveTag(tag: tag) ? self.topOfScreen(for: geometry) : 0)
+                .offset(y: self.isTagActive(tag) ? self.topOfScreen(for: geometry) : 0)
         }
     }
 
@@ -69,11 +69,7 @@ struct TagPreviewList: View {
             setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
     }
 
-    private func isNotActiveTag(tag: Tag) -> Bool {
-        isShowingTag && !isActiveTag(tag: tag)
-    }
-
-    private func isActiveTag(tag: Tag) -> Bool {
+    private func isTagActive(_ tag: Tag) -> Bool {
         tag == selectedTag
     }
 

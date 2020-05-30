@@ -1,36 +1,64 @@
 import SwiftUI
 
+private enum EditingState: Equatable {
+    case normal
+    case editingLocationName
+
+    var isNormal: Bool {
+        self == .normal
+    }
+
+    var isEditingLocationName: Bool {
+        self == .editingLocationName
+    }
+}
+
 struct LocationVisitsView: View {
+    @Environment(\.appTheme) private var appTheme: UIColor
+
+    @State private var editingState: EditingState = .normal
+
     @Binding var mapState: MapState
     @Binding var showing: AppState.Showing
-    
-    var body: some View {
-        VStack {
-            headerText
-                .padding(.bottom, 8)
 
-            locationVisitsList
-            Spacer()
-            exitButton
+    private var currentLocation: Location {
+        mapState.selectedLocation!
+    }
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Group {
+                if mapState.hasSelectedLocation {
+                    locationNameTextField
+                }
+                if mapState.hasSelectedLocation {
+                    locationVisitsList
+                }
+                Spacer()
+                exitButton
+            }
+            .transition(.move(edge: .bottom))
         }
         .padding()
+        .animation(.spring())
     }
 }
 
 private extension LocationVisitsView {
-    private var headerText: some View {
-        let name = mapState.hasSelectedLocation ? mapState.selectedLocation!.name : ""
-        return Text("Visits for \(name)")
-            .font(.headline)
+    private var locationNameTextField: some View {
+        LocationNameTextField(
+            location: currentLocation,
+            textColor: appTheme.color,
+            onEditingChanged: setEditingStateForLocationName)
     }
-    
+
+    private func setEditingStateForLocationName(_ isEditing: Bool) {
+        editingState = isEditing ? .editingLocationName : .normal
+    }
+
     private var locationVisitsList: some View {
-        Group {
-            if mapState.hasSelectedLocation {
-                FilteredList(predicate: visitsPredicate, sortDescriptors: [arrivalDateSort], spacing: 8) { (visit: Visit) in
-                    LocationVisitsRow(visit: visit)
-                }
-            }
+        FilteredList(predicate: visitsPredicate, sortDescriptors: [arrivalDateSort], spacing: 8) { (visit: Visit) in
+            LocationVisitsRow(visit: visit)
         }
     }
 

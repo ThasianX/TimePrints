@@ -43,13 +43,21 @@ private extension VisitDetailsView {
             header
                 .padding(.bottom, isSelected ? 10 : 0)
                 .padding(.horizontal, isSelected ? 30 : 0)
-            coreDetailsView
-                .scaleFade(if: isMapOpen || isEditingNotes)
-            interactableMapViewIfSelected
-                .scaleFade(if: isEditingNotes)
-            notesIfSelected
-                .scaleFade(if: isMapOpen)
-                .padding(.bottom, 100)
+            if !isMapOpen && !isEditingNotes {
+                coreDetailsView
+                    .transition(.scaleFade)
+            }
+            if isSelected {
+                if !isEditingNotes {
+                    interactableMapView
+                        .transition(.scaleFade)
+                }
+                if !isMapOpen {
+                    notesButton
+                        .transition(.scaleFade)
+                        .padding(.bottom, 100)
+                }
+            }
             Spacer()
         }
     }
@@ -57,19 +65,21 @@ private extension VisitDetailsView {
 
 private extension VisitDetailsView {
     private var header: some View {
-        HStack {
-            backButton
-                .fade(if: !isSelected)
-            Spacer()
+        ZStack {
             HStack {
-                locationNameText
-                starImageIfNotSelectedAndIsFavorite
+                if isSelected {
+                    backButton
+                        .transition(.scaleFade)
+                }
+                Spacer()
+                favoriteButton
+                    .id(visit.isFavorite)
             }
-            Spacer()
-            favoriteButton
-                .id(visit.isFavorite)
-                .fade(if: !isSelected)
+            locationNameText
+                .id(isSelected)
+                .padding(.horizontal, 30)
         }
+        .transition(.scaleFade)
     }
 
     private var backButton: some View {
@@ -86,8 +96,7 @@ private extension VisitDetailsView {
         var body: some View {
             ZStack {
                 whiteCircle
-                    .fade(if: !isMapOpen)
-                    .scaleEffect(isMapOpen ? 1 : 0.8)
+                    .scaleFade(if: !isMapOpen)
                 BImage(perform: onBack, image: backButtonImage)
                     .foregroundColor(isMapOpen ? appTheme : .white)
             }
@@ -134,16 +143,6 @@ private extension VisitDetailsView {
             .fontWeight(isSelected ? .bold : .regular)
             .lineLimit(isSelected ? nil : 1)
             .multilineTextAlignment(.center)
-            .animation(nil)
-    }
-
-    private var starImageIfNotSelectedAndIsFavorite: some View {
-        Group {
-            if !isSelected && favoriteButton.favorited {
-                Image("star.fill")
-                    .foregroundColor(.yellow)
-            }
-        }
     }
 
     private var favoriteButton: FavoriteButton {
@@ -154,15 +153,16 @@ private extension VisitDetailsView {
 private extension VisitDetailsView {
     private var coreDetailsView: some View {
         Group {
-            if !isMapOpen && !isEditingNotes {
-                visitDurationText
-                fullMonthWithDayOfWeekTextIfSelected
-                    .padding(.top, isSelected ? 8 : 0)
-                    .padding(.bottom, isSelected ? 10 : 0)
-                locationTagView
-                    .padding(.top, 6)
-                    .padding(.bottom, isSelected ? 20 : 4)
+            visitDurationText
+                .id(isSelected)
+            if isSelected {
+                fullMonthWithDayOfWeekText
+                    .padding(.top, 8)
+                    .padding(.bottom, 10)
             }
+            locationTagView
+                .padding(.top, 6)
+                .padding(.bottom, isSelected ? 20 : 4)
         }
     }
 
@@ -170,15 +170,6 @@ private extension VisitDetailsView {
         Text(visit.duration)
             .font(isSelected ? .system(size: 18) : .system(size: 10))
             .tracking(isSelected ? 2 : 0)
-            .animation(nil)
-    }
-
-    private var fullMonthWithDayOfWeekTextIfSelected: some View {
-        Group {
-            if isSelected {
-                fullMonthWithDayOfWeekText
-            }
-        }
     }
 
     private var fullMonthWithDayOfWeekText: some View {
@@ -192,25 +183,29 @@ private extension VisitDetailsView {
 }
 
 private extension VisitDetailsView {
-    private var interactableMapViewIfSelected: some View {
+    private var interactableMapView: some View {
         Group {
-            if isSelected && !isEditingNotes {
-                staticMapView
-                    .padding(.bottom, 10)
-                VStack(spacing: 16) {
-                    locationAddressText
+            staticMapView
+                .padding(.bottom, 10)
+            VStack(spacing: 16) {
+                locationAddressText
+                if isMapOpen {
                     mapOptionsView
-                        .scaleFade(if: !isMapOpen)
                 }
-                .padding(.leading, 80)
-                .padding(.trailing, 80)
             }
+            .padding(.horizontal, 80)
+            .padding(.bottom, 10)
         }
     }
 
     private var staticMapView: some View {
-        StaticMapView(coordinate: visit.location.coordinate, name: visit.location.name, userLocationColor: appTheme, annotationColor: visit.location.accent)
-            .frame(width: isMapOpen ? screen.width : screen.width / 2.5, height: isMapOpen ? screen.height * 8 / 15 : screen.width / 2.5)
+        StaticMapView(
+            coordinate: visit.location.coordinate,
+            name: visit.location.name,
+            userLocationColor: appTheme,
+            annotationColor: visit.location.accent)
+            .frame(width: isMapOpen ? screen.width : screen.width / 2.5,
+                   height: isMapOpen ? screen.height * 8 / 15 : screen.width / 2.5)
             .cornerRadius(isMapOpen ? 0 : screen.width / 5)
             .onTapGesture(perform: toggleMapState)
             .animation(.spring())
@@ -225,7 +220,6 @@ private extension VisitDetailsView {
             .font(.headline)
             .lineLimit(nil)
             .multilineTextAlignment(.center)
-            .animation(nil)
     }
 
     private var mapOptionsView: some View {
@@ -274,14 +268,6 @@ private extension VisitDetailsView {
 }
 
 private extension VisitDetailsView {
-    private var notesIfSelected: some View {
-        Group {
-            if isSelected && !isMapOpen {
-                notesButton
-            }
-        }
-    }
-
     private var notesButton: some View {
         NotesButton(isEditingNotes: $isEditingNotes, notesInput: $notesInput, onCommit: commitNoteEdits)
     }
@@ -356,18 +342,10 @@ private extension VisitDetailsView {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     Text(self.notesInput)
-                        .font(.caption)
+                        .fixedSize(horizontal: false, vertical: true)
                         .lineLimit(nil)
                         .multilineTextAlignment(.center)
-                        .frame(
-                            minWidth: geometry.size.width,
-                            idealWidth: geometry.size.width,
-                            maxWidth: geometry.size.width,
-                            minHeight: geometry.size.height,
-                            idealHeight: geometry.size.height,
-                            maxHeight: .infinity,
-                            alignment: .top
-                        )
+                        .frame(width: geometry.size.width)
                 }
             }
         }

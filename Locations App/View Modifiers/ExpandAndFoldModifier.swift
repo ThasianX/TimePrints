@@ -3,6 +3,8 @@
 import SwiftUI
 
 struct ExpandAndFoldModifier: ViewModifier {
+
+    let rowHeight: CGFloat
     let foldOffset: CGFloat
     let shouldFold: Bool
     let isActiveIndex: Bool
@@ -15,15 +17,18 @@ struct ExpandAndFoldModifier: ViewModifier {
     }
 
     private func makeNestedModifier(withMinY minY: CGFloat) -> _ExpandAndFoldModifier {
-        _ExpandAndFoldModifier(foldOffset: foldOffset, minY: minY, shouldFold: shouldFold, isActiveIndex: isActiveIndex)
+        _ExpandAndFoldModifier(rowHeight: rowHeight, foldOffset: foldOffset, minY: minY, shouldFold: shouldFold, isActiveIndex: isActiveIndex)
     }
+
 }
 
 private struct _ExpandAndFoldModifier: ViewModifier {
-    let foldOffset: CGFloat
-    let minY: CGFloat
-    let shouldFold: Bool
-    let isActiveIndex: Bool
+
+    let rowHeight: CGFloat // height of the row to be folded
+    let foldOffset: CGFloat // y coordinate at which to start folding
+    let minY: CGFloat // the current y coordinate of the row
+    let shouldFold: Bool // shouldn't fold when expanded
+    let isActiveIndex: Bool // if the row is active, we want to expand it by offsetting it from it's current position to the top of the screen
 
     func body(content: Content) -> some View {
         content
@@ -61,6 +66,7 @@ private struct _ExpandAndFoldModifier: ViewModifier {
     }
 
     private var foldDelta: Double {
-        Double((VisitCellConstants.height + (minY - foldOffset)) / VisitCellConstants.height)
+        Double((rowHeight + (minY - foldOffset)) / rowHeight)
     }
+
 }
