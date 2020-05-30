@@ -65,16 +65,19 @@ private extension VisitDetailsView {
 
 private extension VisitDetailsView {
     private var header: some View {
-        HStack {
-            if isSelected {
-                backButton
+        ZStack {
+            HStack {
+                if isSelected {
+                    backButton
+                        .transition(.scaleFade)
+                }
+                Spacer()
+                favoriteButton
+                    .id(visit.isFavorite)
             }
-            Spacer()
             locationNameText
                 .id(isSelected)
-            Spacer()
-            favoriteButton
-                .id(visit.isFavorite)
+                .padding(.horizontal, 30)
         }
         .transition(.scaleFade)
     }
@@ -93,8 +96,7 @@ private extension VisitDetailsView {
         var body: some View {
             ZStack {
                 whiteCircle
-                    .fade(if: !isMapOpen)
-                    .scaleEffect(isMapOpen ? 1 : 0.8)
+                    .scaleFade(if: !isMapOpen)
                 BImage(perform: onBack, image: backButtonImage)
                     .foregroundColor(isMapOpen ? appTheme : .white)
             }
