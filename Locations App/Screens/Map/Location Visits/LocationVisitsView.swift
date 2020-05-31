@@ -26,10 +26,11 @@ struct LocationVisitsView: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack {
             Group {
                 if mapState.hasSelectedLocation {
-                    locationNameTextField
+                    headerView
+                        .padding(.bottom)
                     locationVisitsList
                 }
                 Spacer()
@@ -42,7 +43,14 @@ struct LocationVisitsView: View {
     }
 }
 
-private extension LocationVisitsView {
+extension LocationVisitsView {
+    private var headerView: some View {
+        V0Stack {
+            locationNameTextField
+            locationVisitsAddressText
+        }
+    }
+
     private var locationNameTextField: some View {
         LocationNameTextField(
             location: currentLocation,
@@ -54,13 +62,17 @@ private extension LocationVisitsView {
         editingState = isEditing ? .editingLocationName : .normal
     }
 
+    private var locationVisitsAddressText: some View {
+        Text(currentLocation.address)
+            .font(.caption)
+    }
+}
+
+extension LocationVisitsView {
     private var locationVisitsList: some View {
         FilteredListView(
             sortDescriptors: [arrivalDateSort],
             predicate: visitsPredicate,
-            searchKey: "location.name",
-            placeholder: "Search visits...",
-            searchColor: appTheme.color,
             content: LocationVisitsRow.init)
     }
 
@@ -70,40 +82,6 @@ private extension LocationVisitsView {
 
     private var visitsPredicate: NSPredicate {
         NSPredicate(format: "%@ == location", mapState.selectedLocation!)
-    }
-
-    private struct LocationVisitsRow: View {
-        let visit: Visit
-
-        var body: some View {
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    visitDurationText
-                    Spacer()
-                    starImageIfFavorited
-                }
-                arrivalDateAbbreviatedText
-            }
-        }
-
-        private var visitDurationText: some View {
-            Text(visit.duration)
-        }
-
-        private var starImageIfFavorited: some View {
-            Group {
-                if visit.isFavorite {
-                    Image(systemName: "star.fill")
-                        .imageScale(.medium)
-                        .foregroundColor(.yellow)
-                }
-            }
-        }
-
-        private var arrivalDateAbbreviatedText: some View {
-            Text(visit.arrivalDate.abbreviatedMonthWithDayAndYear)
-                .font(.caption)
-        }
     }
 }
 

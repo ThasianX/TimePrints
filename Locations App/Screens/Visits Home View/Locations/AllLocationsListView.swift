@@ -33,7 +33,7 @@ private extension AllLocationsListView {
     }
 
     private var filteredLocationsListView: some View {
-        FilteredListView(
+        FilteredSearchView(
             sortDescriptors: [locationNameSort],
             searchKey: "name",
             placeholder: "Search locations...",

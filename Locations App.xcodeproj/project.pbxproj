@@ -26,7 +26,7 @@
 		1E21F309240D617600BC81DC /* ScalingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F308240D617600BC81DC /* ScalingCircle.swift */; };
 		1E21F30D240EC50700BC81DC /* DimensionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21F30C240EC50700BC81DC /* DimensionalButton.swift */; };
 		1E22BF5D23E2970500926030 /* Route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1E22BF5C23E2970500926030 /* Route.gpx */; };
-		1E237EE62415F2E200CEE548 /* FilteredListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E237EE52415F2E200CEE548 /* FilteredListView.swift */; };
+		1E237EE62415F2E200CEE548 /* FilteredSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E237EE52415F2E200CEE548 /* FilteredSearchView.swift */; };
 		1E24927023EB52D200165280 /* ColorTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24926F23EB52D200165280 /* ColorTextRow.swift */; };
 		1E3237992418632500D370CD /* CloseRouteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3237982418632500D370CD /* CloseRouteButton.swift */; };
 		1E3CD7EC2403254A00C95ABF /* AllLocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CD7EB2403254A00C95ABF /* AllLocationsListView.swift */; };
@@ -96,6 +96,8 @@
 		1EB865E423F9EC3C00A4B8E1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */; };
 		1EC19125241FE32800089E8D /* RouteOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC19124241FE32800089E8D /* RouteOverlayView.swift */; };
 		1EC1912C2420267800089E8D /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1912B2420267800089E8D /* FavoriteButton.swift */; };
+		1ED019F12483659700780D62 /* LocationVisitsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED019F02483659700780D62 /* LocationVisitsRow.swift */; };
+		1ED019F324836A4900780D62 /* FilteredListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED019F224836A4900780D62 /* FilteredListView.swift */; };
 		1ED534FE24096B34009B11D3 /* profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ED534FD24096B34009B11D3 /* profile.json */; };
 		1ED5350024096D62009B11D3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED534FF24096D62009B11D3 /* LoginView.swift */; };
 		1ED53502240A1E7D009B11D3 /* ICloudLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */; };
@@ -207,7 +209,7 @@
 		1E21F308240D617600BC81DC /* ScalingCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingCircle.swift; sourceTree = "<group>"; };
 		1E21F30C240EC50700BC81DC /* DimensionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionalButton.swift; sourceTree = "<group>"; };
 		1E22BF5C23E2970500926030 /* Route.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
-		1E237EE52415F2E200CEE548 /* FilteredListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredListView.swift; sourceTree = "<group>"; };
+		1E237EE52415F2E200CEE548 /* FilteredSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredSearchView.swift; sourceTree = "<group>"; };
 		1E24926F23EB52D200165280 /* ColorTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextRow.swift; sourceTree = "<group>"; };
 		1E3237982418632500D370CD /* CloseRouteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseRouteButton.swift; sourceTree = "<group>"; };
 		1E3CD7EB2403254A00C95ABF /* AllLocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsListView.swift; sourceTree = "<group>"; };
@@ -282,6 +284,8 @@
 		1EB865E323F9EC3C00A4B8E1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		1EC19124241FE32800089E8D /* RouteOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOverlayView.swift; sourceTree = "<group>"; };
 		1EC1912B2420267800089E8D /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		1ED019F02483659700780D62 /* LocationVisitsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVisitsRow.swift; sourceTree = "<group>"; };
+		1ED019F224836A4900780D62 /* FilteredListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredListView.swift; sourceTree = "<group>"; };
 		1ED534FD24096B34009B11D3 /* profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profile.json; sourceTree = "<group>"; };
 		1ED534FF24096D62009B11D3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1ED53501240A1E7D009B11D3 /* ICloudLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudLoginService.swift; sourceTree = "<group>"; };
@@ -403,7 +407,8 @@
 		1E237EE42415F2D400CEE548 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				1E237EE52415F2E200CEE548 /* FilteredListView.swift */,
+				1E237EE52415F2E200CEE548 /* FilteredSearchView.swift */,
+				1ED019F224836A4900780D62 /* FilteredListView.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -649,6 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				1E97274123EB57AE006528ED /* LocationVisitsView.swift */,
+				1ED019F02483659700780D62 /* LocationVisitsRow.swift */,
 			);
 			path = "Location Visits";
 			sourceTree = "<group>";
@@ -1096,7 +1102,7 @@
 				1E6D569423E653990044AB3A /* VSpace.swift in Sources */,
 				1EB03D2724102955001146FF /* AppMapView.swift in Sources */,
 				1E97571D2482281200847313 /* LocationNameTextField.swift in Sources */,
-				1E237EE62415F2E200CEE548 /* FilteredListView.swift in Sources */,
+				1E237EE62415F2E200CEE548 /* FilteredSearchView.swift in Sources */,
 				1ED53521240B0A48009B11D3 /* LottieAlert.swift in Sources */,
 				1EFF83A823E52B9000FF04A1 /* SizePreferenceKey.swift in Sources */,
 				1E5AF45623E3E25E00A94F10 /* Formatter+DateFormatter.swift in Sources */,
@@ -1120,6 +1126,7 @@
 				1E97274223EB57AE006528ED /* LocationVisitsView.swift in Sources */,
 				1EFFA58C23E8B1E700914607 /* Location+CoreDataProperties.swift in Sources */,
 				1EFFA58B23E8B1E700914607 /* Location+CoreDataClass.swift in Sources */,
+				1ED019F12483659700780D62 /* LocationVisitsRow.swift in Sources */,
 				1E9D789C23E125610020FAFE /* Visit+CoreDataClass.swift in Sources */,
 				1E5AF45823E3E2E500A94F10 /* Date+ToString.swift in Sources */,
 				1EA65CBF2470C1F2002795FC /* LocationsForTagView.swift in Sources */,
@@ -1190,6 +1197,7 @@
 				1E5DBEA923E9C7A100C86641 /* OpacityModifier.swift in Sources */,
 				1ED5351F240B0A27009B11D3 /* LoginService.swift in Sources */,
 				1E5B271924392794000E0054 /* RouteEditNotesHeader.swift in Sources */,
+				1ED019F324836A4900780D62 /* FilteredListView.swift in Sources */,
 				1E9D789F23E125610020FAFE /* Tag+CoreDataProperties.swift in Sources */,
 				1E9D786023E10B4F0020FAFE /* RootView.swift in Sources */,
 				1EF5BED4242897F800B34251 /* TagHeader.swift in Sources */,

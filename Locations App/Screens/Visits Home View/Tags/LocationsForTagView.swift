@@ -27,7 +27,7 @@ struct LocationsForTagView: View {
     }
 
     private var filteredLocationsListView: some View {
-        FilteredListView(
+        FilteredSearchView(
             sortDescriptors: [locationNameSort],
             predicate: locationsPredicate,
             searchKey: "name",
