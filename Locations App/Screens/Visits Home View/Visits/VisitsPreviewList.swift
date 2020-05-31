@@ -60,22 +60,15 @@ private extension VisitsPreviewList {
     private var daysComponentsForMonthComponent: [DateComponents: [DateComponents]] {
         Dictionary(grouping: Array(visitsForDayComponent.keys), by: { $0.monthAndYear })
     }
-}
-
-private extension VisitsPreviewList {
-    private func visitsPreviewList(isFilled: @escaping () -> Bool) -> some View {
-        VScroll {
-            visitsPreviewStack(isFilled: isFilled)
-                .frame(width: screen.width)
-        }
-    }
 
     private var descendingMonthComponents: [DateComponents] {
         daysComponentsForMonthComponent.descendingKeys
     }
+}
 
-    private func visitsPreviewStack(isFilled: @escaping () -> Bool) -> some View {
-        V0Stack {
+private extension VisitsPreviewList {
+    private func visitsPreviewList(isFilled: @escaping () -> Bool) -> some View {
+        List {
             ForEach(descendingMonthComponents) { month in
                 self.monthYearSideBarWithDayPreviewBlocksView(
                     month: month,
@@ -83,12 +76,14 @@ private extension VisitsPreviewList {
                     isFilled: isFilled
                 )
             }
+            .listRowInsets(EdgeInsets())
         }
+        .removeAllSeparators()
     }
 
     private func monthYearSideBarWithDayPreviewBlocksView(month: DateComponents, daysForMonth: [DateComponents], isFilled: @escaping () -> Bool) -> some View {
         H0Stack {
-            monthYearSideBarText(date: month.date)
+            monthYearSideBarText(date: month.date, shouldAbbreviate: daysForMonth.count == 1)
             V0Stack {
                 ForEach(daysForMonth) { day in
                     self.daySideBarWithPreviewBlockView(
@@ -98,10 +93,11 @@ private extension VisitsPreviewList {
                 }
             }
         }
+        .frame(height: CGFloat(150*daysForMonth.count))
     }
 
-    private func monthYearSideBarText(date: Date) -> MonthYearSideBar {
-        MonthYearSideBar(date: date, color: appTheme.color)
+    private func monthYearSideBarText(date: Date, shouldAbbreviate: Bool) -> MonthYearSideBar {
+        MonthYearSideBar(date: date, color: appTheme.color, shouldAbbreviate: shouldAbbreviate)
     }
 
     private func descendingDayComponents(for monthComponent: DateComponents) -> [DateComponents] {
@@ -181,7 +177,6 @@ struct VisitsPreviewList_Previews: PreviewProvider {
     static var previews: some View {
         VisitsPreviewList(hideFAB: .constant(false), appState: .init())
             .environment(\.managedObjectContext, CoreData.stack.context)
-            .statusBar(hidden: true)
     }
 }
 

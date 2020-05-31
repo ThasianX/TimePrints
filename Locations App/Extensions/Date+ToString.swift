@@ -16,6 +16,10 @@ extension Date {
     var dayOfMonth: String {
         return Formatter.dayOfMonth.string(from: self)
     }
+
+    var abbreviatedMonthWithYear: String {
+        return Formatter.abbreviatedMonthWithYear.string(from: self)
+    }
     
     var fullMonthWithYear: String {
         return Formatter.fullMonthWithYear.string(from: self)

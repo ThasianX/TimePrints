@@ -24,6 +24,12 @@ extension Formatter {
         formatter.dateFormat = "d"
         return formatter
     }()
+
+    static let abbreviatedMonthWithYear: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM y"
+        return formatter
+    }()
     
     static let fullMonthWithYear: DateFormatter = {
         let formatter = DateFormatter()
@@ -42,16 +48,16 @@ extension Formatter {
         formatter.dateFormat = "EEEE MMMM d"
         return formatter
     }()
-    
+
     static let abbreviatedMonthWithDayAndYear: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy"
+        formatter.dateFormat = "MMM d, y"
         return formatter
     }()
     
     static let fullMonthWithDayAndYear: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM d, yyyy"
+        formatter.dateFormat = "MMMM d, y"
         return formatter
     }()
 }
