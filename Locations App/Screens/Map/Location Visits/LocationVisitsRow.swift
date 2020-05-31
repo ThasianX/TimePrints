@@ -8,30 +8,39 @@ struct LocationVisitsRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                visitDurationText
+                arrivalDateAbbreviatedText
                 Spacer()
-                starImageIfFavorited
+                if visit.isFavorite {
+                    starImage
+                }
             }
-            arrivalDateAbbreviatedText
-        }
-    }
-
-    private var visitDurationText: some View {
-        Text(visit.duration)
-    }
-
-    private var starImageIfFavorited: some View {
-        Group {
-            if visit.isFavorite {
-                Image(systemName: "star.fill")
-                    .imageScale(.medium)
-                    .foregroundColor(.yellow)
+            visitDurationText
+            if !visit.notes.isEmpty {
+                visitNotes
             }
         }
+        .padding(.vertical, 4)
     }
 
     private var arrivalDateAbbreviatedText: some View {
         Text(visit.arrivalDate.abbreviatedMonthWithDayAndYear)
+            .font(.headline)
+    }
+
+    private var starImage: some View {
+        Image(systemName: "star.fill")
+            .imageScale(.medium)
+            .foregroundColor(.yellow)
+    }
+
+    private var visitDurationText: some View {
+        Text(visit.duration)
+            .font(.subheadline)
+    }
+
+    private var visitNotes: some View {
+        Text(visit.notes)
             .font(.caption)
+            .lineLimit(2)
     }
 }
