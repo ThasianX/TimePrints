@@ -1,3 +1,4 @@
+import Introspect
 import SwiftUI
 
 extension View {
@@ -55,5 +56,13 @@ extension View {
 extension View {
     func erased() -> AnyView {
         AnyView(self)
+    }
+}
+
+extension View {
+    func removeAllSeparators() -> some View {
+        introspectTableView { tableView in
+            tableView.separatorStyle = .none
+        }
     }
 }
