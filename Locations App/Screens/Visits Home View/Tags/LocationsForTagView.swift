@@ -6,13 +6,9 @@ struct LocationsForTagView: View {
     let tag: Tag
     let setActiveLocationAndDisplayMap: (Location) -> Void
 
-    var locations: [Location] {
-        Array(tag.locations)
-    }
-
     var body: some View {
         Group {
-            if locations.isEmpty {
+            if tag.locations.isEmpty {
                 emptyLocationsView
             } else {
                 filteredLocationsListView
@@ -30,11 +26,28 @@ struct LocationsForTagView: View {
         }
     }
 
-    private var filteredLocationsListView: FilteredLocationsListView {
-        FilteredLocationsListView(
-            locations: locations
-                .sorted(by: { $0.name < $1.name }),
-            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap,
-            color: tag.uiColor.color)
+    private var filteredLocationsListView: some View {
+        FilteredListView(
+            sortDescriptors: [locationNameSort],
+            predicate: locationsPredicate,
+            searchKey: "name",
+            placeholder: "Search locations...",
+            searchColor: tag.uiColor.color,
+            content: locationRowView)
+    }
+
+    private var locationNameSort: NSSortDescriptor {
+        NSSortDescriptor(keyPath: \Location.name, ascending: true)
+    }
+
+    private var locationsPredicate: NSPredicate {
+        NSPredicate(format: "%@ == tag", tag)
+    }
+
+    private func locationRowView(for location: Location) -> LocationRowView {
+        LocationRowView(
+            location: location,
+            locationService: CoreLocationService.shared,
+            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
     }
 }

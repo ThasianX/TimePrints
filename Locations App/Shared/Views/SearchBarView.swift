@@ -1,31 +1,18 @@
-// Kevin Li - 11:47 AM - 5/17/20
+// Kevin Li - 5:23 PM - 5/30/20
 
 import SwiftUI
 
-struct FilteredLocationsListView: View {
-    @State private var query = ""
+struct SearchBarView: View {
     @State private var showCancelButton: Bool = false
 
-    let locations: [Location]
-    let setActiveLocationAndDisplayMap: (Location) -> Void
+    @Binding var query: String
+    let placeholder: String
     let color: Color
 
     var body: some View {
-        filteredLocationsListView
+        searchView
     }
 
-    private var filteredLocationsListView: some View {
-        VStack {
-            searchView
-            filteredLocationsView
-                .resignKeyboardOnDrag()
-                .padding(.bottom, 25)
-        }
-        .animation(.easeInOut)
-    }
-}
-
-private extension FilteredLocationsListView {
     private var searchView: some View {
         HStack {
             HStack {
@@ -50,7 +37,7 @@ private extension FilteredLocationsListView {
     }
 
     private var searchTextField: some View {
-        TextField("Search locations...", text: $query, onEditingChanged: onEditingChanged)
+        TextField(placeholder, text: $query, onEditingChanged: onEditingChanged)
     }
 
     private func onEditingChanged(_ isEditing: Bool) {
@@ -77,22 +64,5 @@ private extension FilteredLocationsListView {
             self.showCancelButton = false
         }
         .foregroundColor(.white)
-    }
-}
-
-private extension FilteredLocationsListView {
-    private var filteredLocationsView: some View {
-        List {
-            ForEach(locations.filter { $0.name.hasPrefix(query) || query == "" }) { location in
-                self.locationRowView(for: location)
-            }
-        }
-    }
-
-    private func locationRowView(for location: Location) -> LocationRowView {
-        LocationRowView(
-            location: location,
-            locationService: CoreLocationService.shared,
-            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
     }
 }

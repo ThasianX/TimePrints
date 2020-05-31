@@ -4,12 +4,6 @@ import SwiftUI
 
 struct AllLocationsListView: View {
     @Environment(\.appTheme) private var appTheme: UIColor
-    @FetchRequest(
-        entity: Location.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Location.name, ascending: true)
-        ]
-    ) private var locations: FetchedResults<Location>
 
     @ObservedObject var showing: AppState.Showing
     @ObservedObject var locationControl: AppState.LocationControl
@@ -38,11 +32,24 @@ private extension AllLocationsListView {
             .foregroundColor(appTheme.color)
     }
 
-    private var filteredLocationsListView: FilteredLocationsListView {
-        FilteredLocationsListView(
-            locations: Array(locations),
-            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap,
-            color: appTheme.color)
+    private var filteredLocationsListView: some View {
+        FilteredListView(
+            sortDescriptors: [locationNameSort],
+            searchKey: "name",
+            placeholder: "Search locations...",
+            searchColor: appTheme.color,
+            content: locationRowView)
+    }
+
+    var locationNameSort: NSSortDescriptor {
+        NSSortDescriptor(keyPath: \Location.name, ascending: true)
+    }
+
+    private func locationRowView(for location: Location) -> LocationRowView {
+        LocationRowView(
+            location: location,
+            locationService: CoreLocationService.shared,
+            setActiveLocationAndDisplayMap: setActiveLocationAndDisplayMap)
     }
 
     private func setActiveLocationAndDisplayMap(location: Location) {

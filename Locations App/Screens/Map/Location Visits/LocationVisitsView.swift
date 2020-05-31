@@ -30,8 +30,6 @@ struct LocationVisitsView: View {
             Group {
                 if mapState.hasSelectedLocation {
                     locationNameTextField
-                }
-                if mapState.hasSelectedLocation {
                     locationVisitsList
                 }
                 Spacer()
@@ -57,33 +55,26 @@ private extension LocationVisitsView {
     }
 
     private var locationVisitsList: some View {
-        FilteredList(predicate: visitsPredicate, sortDescriptors: [arrivalDateSort], spacing: 8) { (visit: Visit) in
-            LocationVisitsRow(visit: visit)
-        }
+        FilteredListView(
+            sortDescriptors: [arrivalDateSort],
+            predicate: visitsPredicate,
+            searchKey: "location.name",
+            placeholder: "Search visits...",
+            searchColor: appTheme.color,
+            content: LocationVisitsRow.init)
+    }
+
+    private var arrivalDateSort: NSSortDescriptor {
+        NSSortDescriptor(keyPath: \Visit.arrivalDate, ascending: false)
     }
 
     private var visitsPredicate: NSPredicate {
         NSPredicate(format: "%@ == location", mapState.selectedLocation!)
     }
 
-    private var arrivalDateSort: NSSortDescriptor {
-        NSSortDescriptor(keyPath: \Visit.arrivalDate, ascending: false)
-    }
-    
-    private var exitButton: some View {
-        BImage(perform: exitView, image: .init(systemName: "x.circle.fill"))
-    }
-    
-    private func exitView() {
-        mapState = .showingMap
-        showing.toggleButton = true
-    }
-}
-
-private extension LocationVisitsView {
     private struct LocationVisitsRow: View {
         let visit: Visit
-        
+
         var body: some View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
@@ -113,6 +104,17 @@ private extension LocationVisitsView {
             Text(visit.arrivalDate.abbreviatedMonthWithDayAndYear)
                 .font(.caption)
         }
+    }
+}
+
+private extension LocationVisitsView {
+    var exitButton: some View {
+        BImage(perform: exitView, image: .init(systemName: "x.circle.fill"))
+    }
+
+    func exitView() {
+        mapState = .showingMap
+        showing.toggleButton = true
     }
 }
 
