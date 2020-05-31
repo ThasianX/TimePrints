@@ -8,7 +8,7 @@ struct DaySideBar: View {
             abbreviatedDayOfWeek
             dayOfMonth
         }
-        .frame(width: 35)
+        .frame(width: VisitPreviewConstants.sideBarWidth)
     }
 }
 

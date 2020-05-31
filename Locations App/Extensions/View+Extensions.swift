@@ -58,11 +58,3 @@ extension View {
         AnyView(self)
     }
 }
-
-extension View {
-    func removeAllSeparators() -> some View {
-        introspectTableView { tableView in
-            tableView.separatorStyle = .none
-        }
-    }
-}

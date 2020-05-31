@@ -1,6 +1,22 @@
 import SwiftUI
 import Mapbox
 
+struct VisitPreviewConstants {
+    static let cellHeight: CGFloat = 50
+    static let numberOfCellsInBlock: Int = 3
+
+    static let previewTime: TimeInterval = 5
+
+    static let sideBarWidth: CGFloat = 35
+
+    static let blockHeight: CGFloat = VisitPreviewConstants.cellHeight * CGFloat(VisitPreviewConstants.numberOfCellsInBlock)
+    static let maxWidth: CGFloat = screen.width
+
+    static func height(forBlockCount count: Int) -> CGFloat {
+        return blockHeight * CGFloat(count)
+    }
+}
+
 struct VisitsPreviewList: View {
     @Environment(\.appTheme) private var appTheme: UIColor
 
@@ -73,27 +89,33 @@ private extension VisitsPreviewList {
                 self.monthYearSideBarWithDayPreviewBlocksView(
                     month: month,
                     daysForMonth: self.descendingDayComponents(for: month),
-                    isFilled: isFilled
-                )
+                    isFilled: isFilled)
             }
             .listRowInsets(EdgeInsets())
         }
-        .removeAllSeparators()
+        .frame(width: screen.width)
+        .introspectTableView { tableView in
+            tableView.separatorStyle = .none
+            tableView.showsVerticalScrollIndicator = false
+        }
     }
 
     private func monthYearSideBarWithDayPreviewBlocksView(month: DateComponents, daysForMonth: [DateComponents], isFilled: @escaping () -> Bool) -> some View {
-        H0Stack {
-            monthYearSideBarText(date: month.date, shouldAbbreviate: daysForMonth.count == 1)
-            V0Stack {
-                ForEach(daysForMonth) { day in
-                    self.daySideBarWithPreviewBlockView(
-                        dayComponent: day,
-                        isFilled: isFilled()
-                    )
+        GeometryReader { geometry in
+            H0Stack {
+                self.monthYearSideBarText(date: month.date, shouldAbbreviate: daysForMonth.count == 1)
+                V0Stack {
+                    ForEach(daysForMonth) { day in
+                        self.daySideBarWithPreviewBlockView(
+                            dayComponent: day,
+                            isFilled: isFilled()
+                        )
+                    }
                 }
             }
         }
-        .frame(height: CGFloat(150*daysForMonth.count))
+        .frame(height: VisitPreviewConstants.height(forBlockCount: daysForMonth.count))
+        .frame(maxWidth: VisitPreviewConstants.maxWidth)
     }
 
     private func monthYearSideBarText(date: Date, shouldAbbreviate: Bool) -> MonthYearSideBar {
@@ -109,7 +131,7 @@ private extension VisitsPreviewList {
             daySideBarView(date: dayComponent.date)
             dayPreviewBlockView(dayComponent: dayComponent, isFilled: isFilled)
         }
-        .frame(height: 150)
+        .frame(height: VisitPreviewConstants.blockHeight)
     }
 
     private func daySideBarView(date: Date) -> DaySideBar {

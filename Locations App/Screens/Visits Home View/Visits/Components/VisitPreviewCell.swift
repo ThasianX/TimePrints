@@ -23,8 +23,8 @@ struct VisitPreviewCell: View {
                 favoriteIcon
             }
         }
-        .frame(height: 50)
-        .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
+        .frame(height: VisitPreviewConstants.cellHeight)
+        .padding(.horizontal, 10)
     }
 }
 

@@ -3,7 +3,8 @@ import SwiftUI
 struct DayPreviewBlock: View {
     @Environment(\.appTheme) private var appTheme: UIColor
 
-    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: VisitPreviewConstants.previewTime,
+                                      on: .main, in: .common).autoconnect()
     @State var visitIndex = 0
 
     @Binding var currentDayComponent: DateComponents
@@ -14,10 +15,12 @@ struct DayPreviewBlock: View {
     let onTap: () -> Void
     
     private var range: Range<Int> {
-        guard visits.count > 3 && visitIndex+3 <= visits.count else {
+        let exclusiveEndIndex = visitIndex + VisitPreviewConstants.numberOfCellsInBlock
+        guard visits.count > VisitPreviewConstants.numberOfCellsInBlock &&
+            exclusiveEndIndex <= visits.count else {
             return visitIndex..<visits.count
         }
-        return visitIndex..<visitIndex+3
+        return visitIndex..<exclusiveEndIndex
     }
     
     var body: some View {
@@ -34,15 +37,16 @@ struct DayPreviewBlock: View {
     }
 
     private func setUpVisitsSlideShow() {
-        if visits.count <= 3 {
+        if visits.count <= VisitPreviewConstants.numberOfCellsInBlock {
             // To reduce memory usage, we don't want the timer to fire when
-            // visits count is less than 3(no slideshow)
+            // visits count is less than or equal to the number
+            // of visits allowed in a single slide
             timer.upstream.connect().cancel()
         }
     }
 
     private func shiftActivePreviewVisitIndex() {
-        let startingVisitIndexOfNextSlide = visitIndex + 3
+        let startingVisitIndexOfNextSlide = visitIndex + VisitPreviewConstants.numberOfCellsInBlock
         let startingVisitIndexOfNextSlideIsValid = startingVisitIndexOfNextSlide < visits.count
         visitIndex = startingVisitIndexOfNextSlideIsValid ? startingVisitIndexOfNextSlide : 0
     }
